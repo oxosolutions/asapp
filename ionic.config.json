@@ -1,0 +1,8 @@
+{
+  "name": "AioneBasic-Services",
+  "app_id": "7adbcbde",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
