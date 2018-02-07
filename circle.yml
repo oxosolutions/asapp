@@ -6,8 +6,6 @@ docker:
 ## Setup dependencies
 dependencies:
   post:
-    - mkdir www
-    - rm -rf node_modules
     - ionic cordova platform add android -Y --noresources
 
 test:
