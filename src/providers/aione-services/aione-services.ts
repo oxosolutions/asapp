@@ -51,163 +51,143 @@ export class AioneServicesProvider {
 			}
 		})		
 	}
-	LoadApi(ApiLink){
-		// this.http.get("http://master.scolm.com/api/dataset/123456/3s1clNJqHOXhFbir1NFlpsx9s")
-		// .subscribe((data)=>{
-       
-  //   })
-    
-	}
 	CreateTable(TableName,Col){
-		let columns=[];
-		let result:any;
-		if(this.db!= undefined){
-			// for(let Appkey in Col){
-			// 	console.log(Col[Appkey] + ' TEXT');
-			// 	columns.push([Appkey] + ' TEXT');
-			// }console.log(columns);
+		if(this.db!= undefined){			
 			this.query="CREATE TABLE IF NOT EXISTS " +TableName +' ('+Col +')';
-			//console.log(this.query);
+			console.log(this.query);
 		  this.ExecuteRun(this.query,[]).then((res)=>{
-			 // console.log(res);
+			  console.log(res);
 		  });
 		}
 	}
-	Insert(tableName,Cols,Values){
-		let questionMarks=[]
+	TableBulk(TableName,Col){
 		if(this.db!= undefined){
-		this.query='select * from '+tableName;
-		this.ExecuteRun(this.query,[]).then((insertRes:any)=>{
-			//console.log(insertRes);
-			if(insertRes.rows.length>0){
-				//console.log('update');
-				this.query='Delete from '+tableName;
-				this.ExecuteRun(this.query,[]).then((Delresult)=>{
-					this.InsertSingle(Values,tableName,Cols).then((updateinsert)=>{
-						//console.log(updateinsert);
-					})
-				})
-			}else{
-				//console.log('insert');
-				this.InsertSingle(Values,tableName,Cols).then((insert)=>{
-					//console.log(insert);
-				})
-			}
-		})
-
+			console.log(TableName);		
+		  for(let i=0; i<TableName.length;i++){
+		  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';
+				console.log(this.query);
+		 	  this.ExecuteRun(this.query,[]).then((res)=>{
+			 	 console.log(res);
+		 	  });
+		  }				
 		}
 	}
-	InsertSingle(Values,tableName,Cols){
+	Insert(tableName,Cols,Values){
 		return new Promise((resolve,reject)=>{
 			let questionMarks=[]
-			for(let j=0; j< Values.length; j++){
+			if(this.db!= undefined){
+				let questionMarks=[]
+				for(let j=0; j< Values.length; j++){
 					questionMarks.push("?");
+				}
+				this.query='insert into '+tableName + '(' + Cols + ') VALUES (' +questionMarks + ')'; 
+				//console.log(this.query);
+				this.ExecuteRun(this.query, Values).then((insertRes:any)=>{
+					resolve(insertRes);
+				})
 			}
-			//console.log(questionMarks);
-			this.query='insert into '+tableName + '(' + Cols + ') VALUES (' +questionMarks + ')'; 
-			//console.log(this.query);
-			this.ExecuteRun(this.query, Values).then((hh:any)=>{
-				resolve(hh);
-			})
 		})
-		
 	}
 	InsertBulk(tableName,Cols,Values){
-		if(this.db!=undefined){
-			console.log(Cols);
-			console.log(Values);
-			this.query='select * from '+tableName;
-			this.ExecuteRun(this.query,[]).then((result:any)=>{
-				if(result.rows.length> 0){
-					console.log('update');
-					this.query='Delect from '+ tableName;
-					this.ExecuteRun(this.query,[]).then((dfd)=>{
-						this.bulkinsert(tableName,Cols,Values).then((bulkUpdate:any)=>{
-							console.log(bulkUpdate);
-						});		
-					})
-				}else{
-					console.log('insert');
-					this.bulkinsert(tableName,Cols,Values).then((bulkInsert:any)=>{
-						console.log(bulkInsert);
-					});
-				}
-			})
-		}
-	}
-	bulkinsert(tableName,Cols,Values){
-		return new Promise((resolve,reject)=>{
-			if(Values!= undefined){
+		return new Promise ((resolve,reject) =>{
+			if(this.db!=undefined){
 				let CollectedData=[];
 				for(let i=0; i<Values.length; i++){
 					let ValuesArray=[];
 					for(let j=0; j < Values[i].length; j++){
-						console.log(Values[i].length);
-						//ValuesArray.push(j)
+						ValuesArray.push('"'+Values[i][j]+'"');
 					}
-					// for(let j=0; j)
-				}
+					CollectedData.push("("+ValuesArray.join(',') +")");
+				}//console.log(CollectedData)
+				this.query = 'INSERT INTO '+tableName+' ( '+Cols.join(',')+' ) VALUES '+CollectedData.join(',');
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((Bulkres:any)=>{ resolve(Bulkres);})
 			}
 		})
 	}
-	Update(tableName){
-		if(this.db!=undefined){
-
-		}
-	}
 	DeleteAll(tableName){
-		if(this.db!= undefined){
-			this.query='Delete * from '+tableName;
-			console.log(this.query);
-			this.ExecuteRun(this.query,[]).then((Delresult)=>{
-				//console.log(Delresult);
-			})
-		}
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Delete  from '+tableName;
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((Delresult)=>{
+					console.log(Delresult);
+				})
+			}
+		})	
 	}
-	DeleteWhere(tableName,id){
-		if(this.db!= undefined){
-			this.query='Delete * from '+tableName+' where id = '+id;
-			this.ExecuteRun(this.query,[]).then((Delres)=>{
-				//console.log(Delres);
-			})
-		}
+	DeleteWhere(tableName, Where, Value){
+		return new Promise((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Delete  from '+tableName+' where '+ Where +' = '+Value;
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((Delres)=>{
+					console.log(Delres);
+				})
+			}
+		})		
 	}
 	SelectAll(tableName){
-		if(this.db!= undefined){
-			this.query='Select * from '+tableName;
-			this.ExecuteRun(this.query,[]).then((selectresult)=>{
-				console.log(selectresult);
-			})
-		}
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Select * from '+tableName;
+				this.ExecuteRun(this.query,[]).then((selectresult:any)=>{
+					resolve(selectresult);
+				})
+			}
+		})
+		
 	}
-	SelectWhere(tableName,id){
-		if(this.db!= undefined){
-			this.query='Select * from '+tableName+' Where id '+id;
-			this.ExecuteRun(this.query,[]).then((SelResult)=>{
-				console.log(SelResult)
-			})
-		}
+	SelectWhere(tableName, Where, Value){
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
+					resolve(SelResult)
+				})	
+			}
+		});		
 	}
 	selectAllLimit(tableName,limit){
-		if(this.db!= undefined){
-			this.query='Select * From ' +tableName +'LIMIT '+limit;
-			this.ExecuteRun(this.query,[]).then((selLimitResult)=>{
-				console.log(selLimitResult);
-			})
-		}
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Select * From ' +tableName +' LIMIT '+limit;
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((selLimitResult)=>{
+					console.log(selLimitResult);
+				})
+			}
+		})		
 	}
 	DropTable(tableName){
-		console.log("dflkdfjdkl");
 		if(this.db!= undefined){
 			this.query='DROP Table ' + tableName;
 			console.log(this.query);
 			this.ExecuteRun(this.query,[]).then((DropResult)=>{
-				console.log(DropResult);
+				//console.log(DropResult);
 			})
 		}
 	}
-	StringReplace(Result){
-		// for(i=)
+	StringReplaceBulk(result){
+		return new Promise ((resolve,reject)=>{
+			for(let i=0; i< result.length; i++){
+				//result[i]=result.item(i);
+				let replace=[]
+				for(let key in result[i]){
+					//console.log(result[i][key]);
+					if(typeof(key)!='string'){
+						console.log('id');
+					}else{
+						result[i][key]=result[i][key].replace(/&lt;/g, "<")
+                .replace(/&gt;/g, ">")
+                .replace(/&quot;/g, '"')
+                .replace(/&#039;/g, "'");
+					}
+					replace.push(result[i][key]);
+				}//console.log(replace);
+		 	}
+		})
 	}
 
 

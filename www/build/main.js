@@ -68,169 +68,157 @@ var AioneServicesProvider = (function () {
             }
         });
     };
-    AioneServicesProvider.prototype.LoadApi = function (ApiLink) {
-        // this.http.get("http://master.scolm.com/api/dataset/123456/3s1clNJqHOXhFbir1NFlpsx9s")
-        // .subscribe((data)=>{
-        //   })
-    };
     AioneServicesProvider.prototype.CreateTable = function (TableName, Col) {
-        var columns = [];
-        var result;
         if (this.db != undefined) {
-            // for(let Appkey in Col){
-            // 	console.log(Col[Appkey] + ' TEXT');
-            // 	columns.push([Appkey] + ' TEXT');
-            // }console.log(columns);
             this.query = "CREATE TABLE IF NOT EXISTS " + TableName + ' (' + Col + ')';
-            //console.log(this.query);
+            console.log(this.query);
             this.ExecuteRun(this.query, []).then(function (res) {
-                // console.log(res);
+                console.log(res);
             });
+        }
+    };
+    AioneServicesProvider.prototype.TableBulk = function (TableName, Col) {
+        if (this.db != undefined) {
+            console.log(TableName);
+            for (var i = 0; i < TableName.length; i++) {
+                this.query = "CREATE TABLE IF NOT EXISTS " + TableName[i] + ' (' + Col[i] + ')';
+                console.log(this.query);
+                this.ExecuteRun(this.query, []).then(function (res) {
+                    console.log(res);
+                });
+            }
         }
     };
     AioneServicesProvider.prototype.Insert = function (tableName, Cols, Values) {
         var _this = this;
-        var questionMarks = [];
-        if (this.db != undefined) {
-            this.query = 'select * from ' + tableName;
-            this.ExecuteRun(this.query, []).then(function (insertRes) {
-                //console.log(insertRes);
-                if (insertRes.rows.length > 0) {
-                    //console.log('update');
-                    _this.query = 'Delete from ' + tableName;
-                    _this.ExecuteRun(_this.query, []).then(function (Delresult) {
-                        _this.InsertSingle(Values, tableName, Cols).then(function (updateinsert) {
-                            //console.log(updateinsert);
-                        });
-                    });
-                }
-                else {
-                    //console.log('insert');
-                    _this.InsertSingle(Values, tableName, Cols).then(function (insert) {
-                        //console.log(insert);
-                    });
-                }
-            });
-        }
-    };
-    AioneServicesProvider.prototype.InsertSingle = function (Values, tableName, Cols) {
-        var _this = this;
         return new Promise(function (resolve, reject) {
             var questionMarks = [];
-            for (var j = 0; j < Values.length; j++) {
-                questionMarks.push("?");
+            if (_this.db != undefined) {
+                var questionMarks_1 = [];
+                for (var j = 0; j < Values.length; j++) {
+                    questionMarks_1.push("?");
+                }
+                _this.query = 'insert into ' + tableName + '(' + Cols + ') VALUES (' + questionMarks_1 + ')';
+                //console.log(this.query);
+                _this.ExecuteRun(_this.query, Values).then(function (insertRes) {
+                    resolve(insertRes);
+                });
             }
-            //console.log(questionMarks);
-            _this.query = 'insert into ' + tableName + '(' + Cols + ') VALUES (' + questionMarks + ')';
-            //console.log(this.query);
-            _this.ExecuteRun(_this.query, Values).then(function (hh) {
-                resolve(hh);
-            });
         });
     };
     AioneServicesProvider.prototype.InsertBulk = function (tableName, Cols, Values) {
         var _this = this;
-        if (this.db != undefined) {
-            console.log(Cols);
-            console.log(Values);
-            this.query = 'select * from ' + tableName;
-            this.ExecuteRun(this.query, []).then(function (result) {
-                if (result.rows.length > 0) {
-                    console.log('update');
-                    _this.query = 'Delect from ' + tableName;
-                    _this.ExecuteRun(_this.query, []).then(function (dfd) {
-                        _this.bulkinsert(tableName, Cols, Values).then(function (bulkUpdate) {
-                            console.log(bulkUpdate);
-                        });
-                    });
-                }
-                else {
-                    console.log('insert');
-                    _this.bulkinsert(tableName, Cols, Values).then(function (bulkInsert) {
-                        console.log(bulkInsert);
-                    });
-                }
-            });
-        }
-    };
-    AioneServicesProvider.prototype.bulkinsert = function (tableName, Cols, Values) {
         return new Promise(function (resolve, reject) {
-            if (Values != undefined) {
+            if (_this.db != undefined) {
                 var CollectedData = [];
                 for (var i = 0; i < Values.length; i++) {
                     var ValuesArray = [];
                     for (var j = 0; j < Values[i].length; j++) {
-                        console.log(Values[i].length);
-                        //ValuesArray.push(j)
+                        ValuesArray.push('"' + Values[i][j] + '"');
                     }
-                    // for(let j=0; j)
-                }
+                    CollectedData.push("(" + ValuesArray.join(',') + ")");
+                } //console.log(CollectedData)
+                _this.query = 'INSERT INTO ' + tableName + ' ( ' + Cols.join(',') + ' ) VALUES ' + CollectedData.join(',');
+                console.log(_this.query);
+                _this.ExecuteRun(_this.query, []).then(function (Bulkres) { resolve(Bulkres); });
             }
         });
     };
-    AioneServicesProvider.prototype.Update = function (tableName) {
-        if (this.db != undefined) {
-        }
-    };
     AioneServicesProvider.prototype.DeleteAll = function (tableName) {
-        if (this.db != undefined) {
-            this.query = 'Delete * from ' + tableName;
-            console.log(this.query);
-            this.ExecuteRun(this.query, []).then(function (Delresult) {
-                //console.log(Delresult);
-            });
-        }
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Delete  from ' + tableName;
+                console.log(_this.query);
+                _this.ExecuteRun(_this.query, []).then(function (Delresult) {
+                    console.log(Delresult);
+                });
+            }
+        });
     };
-    AioneServicesProvider.prototype.DeleteWhere = function (tableName, id) {
-        if (this.db != undefined) {
-            this.query = 'Delete * from ' + tableName + ' where id = ' + id;
-            this.ExecuteRun(this.query, []).then(function (Delres) {
-                //console.log(Delres);
-            });
-        }
+    AioneServicesProvider.prototype.DeleteWhere = function (tableName, Where, Value) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Delete  from ' + tableName + ' where ' + Where + ' = ' + Value;
+                console.log(_this.query);
+                _this.ExecuteRun(_this.query, []).then(function (Delres) {
+                    console.log(Delres);
+                });
+            }
+        });
     };
     AioneServicesProvider.prototype.SelectAll = function (tableName) {
-        if (this.db != undefined) {
-            this.query = 'Select * from ' + tableName;
-            this.ExecuteRun(this.query, []).then(function (selectresult) {
-                console.log(selectresult);
-            });
-        }
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Select * from ' + tableName;
+                _this.ExecuteRun(_this.query, []).then(function (selectresult) {
+                    resolve(selectresult);
+                });
+            }
+        });
     };
-    AioneServicesProvider.prototype.SelectWhere = function (tableName, id) {
-        if (this.db != undefined) {
-            this.query = 'Select * from ' + tableName + ' Where id ' + id;
-            this.ExecuteRun(this.query, []).then(function (SelResult) {
-                console.log(SelResult);
-            });
-        }
+    AioneServicesProvider.prototype.SelectWhere = function (tableName, Where, Value) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Select * from ' + tableName + ' where ' + Where + ' = ' + Value;
+                console.log(_this.query);
+                _this.ExecuteRun(_this.query, []).then(function (SelResult) {
+                    resolve(SelResult);
+                });
+            }
+        });
     };
     AioneServicesProvider.prototype.selectAllLimit = function (tableName, limit) {
-        if (this.db != undefined) {
-            this.query = 'Select * From ' + tableName + 'LIMIT ' + limit;
-            this.ExecuteRun(this.query, []).then(function (selLimitResult) {
-                console.log(selLimitResult);
-            });
-        }
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Select * From ' + tableName + ' LIMIT ' + limit;
+                console.log(_this.query);
+                _this.ExecuteRun(_this.query, []).then(function (selLimitResult) {
+                    console.log(selLimitResult);
+                });
+            }
+        });
     };
     AioneServicesProvider.prototype.DropTable = function (tableName) {
-        console.log("dflkdfjdkl");
         if (this.db != undefined) {
             this.query = 'DROP Table ' + tableName;
             console.log(this.query);
             this.ExecuteRun(this.query, []).then(function (DropResult) {
-                console.log(DropResult);
+                //console.log(DropResult);
             });
         }
     };
-    AioneServicesProvider.prototype.StringReplace = function (Result) {
-        // for(i=)
+    AioneServicesProvider.prototype.StringReplaceBulk = function (result) {
+        return new Promise(function (resolve, reject) {
+            for (var i = 0; i < result.length; i++) {
+                //result[i]=result.item(i);
+                var replace = [];
+                for (var key in result[i]) {
+                    //console.log(result[i][key]);
+                    if (typeof (key) != 'string') {
+                        console.log('id');
+                    }
+                    else {
+                        result[i][key] = result[i][key].replace(/&lt;/g, "<")
+                            .replace(/&gt;/g, ">")
+                            .replace(/&quot;/g, '"')
+                            .replace(/&#039;/g, "'");
+                    }
+                    replace.push(result[i][key]);
+                } //console.log(replace);
+            }
+        });
     };
     AioneServicesProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_http__["a" /* HTTP */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_sqlite__["a" /* SQLite */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_http__["a" /* HTTP */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_http__["a" /* HTTP */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_sqlite__["a" /* SQLite */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_sqlite__["a" /* SQLite */]) === "function" && _c || Object])
     ], AioneServicesProvider);
     return AioneServicesProvider;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=aione-services.js.map
@@ -296,41 +284,51 @@ var HomePage = (function () {
     function HomePage(servicesProvider, navCtrl) {
         this.servicesProvider = servicesProvider;
         this.navCtrl = navCtrl;
-        this.colAll = [{ 'id': 'df', 'name': 'sharma' },
-            { 'id': 'df', 'name': 'sharma' },
-            { 'id': 'df', 'name': 'sharma' },
+        this.bulktable = ['contact', 'testimonials', 'photos'];
+        this.colAll = [{ 'id': '1', 'name': 'sharma' },
+            { 'id': '2', 'name': 'sharma' },
+            { 'id': '3', 'name': 'sharma' },
         ];
         // 		];
-        this.colAllkey = [['id', 'df'], ['id', 'df'], ['id', 'df']];
-        this.colAllValues = [['3', 'ram'], ['4', 'sita'], ['5', 'sham']];
+        this.colAllkey = ['id', 'name'];
+        this.bulkTablekey = [['contactid', 'contdesc'], ['testimonialsid', 'testdesc'], ['photoid', 'photo', 'kjdfjlkd']];
+        this.colAllValues = [['1', '<ram/>'], ['2<', 'sita'], ['3', 'sham']];
         this.ColsSingle = { 'id': 'dfkjd', 'name': 'sharma' };
         this.colsinlekey = ['id', 'name'];
-        this.values = ['dfkjd', 'sharmaji'];
+        this.values = ['3', 'sharmaji'];
     }
     //database operations
     HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         this.servicesProvider.PlatfromCheck('Aione');
-        // this.servicesProvider.LoadApi('dkjfkdjfkdfkdf');
+        //this.servicesProvider.LoadApi('http://aione.oxosolutions.com/api/android/').then(()=>{});
         this.servicesProvider.CreateTable('test', this.colsinlekey);
+        this.servicesProvider.TableBulk(this.bulktable, this.bulkTablekey);
         this.servicesProvider.CreateTable('testing', this.colsinlekey);
-        this.servicesProvider.Insert('test', this.colsinlekey, this.values);
-        this.servicesProvider.InsertBulk('testing', this.colAllkey, this.colAllValues);
-        // this.servicesProvider.Update('home')
-        // this.servicesProvider.DeleteAll('home');
-        // this.servicesProvider.DeleteWhere('home',2);
-        // this.servicesProvider.SelectAll('home');
-        // this.servicesProvider.SelectWhere('home',1);
-        // this.servicesProvider.selectAllLimit('home',4)
-        //this.servicesProvider.DropTable('testing');
-        // this.servicesProvider.StringReplace('result');
+        // this.servicesProvider.Insert('test', this.colsinlekey, this.values).then((res:any)=>{
+        //    console.log(res);})
+        // this.servicesProvider.InsertBulk('testing',this.colAllkey, this.colAllValues).then((result)=>{
+        //    //console.log(result);
+        //  });
+        // this.servicesProvider.DeleteAll('test').then(()=>{});
+        // this.servicesProvider.DeleteWhere('test', 'name', '"sharmaji"').then(()=>{});
+        this.servicesProvider.SelectAll('testing').then(function (rsult) {
+            _this.resultSelect = rsult.rows;
+            console.log(_this.resultSelect);
+            _this.servicesProvider.StringReplaceBulk(_this.resultSelect).then(function () { });
+        });
+        this.servicesProvider.SelectWhere('testing', 'name', "'<ram/>'").then(function () { });
+        this.servicesProvider.selectAllLimit('testing', 2).then(function () { });
+        // this.servicesProvider.DropTable('testing');  	
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n<button ion-button secondary menuToggle>Toggle Menu</button>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map

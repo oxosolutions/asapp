@@ -10,17 +10,21 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
   templateUrl: 'home.html'
 })
 export class HomePage  {
-	colAll=[{'id':'df','name':'sharma'},
-          {'id':'df','name':'sharma'},
-          {'id':'df','name':'sharma'},
+ resultSelect:any;
+ bulktable=['contact','testimonials','photos']
+	colAll=[{'id':'1','name':'sharma'},
+          {'id':'2','name':'sharma'},
+          {'id':'3','name':'sharma'},
          ];
 	// 		];
-  colAllkey=[['id','df'],['id','df'],['id','df']];
-  colAllValues=[['3','ram'],['4','sita'],['5','sham']];
+  colAllkey=['id','name'];
+  bulkTablekey=[['contactid','contdesc'],['testimonialsid','testdesc'],['photoid','photo','kjdfjlkd']];
+
+  colAllValues=[['1','<ram/>'],['2<','sita'],['3','sham']];
 
   ColsSingle={'id':'dfkjd','name':'sharma'};
   colsinlekey=['id','name'];
-	values=['dfkjd','sharmaji'];
+	values=['3','sharmaji'];
 	query;
 
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController) {
@@ -30,19 +34,29 @@ export class HomePage  {
   //database operations
   ionViewDidLoad(){
   	this.servicesProvider.PlatfromCheck('Aione');
-  	// this.servicesProvider.LoadApi('dkjfkdjfkdfkdf');
+  	//this.servicesProvider.LoadApi('http://aione.oxosolutions.com/api/android/').then(()=>{});
   	this.servicesProvider.CreateTable('test', this.colsinlekey);
+    this.servicesProvider.TableBulk(this.bulktable, this.bulkTablekey);
     this.servicesProvider.CreateTable('testing', this.colsinlekey);
-  	this.servicesProvider.Insert('test', this.colsinlekey, this.values);
-  	this.servicesProvider.InsertBulk('testing',this.colAllkey, this.colAllValues);
-  	// this.servicesProvider.Update('home')
-  	// this.servicesProvider.DeleteAll('home');
-  	// this.servicesProvider.DeleteWhere('home',2);
-  	// this.servicesProvider.SelectAll('home');
-  	// this.servicesProvider.SelectWhere('home',1);
-  	// this.servicesProvider.selectAllLimit('home',4)
-  	//this.servicesProvider.DropTable('testing');
-  	// this.servicesProvider.StringReplace('result');
+  	// this.servicesProvider.Insert('test', this.colsinlekey, this.values).then((res:any)=>{
+   //    console.log(res);})
+  	// this.servicesProvider.InsertBulk('testing',this.colAllkey, this.colAllValues).then((result)=>{
+   //    //console.log(result);
+   //  });
+
+
+  	// this.servicesProvider.DeleteAll('test').then(()=>{});
+    // this.servicesProvider.DeleteWhere('test', 'name', '"sharmaji"').then(()=>{});
+
+
+  	this.servicesProvider.SelectAll('testing').then((rsult:any)=>{
+      this.resultSelect=rsult.rows;
+      console.log(this.resultSelect);
+      this.servicesProvider.StringReplaceBulk(this.resultSelect).then(()=>{});
+    });
+  	this.servicesProvider.SelectWhere('testing','name',"'<ram/>'").then(()=>{});
+  	this.servicesProvider.selectAllLimit('testing', 2).then(()=>{});
+   	// this.servicesProvider.DropTable('testing');  	
   }
   
 
