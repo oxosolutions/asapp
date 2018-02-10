@@ -3,7 +3,7 @@ import { HTTP } from '@ionic-native/http';
 import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../../pages/home/home';
-
+import { ListPage } from '../../pages/list/list';
 
 @Injectable()
 export class AioneServicesProvider {

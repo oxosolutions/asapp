@@ -1,12 +1,9 @@
 //import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HomePage } from '../../pages/home/home';
+import { ListPage } from '../../pages/list/list';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
-/*
-  Generated class for the AioneHelperProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AioneHelperProvider {
 

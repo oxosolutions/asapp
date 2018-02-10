@@ -7,7 +7,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
-//import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
+import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HTTP } from '@ionic-native/http';
 //import { HttpModule } from '@angular/http';
@@ -39,7 +39,7 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     
     AioneServicesProvider,
-   // AioneHelperProvider,
+    AioneHelperProvider,
     SQLite,
     HTTP
   ]

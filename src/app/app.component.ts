@@ -10,19 +10,20 @@ import { AioneServicesProvider } from '../providers/aione-services/aione-service
 
 @Component({
   templateUrl: 'app.html',
-  providers: [AioneServicesProvider]
+  // providers: [AioneServicesProvider]
 
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  rootPage: any = ListPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
       this.initializeApp();
       this.pages = [
-         { title: 'Home', component: HomePage },
-         { title: 'List', component: ListPage }
+        { title: 'List', component: ListPage },
+        { title: 'Home', component: HomePage }
+        
       ];
       
   } 
