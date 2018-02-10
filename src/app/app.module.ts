@@ -10,6 +10,7 @@ import { AioneServicesProvider } from '../providers/aione-services/aione-service
 import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HTTP } from '@ionic-native/http';
+import { Calendar } from '@ionic-native/calendar';
 //import { HttpModule } from '@angular/http';
 
 import { Nav, Platform ,ToastController} from 'ionic-angular';
@@ -36,12 +37,12 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    
+    {provide: ErrorHandler, useClass: IonicErrorHandler},   
     AioneServicesProvider,
     AioneHelperProvider,
     SQLite,
-    HTTP
+    HTTP,
+    Calendar
   ]
 })
 export class AppModule {}
