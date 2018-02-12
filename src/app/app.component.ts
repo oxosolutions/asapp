@@ -21,10 +21,8 @@ export class MyApp {
       this.initializeApp();
       this.pages = [
         { title: 'List', component: ListPage },
-        { title: 'Home', component: HomePage }
-        
-      ];
-      
+        { title: 'Home', component: HomePage }       
+      ];      
   } 
   initializeApp() {
     this.platform.ready().then(() => {

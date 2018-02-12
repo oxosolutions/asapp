@@ -5,10 +5,13 @@ import { ListPage } from '../../pages/list/list';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 @Injectable()
 export class AioneHelperProvider {
 	DeviceInfo={};
-  constructor(private device: Device,private calender:Calendar) {
+	base64Image;
+  constructor(private camera:Camera,private device: Device,private calender:Calendar) {
     console.log('Hello AioneHelperProvider Provider');
   }
   deviceInfo(){
@@ -18,14 +21,11 @@ export class AioneHelperProvider {
     this.DeviceInfo['version']=this.device.version;
     this.DeviceInfo['manufacturer']=this.device.manufacturer;
     this.DeviceInfo['serial']=this.device.serial;
-    return this.DeviceInfo['serial'];
+    return this.DeviceInfo['model'];
   }
-  // cal(){
-  // 	console.log('calender clicked');
-  // 	this.calender.createCalendar('MyCalendar').then(
-  // 		(msg) => { console.log(msg); },
-  // 		(err) => { console.log(err); }
-		// );
-  // }
+  img(){
+  	
+  }
+ 
 
 }

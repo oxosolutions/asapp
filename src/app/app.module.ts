@@ -12,6 +12,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HTTP } from '@ionic-native/http';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 //import { HttpModule } from '@angular/http';
 
 import { Nav, Platform ,ToastController} from 'ionic-angular';
@@ -45,7 +46,8 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
     SQLite,
     HTTP,
     Calendar,
-    Device
+    Device,
+    Camera
   ]
 })
 export class AppModule {}
