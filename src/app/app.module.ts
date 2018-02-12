@@ -11,6 +11,7 @@ import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HTTP } from '@ionic-native/http';
 import { Calendar } from '@ionic-native/calendar';
+import { Device } from '@ionic-native/device';
 //import { HttpModule } from '@angular/http';
 
 import { Nav, Platform ,ToastController} from 'ionic-angular';
@@ -26,6 +27,7 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+
      //HttpModule, 
   ],
   bootstrap: [IonicApp],
@@ -42,7 +44,8 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
     AioneHelperProvider,
     SQLite,
     HTTP,
-    Calendar
+    Calendar,
+    Device
   ]
 })
 export class AppModule {}

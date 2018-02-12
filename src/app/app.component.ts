@@ -11,7 +11,6 @@ import { AioneServicesProvider } from '../providers/aione-services/aione-service
 @Component({
   templateUrl: 'app.html',
   // providers: [AioneServicesProvider]
-
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

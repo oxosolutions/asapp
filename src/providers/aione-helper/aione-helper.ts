@@ -4,18 +4,28 @@ import { HomePage } from '../../pages/home/home';
 import { ListPage } from '../../pages/list/list';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { Calendar } from '@ionic-native/calendar';
+import { Device } from '@ionic-native/device';
 @Injectable()
 export class AioneHelperProvider {
-
-  constructor(private calender:Calendar) {
+	DeviceInfo={};
+  constructor(private device: Device,private calender:Calendar) {
     console.log('Hello AioneHelperProvider Provider');
   }
-  cal(){
-  	console.log('calender clicked');
-  	this.calender.createCalendar('MyCalendar').then(
-  		(msg) => { console.log(msg); },
-  		(err) => { console.log(err); }
-		);
+  deviceInfo(){
+    this.DeviceInfo['cordova']=this.device.cordova;
+    this.DeviceInfo['model']=this.device.model;
+    this.DeviceInfo['platform']=this.device.platform;
+    this.DeviceInfo['version']=this.device.version;
+    this.DeviceInfo['manufacturer']=this.device.manufacturer;
+    this.DeviceInfo['serial']=this.device.serial;
+    return this.DeviceInfo['serial'];
   }
+  // cal(){
+  // 	console.log('calender clicked');
+  // 	this.calender.createCalendar('MyCalendar').then(
+  // 		(msg) => { console.log(msg); },
+  // 		(err) => { console.log(err); }
+		// );
+  // }
 
 }
