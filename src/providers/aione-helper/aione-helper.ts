@@ -13,7 +13,8 @@ import { AlertController } from 'ionic-angular';
 export class AioneHelperProvider {
 	DeviceInfo={};
 	base64Image;
-	Status:any
+	Status:any;
+  message : string='hello';
  
   constructor(public alert:AlertController,private network: Network,private camera:Camera,private device: Device,private calender:Calendar) {
     console.log('Hello AioneHelperProvider Provider');
@@ -28,46 +29,29 @@ export class AioneHelperProvider {
     return this.DeviceInfo['model'];
   }
   internet(){
-  	let alert = this.alert.create({
-	    title: 'Connected',
-	    subTitle: 'You have an internet connection',
-	    buttons: ['ok']
-  	});
-	  let disconnect = this.alert.create({
-	    title: 'Disconnected !!',
-	    subTitle: 'No Internet Connection',
-	    buttons: ['ok']
-	  });
 	  if(this.network.onConnect().subscribe()){
 	  	if (this.network.type === 'none' ) {
-	  		disconnect.present();	
+	  		this.showAlert('Disconnected !!','No Internet Connection');
 			}else{
-				alert.present();
+				this.showAlert('Connected !!','You have an internet connection');	
 			}
 	  }
   }
+  showAlert(hello,message){
+  	let alert=this.alert.create({
+	    title: hello,
+	    subTitle: message,
+	    buttons: ['ok']
+	  });
+	  alert.present();
+  }
   wifi(){
-	  let disconnect2 = this.alert.create({
-	    title: 'Disconnected !!',
-	    subTitle: 'Wifi Connection has been lost',
-	    buttons: ['ok']
-	  });
-	  let wifi2 = this.alert.create({
-	    title: 'Wifi connected',
-	    subTitle: 'you got a Wifi Connection',
-	    buttons: ['ok']
-	  });
 	  if(this.network.onConnect().subscribe()){
 	  	if (this.network.type === 'wifi') {
-				wifi2.present();
+				this.showAlert('Wifi connected','you got a Wifi Connection');	
 			}else{
-				disconnect2.present();
+				this.showAlert('Disconnected ','Wifi Connection has been lost');	
 			}
-	  }else{
-	  	this.Status='Disconnect'
-	  	disconnect2.present();
-	  }
+	   }	 
 	}
- 
-
 }

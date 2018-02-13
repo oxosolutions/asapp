@@ -14,7 +14,7 @@ export class ListPage {
 
   constructor(private camera:Camera,public AioneHelp:AioneHelperProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  
+
   Device(){
     let result123:any;
     this.result=this.AioneHelp.deviceInfo();
@@ -25,7 +25,6 @@ export class ListPage {
   wifiCheck(){
   	this.AioneHelp.wifi();
   }
-
   camera1(){
   	const options: CameraOptions = {
 	  quality: 100,
