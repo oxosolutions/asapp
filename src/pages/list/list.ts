@@ -11,17 +11,22 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class ListPage {
   result:any;
   public base64Image:string
-  Status:any
-  constructor(private camera:Camera,private device: Device,public AioneHelp:AioneHelperProvider,
-  	public navCtrl: NavController, public navParams: NavParams) {
-  
+
+  constructor(private camera:Camera,public AioneHelp:AioneHelperProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  calender1(){
+  
+  Device(){
     let result123:any;
     this.result=this.AioneHelp.deviceInfo();
   }
+  internetCheck(){ 
+  	this.AioneHelp.internet();
+  }
+  wifiCheck(){
+  	this.AioneHelp.wifi();
+  }
+
   camera1(){
-  	// this.AioneHelp.Camera()
   	const options: CameraOptions = {
 	  quality: 100,
 	  destinationType: this.camera.DestinationType.DATA_URL,
@@ -34,8 +39,6 @@ export class ListPage {
 		}, (err) => {
 		});
   }
-  internet(){ 	
-  	this.AioneHelp.connection2();
-  }
+ 
  
 }

@@ -27,36 +27,47 @@ export class AioneHelperProvider {
     this.DeviceInfo['serial']=this.device.serial;
     return this.DeviceInfo['model'];
   }
-  connection2(){
+  internet(){
   	let alert = this.alert.create({
-    title: 'Connected',
-    subTitle: 'Internet Connection is Establised',
-    buttons: ['ok']
-  });
-  let disconnect = this.alert.create({
-    title: 'Disconnected !!',
-    subTitle: 'Internet Connection has been lost',
-    buttons: ['ok']
-  });
-  let wifi = this.alert.create({
-    title: 'Wifi connected',
-    subTitle: 'you got a Wifi Connection',
-    buttons: ['ok']
-  });
- 	let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-			this.Status='Disconnect'
-			 disconnect.present();
-	});                                                                            
-	let connectSubscription = this.network.onConnect().subscribe(() => {
-			 alert.present();
-				setTimeout(() => {
-				if (this.network.type === 'wifi') {
-				  wifi.present();
-				}
-			}, 3000);
-		});
-
+	    title: 'Connected',
+	    subTitle: 'You have an internet connection',
+	    buttons: ['ok']
+  	});
+	  let disconnect = this.alert.create({
+	    title: 'Disconnected !!',
+	    subTitle: 'No Internet Connection',
+	    buttons: ['ok']
+	  });
+	  if(this.network.onConnect().subscribe()){
+	  	if (this.network.type === 'none' ) {
+	  		disconnect.present();	
+			}else{
+				alert.present();
+			}
+	  }
   }
+  wifi(){
+	  let disconnect2 = this.alert.create({
+	    title: 'Disconnected !!',
+	    subTitle: 'Wifi Connection has been lost',
+	    buttons: ['ok']
+	  });
+	  let wifi2 = this.alert.create({
+	    title: 'Wifi connected',
+	    subTitle: 'you got a Wifi Connection',
+	    buttons: ['ok']
+	  });
+	  if(this.network.onConnect().subscribe()){
+	  	if (this.network.type === 'wifi') {
+				wifi2.present();
+			}else{
+				disconnect2.present();
+			}
+	  }else{
+	  	this.Status='Disconnect'
+	  	disconnect2.present();
+	  }
+	}
  
 
 }

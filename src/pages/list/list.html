@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button (click)="calender1()">Default</button>
+  <button ion-button (click)="Device()">Default</button>
  
   <span>{{result}}</span>
   <ion-card-content>
@@ -17,4 +17,5 @@
     <img [src]="(base64Image)" *ngIf="base64Image" />
   </ion-card-content>
   <button ion-button (click)="camera1()">Camera</button>
-  <button ion-button (click)="internet()">Internet</button>
+  <button ion-button (click)="internetCheck()">Internet</button> 
+  <button ion-button (click)="wifiCheck()">Wifi</button>
