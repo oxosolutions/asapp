@@ -13,9 +13,8 @@
   <span>{{result}}</span>
   <ion-card-content>
     Latest Picture:
-    <img src="../../assets/img/sarah-avatar.png.jpeg" id ="myimg">
-    <!-- <p>{{base64Image}}</p> -->
+   
     <img [src]="(base64Image)" *ngIf="base64Image" />
   </ion-card-content>
   <button ion-button (click)="camera1()">Camera</button>
-</ion-content>
+  <button ion-button (click)="internet()">Internet</button>

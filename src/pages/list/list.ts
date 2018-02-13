@@ -10,10 +10,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class ListPage {
   result:any;
-  public base64Image:string;
+  public base64Image:string
+  Status:any
   constructor(private camera:Camera,private device: Device,public AioneHelp:AioneHelperProvider,
   	public navCtrl: NavController, public navParams: NavParams) {
-   
+  
   }
   calender1(){
     let result123:any;
@@ -33,4 +34,8 @@ export class ListPage {
 		}, (err) => {
 		});
   }
+  internet(){ 	
+  	this.AioneHelp.connection2();
+  }
+ 
 }

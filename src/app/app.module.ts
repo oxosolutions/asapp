@@ -16,6 +16,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 //import { HttpModule } from '@angular/http';
 
 import { Nav, Platform ,ToastController} from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
     HTTP,
     Calendar,
     Device,
-    Camera
+    Camera,
+    Network
   ]
 })
 export class AppModule {}
