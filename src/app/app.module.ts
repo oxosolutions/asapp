@@ -17,6 +17,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { SurveyProvider } from '../providers/survey/survey';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { Network } from '@ionic-native/network';
     Calendar,
     Device,
     Camera,
-    Network
+    Network,
+    SurveyProvider
   ]
 })
 export class AppModule {}
