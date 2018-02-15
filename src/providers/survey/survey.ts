@@ -10,7 +10,6 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 */
 @Injectable()
 export class SurveyProvider {
-
   constructor(public http: HttpClient) {
     console.log('Hello SurveyProvider Provider');
   }
