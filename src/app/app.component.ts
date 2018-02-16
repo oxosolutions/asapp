@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
+import { ActivationPage } from '../pages/activation/activation';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { AioneServicesProvider } from '../providers/aione-services/aione-service
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = ListPage;
+  rootPage: any = ActivationPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {

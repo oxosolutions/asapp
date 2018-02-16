@@ -9,49 +9,50 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
 import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { HTTP } from '@ionic-native/http';
 import { Calendar } from '@ionic-native/calendar';
 import { Device } from '@ionic-native/device';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-//import { HttpModule } from '@angular/http';
-
+import { HttpModule } from '@angular/http';
 import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import { SurveyProvider } from '../providers/survey/survey';
-
+import { ActivationPage } from '../pages/activation/activation';
+import { Geolocation } from '@ionic-native/geolocation';
+import {Http,Headers ,RequestOptions } from '@angular/http';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ActivationPage
   ],
   //exports: [AioneServicesProvider],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-
-     //HttpModule, 
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ActivationPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    // HttpModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},   
     AioneServicesProvider,
     AioneHelperProvider,
     SQLite,
-    HTTP,
     Calendar,
     Device,
     Camera,
     Network,
-    SurveyProvider
+    SurveyProvider,Geolocation
   ]
 })
 export class AppModule {}

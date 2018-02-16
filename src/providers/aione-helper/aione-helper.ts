@@ -8,6 +8,7 @@ import { Device } from '@ionic-native/device';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { AlertController } from 'ionic-angular';
+import { ActivationPage } from '../../pages/activation/activation';
 
 @Injectable()
 export class AioneHelperProvider {
@@ -16,7 +17,8 @@ export class AioneHelperProvider {
 	Status:any;
   message : string='hello';
  
-  constructor(public alert:AlertController,private network: Network,private camera:Camera,private device: Device,private calender:Calendar) {
+  constructor(public alert:AlertController,private network: Network,private camera:Camera,
+  	private device: Device,private calender:Calendar) {
     console.log('Hello AioneHelperProvider Provider');
   }
   deviceInfo(){
@@ -29,13 +31,15 @@ export class AioneHelperProvider {
     return this.DeviceInfo['model'];
   }
   internet(){
-	  if(this.network.onConnect().subscribe()){
-	  	if (this.network.type === 'none' ) {
-	  		this.showAlert('Disconnected !!','No Internet Connection');
-			}else{
-				this.showAlert('Connected !!','You have an internet connection');	
-			}
-	  }
+  	return new Promise ((resolve,reject)=>{
+  		if(this.network.onConnect().subscribe()){
+		  	if (this.network.type === 'none' ) {
+		  		this.showAlert('Disconnected !!','No Internet Connection');
+				}else{
+					this.showAlert('Connected !!','You have an internet connection');	
+				}resolve('yes connected');
+	  	}
+  	}) 
   }
   showAlert(hello,message){
   	let alert=this.alert.create({

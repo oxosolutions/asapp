@@ -10,7 +10,7 @@
   "cordova-plugin-advanced-http": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-advanced-http"
+      "id": "cordova-plugin-advanced-http@^1.9.1"
     },
     "is_top_level": true,
     "variables": {}
@@ -51,6 +51,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-network-information"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-geolocation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-geolocation@4.0.1"
     },
     "is_top_level": true,
     "variables": {}

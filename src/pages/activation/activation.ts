@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
+import { SurveyProvider } from '../../providers/survey/survey';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 
-/**
- * Generated class for the ActivationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +13,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ActivationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private geolocation: Geolocation,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivationPage');
+  }
+  activation(){
+  	this.AioneHelp.internet().then((conn)=>{
+  		this.geolocation.getCurrentPosition().then((resp)=>{
+  			console.log(resp.coords.latitude); //console.log(resp.coords.longitude);
+  			this.survey.CreateSurvey().then(()=>{
+
+  			});
+  		}).catch((error)=>{ console.log(error);
+			})
+  	});
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HTTP } from '@ionic-native/http';
+// import { HTTP } from '@ionic-native/http';
 import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../../pages/home/home';
@@ -15,20 +15,24 @@ export class AioneServicesProvider {
 	dataset:any;
 	AppkitProducts=[];
 
-	constructor(public http: HTTP, public platform:Platform, public sqlite:SQLite) {
+	constructor( public platform:Platform, public sqlite:SQLite) {
 		console.log('Hello AioneServicesProvider Provider');
 	}
 
-	PlatfromCheck(databaseName){
-		if(this.platform.is('cordova')){
+	PlatformCheck(databaseName){
+		return new Promise ((resolve,reject)=>{
+			if(this.platform.is('cordova')){
 			this.sqlite.create({name: databaseName, location:'default'}).then(( data: SQLiteObject) => { 
 			  this.db=data;
-			  console.log(this.db);
+			  //console.log(this.db);
+			  resolve(this.db);
 			});
-		}else{
-			this.db= (<any> window).openDatabase(databaseName, '1', 'my', 1024 * 1024 * 100); 
-			console.log(this.db);  
-		}
+			}else{
+				this.db= (<any> window).openDatabase(databaseName, '1', 'my', 1024 * 1024 * 100); 
+					//console.log(this.db); 
+				resolve(this.db);
+			}
+		})	
 	}
 	ExecuteRun(query,DataValue){
 		return new Promise( (resolve,reject)=>{
