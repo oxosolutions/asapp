@@ -65,16 +65,19 @@ export class AioneServicesProvider {
 		}
 	}
 	TableBulk(TableName,Col){
-		if(this.db!= undefined){
-			console.log(TableName);		
-		  for(let i=0; i<TableName.length;i++){
-		  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';
-				console.log(this.query);
-		 	  this.ExecuteRun(this.query,[]).then((res)=>{
-			 	 console.log(res);
-		 	  });
-		  }				
-		}
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				//console.log(Col);		
+			  for(let i=0; i<TableName.length;i++){
+			  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';
+					//console.log(this.query);
+			 	  this.ExecuteRun(this.query,[]).then((res)=>{
+				 		resolve(res);
+			 	  });																															
+			  }				
+			}
+		})
+		
 	}
 	Insert(tableName,Cols,Values){
 		return new Promise((resolve,reject)=>{

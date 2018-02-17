@@ -24,16 +24,19 @@ export class HomePage  {
 
   ColsSingle={'id':'dfkjd','name':'sharma'};
   colsinlekey=['id','name'];
-	values=['3','sharmaji'];
+	values=['3','sharmaji'];  
 	query;
 
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController) {
-
+ // setTimeout(function(){
+ //            console.log(TableCols[1]);
+ //          },2000);
+         
   }
 
   //database operations
   ionViewDidLoad(){
-  	this.servicesProvider.PlatfromCheck('Aione');
+  	//this.servicesProvider.PlatfromCheck('Aione');
   	//this.servicesProvider.LoadApi('http://aione.oxosolutions.com/api/android/').then(()=>{});
   	this.servicesProvider.CreateTable('test', this.colsinlekey);
     this.servicesProvider.TableBulk(this.bulktable, this.bulkTablekey);
@@ -49,8 +52,7 @@ export class HomePage  {
     // this.servicesProvider.DeleteWhere('test', 'name', '"sharmaji"').then(()=>{});
 
 
-  	this.servicesProvider.SelectAll('testing').then((rsult:any)=>{
-      this.resultSelect=rsult.rows;
+  	this.servicesProvider.SelectAll('testing').then((rsult:any)=>{this.resultSelect=rsult.rows;
       console.log(this.resultSelect);
       this.servicesProvider.StringReplaceBulk(this.resultSelect).then(()=>{});
     });
