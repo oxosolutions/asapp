@@ -156,7 +156,7 @@ var SurveyProvider = (function () {
                                         _this.insertgroups(Apidata).then(function (groups) {
                                             _this.insertquestions(Apidata).then(function (questions) {
                                                 _this.insertsettings(Apidata).then(function (setting) {
-                                                    _this.SelectLeftJoin1(Apidata.questions, Apidata.surveys).then(function (result) {
+                                                    _this.resultSurvey(Apidata.questions, Apidata.surveys).then(function (result) {
                                                         console.log(result);
                                                     });
                                                 });
@@ -171,28 +171,27 @@ var SurveyProvider = (function () {
             });
         });
     };
-    SurveyProvider.prototype.SelectLeftJoin1 = function (questions, surveys) {
+    SurveyProvider.prototype.resultSurvey = function (questions, surveys) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var keyColumns = {};
+            var keyColumns = [];
+            var keyqColumns = [];
             var loopLength = 0;
             var surveyresult = [];
             surveys.forEach(function (value, key) {
-                keyColumns[value.id] = [];
+                keyColumns = [];
                 surveyresult.push('surveyResult_' + value.id);
                 questions.forEach(function (qValue, qKey) {
                     qValue;
                     var qresult = qValue.question_key + ' TEXT';
-                    keyColumns[value.id].push(qresult);
+                    keyColumns.push(qresult);
                 });
+                keyqColumns.push(keyColumns);
                 loopLength++;
                 if (loopLength == surveys.length) {
-                    console.log(surveyresult);
-                    console.log(keyColumns);
-                    _this.AioneService.TableBulk(surveyresult, keyColumns).then(function (ff) {
-                        console.log(ff);
+                    _this.AioneService.TableBulk(surveyresult, keyqColumns).then(function (keyqColumns) {
+                        resolve(keyColumns);
                     });
-                    //resolve(keyColumns);
                 }
             });
         });
@@ -686,15 +685,14 @@ var MyApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n       <button ion-button menuToggle>\n      <ion-icon name="close"></ion-icon>\n    </button>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -787,7 +785,7 @@ var AioneServicesProvider = (function () {
             if (_this.db != undefined) {
                 for (var i = 0; i < TableName.length; i++) {
                     _this.query = "CREATE TABLE IF NOT EXISTS " + TableName[i] + ' (' + Col[i] + ')';
-                    console.log(_this.query);
+                    //console.log(this.query);
                     _this.ExecuteRun(_this.query, []).then(function (res) {
                     });
                 }

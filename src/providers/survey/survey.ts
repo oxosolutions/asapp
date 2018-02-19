@@ -28,7 +28,7 @@ export class SurveyProvider {
                     this.insertgroups(Apidata).then((groups)=>{
                       this.insertquestions(Apidata).then((questions)=>{
                         this.insertsettings(Apidata).then((setting)=>{
-                          this.SelectLeftJoin1(Apidata.questions,Apidata.surveys).then(result=>{
+                          this.resultSurvey(Apidata.questions,Apidata.surveys).then(result=>{
                             console.log(result);
                           });
                         })
@@ -44,26 +44,24 @@ export class SurveyProvider {
   	})	
   }
   
-  SelectLeftJoin1(questions,surveys){
+  resultSurvey(questions,surveys){
     return new Promise((resolve,reject)=>{
-      let keyColumns = {};
+      let keyColumns = [];
+      let keyqColumns = [];
       let loopLength = 0;
       let surveyresult=[];
       surveys.forEach((value,key)=>{
-        keyColumns[value.id] = [];
+        keyColumns = [];
         surveyresult.push('surveyResult_'+value.id);
         questions.forEach((qValue,qKey)=>{qValue
           let qresult=qValue.question_key+' TEXT';
-          keyColumns[value.id].push(qresult); 
-        });
+          keyColumns.push(qresult); 
+        });keyqColumns.push(keyColumns);
         loopLength++;
         if(loopLength == surveys.length){
-          console.log(surveyresult);
-          console.log(keyColumns);
-          this.AioneService.TableBulk(surveyresult, keyColumns).then((ff:any)=>{
-            console.log(ff);
+          this.AioneService.TableBulk(surveyresult, keyqColumns).then((keyqColumns:any)=>{
+            resolve(keyColumns);
           });
-          //resolve(keyColumns);
         }
       });
     });

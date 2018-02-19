@@ -70,7 +70,7 @@ export class AioneServicesProvider {
 			if(this.db!= undefined){
 			  for(let i=0; i<TableName.length;i++){
 			  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';
-					console.log(this.query);
+					//console.log(this.query);
 			 	  this.ExecuteRun(this.query,[]).then((res)=>{
 				 	
 			 	  });																															
