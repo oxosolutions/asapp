@@ -153,7 +153,7 @@ var SurveyProvider = (function () {
                                 _this.insertsurveys(Apidata).then(function (surveys) {
                                     _this.insertgroups(Apidata).then(function (groups) {
                                         _this.insertquestions(Apidata).then(function (questions) {
-                                            _this.insertsettings(Apidata).then(function () {
+                                            _this.insertsettings(Apidata).then(function (setting) {
                                             });
                                         });
                                     });
@@ -169,7 +169,10 @@ var SurveyProvider = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if ("settings" in Apidata) {
-                _this.insertSingleExecute().then(function () {
+                _this.insertSingleExecute(Apidata.settings).then(function (settingExe) {
+                    _this.AioneService.Insert("settings", settingExe.dataColumns, settingExe.insertContent).then(function (setting) {
+                        resolve(setting);
+                    });
                 });
             }
         });
@@ -179,7 +182,6 @@ var SurveyProvider = (function () {
         return new Promise(function (resolve, reject) {
             if ("questions" in Apidata) {
                 _this.insertExecute(Apidata.questions).then(function (insertExe) {
-                    console.log(insertExe.dataColumns);
                     _this.AioneService.InsertBulk("questions", insertExe.dataColumns, insertExe.insertContent).then(function (questions) {
                         resolve(questions);
                     });
@@ -192,7 +194,6 @@ var SurveyProvider = (function () {
         return new Promise(function (resolve, reject) {
             if ("groups" in Apidata) {
                 _this.insertExecute(Apidata.groups).then(function (insertExe) {
-                    console.log(insertExe.dataColumns);
                     _this.AioneService.InsertBulk("groups", insertExe.dataColumns, insertExe.insertContent).then(function (surveys) {
                         resolve(surveys);
                     });
@@ -205,7 +206,6 @@ var SurveyProvider = (function () {
         return new Promise(function (resolve, reject) {
             if ("surveys" in Apidata) {
                 _this.insertExecute(Apidata.surveys).then(function (insertExe) {
-                    console.log(insertExe.dataColumns);
                     _this.AioneService.InsertBulk("surveys", insertExe.dataColumns, insertExe.insertContent).then(function (surveys) {
                         resolve(surveys);
                     });
@@ -225,10 +225,18 @@ var SurveyProvider = (function () {
             }
         });
     };
-    SurveyProvider.prototype.insertSingleExecute = function () {
+    SurveyProvider.prototype.insertSingleExecute = function (result) {
         return new Promise(function (resolve, reject) {
             var insertContent = [];
-            var dataColumns;
+            var dataColumns = [];
+            for (var app_key in result) {
+                dataColumns.push(app_key);
+                insertContent.push(result[app_key]);
+            }
+            var collection = {};
+            collection['dataColumns'] = dataColumns;
+            collection['insertContent'] = insertContent;
+            resolve(collection);
         });
     };
     SurveyProvider.prototype.insertExecute = function (result) {
@@ -244,8 +252,6 @@ var SurveyProvider = (function () {
                 });
                 insertContent.push(dataset);
             });
-            //console.log(dataColumns);
-            //console.log(insertContent);
             var collection = {};
             collection['dataColumns'] = dataColumns;
             collection['insertContent'] = insertContent;
@@ -275,20 +281,16 @@ var SurveyProvider = (function () {
                     Apidata[table].forEach(function (key, value) {
                         var dataset = [];
                         Object.keys(key).forEach(function (keyvalue, keydata) {
-                            //console.log(keyvalue);
                             dataset.push(keyvalue + ' TEXT');
-                            //console.log(key[keyvalue]);
                         });
-                        //console.log(dataset);
                         resolve(dataset);
                     });
                 }
                 else {
-                    //console.log('string');
                     var dataset = [];
                     for (var apikey in Apidata[table]) {
                         dataset.push(apikey + ' TEXT');
-                    } //console.log(dataset);
+                    }
                     resolve(dataset);
                 }
             }
@@ -303,7 +305,7 @@ var SurveyProvider = (function () {
             formArray['activation_key'] = 123456;
             _this.http.post('http://master.scolm.com/api/survey_api', formArray, { headers: headers }).subscribe(function (data) {
                 _this.apiresult = data.json();
-                //console.log(this.apiresult);
+                console.log(_this.apiresult);
                 resolve(_this.apiresult);
             }, function (err) {
                 //console.error(err);
@@ -635,14 +637,15 @@ var MyApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n       <button ion-button menuToggle>\n      <ion-icon name="close"></ion-icon>\n    </button>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _e || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=app.component.js.map

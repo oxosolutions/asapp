@@ -24,8 +24,8 @@ export class SurveyProvider {
                 this.insertsurveys(Apidata).then((surveys  )=>{
                   this.insertgroups(Apidata).then((groups)=>{
                     this.insertquestions(Apidata).then((questions)=>{
-                      this.insertsettings(Apidata).then(()=>{
-
+                      this.insertsettings(Apidata).then((setting)=>{
+                        
                       })
                     })
                   })
@@ -40,8 +40,10 @@ export class SurveyProvider {
   insertsettings(Apidata){
     return new Promise ((resolve,reject)=>{
       if("settings" in Apidata){
-        this.insertSingleExecute().then(()=>{
-
+        this.insertSingleExecute(Apidata.settings).then((settingExe:any)=>{
+          this.AioneService.Insert("settings",settingExe.dataColumns,settingExe.insertContent).then((setting)=>{
+            resolve(setting);
+          })
         })
       }
     })
@@ -50,7 +52,6 @@ export class SurveyProvider {
     return new Promise ((resolve,reject)=>{
       if("questions" in Apidata){
         this.insertExecute(Apidata.questions).then((insertExe:any)=>{
-          console.log(insertExe.dataColumns);
           this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
              resolve(questions);
           })
@@ -62,7 +63,6 @@ export class SurveyProvider {
     return new Promise ((resolve,reject)=>{
       if("groups" in Apidata){
         this.insertExecute(Apidata.groups).then((insertExe:any)=>{
-          console.log(insertExe.dataColumns);
           this.AioneService.InsertBulk("groups", insertExe.dataColumns,insertExe.insertContent).then((surveys)=>{
              resolve(surveys);
           })
@@ -74,7 +74,6 @@ export class SurveyProvider {
     return new Promise ((resolve,reject)=>{
       if("surveys" in Apidata){
         this.insertExecute(Apidata.surveys).then((insertExe:any)=>{
-          console.log(insertExe.dataColumns);
           this.AioneService.InsertBulk("surveys", insertExe.dataColumns,insertExe.insertContent).then((surveys)=>{
              resolve(surveys);
           })
@@ -93,10 +92,19 @@ export class SurveyProvider {
       }
     })
   }
-  insertSingleExecute(){
+  insertSingleExecute(result){
     return new Promise((resolve,reject)=>{
       let insertContent=[];
-      let dataColumns;
+      let dataColumns=[];
+      for(let app_key in result){
+        dataColumns.push(app_key);
+        insertContent.push(result[app_key]);
+
+      }
+      let collection={};
+      collection['dataColumns']=dataColumns;
+      collection['insertContent']=insertContent;
+      resolve(collection);  
     })
   }
   insertExecute(result){
@@ -112,8 +120,6 @@ export class SurveyProvider {
         });
         insertContent.push(dataset);
       })
-      //console.log(dataColumns);
-      //console.log(insertContent);
       let collection={};
       collection['dataColumns']=dataColumns;
       collection['insertContent']=insertContent;
@@ -141,19 +147,15 @@ export class SurveyProvider {
           Apidata[table].forEach(function(key,value){
             let dataset=[];
             Object.keys(key).forEach(function(keyvalue,keydata){
-              //console.log(keyvalue);
               dataset.push(keyvalue + ' TEXT');     
-              //console.log(key[keyvalue]);
           });
-          //console.log(dataset);
           resolve(dataset);
           })
         }else{
-          //console.log('string');
           let dataset=[];
           for (let apikey in Apidata[table] ){
             dataset.push(apikey + ' TEXT');
-          }//console.log(dataset);
+          }
           resolve(dataset);
         }
 
@@ -168,7 +170,7 @@ export class SurveyProvider {
       formArray['activation_key'] = 123456;
       this.http.post('http://master.scolm.com/api/survey_api',formArray,{headers:headers}).subscribe((data:any)=>{
         this.apiresult=data.json();
-        //console.log(this.apiresult);
+        console.log(this.apiresult);
         resolve(this.apiresult);
       },(err)=>{
         //console.error(err);
