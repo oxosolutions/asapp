@@ -208,6 +208,9 @@ export class SurveyProvider {
     });
     return promise;
   }
+  userActivation(){
+    
+  }
   Api(){
     return new Promise ((resolve,reject)=>{
       let headers = new Headers();
