@@ -66,16 +66,17 @@ export class AioneServicesProvider {
 	}
 	TableBulk(TableName,Col){
 		return new Promise ((resolve,reject)=>{
+			console.log(Col);
 			if(this.db!= undefined){
-				//console.log(Col);		
 			  for(let i=0; i<TableName.length;i++){
 			  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';
-					//console.log(this.query);
+					console.log(this.query);
 			 	  this.ExecuteRun(this.query,[]).then((res)=>{
-				 		resolve(res);
+				 	
 			 	  });																															
-			  }				
+			  }			
 			}
+			resolve("yes");	
 		})
 		
 	}
@@ -107,7 +108,7 @@ export class AioneServicesProvider {
 					CollectedData.push("("+ValuesArray.join(',') +")");
 				}//console.log(CollectedData)
 				this.query = 'INSERT INTO '+tableName+' ( '+Cols.join(',')+' ) VALUES '+CollectedData.join(',');
-				console.log(this.query);
+				//console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((Bulkres:any)=>{ resolve(Bulkres);})
 			}
 		})
@@ -149,7 +150,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				console.log(this.query);
+				// console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	
@@ -168,13 +169,26 @@ export class AioneServicesProvider {
 		})		
 	}
 	DropTable(tableName){
-		if(this.db!= undefined){
-			this.query='DROP Table ' + tableName;
-			console.log(this.query);
-			this.ExecuteRun(this.query,[]).then((DropResult)=>{
-				//console.log(DropResult);
-			})
-		}
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				//console.log(Col);		
+			  for(let i=0; i<tableName.length;i++){
+			  	this.query='DROP Table IF  EXISTS ' + tableName[i];
+					console.log(this.query);
+			 	  this.ExecuteRun(this.query,[]).then((res)=>{
+			 	  	resolve(res);
+			 	  });	
+			 	}																														
+			}	
+		})
+	
+	}
+	SelectUnion(tableName1,tableName2){
+		return new Promise((resolve,reject)=>{
+			this.query='SELECT * FROM '+tableName1+' UNION SELECT * FROM ' + tableName2;
+		console.log(this.query);
+		})
+		
 	}
 	StringReplaceBulk(result){
 		return new Promise ((resolve,reject)=>{

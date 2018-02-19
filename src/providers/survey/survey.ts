@@ -8,34 +8,78 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class SurveyProvider {
   apiresult:any;
+  public query:any;
   public TableCols=[];
   constructor(public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider) {
     console.log('Hello SurveyProvider Provider');
   }
   CreateSurvey(){
   	return new Promise ((resolve,reject)=>{
+      let tableName=["questions","surveys","groups","users" ,"settings"];
+      let dropTable=["questions","surveys","groups","users" ,"settings","surveyResult_156","surveyResult_157"];
   		this.servicepro.PlatformCheck('asapp').then((db)=>{
-  			this.Api().then((Apidata:any)=>{
-          let i
-          let tableName=["questions","surveys","groups","users" ,"settings"];
-          this.test(Apidata,tableName, 0).then(result => {
-            this.AioneService.TableBulk(tableName,this.TableCols).then(()=>{
-              this.insertUser(Apidata).then((user)=>{
-                this.insertsurveys(Apidata).then((surveys  )=>{
-                  this.insertgroups(Apidata).then((groups)=>{
-                    this.insertquestions(Apidata).then((questions)=>{
-                      this.insertsettings(Apidata).then((setting)=>{
-                        
+        this.AioneService.DropTable(dropTable).then(()=>{
+  			  this.Api().then((Apidata:any)=>{
+            let i
+            this.table(Apidata,tableName, 0).then(result => {
+              this.AioneService.TableBulk(tableName,this.TableCols).then(()=>{
+                this.insertUser(Apidata).then((user)=>{//console.log(user)
+                  this.insertsurveys(Apidata).then((surveys  )=>{
+                    this.insertgroups(Apidata).then((groups)=>{
+                      this.insertquestions(Apidata).then((questions)=>{
+                        this.insertsettings(Apidata).then((setting)=>{
+                          this.SelectLeftJoin1(Apidata.questions,Apidata.surveys).then(result=>{
+                            console.log(result);
+                          });
+                        })
                       })
                     })
                   })
                 })
               })
-            })
-          });      
+            });  
+          })    
         });
   		})
   	})	
+  }
+  
+  SelectLeftJoin1(questions,surveys){
+    return new Promise((resolve,reject)=>{
+      let keyColumns = {};
+      let loopLength = 0;
+      let surveyresult=[];
+      surveys.forEach((value,key)=>{
+        keyColumns[value.id] = [];
+        surveyresult.push('surveyResult_'+value.id);
+        questions.forEach((qValue,qKey)=>{qValue
+          let qresult=qValue.question_key+' TEXT';
+          keyColumns[value.id].push(qresult); 
+        });
+        loopLength++;
+        if(loopLength == surveys.length){
+          console.log(surveyresult);
+          console.log(keyColumns);
+          this.AioneService.TableBulk(surveyresult, keyColumns).then((ff:any)=>{
+            console.log(ff);
+          });
+          //resolve(keyColumns);
+        }
+      });
+    });
+  }
+  
+  insertquestions(Apidata){
+    return new Promise ((resolve,reject)=>{
+      if("questions" in Apidata){
+        console.log(Apidata.questions);
+        this.insertExecute(Apidata.questions).then((insertExe:any)=>{
+          this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
+             resolve(questions);
+          })
+        });
+      }
+    })
   }
   insertsettings(Apidata){
     return new Promise ((resolve,reject)=>{
@@ -48,17 +92,7 @@ export class SurveyProvider {
       }
     })
   }
-  insertquestions(Apidata){
-    return new Promise ((resolve,reject)=>{
-      if("questions" in Apidata){
-        this.insertExecute(Apidata.questions).then((insertExe:any)=>{
-          this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
-             resolve(questions);
-          })
-        });
-      }
-    })
-  }
+  
   insertgroups(Apidata){
     return new Promise ((resolve,reject)=>{
       if("groups" in Apidata){
@@ -126,13 +160,13 @@ export class SurveyProvider {
       resolve(collection);   
     });
   }
-  test(Apidata,tableName, i){
+  table(Apidata,tableName, i){
     let promise = new Promise((resolve,reject)=>{
         if(tableName[i] != undefined){
           this.surveyTable(Apidata,tableName[i]).then((dd:any)=>{
             this.TableCols.push(dd);
             i = i+1;
-            return resolve(this.test(Apidata,tableName,i));
+            return resolve(this.table(Apidata,tableName,i));
           });
         }else{
             resolve('Done');
@@ -161,6 +195,20 @@ export class SurveyProvider {
 
       }
     })
+  }
+  table33(Apidata,tableName, i){
+    let promise = new Promise((resolve,reject)=>{
+        if(tableName[i] != undefined){
+          this.surveyTable(Apidata,tableName[i]).then((dd:any)=>{
+            this.TableCols.push(dd);
+            i = i+1;
+            return resolve(this.table(Apidata,tableName,i));
+          });
+        }else{
+            resolve('Done');
+        }
+    });
+    return promise;
   }
   Api(){
     return new Promise ((resolve,reject)=>{

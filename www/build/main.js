@@ -143,17 +143,23 @@ var SurveyProvider = (function () {
     SurveyProvider.prototype.CreateSurvey = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            var tableName = ["questions", "surveys", "groups", "users", "settings"];
+            var dropTable = ["questions", "surveys", "groups", "users", "settings", "surveyResult_156", "surveyResult_157"];
             _this.servicepro.PlatformCheck('asapp').then(function (db) {
-                _this.Api().then(function (Apidata) {
-                    var i;
-                    var tableName = ["questions", "surveys", "groups", "users", "settings"];
-                    _this.test(Apidata, tableName, 0).then(function (result) {
-                        _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
-                            _this.insertUser(Apidata).then(function (user) {
-                                _this.insertsurveys(Apidata).then(function (surveys) {
-                                    _this.insertgroups(Apidata).then(function (groups) {
-                                        _this.insertquestions(Apidata).then(function (questions) {
-                                            _this.insertsettings(Apidata).then(function (setting) {
+                _this.AioneService.DropTable(dropTable).then(function () {
+                    _this.Api().then(function (Apidata) {
+                        var i;
+                        _this.table(Apidata, tableName, 0).then(function (result) {
+                            _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
+                                _this.insertUser(Apidata).then(function (user) {
+                                    _this.insertsurveys(Apidata).then(function (surveys) {
+                                        _this.insertgroups(Apidata).then(function (groups) {
+                                            _this.insertquestions(Apidata).then(function (questions) {
+                                                _this.insertsettings(Apidata).then(function (setting) {
+                                                    _this.SelectLeftJoin1(Apidata.questions, Apidata.surveys).then(function (result) {
+                                                        console.log(result);
+                                                    });
+                                                });
                                             });
                                         });
                                     });
@@ -165,6 +171,45 @@ var SurveyProvider = (function () {
             });
         });
     };
+    SurveyProvider.prototype.SelectLeftJoin1 = function (questions, surveys) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var keyColumns = {};
+            var loopLength = 0;
+            var surveyresult = [];
+            surveys.forEach(function (value, key) {
+                keyColumns[value.id] = [];
+                surveyresult.push('surveyResult_' + value.id);
+                questions.forEach(function (qValue, qKey) {
+                    qValue;
+                    var qresult = qValue.question_key + ' TEXT';
+                    keyColumns[value.id].push(qresult);
+                });
+                loopLength++;
+                if (loopLength == surveys.length) {
+                    console.log(surveyresult);
+                    console.log(keyColumns);
+                    _this.AioneService.TableBulk(surveyresult, keyColumns).then(function (ff) {
+                        console.log(ff);
+                    });
+                    //resolve(keyColumns);
+                }
+            });
+        });
+    };
+    SurveyProvider.prototype.insertquestions = function (Apidata) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if ("questions" in Apidata) {
+                console.log(Apidata.questions);
+                _this.insertExecute(Apidata.questions).then(function (insertExe) {
+                    _this.AioneService.InsertBulk("questions", insertExe.dataColumns, insertExe.insertContent).then(function (questions) {
+                        resolve(questions);
+                    });
+                });
+            }
+        });
+    };
     SurveyProvider.prototype.insertsettings = function (Apidata) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -172,18 +217,6 @@ var SurveyProvider = (function () {
                 _this.insertSingleExecute(Apidata.settings).then(function (settingExe) {
                     _this.AioneService.Insert("settings", settingExe.dataColumns, settingExe.insertContent).then(function (setting) {
                         resolve(setting);
-                    });
-                });
-            }
-        });
-    };
-    SurveyProvider.prototype.insertquestions = function (Apidata) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            if ("questions" in Apidata) {
-                _this.insertExecute(Apidata.questions).then(function (insertExe) {
-                    _this.AioneService.InsertBulk("questions", insertExe.dataColumns, insertExe.insertContent).then(function (questions) {
-                        resolve(questions);
                     });
                 });
             }
@@ -258,14 +291,14 @@ var SurveyProvider = (function () {
             resolve(collection);
         });
     };
-    SurveyProvider.prototype.test = function (Apidata, tableName, i) {
+    SurveyProvider.prototype.table = function (Apidata, tableName, i) {
         var _this = this;
         var promise = new Promise(function (resolve, reject) {
             if (tableName[i] != undefined) {
                 _this.surveyTable(Apidata, tableName[i]).then(function (dd) {
                     _this.TableCols.push(dd);
                     i = i + 1;
-                    return resolve(_this.test(Apidata, tableName, i));
+                    return resolve(_this.table(Apidata, tableName, i));
                 });
             }
             else {
@@ -295,6 +328,22 @@ var SurveyProvider = (function () {
                 }
             }
         });
+    };
+    SurveyProvider.prototype.table33 = function (Apidata, tableName, i) {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            if (tableName[i] != undefined) {
+                _this.surveyTable(Apidata, tableName[i]).then(function (dd) {
+                    _this.TableCols.push(dd);
+                    i = i + 1;
+                    return resolve(_this.table(Apidata, tableName, i));
+                });
+            }
+            else {
+                resolve('Done');
+            }
+        });
+        return promise;
     };
     SurveyProvider.prototype.Api = function () {
         var _this = this;
@@ -734,16 +783,16 @@ var AioneServicesProvider = (function () {
     AioneServicesProvider.prototype.TableBulk = function (TableName, Col) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            console.log(Col);
             if (_this.db != undefined) {
-                //console.log(Col);		
                 for (var i = 0; i < TableName.length; i++) {
                     _this.query = "CREATE TABLE IF NOT EXISTS " + TableName[i] + ' (' + Col[i] + ')';
-                    //console.log(this.query);
+                    console.log(_this.query);
                     _this.ExecuteRun(_this.query, []).then(function (res) {
-                        resolve(res);
                     });
                 }
             }
+            resolve("yes");
         });
     };
     AioneServicesProvider.prototype.Insert = function (tableName, Cols, Values) {
@@ -776,7 +825,7 @@ var AioneServicesProvider = (function () {
                     CollectedData.push("(" + ValuesArray.join(',') + ")");
                 } //console.log(CollectedData)
                 _this.query = 'INSERT INTO ' + tableName + ' ( ' + Cols.join(',') + ' ) VALUES ' + CollectedData.join(',');
-                console.log(_this.query);
+                //console.log(this.query);
                 _this.ExecuteRun(_this.query, []).then(function (Bulkres) { resolve(Bulkres); });
             }
         });
@@ -821,7 +870,7 @@ var AioneServicesProvider = (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + Where + ' = ' + Value;
-                console.log(_this.query);
+                // console.log(this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });
@@ -841,13 +890,26 @@ var AioneServicesProvider = (function () {
         });
     };
     AioneServicesProvider.prototype.DropTable = function (tableName) {
-        if (this.db != undefined) {
-            this.query = 'DROP Table ' + tableName;
-            console.log(this.query);
-            this.ExecuteRun(this.query, []).then(function (DropResult) {
-                //console.log(DropResult);
-            });
-        }
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                //console.log(Col);		
+                for (var i = 0; i < tableName.length; i++) {
+                    _this.query = 'DROP Table IF  EXISTS ' + tableName[i];
+                    console.log(_this.query);
+                    _this.ExecuteRun(_this.query, []).then(function (res) {
+                        resolve(res);
+                    });
+                }
+            }
+        });
+    };
+    AioneServicesProvider.prototype.SelectUnion = function (tableName1, tableName2) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.query = 'SELECT * FROM ' + tableName1 + ' UNION SELECT * FROM ' + tableName2;
+            console.log(_this.query);
+        });
     };
     AioneServicesProvider.prototype.StringReplaceBulk = function (result) {
         return new Promise(function (resolve, reject) {
