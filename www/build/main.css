@@ -25677,3 +25677,22 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+page-activation ion-spinner * {
+  width: 28px;
+  height: 28px;
+  stroke: #444;
+  fill: #222;
+}
+
+page-activation .failure {
+  color: red;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+page-activation .success {
+  color: green;
+  font-weight: bold;
+  font-size: 15px;
+}

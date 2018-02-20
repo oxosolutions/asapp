@@ -8,13 +8,19 @@
 </ion-header>
 <ion-content padding>
 <h2>Enter Activation code</h2>
+<div *ngIf="loginForm">
+<form [formGroup]="loginForm">
 	<ion-list>
 	  <ion-item>
 	    <ion-label floating>Enter Acitvation code</ion-label>
-	    <ion-input type="text" ></ion-input>
+	    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>
 	  </ion-item>
-	     <button ion-button (click)="activation()">Internet</button> 
+	  
+	  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> 
+	   
 	  
 	</ion-list>
+</form>
+</div>
 	
 </ion-content>

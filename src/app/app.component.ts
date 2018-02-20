@@ -7,7 +7,7 @@ import { ListPage } from '../pages/list/list';
 import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
 import { ActivationPage } from '../pages/activation/activation';
-
+import {LoginPage} from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html',

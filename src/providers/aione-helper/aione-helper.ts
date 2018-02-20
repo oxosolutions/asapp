@@ -33,8 +33,9 @@ export class AioneHelperProvider {
   internet(){
   	return new Promise ((resolve,reject)=>{
   		if(this.network.onConnect().subscribe()){
-		  	if (this.network.type === 'none' ) {
-		  		//this.showAlert('Disconnected !!','No Internet Connection');
+		  	if (this.network.type === 'none') {
+		  		this.showAlert('Disconnected !!','No Internet Connection');
+          resolve('not connecton')
 				}else{
 					//this.showAlert('Connected !!','You have an internet connection');	
 				}resolve('yes connected');

@@ -19,13 +19,14 @@ import { SurveyProvider } from '../providers/survey/survey';
 import { ActivationPage } from '../pages/activation/activation';
 import { Geolocation } from '@ionic-native/geolocation';
 import {Http,Headers ,RequestOptions } from '@angular/http';
-
+import {LoginPage} from '../pages/login/login';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    ActivationPage
+    ActivationPage,
+    LoginPage
   ],
   //exports: [AioneServicesProvider],
   imports: [
@@ -38,7 +39,8 @@ import {Http,Headers ,RequestOptions } from '@angular/http';
     MyApp,
     HomePage,
     ListPage,
-    ActivationPage
+    ActivationPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

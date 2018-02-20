@@ -1,3 +1,19 @@
 page-activation {
-
+	ion-spinner * {
+  width: 28px;
+  height: 28px;
+  stroke: #444;
+  fill: #222;
+}p{
 }
+.failure{
+	color:red;
+	font-weight:bold;
+	font-size:15px;
+}
+.success{
+	color:green;
+	font-weight:bold;
+	font-size:15px;
+}
+}	
