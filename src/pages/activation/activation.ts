@@ -6,10 +6,10 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {Validators, FormBuilder, FormGroup,NgForm,FormControl} from '@angular/forms';
 import {Http,Headers ,RequestOptions } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { LoadingController } from 'ionic-angular';
 import {DashboardPage} from '../../pages/dashboard/dashboard';
 import {LoginPage} from '../../pages/login/login';
+
 @IonicPage()
 @Component({
   selector: 'page-activation',
@@ -71,8 +71,7 @@ export class ActivationPage {
                               console.log(resultSurvey);
                               this.loader.dismiss();
                               this.nav.setRoot(LoginPage);
-                             // localStorage.setItem("activation", 'Success');
-
+                              localStorage.setItem("activation", 'Success');
                             }
                           });
                         })

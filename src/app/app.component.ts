@@ -8,29 +8,34 @@ import { AioneHelperProvider } from '../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
 import { ActivationPage } from '../pages/activation/activation';
 import {LoginPage} from '../pages/login/login';
-
+import { SurveyProvider } from '../providers/survey/survey';
+import {DashboardPage } from '../pages/dashboard/dashboard';
 @Component({
   templateUrl: 'app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-   rootPage: any
+  rootPage: any
   pages: Array<{title: string, component: any}>;
 
-  constructor(public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-      this.initializeApp();
-      this.pages = [
-        { title: 'List', component: ListPage },
-        { title: 'Home', component: HomePage }       
-      ]; 
-      let storgae=localStorage.getItem("activation");
-      console.log(storgae);
-      // if(localStorage.getItem("activation") != undefined){
-      //   this.rootPage=LoginPage;     
-      // }else{
-        this.rootPage=ActivationPage;     
-     // }
-     
+  constructor(public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeApp();
+    this.servicepro.PlatformCheck('asapp').then((db)=>{
+        this.pages = [
+          { title: 'List', component: ListPage },
+          { title: 'Home', component: HomePage }       
+    ]; 
+    if(localStorage.getItem("activation") != undefined){
+      this.rootPage=LoginPage;  
+      if(localStorage.getItem("username") != undefined){
+        this.rootPage=DashboardPage;   
+      }else{
+        this.rootPage=LoginPage;   
+      }  
+    }else{
+      this.rootPage=ActivationPage;     
+    }
+  });    
   } 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -42,6 +47,6 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  //database operations
+
  
 }

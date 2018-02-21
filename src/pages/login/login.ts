@@ -45,6 +45,7 @@ export class LoginPage {
   			this.loader.dismiss();
     		if(userDetail.rows.length >= 1){
     			this.navCtrl.setRoot(DashboardPage);
+    			localStorage.setItem("username", this.user);
     		}else{
     			this.AioneHelp.showAlert("Error","Wrong Credentials");
     		}
