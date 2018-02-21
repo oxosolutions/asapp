@@ -25696,3 +25696,7 @@ page-activation .success {
   font-weight: bold;
   font-size: 15px;
 }
+
+page-login .alert {
+  color: red;
+}

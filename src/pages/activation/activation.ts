@@ -53,9 +53,9 @@ export class ActivationPage {
   CreateSurvey(){
     return new Promise ((resolve,reject)=>{
       let tableName=["questions","surveys","groups","users" ,"settings"];
-      let dropTable=["questions","surveys","groups","users" ,"settings","surveyResult_157"];
+      let dropTable=["questions","surveys","groups","users" ,"settings"];
       this.servicepro.PlatformCheck('asapp').then((db)=>{
-        this.AioneService.DropTable(dropTable).then((drop)=>{console.log(drop)
+       this.AioneService.DropTable(dropTable).then((drop)=>{console.log(drop)
           this.Api().then((Apidata:any)=>{
             let i
             this.table(Apidata,tableName, 0).then(result => {

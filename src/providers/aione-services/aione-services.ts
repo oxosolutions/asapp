@@ -170,6 +170,17 @@ export class AioneServicesProvider {
 			}
 		});		
 	}
+	MultipleSelectWhere(tableName,ConditionWhere1,ConditionValue1,ConditionValue2,ConditionWhere2){
+		return new Promise ((resolve,reject)=>{
+			if(this.db!= undefined){
+				this.query='Select * from '+ tableName+' where '+ ConditionWhere1 +' = '+ConditionValue1+' AND '+ConditionValue2+ '= '+ ConditionWhere2;
+				 console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
+					resolve(SelResult)
+				})	
+			}
+		});	
+	}
 	selectAllLimit(tableName,limit){
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){

@@ -20,13 +20,15 @@ import { ActivationPage } from '../pages/activation/activation';
 import { Geolocation } from '@ionic-native/geolocation';
 import {Http,Headers ,RequestOptions } from '@angular/http';
 import {LoginPage} from '../pages/login/login';
+import {DashboardPage } from '../pages/dashboard/dashboard';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
     ActivationPage,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   //exports: [AioneServicesProvider],
   imports: [
@@ -40,7 +42,8 @@ import {LoginPage} from '../pages/login/login';
     HomePage,
     ListPage,
     ActivationPage,
-    LoginPage
+    LoginPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,
