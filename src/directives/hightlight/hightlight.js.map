@@ -1,0 +1,1 @@
+{"version":3,"file":"hightlight.js","sourceRoot":"","sources":["hightlight.ts"],"names":[],"mappings":";;;;;;;;;AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAE1C;;;;;GAKG;AAIH;IAEE;QACE,OAAO,CAAC,GAAG,CAAC,qCAAqC,CAAC,CAAC;IACrD,CAAC;IAJU,mBAAmB;QAH/B,SAAS,CAAC;YACT,QAAQ,EAAE,cAAc,CAAC,qBAAqB;SAC/C,CAAC;;OACW,mBAAmB,CAM/B;IAAD,0BAAC;CAAA,AAND,IAMC;SANY,mBAAmB"}
