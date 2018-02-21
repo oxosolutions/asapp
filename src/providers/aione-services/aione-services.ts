@@ -79,7 +79,7 @@ export class AioneServicesProvider {
 	}
 	TableBulk(TableName,Col){
 		return new Promise ((resolve,reject)=>{
-			console.log(Col);
+			// console.log(Col);
 			if(this.db!= undefined){
 			  for(let i=0; i<TableName.length;i++){
 			  	this.query="CREATE TABLE IF NOT EXISTS " +TableName[i] +' ('+Col[i] +')';

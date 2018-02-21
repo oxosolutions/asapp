@@ -28,7 +28,7 @@ export class MyApp {
       // if(localStorage.getItem("activation") != undefined){
       //   this.rootPage=LoginPage;     
       // }else{
-        this.rootPage=LoginPage;     
+        this.rootPage=ActivationPage;     
      // }
      
   } 

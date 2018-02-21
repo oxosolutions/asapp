@@ -20,13 +20,12 @@ export class LoginPage {
 
   }
   Login() {
-  	// this.username=this.loginUser.value.username;
-  	// this.password=this.loginUser.value.password;
-   //  	console.log(this.username);
-   //  	console.log(this.password);
-
-    	console.log('login');
-    	this.AioneService.check('users');
+  	this.username=this.loginUser.value.username;
+  	this.password=this.loginUser.value.password;
+  		
+    	this.AioneService.SelectWhere("users","email", "'radha@gmail.com'" ).then((userDetail:any)=>{
+    		console.log(userDetail.rows);
+    	})
   }
   ionViewWillEnter(){
   	

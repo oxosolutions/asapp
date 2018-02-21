@@ -68,10 +68,10 @@ export class ActivationPage {
                         this.insertsettings(Apidata).then((setting)=>{
                           this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
                             if(resultSurvey != undefined){
-                              //this.dismissLoader();
+                              console.log(resultSurvey);
                               this.loader.dismiss();
                               this.nav.setRoot(LoginPage);
-                              localStorage.setItem("activation", 'Success');
+                             // localStorage.setItem("activation", 'Success');
 
                             }
                           });
@@ -112,7 +112,7 @@ export class ActivationPage {
   insertquestions(Apidata){
     return new Promise ((resolve,reject)=>{
       if("questions" in Apidata){
-        console.log(Apidata.questions);
+       // console.log(Apidata.questions);
         this.insertExecute(Apidata.questions).then((insertExe:any)=>{
           this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
              resolve(questions);
