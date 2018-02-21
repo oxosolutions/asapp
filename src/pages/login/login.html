@@ -1,9 +1,4 @@
-<!--
-  Generated template for the LoginPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,18 +9,22 @@
 
 
 <ion-content padding>
-	<ion-list>
+  <div *ngIf="loginUser">
+    <form [formGroup]="loginUser">
+    	<ion-list>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
-
-	</ion-list>	
+      <button ion-button (click)="Login()">Login</button>
+    	</ion-list>	
+    </form>
+  </div>
 	
 </ion-content>

@@ -4,6 +4,8 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../../pages/home/home';
 import { ListPage } from '../../pages/list/list';
+import { LoginPage } from '../../pages/login/login';
+
 
 @Injectable()
 export class AioneServicesProvider {
@@ -19,6 +21,17 @@ export class AioneServicesProvider {
 		console.log('Hello AioneServicesProvider Provider');
 	}
 
+	check(tableName){
+		// if(this.db!= undefined){
+				this.query='Select * from '+tableName;
+				console.log(this.query);
+				this.ExecuteRun(this.query,[]).then((selectresult:any)=>{
+					console.log(selectresult);
+					console.log('check');
+					//resolve(selectresult);
+				})
+			// }
+	}
 	PlatformCheck(databaseName){
 		return new Promise ((resolve,reject)=>{
 			if(this.platform.is('cordova')){
@@ -150,7 +163,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				// console.log(this.query);
+				 console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	

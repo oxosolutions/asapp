@@ -19,7 +19,7 @@ export class ActivationPage {
   firstnameValidator:any;
   loginForm: FormGroup;
   submitAttempt: boolean = false;
-    apiresult:any;
+  apiresult:any;
   public query:any;
   public TableCols=[];
   ActivationCode:any;
@@ -30,7 +30,6 @@ export class ActivationPage {
     this.ionViewWillEnter();
   }
   activation(){
-    
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
       this.CreateSurvey().then(()=>{
@@ -38,9 +37,9 @@ export class ActivationPage {
   	});
   }
   presentLoading(message) {
-       this.loader = this.loaderCtrl.create({
-       spinner: 'crescent',
-        content: `
+    this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
       <div class="custom-spinner-container">
         <div class="custom-spinner-box">`+message+`</div>
       </div>`,
@@ -51,7 +50,6 @@ export class ActivationPage {
     this.loader.dismiss();
     this.presentLoading("your form is submitting Successfully");
   }
-
   CreateSurvey(){
     return new Promise ((resolve,reject)=>{
       let tableName=["questions","surveys","groups","users" ,"settings"];
@@ -63,7 +61,7 @@ export class ActivationPage {
             this.table(Apidata,tableName, 0).then(result => {
               this.AioneService.TableBulk(tableName,this.TableCols).then(()=>{
                 this.dismissLoader();
-                this.insertUser(Apidata).then((user)=>{//console.log(user)
+                this.insertUser(Apidata).then((user)=>{console.log(user)
                   this.insertsurveys(Apidata).then((surveys  )=>{
                     this.insertgroups(Apidata).then((groups)=>{
                       this.insertquestions(Apidata).then((questions)=>{
@@ -73,6 +71,8 @@ export class ActivationPage {
                               //this.dismissLoader();
                               this.loader.dismiss();
                               this.nav.setRoot(LoginPage);
+                              localStorage.setItem("activation", 'Success');
+
                             }
                           });
                         })

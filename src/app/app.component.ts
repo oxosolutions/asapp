@@ -14,7 +14,7 @@ import {LoginPage} from '../pages/login/login';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = ActivationPage;
+   rootPage: any
   pages: Array<{title: string, component: any}>;
 
   constructor(public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
@@ -22,7 +22,15 @@ export class MyApp {
       this.pages = [
         { title: 'List', component: ListPage },
         { title: 'Home', component: HomePage }       
-      ];      
+      ]; 
+      let storgae=localStorage.getItem("activation");
+      console.log(storgae);
+      // if(localStorage.getItem("activation") != undefined){
+      //   this.rootPage=LoginPage;     
+      // }else{
+        this.rootPage=LoginPage;     
+     // }
+     
   } 
   initializeApp() {
     this.platform.ready().then(() => {
