@@ -21,16 +21,11 @@ export class AioneServicesProvider {
 		console.log('Hello AioneServicesProvider Provider');
 	}
 
-	check(tableName){
-		// if(this.db!= undefined){
-				this.query='Select * from '+tableName;
-				console.log(this.query);
-				this.ExecuteRun(this.query,[]).then((selectresult:any)=>{
-					console.log(selectresult);
-					console.log('check');
-					//resolve(selectresult);
-				})
-			// }
+	dbClose(){
+		return new Promise((resolve,reject)=>{
+			console.log(this.db);
+			resolve(this.db);
+		})
 	}
 	PlatformCheck(databaseName){
 		return new Promise ((resolve,reject)=>{
