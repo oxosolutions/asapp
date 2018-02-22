@@ -21,6 +21,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {Http,Headers ,RequestOptions } from '@angular/http';
 import {LoginPage} from '../pages/login/login';
 import {DashboardPage } from '../pages/dashboard/dashboard';
+import {HelpPage} from '../pages/help/help';
+import {AboutPage} from '../pages/about/about';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +31,9 @@ import {DashboardPage } from '../pages/dashboard/dashboard';
     ListPage,
     ActivationPage,
     LoginPage,
-    DashboardPage
+    DashboardPage,
+    HelpPage,
+    AboutPage
   ],
   //exports: [AioneServicesProvider],
   imports: [
@@ -43,7 +48,9 @@ import {DashboardPage } from '../pages/dashboard/dashboard';
     ListPage,
     ActivationPage,
     LoginPage,
-    DashboardPage
+    DashboardPage,
+    HelpPage,
+    AboutPage
   ],
   providers: [
     StatusBar,

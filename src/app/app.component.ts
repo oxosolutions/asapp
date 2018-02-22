@@ -11,6 +11,9 @@ import {LoginPage} from '../pages/login/login';
 import { SurveyProvider } from '../providers/survey/survey';
 import {DashboardPage } from '../pages/dashboard/dashboard';
 import { LoadingController } from 'ionic-angular';
+import {HelpPage} from '../pages/help/help';
+import {AboutPage} from '../pages/about/about';
+
 @Component({
   templateUrl: 'app.html',
 })
@@ -23,8 +26,9 @@ export class MyApp {
   constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
         this.pages = [
-          { title: 'List', component: ListPage },
-          { title: 'Home', component: HomePage },
+          { title: 'Home', component: DashboardPage },
+          { title: 'About', component: AboutPage },
+          { title: 'Help', component: HelpPage },
     ]; 
     if(localStorage.getItem("activation") != undefined){
       this.rootPage=LoginPage;  
@@ -66,7 +70,6 @@ export class MyApp {
     localStorage.removeItem("activation");
     localStorage.removeItem("username");
     if(localStorage.getItem("activation") == undefined){
-      console.log('activation code');
       this.rootPage = ActivationPage;  
       this.dismissLoader();                                                 
     }   
