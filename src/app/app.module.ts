@@ -23,6 +23,9 @@ import {LoginPage} from '../pages/login/login';
 import {DashboardPage } from '../pages/dashboard/dashboard';
 import {HelpPage} from '../pages/help/help';
 import {AboutPage} from '../pages/about/about';
+import {ListsurveyPage} from '../pages/listsurvey/listsurvey';
+import {GroupsPage} from '../pages/groups/groups';
+import {QuestionPage} from '../pages/question/question';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import {AboutPage} from '../pages/about/about';
     LoginPage,
     DashboardPage,
     HelpPage,
-    AboutPage
+    AboutPage,
+    ListsurveyPage,
+    GroupsPage,
+    QuestionPage
   ],
   //exports: [AioneServicesProvider],
   imports: [
@@ -50,7 +56,10 @@ import {AboutPage} from '../pages/about/about';
     LoginPage,
     DashboardPage,
     HelpPage,
-    AboutPage
+    AboutPage,
+    ListsurveyPage,
+    GroupsPage,
+    QuestionPage
   ],
   providers: [
     StatusBar,

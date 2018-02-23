@@ -25697,6 +25697,25 @@ page-activation .success {
   font-size: 15px;
 }
 
+page-dashboard .button-block {
+  padding: 42px 0px;
+  margin: 30px 0px;
+}
+
+page-groups .groups ion-item {
+  background: #f5f5f5;
+  text-align: center;
+  padding: 5px 0 9px 0px;
+  margin-bottom: 14px;
+}
+
 page-login .alert {
   color: red;
+}
+
+page-question .groups ion-item {
+  background: #f5f5f5;
+  text-align: center;
+  padding: 5px 0 9px 0px;
+  margin-bottom: 14px;
 }

@@ -90,13 +90,15 @@ export class ActivationPage {
       let keyqColumns = [];
       let loopLength = 0;
       let surveyresult=[];
+      console.log(surveys);
       surveys.forEach((value,key)=>{
         keyColumns = [];
         surveyresult.push('surveyResult_'+value.id);
         questions.forEach((qValue,qKey)=>{qValue
           let qresult=qValue.question_key+' TEXT';
           keyColumns.push(qresult); 
-        });keyqColumns.push(keyColumns);
+        });
+        keyqColumns.push(keyColumns);
         loopLength++;
         if(loopLength == surveys.length){
           this.AioneService.TableBulk(surveyresult, keyqColumns).then((keyqColumns:any)=>{

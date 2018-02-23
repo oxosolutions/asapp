@@ -1,0 +1,31 @@
+<!--
+  Generated template for the GroupsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  <button ion-button menuToggle>
+ 	 <ion-icon name="menu"></ion-icon>
+  </button>
+    <ion-title>groups</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<h1>Survey Section</h1>
+<ion-list>
+<div  class="groups" *ngFor="let groups of groupsResult">
+	
+  <ion-item (click)="questionid(groups.id)">  
+  <h1>{{groups.survey_id}}</h1>
+    <h2>{{groups.title}}</h2>
+    <p>{{groups.description}}</p>   
+  </ion-item>
+</div>
+</ion-list>
+</ion-content>

@@ -9,5 +9,12 @@
 
 
 <ion-content padding>
-
+	<div class="Dashboard-content" *ngIf="dashboard">
+		<h1>{{dashboard.android_application_title}}</h1>
+		<p>{{dashboard.android_application_description}}</p>
+		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>
+		<button ion-button icon-left block color="secondary"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>
+		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>
+		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>
+	</div>
 </ion-content>
