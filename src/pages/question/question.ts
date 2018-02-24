@@ -35,8 +35,15 @@ export class QuestionPage {
         {
           text: 'Save',
           handler: data => {
-            this.navCtrl.setRoot(DashboardPage);
-            console.log(data);
+          	if(data[0] == ""){
+          		console.log(" not contain data");
+          		
+          	}else{
+          		console.log("cantain data");
+          		 this.navCtrl.setRoot(DashboardPage);
+            		console.log(data);
+          	}
+           
           }
         }
       ]
