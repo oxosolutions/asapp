@@ -13,6 +13,8 @@ import {DashboardPage } from '../pages/dashboard/dashboard';
 import { LoadingController } from 'ionic-angular';
 import {HelpPage} from '../pages/help/help';
 import {AboutPage} from '../pages/about/about';
+import { RecordListPage }  from '../pages/record-list/record-list';
+import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 
 @Component({
   templateUrl: 'app.html',
@@ -27,8 +29,11 @@ export class MyApp {
     this.initializeApp();
         this.pages = [
           { title: 'Home', component: DashboardPage },
+          { title: 'Enter Record', component: ListsurveyPage},
+          { title: 'Review Record', component: RecordListPage },
           { title: 'About', component: AboutPage },
           { title: 'Help', component: HelpPage },
+
     ]; 
     if(localStorage.getItem("activation") != undefined){
       this.rootPage=LoginPage;  

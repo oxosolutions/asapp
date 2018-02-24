@@ -25719,3 +25719,25 @@ page-question .groups ion-item {
   padding: 5px 0 9px 0px;
   margin-bottom: 14px;
 }
+
+page-record-list .col {
+  border: 1px solid #e8e8e8;
+  padding: 20px 6px;
+  text-align: center;
+}
+
+page-record-list ion-row.active {
+  background-color: #f5f5f5;
+}
+
+page-record-list ion-row.success {
+  background-color: #dff0d8;
+}
+
+page-record-list ion-row.warning {
+  background-color: #fcf8e3;
+}
+
+page-record-list ion-row.error {
+  background-color: #f2dede;
+}

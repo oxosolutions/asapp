@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RecordListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+  <button ion-button menuToggle>
+  	<ion-icon name="menu"></ion-icon>
+  </button>
+    <ion-title>RecordList</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-row>
+	  <ion-col>
+      <strong>Title</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Total questions</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Complete rocords</strong>
+    </ion-col>
+    <ion-col>
+      <strong>Imcomplete records</strong>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let record of listSurvey[0]">
+ 		<ion-col>
+ 		{{record.name}}
+ 		</ion-col>
+ 		<ion-col>
+ 		0
+ 		</ion-col>
+ 		<ion-col>
+ 		0
+ 		</ion-col>
+ 		<ion-col>
+ 		0
+ 		</ion-col>
+  </ion-row>
+</ion-content>

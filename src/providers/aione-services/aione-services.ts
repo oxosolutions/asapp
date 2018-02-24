@@ -138,7 +138,8 @@ export class AioneServicesProvider {
 				this.query='Delete  from '+tableName+' where '+ Where +' = '+Value;
 				console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((Delres)=>{
-					console.log(Delres);
+					// console.log(Delres); 
+					resolve(Delres);
 				})
 			}
 		})		
@@ -158,7 +159,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				 console.log(this.query);
+				 // console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	

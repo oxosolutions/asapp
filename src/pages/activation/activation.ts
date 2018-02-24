@@ -33,7 +33,7 @@ export class ActivationPage {
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
       this.CreateSurvey().then(()=>{
-  		})
+  		});
   	});
   }
   presentLoading(message) {
@@ -67,7 +67,7 @@ export class ActivationPage {
                         this.insertsettings(Apidata).then((setting)=>{
                           this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
                             if(resultSurvey != undefined){
-                              console.log(resultSurvey);
+                              //console.log(resultSurvey);
                               this.loader.dismiss();
                               this.nav.setRoot(LoginPage);
                               localStorage.setItem("activation", 'Success');
@@ -90,7 +90,7 @@ export class ActivationPage {
       let keyqColumns = [];
       let loopLength = 0;
       let surveyresult=[];
-      console.log(surveys);
+      //console.log(surveys);
       surveys.forEach((value,key)=>{
         keyColumns = [];
         surveyresult.push('surveyResult_'+value.id);
@@ -251,7 +251,6 @@ export class ActivationPage {
   Api(){
     return new Promise ((resolve,reject)=>{
       if(!this.loginForm.valid){
-        console.log('not valid');
         this.loginForm;
       }else{
         let headers = new Headers();
@@ -264,7 +263,8 @@ export class ActivationPage {
             this.loader.dismiss();
             this.loginForm.reset();
             this.AioneHelp.showAlert("Error",this.apiresult.message);
-          }else{            
+          }else{ 
+            console.log(this.apiresult);           
             resolve(this.apiresult);
           }
         },(err)=>{

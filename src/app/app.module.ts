@@ -18,14 +18,15 @@ import { Network } from '@ionic-native/network';
 import { SurveyProvider } from '../providers/survey/survey';
 import { ActivationPage } from '../pages/activation/activation';
 import { Geolocation } from '@ionic-native/geolocation';
-import {Http,Headers ,RequestOptions } from '@angular/http';
-import {LoginPage} from '../pages/login/login';
-import {DashboardPage } from '../pages/dashboard/dashboard';
-import {HelpPage} from '../pages/help/help';
-import {AboutPage} from '../pages/about/about';
-import {ListsurveyPage} from '../pages/listsurvey/listsurvey';
-import {GroupsPage} from '../pages/groups/groups';
-import {QuestionPage} from '../pages/question/question';
+import { Http,Headers ,RequestOptions } from '@angular/http';
+import { LoginPage } from '../pages/login/login';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { HelpPage} from '../pages/help/help';
+import { AboutPage } from '../pages/about/about';
+import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
+import { GroupsPage } from '../pages/groups/groups';
+import { QuestionPage } from '../pages/question/question';
+import { RecordListPage }  from '../pages/record-list/record-list';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,10 @@ import {QuestionPage} from '../pages/question/question';
     AboutPage,
     ListsurveyPage,
     GroupsPage,
-    QuestionPage
+    QuestionPage,
+    RecordListPage
   ],
-  //exports: [AioneServicesProvider],
+
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -59,7 +61,8 @@ import {QuestionPage} from '../pages/question/question';
     AboutPage,
     ListsurveyPage,
     GroupsPage,
-    QuestionPage
+    QuestionPage,
+    RecordListPage
   ],
   providers: [
     StatusBar,

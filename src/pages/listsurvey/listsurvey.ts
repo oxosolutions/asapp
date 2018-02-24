@@ -17,7 +17,6 @@ export class ListsurveyPage {
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id){
-  	console.log(id);
   	this.navCtrl.setRoot(GroupsPage,{'id': id});
 
   }
@@ -37,11 +36,11 @@ ionViewDidLoad(){
 		    			// 	console.log(keys[qvalue]);		    				
 		    			// });
 		    			questionData=key[svalue].id;																																																								 
-		    			console.log(questionData);		    				
+		    			//console.log(questionData);		    				
 		    			});
 		    			let query='select COUNT(*)  from questions where survey_id = ' + questionData;
 		    			this.servicesProvider.ExecuteRun(this.data,[]).then((jj:any)=>{
-		    				console.log(jj);
+		    				//console.log(jj);
 		    			
     			 });  						
     		});

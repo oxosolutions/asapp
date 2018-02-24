@@ -25,13 +25,10 @@ export class GroupsPage {
   	this.navCtrl.setRoot(QuestionPage,{'id': id});
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupsPage');
     this.ids=this.navParams.get('id');
-    console.log(this.ids);
     this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
     	this.groupsResult=result.rows;
     	console.log(this.groupsResult);
-    	console.log(this.groupsResult[0].title);
     })
   }
 

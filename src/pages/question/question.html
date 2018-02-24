@@ -11,13 +11,16 @@
 
 
 <ion-content padding>
-		<h1>Survey Section</h1>
+		<br><br>
 <ion-list>
 <div  class="groups" *ngFor="let question of questions">
 	
   <ion-item >  
-  <h1>{{question.question_text}}</h1>
-  
+    <h1>{{question.question_text}}</h1>
+    <p>{{question.question_desc}}</p>
+    <button ion-button>Previous</button>
+    <button ion-button (click)="showConfirm()">Exit</button>
+    <button ion-button>Next</button>
   </ion-item>
 </div>
 </ion-list>
