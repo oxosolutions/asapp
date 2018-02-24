@@ -3,14 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Dashboard</ion-title>
+    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 	<div class="Dashboard-content" *ngIf="dashboard">
-		<h1>{{dashboard.android_application_title}}</h1>
 		<p>{{dashboard.android_application_description}}</p>
 		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>
 		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>

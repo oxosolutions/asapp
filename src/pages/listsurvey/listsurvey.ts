@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {GroupsPage} from '../../pages/groups/groups';
 
-
 @IonicPage()
 @Component({
   selector: 'page-listsurvey',
@@ -11,6 +10,7 @@ import {GroupsPage} from '../../pages/groups/groups';
 })
 export class ListsurveyPage {
 	dashboard:any;
+	surveyTitle:any;
 	listSurvey = [];
 	data:any;
 	questionLength=[];
@@ -23,12 +23,15 @@ export class ListsurveyPage {
 ionViewDidLoad(){
 	let questionId;
 	let questionData:any;
+	this.surveyTitle=localStorage.getItem("ApplicationName");
 	this.servicesProvider.SelectAll("surveys").then((survey:any)=>{
     		this.listSurvey.push(survey.rows);
     		this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
     		this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
 					this.questionLength.push(SelResult.rows);
-
+					// let listdata=[];
+					// listdata=this.listSurvey[0];
+					// console.log(listdata);
     		this.listSurvey.forEach((key,value,)=>{
 					this.questionLength.forEach((keys,values,)=>{
 						Object.keys(key).forEach(function(svalue,skey){

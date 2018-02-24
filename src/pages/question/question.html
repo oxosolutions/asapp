@@ -4,7 +4,8 @@
   <button ion-button menuToggle>
   <ion-icon name="menu"></ion-icon>
   </button>
-    <ion-title>question</ion-title>
+     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>
+    
   </ion-navbar>
 
 </ion-header>
@@ -14,7 +15,6 @@
 		<br><br>
 <ion-list>
 <div  class="groups" *ngFor="let question of questions">
-	
   <ion-item >  
     <h1>{{question.question_text}}</h1>
     <p>{{question.question_desc}}</p>

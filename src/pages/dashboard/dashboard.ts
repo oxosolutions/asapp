@@ -4,12 +4,6 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import { RecordListPage }  from '../../pages/record-list/record-list';
-/**
- * Generated class for the DashboardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,12 +12,14 @@ import { RecordListPage }  from '../../pages/record-list/record-list';
 })
 export class DashboardPage {
 	dashboard:any;
+  ApplicationName:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
     	this.dashboard=result.rows[0];
-    	console.log(this.dashboard);
+      console.log(this.dashboard);
+      localStorage.setItem("ApplicationName", this.dashboard.android_application_title)
     })
   }	
   recordList(){

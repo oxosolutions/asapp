@@ -12,6 +12,7 @@ import { DashboardPage } from '../../pages/dashboard/dashboard';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+	questionTitle:any;
 	id:any;
 	questions:any;
   constructor(public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -43,6 +44,7 @@ export class QuestionPage {
     prompt.present();
   }
   ionViewDidLoad() {
+  	this.questionTitle=localStorage.getItem("ApplicationName");
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
     	this.questions=result.rows;
