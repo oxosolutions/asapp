@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import {QuestionPage} from '../../pages/question/question';
-/**
- * Generated class for the GroupsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({

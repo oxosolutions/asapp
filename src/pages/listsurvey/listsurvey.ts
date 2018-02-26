@@ -44,10 +44,9 @@ ionViewDidLoad(){
 		    			let query='select COUNT(*)  from questions where survey_id = ' + questionData;
 		    			this.servicesProvider.ExecuteRun(this.data,[]).then((jj:any)=>{
 		    				//console.log(jj);
-		    			
-    			 });  						
-    		});
-			});
+		    			});  						
+    				});
+					});
 		});
 
 				

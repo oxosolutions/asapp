@@ -220,8 +220,8 @@ export class ActivationPage {
             let dataset=[];
             Object.keys(key).forEach(function(keyvalue,keydata){
               dataset.push(keyvalue + ' TEXT');     
-          });
-          resolve(dataset);
+            });
+            resolve(dataset);
           })
         }else{
           let dataset=[];

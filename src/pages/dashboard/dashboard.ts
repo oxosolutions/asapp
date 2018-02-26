@@ -19,8 +19,8 @@ export class DashboardPage {
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
     	this.dashboard=result.rows[0];
       console.log(this.dashboard);
-      localStorage.setItem("ApplicationName", this.dashboard.android_application_title)
-    })
+      localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
+    });
   }	
   recordList(){
     this.navCtrl.setRoot(RecordListPage);

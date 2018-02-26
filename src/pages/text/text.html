@@ -1,0 +1,31 @@
+	<!--
+  Generated template for the TextPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>text</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<div *ngIf="data">
+	 <h1>{{data.question_text}}</h1>
+	    <p>{{data.question_desc}}</p>
+		<ion-item >
+	   
+	  <ion-label>{{data.question_text}}</ion-label>
+    <ion-input type="text"></ion-input>
+	    
+	  </ion-item>
+	  <button ion-button>Previous</button>
+	    <button ion-button >Exit</button>
+	    <button ion-button (click)="next()">Next</button>
+	</div>
+</ion-content>

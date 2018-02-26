@@ -27,6 +27,10 @@ import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 import { GroupsPage } from '../pages/groups/groups';
 import { QuestionPage } from '../pages/question/question';
 import { RecordListPage }  from '../pages/record-list/record-list';
+import { TextPage }  from '../pages/text/text';
+import { SelectPage } from '../pages/select/select';
+
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { RecordListPage }  from '../pages/record-list/record-list';
     ListsurveyPage,
     GroupsPage,
     QuestionPage,
-    RecordListPage
+    RecordListPage,
+    TextPage,
+    SelectPage
   ],
 
   imports: [
@@ -62,12 +68,13 @@ import { RecordListPage }  from '../pages/record-list/record-list';
     ListsurveyPage,
     GroupsPage,
     QuestionPage,
-    RecordListPage
+    RecordListPage,
+    TextPage,
+    SelectPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    // HttpModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},   
     AioneServicesProvider,
     AioneHelperProvider,

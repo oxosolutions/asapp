@@ -5,6 +5,8 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {Http,Headers ,RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Validators, FormBuilder, FormGroup,NgForm,FormControl} from '@angular/forms';
+import { QuestionPage } from '../../pages/question/question';
+
 @Injectable()
 export class SurveyProvider {
   apiresult:any;
@@ -17,14 +19,10 @@ export class SurveyProvider {
   constructor(private formBuilder: FormBuilder,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider) {
     // this.ionViewWillEnter();
   }
-  details(){
+  questionsid(result){
     return new Promise ((resolve)=>{
-      
-      // this.AioneService.SelectAll("users").then((userDetail:any)=>{
-      //   console.log('skdjf')
-      //   console.log(userDetail);
-      // })
- //   console.log('dkejf');
+       console.log(result);
+       
     });
   }
   
