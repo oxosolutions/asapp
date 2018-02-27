@@ -502,6 +502,7 @@ var QuestionPage = (function () {
         this.id = this.navParams.get('id');
         this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
             _this.questions.push(result.rows);
+            console.log(_this.questions);
             _this.questions.forEach(function (value, key) {
                 var i;
                 _this.textData(value, 0).then(function () {
@@ -514,7 +515,7 @@ var QuestionPage = (function () {
         var promise = new Promise(function (resolve, reject) {
             if (result[i] != undefined) {
                 console.log(result[i]);
-                _this.validation(result[i]).then(function () {
+                _this.questionsResult(result[i]).then(function () {
                     i = i + 1;
                     return resolve(_this.textData(result, i));
                 });
@@ -525,37 +526,18 @@ var QuestionPage = (function () {
         });
         return promise;
     };
-    QuestionPage.prototype.validation = function (data) {
+    QuestionPage.prototype.questionsResult = function (data) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            data.question_type = data.question_type;
-            switch (data.question_type) {
-                case "text":
-                    console.log(data.question_type);
-                    //console.log(data);
-                    _this.clickNext(data, "select").then(function () {
-                    });
-                    break;
-                case "select":
-                    console.log("select");
-                    break;
-                default:
-                    console.log("your default data");
-            }
-            //resolve(data);
+            _this.OriginalContent = data;
         });
     };
-    QuestionPage.prototype.clickNext = function (Originaldata, type) {
-        this.OriginalContent = Originaldata;
-        this.dataUrl = type + '/' + type + '.html';
-        console.log(this.dataUrl);
-        console.log(this.OriginalContent);
-        return new Promise(function (resolve, reject) {
-        });
+    QuestionPage.prototype.next = function () {
+        console.log("next");
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n<ion-list>\n\n  <h1>question page</h1>\n    <div ng-include src = "\'/../select/select.html\'"></div>\n     <page-text></page-text>\n</ion-list>\n\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<ion-list>\n		<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n		    <div *ngSwitchCase="\'text\'">\n		        <page-text></page-text>\n		    </div>\n	      <div *ngSwitchCase="\'select\'">\n	        	<page-select></page-select>\n	      </div>\n			</div>\n			<button ion-button color="secondary" outline>Previous</button>\n			<button ion-button color="danger" outline>Exit</button>\n			<button ion-button color="dark" outline (click)="next(index+1)">Next</button>\n\n	 </div> \n		    \n\n	</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _d || Object])
     ], QuestionPage);
@@ -985,10 +967,9 @@ var SelectPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-select',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/select/select.html"*/'<ion-content padding>\n<h1>this is select text</h1>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/select/select.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], SelectPage);
     return SelectPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=select.js.map
@@ -1031,12 +1012,11 @@ var TextPage = (function () {
     };
     TextPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-text',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/'<ion-content padding>\n<h1>this is select text</h1>\n</ion-content>\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/,
+            selector: 'page-text',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/'<ion-content padding>\n <ion-item>\n    \n    <ion-input type="text" value=""></ion-input>\n  </ion-item>\n</ion-content>\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], TextPage);
     return TextPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=text.js.map

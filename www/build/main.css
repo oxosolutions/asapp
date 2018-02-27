@@ -25720,6 +25720,10 @@ page-question .groups ion-item {
   margin-bottom: 14px;
 }
 
+page-question .button-outline-md {
+  margin-top: 65px;
+}
+
 page-record-list .col {
   border: 1px solid #e8e8e8;
   padding: 20px 6px;

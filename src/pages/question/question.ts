@@ -55,7 +55,7 @@ export class QuestionPage {
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       this.questions.push(result.rows);
-
+      console.log(this.questions);
       this.questions.forEach((value,key)=>{
         
         let i;
@@ -69,7 +69,7 @@ export class QuestionPage {
     let promise = new Promise((resolve,reject)=>{
       if(result[i] != undefined){
         console.log(result[i]);
-        this.validation(result[i]).then(()=>{
+        this.questionsResult(result[i]).then(()=>{
           i = i+1;
           return resolve (this.textData(result,i));
         })
@@ -79,37 +79,45 @@ export class QuestionPage {
     });
     return promise;
   }
-  validation(data){
+  questionsResult(data){
     return new Promise((resolve,reject)=>{
-      data.question_type = data.question_type;
-            switch (data.question_type) {
-              case "text":
-
-                console.log(data.question_type);
-                //console.log(data);
-                this.clickNext(data,"select").then(()=>{
-
-                });
-                break;
-              case "select":
-                console.log("select");
-                break;
-              default:
-              console.log("your default data");
-            }
-              
-      //resolve(data);
+      this.OriginalContent=data;
+       
     })
   }
-  clickNext(Originaldata, type){
-    this.OriginalContent=Originaldata;
-    this.dataUrl=type+'/'+type+'.html';
-    console.log(this.dataUrl);
-    console.log(this.OriginalContent);
-    return new Promise ((resolve,reject)=>{
-        
-    })
+  next(){
+    console.log("next");
   }
+  // validation(data){
+  //   return new Promise((resolve,reject)=>{
+  //     data.question_type = data.question_type;
+  //           switch (data.question_type) {
+  //             case "text":
+
+  //               console.log(data.question_type);
+  //               //console.log(data);
+  //               this.clickNext(data,"select").then(()=>{
+
+  //               });
+  //               break;
+  //             case "select":
+  //               console.log("select");
+  //               break;
+  //             default:
+  //             console.log("your default data");
+  //           }
+  //   })
+  // }
+  // clickNext(Originaldata, type){
+  //   this.OriginalContent=Originaldata;
+  //   this.dataUrl=type;
+  //   //this.dataUrl=type+'/'+type+'.html';
+  //   console.log(this.dataUrl);
+  //   console.log(this.OriginalContent);
+  //   return new Promise ((resolve,reject)=>{
+
+  //   })
+  // }
 
 
 }

@@ -10,12 +10,25 @@
 
 </ion-header>
 <ion-content padding>
-<ion-list>
+	<ion-list>
+		<div  *ngIf ="OriginalContent">
+			<h1>{{OriginalContent?.question_text}}</h1>
+			<p>{{OriginalContent?.question_desc}}</p>
 
-  <h1>question page</h1>
-    <div ng-include src = "'/../select/select.html'"></div>
-     <page-text></page-text>
-</ion-list>
+			<div [ngSwitch]="OriginalContent?.question_type">
+		    <div *ngSwitchCase="'text'">
+		        <page-text></page-text>
+		    </div>
+	      <div *ngSwitchCase="'select'">
+	        	<page-select></page-select>
+	      </div>
+			</div>
+			<button ion-button color="secondary" outline>Previous</button>
+			<button ion-button color="danger" outline>Exit</button>
+			<button ion-button color="dark" outline (click)="next(index+1)">Next</button>
 
+	 </div> 
+		    
 
+	</ion-list>
 </ion-content>
