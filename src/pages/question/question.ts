@@ -13,6 +13,8 @@ import { SelectPage } from '../../pages/select/select';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+  OriginalContent:any;
+  dataUrl:any;
 	questionTitle:any;
 	id:any;
 	questions=[];
@@ -55,22 +57,9 @@ export class QuestionPage {
       this.questions.push(result.rows);
 
       this.questions.forEach((value,key)=>{
-        // Object.keys(value).forEach((qvalues,qkeys)=>{
-        //     single=value[qkeys]
-        //     this.textData(value[qkeys]).then(()=>{
-        //       console.log(value[qkeys]);
-        //     });
-        // });
-        // console.log(single);
-        // for(let j=0; j < value.length;){
-        //   console.log(value[j]);
-        //   this.textData(value[j],j).then(()=>{
-
-        //   })
-        // }
+        
         let i;
         this.textData(value,0).then(()=>{
-
         })
        
       });                                                                                                                                                        
@@ -95,18 +84,30 @@ export class QuestionPage {
       data.question_type = data.question_type;
             switch (data.question_type) {
               case "text":
+
                 console.log(data.question_type);
-                console.log(data);
-                this.navCtrl.setRoot(TextPage, {'value' : data })
-                 break;
+                //console.log(data);
+                this.clickNext(data,"select").then(()=>{
+
+                });
+                break;
               case "select":
                 console.log("select");
                 break;
               default:
               console.log("your default data");
-              }
+            }
               
       //resolve(data);
+    })
+  }
+  clickNext(Originaldata, type){
+    this.OriginalContent=Originaldata;
+    this.dataUrl=type+'/'+type+'.html';
+    console.log(this.dataUrl);
+    console.log(this.OriginalContent);
+    return new Promise ((resolve,reject)=>{
+        
     })
   }
 

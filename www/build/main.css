@@ -25741,3 +25741,11 @@ page-record-list ion-row.warning {
 page-record-list ion-row.error {
   background-color: #f2dede;
 }
+
+page-select .scroll-content {
+  overflow: visible;
+}
+
+page-text .scroll-content {
+  overflow: visible;
+}
