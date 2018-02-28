@@ -51,19 +51,29 @@ export class QuestionPage {
   }
   ionViewDidLoad() {
     let single;
+    let i=0;
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       this.questions.push(result.rows);
-      console.log(this.questions);
       this.questions.forEach((value,key)=>{
-        
-        let i;
-        this.textData(value,0).then(()=>{
-        })
+        console.log(value[i]);
+        this.OriginalContent=value[i];
+      
+      //   let i;
+      //   // this.textData(value,0).then(()=>{
+      //   // })
        
       });                                                                                                                                                        
     })
+  }
+  next(id){
+    console.log(id);
+    id=id+1;
+    let jj=609;
+    jj= jj+1;
+    console.log(jj);
+    console.log(id);
   }
   textData(result,i){
     let promise = new Promise((resolve,reject)=>{
@@ -82,12 +92,10 @@ export class QuestionPage {
   questionsResult(data){
     return new Promise((resolve,reject)=>{
       this.OriginalContent=data;
-       
+
     })
   }
-  next(){
-    console.log("next");
-  }
+  
   // validation(data){
   //   return new Promise((resolve,reject)=>{
   //     data.question_type = data.question_type;

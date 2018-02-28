@@ -54,7 +54,7 @@ export class ActivationPage {
     return new Promise ((resolve,reject)=>{
       let tableName=["questions","surveys","groups","users" ,"settings"];
       let dropTable=["questions","surveys","groups","users" ,"settings"];
-       this.AioneService.DropTable(dropTable).then((drop)=>{console.log(drop)
+       this.AioneService.DropTable(dropTable).then((drop)=>{
           this.Api().then((Apidata:any)=>{
             let i
             this.table(Apidata,tableName, 0).then(result => {
@@ -94,6 +94,7 @@ export class ActivationPage {
       surveys.forEach((value,key)=>{
         keyColumns = [];
         surveyresult.push('surveyResult_'+value.id);
+        keyColumns.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
         questions.forEach((qValue,qKey)=>{qValue
           let qresult=qValue.question_key+' TEXT';
           keyColumns.push(qresult); 
@@ -218,6 +219,7 @@ export class ActivationPage {
         if((Apidata[table] instanceof Array)){
           Apidata[table].forEach(function(key,value){
             let dataset=[];
+            dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
             Object.keys(key).forEach(function(keyvalue,keydata){
               dataset.push(keyvalue + ' TEXT');     
             });
@@ -225,6 +227,7 @@ export class ActivationPage {
           })
         }else{
           let dataset=[];
+          dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
           for (let apikey in Apidata[table] ){
             dataset.push(apikey + ' TEXT');
           }

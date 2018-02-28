@@ -121,7 +121,6 @@ var ActivationPage = (function () {
             var tableName = ["questions", "surveys", "groups", "users", "settings"];
             var dropTable = ["questions", "surveys", "groups", "users", "settings"];
             _this.AioneService.DropTable(dropTable).then(function (drop) {
-                console.log(drop);
                 _this.Api().then(function (Apidata) {
                     var i;
                     _this.table(Apidata, tableName, 0).then(function (result) {
@@ -163,6 +162,7 @@ var ActivationPage = (function () {
             surveys.forEach(function (value, key) {
                 keyColumns = [];
                 surveyresult.push('surveyResult_' + value.id);
+                keyColumns.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
                 questions.forEach(function (qValue, qKey) {
                     qValue;
                     var qresult = qValue.question_key + ' TEXT';
@@ -294,6 +294,7 @@ var ActivationPage = (function () {
                 if ((Apidata[table] instanceof Array)) {
                     Apidata[table].forEach(function (key, value) {
                         var dataset = [];
+                        dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
                         Object.keys(key).forEach(function (keyvalue, keydata) {
                             dataset.push(keyvalue + ' TEXT');
                         });
@@ -302,6 +303,7 @@ var ActivationPage = (function () {
                 }
                 else {
                     var dataset = [];
+                    dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
                     for (var apikey in Apidata[table]) {
                         dataset.push(apikey + ' TEXT');
                     }
@@ -498,17 +500,27 @@ var QuestionPage = (function () {
     QuestionPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         var single;
+        var i = 0;
         this.questionTitle = localStorage.getItem("ApplicationName");
         this.id = this.navParams.get('id');
         this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
             _this.questions.push(result.rows);
-            console.log(_this.questions);
             _this.questions.forEach(function (value, key) {
-                var i;
-                _this.textData(value, 0).then(function () {
-                });
+                console.log(value[i]);
+                _this.OriginalContent = value[i];
+                //   let i;
+                //   // this.textData(value,0).then(()=>{
+                //   // })
             });
         });
+    };
+    QuestionPage.prototype.next = function (id) {
+        console.log(id);
+        id = id + 1;
+        var jj = 609;
+        jj = jj + 1;
+        console.log(jj);
+        console.log(id);
     };
     QuestionPage.prototype.textData = function (result, i) {
         var _this = this;
@@ -532,12 +544,9 @@ var QuestionPage = (function () {
             _this.OriginalContent = data;
         });
     };
-    QuestionPage.prototype.next = function () {
-        console.log("next");
-    };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<ion-list>\n		<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n		    <div *ngSwitchCase="\'text\'">\n		        <page-text></page-text>\n		    </div>\n	      <div *ngSwitchCase="\'select\'">\n	        	<page-select></page-select>\n	      </div>\n			</div>\n			<button ion-button color="secondary" outline>Previous</button>\n			<button ion-button color="danger" outline>Exit</button>\n			<button ion-button color="dark" outline (click)="next(index+1)">Next</button>\n\n	 </div> \n		    \n\n	</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<ion-list>\n		<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n		    <div *ngSwitchCase="\'text\'">\n		        <page-text></page-text>\n		    </div>\n	      <div *ngSwitchCase="\'select\'">\n	        	<page-select></page-select>\n	      </div>\n			</div>\n			<button ion-button color="secondary" outline>Previous</button>\n			<button ion-button color="danger" outline>Exit</button>\n			<button ion-button color="dark" outline (click)="next(OriginalContent.question_id)">Next</button>\n\n	 </div> \n		    \n\n	</ion-list>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _d || Object])
     ], QuestionPage);
