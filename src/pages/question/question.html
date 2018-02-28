@@ -25,7 +25,7 @@
 	      </div>
 
 			</div>
-			<button ion-button color="secondary" outline>Previous</button>
+			<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.idss)">Previous</button>
 			<button ion-button color="danger" outline>Exit</button>
 			<button ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button>
 
