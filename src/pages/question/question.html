@@ -13,6 +13,7 @@
 	<ion-list>
 		<div  *ngIf ="OriginalContent">
 			<h1>{{OriginalContent?.question_text}}</h1>
+			  <p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
 
 			<div [ngSwitch]="OriginalContent?.question_type">
@@ -22,10 +23,11 @@
 	      <div *ngSwitchCase="'select'">
 	        	<page-select></page-select>
 	      </div>
+
 			</div>
 			<button ion-button color="secondary" outline>Previous</button>
 			<button ion-button color="danger" outline>Exit</button>
-			<button ion-button color="dark" outline (click)="next(OriginalContent.question_id)">Next</button>
+			<button ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button>
 
 	 </div> 
 		    

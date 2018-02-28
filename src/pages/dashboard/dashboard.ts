@@ -4,7 +4,7 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import { RecordListPage }  from '../../pages/record-list/record-list';
-
+import { QuestionPage } from '../../pages/question/question';
 @IonicPage()
 @Component({
   selector: 'page-dashboard',

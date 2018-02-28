@@ -56,76 +56,33 @@ export class QuestionPage {
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       this.questions.push(result.rows);
-      this.questions.forEach((value,key)=>{
+       this.textData(this.questions,i).then(()=>{
+
+       })                                                                                                                                                   
+    })
+  }
+  textData(questions,i){
+    return new Promise((resolve,reject)=>{
+       questions.forEach((value,key)=>{
         console.log(value[i]);
         this.OriginalContent=value[i];
-      
-      //   let i;
-      //   // this.textData(value,0).then(()=>{
-      //   // })
-       
-      });                                                                                                                                                        
+        }); 
     })
+      
+      
   }
   next(id){
+    let questionLength;
     console.log(id);
-    id=id+1;
-    let jj=609;
-    jj= jj+1;
-    console.log(jj);
-    console.log(id);
+    console.log(this.questions);
+    questionLength=this.questions[0].length;
+    console.log();
+    if(id==questionLength){
+      console.log("there is no data");
+      this.navCtrl.setRoot(DashboardPage);
+    }else{
+      this.textData(this.questions,id).then(()=>{
+      });   
+    }
   }
-  textData(result,i){
-    let promise = new Promise((resolve,reject)=>{
-      if(result[i] != undefined){
-        console.log(result[i]);
-        this.questionsResult(result[i]).then(()=>{
-          i = i+1;
-          return resolve (this.textData(result,i));
-        })
-      }else{
-        console.log("else data");
-      }
-    });
-    return promise;
-  }
-  questionsResult(data){
-    return new Promise((resolve,reject)=>{
-      this.OriginalContent=data;
-
-    })
-  }
-  
-  // validation(data){
-  //   return new Promise((resolve,reject)=>{
-  //     data.question_type = data.question_type;
-  //           switch (data.question_type) {
-  //             case "text":
-
-  //               console.log(data.question_type);
-  //               //console.log(data);
-  //               this.clickNext(data,"select").then(()=>{
-
-  //               });
-  //               break;
-  //             case "select":
-  //               console.log("select");
-  //               break;
-  //             default:
-  //             console.log("your default data");
-  //           }
-  //   })
-  // }
-  // clickNext(Originaldata, type){
-  //   this.OriginalContent=Originaldata;
-  //   this.dataUrl=type;
-  //   //this.dataUrl=type+'/'+type+'.html';
-  //   console.log(this.dataUrl);
-  //   console.log(this.OriginalContent);
-  //   return new Promise ((resolve,reject)=>{
-
-  //   })
-  // }
-
-
 }
