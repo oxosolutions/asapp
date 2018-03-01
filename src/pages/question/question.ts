@@ -13,6 +13,7 @@ import { SelectPage } from '../../pages/select/select';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+  answer:{};
   OriginalContent:any;
   dataUrl:any;
 	questionTitle:any;
@@ -20,6 +21,8 @@ export class QuestionPage {
 	questions=[];
   previousButton:any;
   NextButton:any;
+  myData: any;
+  subData: any;
   constructor(public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   showConfirm() {
@@ -54,7 +57,6 @@ export class QuestionPage {
   ionViewDidLoad() {
     let single;
     let i=0;
-
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
@@ -65,26 +67,24 @@ export class QuestionPage {
     })
   }
   textData(questions,i){
-    console.log(questions[0]);
+    // console.log(questions[0]);
     return new Promise((resolve,reject)=>{
        questions.forEach((value,key)=>{
           console.log(value[i]);
-          this.OriginalContent=value[i];
-          console.log(this.OriginalContent.idss);
-          
+          this.OriginalContent=value[i]; 
           if(this.OriginalContent.idss==1 ){
             this.previousButton=false;
           }else{
             this.previousButton=true;
           }
-          // let hh=questions[0].length;
+          let hh=questions[0].length;
           // console.log(hh);
           // console.log(i);
-          // if(questions[0].length == i ){
-          //   this.NextButton=false;
-          // }else{
-          //   this.previousButton=true;
-          // }
+          if(hh == i+1 ){
+            this.NextButton=false;
+          }else{
+            this.NextButton=true;
+          }
         }); 
 
     })
@@ -116,4 +116,17 @@ export class QuestionPage {
       });   
     }
   }
+  onSubmit(formData,id) {
+     // console.log(formData);
+     if(!formData.valid){
+          console.log("not valid");
+      }else{
+        console.log("valid");
+        this.next(id);
+        console.log(formData.value);
+
+      }
+       formData.reset();
+     
+   }
 }

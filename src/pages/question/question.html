@@ -15,19 +15,40 @@
 			<h1>{{OriginalContent?.question_text}}</h1>
 			  <p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
+			
+      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.idss)">
+				<div [ngSwitch]="OriginalContent?.question_type">
+			    <div *ngSwitchCase="'text'">
+			    
+			    <ion-item>
+				    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
+				    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
+				  </ion-item>
+				  
+	       
+			    </div>
+		      <div *ngSwitchCase="'select'">
+		        	<ion-item>
+						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
+						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+						      <ion-option value="nes">NES</ion-option>
+						      <ion-option value="n64">Nintendo64</ion-option>
+						      <ion-option value="ps">PlayStation</ion-option>
+						      <ion-option value="genesis">Sega Genesis</ion-option>
+						      <ion-option value="saturn">Sega Saturn</ion-option>
+						      <ion-option value="snes">SNES</ion-option>
+						    </ion-select>
+  						</ion-item>
+		      </div>
 
-			<div [ngSwitch]="OriginalContent?.question_type">
-		    <div *ngSwitchCase="'text'">
-		        <page-text></page-text>
-		    </div>
-	      <div *ngSwitchCase="'select'">
-	        	<page-select></page-select>
-	      </div>
-
-			</div>
-			<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.idss)">Previous</button>
-			<button ion-button color="danger" outline>Exit</button>
-			<button ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button>
+				</div>
+				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.idss)">Previous</button>
+				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>
+				<!-- <button *ngIf="NextButton" ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button> -->
+				<button  ion-button color="dark" outline>
+	                <ion-icon name="add"></ion-icon>Next</button>
+			</form>
+			
 
 	 </div> 
 		    
