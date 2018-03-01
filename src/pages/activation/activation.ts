@@ -113,13 +113,40 @@ export class ActivationPage {
     return new Promise ((resolve,reject)=>{
       if("questions" in Apidata){
        // console.log(Apidata.questions);
-        this.insertExecute(Apidata.questions).then((insertExe:any)=>{
+        this.insertExecuteObject(Apidata.questions).then((insertExe:any)=>{
           this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
              resolve(questions);
           })
         });
       }
     })
+  }
+  insertExecuteObject(result){
+    return new Promise((resolve,reject)=>{
+      let insertContent=[];
+      let dataColumns;
+      result.forEach(function(key,value){
+        let dataset=[];
+        dataColumns=[];
+        Object.keys(key).forEach(function(keyvalue,keydata){
+          let json;
+          let anotherjson
+          if(typeof key[keyvalue]=="object"){
+            anotherjson=JSON.stringify(key[keyvalue]);
+            json=anotherjson.replace(/"/g, "'");
+          }else{
+            json=key[keyvalue];
+          }
+          dataset.push(json);
+          dataColumns.push(keyvalue);
+        });
+        insertContent.push(dataset);
+      })
+      let collection={};
+      collection['dataColumns']=dataColumns;
+      collection['insertContent']=insertContent;
+      resolve(collection);   
+    });
   }
   insertsettings(Apidata){
     return new Promise ((resolve,reject)=>{

@@ -62,13 +62,13 @@ export class QuestionPage {
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       this.questions.push(result.rows);
         this.textData(this.questions,i).then(()=>{
-         console.log(this.questions);
+         // console.log(this.questions[0]);
         })                                                                                                                                                   
     })
   }
   textData(questions,i){
-    // console.log(questions[0]);
     return new Promise((resolve,reject)=>{
+      console.log(questions[0]);
        questions.forEach((value,key)=>{
           console.log(value[i]);
           this.OriginalContent=value[i]; 
