@@ -52,8 +52,8 @@ export class ActivationPage {
   }
   CreateSurvey(){
     return new Promise ((resolve,reject)=>{
-      let tableName=["questions","surveys","groups","users" ,"settings"];
-      let dropTable=["questions","surveys","groups","users" ,"settings"];
+      let tableName=["questions","surveys","groups","users" ,"settings","survey_meta"];
+      let dropTable=["questions","surveys","groups","users" ,"settings","survey_meta"];
        this.AioneService.DropTable(dropTable).then((drop)=>{
           this.Api().then((Apidata:any)=>{
             let i
@@ -65,14 +65,18 @@ export class ActivationPage {
                     this.insertgroups(Apidata).then((groups)=>{
                       this.insertquestions(Apidata).then((questions)=>{
                         this.insertsettings(Apidata).then((setting)=>{
-                          this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
-                            if(resultSurvey != undefined){
-                              //console.log(resultSurvey);
-                              this.loader.dismiss();
-                              this.nav.setRoot(LoginPage);
-                              localStorage.setItem("activation", 'Success');
-                            }
-                          });
+                          this.insersurveyMeta(Apidata).then((survey_meta)=>{
+
+
+                            this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
+                              if(resultSurvey != undefined){
+                                //console.log(resultSurvey);
+                                this.loader.dismiss();
+                                this.nav.setRoot(LoginPage);
+                                localStorage.setItem("activation", 'Success');
+                              }
+                            });
+                          })
                         })
                       })
                     })
@@ -109,10 +113,22 @@ export class ActivationPage {
       });
     });
   }
+  insersurveyMeta(Apidata){
+    return new Promise ((resolve,reject)=>{
+      if("survey_meta" in Apidata){
+        this.insertExecute(Apidata.survey_meta).then((insertExe:any)=>{
+          console.log(insertExe);
+          this.AioneService.InsertBulk("survey_meta", insertExe.dataColumns,insertExe.insertContent).then((surveys)=>{
+             resolve(surveys);
+          })
+        });
+      }
+    })
+  }
   insertquestions(Apidata){
     return new Promise ((resolve,reject)=>{
       if("questions" in Apidata){
-       // console.log(Apidata.questions);
+       console.log(Apidata.questions);
         this.insertExecuteObject(Apidata.questions).then((insertExe:any)=>{
           this.AioneService.InsertBulk("questions", insertExe.dataColumns,insertExe.insertContent).then((questions)=>{
              resolve(questions);
@@ -125,13 +141,14 @@ export class ActivationPage {
     return new Promise((resolve,reject)=>{
       let insertContent=[];
       let dataColumns;
+      console.log(result);
       result.forEach(function(key,value){
         let dataset=[];
         dataColumns=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
           let json;
           let anotherjson
-          console.log(key[keyvalue]);
+          //console.log(key[keyvalue]);
           if(typeof key[keyvalue]=="object"){
             anotherjson=JSON.stringify(key[keyvalue]);
             json=anotherjson.replace(/"/g, "'");

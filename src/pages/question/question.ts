@@ -56,66 +56,80 @@ export class QuestionPage {
   ionViewDidLoad(){
     let single;
     let i=0;
+    let insertContent=[];
+      let dataColumns;
     let anotherjson;
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
-      this.questions.push(result.rows);
+      //this.questions.push(result.rows);
+      console.log(result.rows);
+      // this.questions=result.rows;
+      let values=[];
+      console.log(typeof(this.questions));
+     for (var key in result.rows) {
+    this.questions.push(result.rows[key])
+}
+console.log(this.questions);
+
+
+
+      //mynew coding
        this.questions.forEach((valuedd,keydd)=>{
-          let singleValue=[];
-          let singlekey=[];
-          Object.keys(valuedd).forEach(function(keyvalue,keydata){
-           //console.log(valuedd[keyvalue]);
-            for(let key in valuedd[keyvalue]){
-               if(typeof valuedd[keyvalue][key]=="object"){
-              anotherjson=JSON.parse(valuedd[keyvalue][key]);
-             
-            }else{
-               anotherjson=valuedd[keyvalue][key];
-            } 
-           
-            // singlekey.push(anotherjson);
-             singlekey.push(anotherjson);
-            } 
-          });
-          console.log(singlekey);
+          let dataset=[];
+        dataColumns=[];
+        Object.keys(valuedd).forEach(function(keyvalue,keydata){
+          let json;
+          let anotherjson
+           console.log(valuedd[keyvalue]);
+          // if(typeof valuedd[keyvalue]=="object"){
+          //   json=JSON.parse(valuedd[keyvalue]);
+          //   // json=anotherjson.replace(/"/g, "'");
+          // }else{
+          //   json=valuedd[keyvalue];
+          // }
+          // dataset.push(json);
+          // dataColumns.push(keyvalue);
+        });
+        insertContent.push(dataset);
+        //  console.log(insertContent);
        });
-        this.textData(this.questions,i).then(()=>{
+        this.textData(this.questions[0],i).then(()=>{
          // console.log(this.questions[0]);
         })                                                                                                                                                   
     })
   }
   textData(questions,i){
-    return new Promise((resolve,reject)=>{
-      console.log(questions[0]);
-       questions.forEach((value,key)=>{
-         console.log(value[i]);
-         console.log(value[i][key]);
-         console.log(value[i][value]);
-           if(typeof value[i]=="object"){
-            // anotherjson=JSON.stringify(valuedd[keyvalue]);
-            console.log("object");
+     return new Promise((resolve,reject)=>{
+    //   console.log(questions[0]);
+    //    questions.forEach((value,key)=>{
+    //      console.log(value[i]);
+    //      console.log(value[i][key]);
+    //      console.log(value[i][value]);
+    //        if(typeof value[i]=="object"){
+    //         // anotherjson=JSON.stringify(valuedd[keyvalue]);
+    //         console.log("object");
             
-          }else{
+    //       }else{
             
-          }
-          this.OriginalContent=value[i]; 
-          if(this.OriginalContent.idss==1 ){
-            this.previousButton=false;
-          }else{
-            this.previousButton=true;
-          }
-          let hh=questions[0].length;
-          // console.log(hh);
-          // console.log(i);
-          if(hh == i+1 ){
-            this.NextButton=false;
-          }else{
-            this.NextButton=true;
-          }
-        }); 
+    //       }
+    //       this.OriginalContent=value[i]; 
+    //       if(this.OriginalContent.idss==1 ){
+    //         this.previousButton=false;
+    //       }else{
+    //         this.previousButton=true;
+    //       }
+    //       let hh=questions[0].length;
+    //       // console.log(hh);
+    //       // console.log(i);
+    //       if(hh == i+1 ){
+    //         this.NextButton=false;
+    //       }else{
+    //         this.NextButton=true;
+    //       }
+    //     }); 
 
-    })   
+     })   
   }
   next(id){
     let questionLength;
