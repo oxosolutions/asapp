@@ -25,7 +25,19 @@ export class GroupsPage {
     this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
     	this.groupsResult=result.rows;
     	console.log(this.groupsResult);
-    })
+      this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
+        for(var keys in form.rows){
+          if(form.rows[keys].value == "survey"){
+            localStorage.setItem("questionType", 'save_survey');
+          }else if(form.rows[keys].value == "section"){
+            localStorage.setItem("questionType", 'save_section');
+          }else if(form.rows[keys].value == "question"){
+            localStorage.setItem("questionType", 'questions');
+          }
+          }
+        })
+      })
+   
   }
 
 }

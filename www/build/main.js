@@ -164,7 +164,7 @@ var ActivationPage = (function () {
             surveys.forEach(function (value, key) {
                 keyColumns = [];
                 surveyresult.push('surveyResult_' + value.id);
-                keyColumns.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
+                keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                 questions.forEach(function (qValue, qKey) {
                     qValue;
                     var qresult = qValue.question_key + ' TEXT';
@@ -339,7 +339,7 @@ var ActivationPage = (function () {
                 if ((Apidata[table] instanceof Array)) {
                     Apidata[table].forEach(function (key, value) {
                         var dataset = [];
-                        dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
+                        dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                         Object.keys(key).forEach(function (keyvalue, keydata) {
                             dataset.push(keyvalue + ' TEXT');
                         });
@@ -348,7 +348,7 @@ var ActivationPage = (function () {
                 }
                 else {
                     var dataset = [];
-                    dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT');
+                    dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                     for (var apikey in Apidata[table]) {
                         dataset.push(apikey + ' TEXT');
                     }
@@ -419,10 +419,9 @@ var ActivationPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Activation</ion-title>\n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n<h2>Enter Activation code</h2>\n<div *ngIf="loginForm">\n<form [formGroup]="loginForm">\n	<ion-list>\n	  <ion-item>\n	    <ion-label floating>Enter Acitvation code</ion-label>\n	    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n	  </ion-item>\n	  \n	  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> \n	   \n	  \n	</ion-list>\n</form>\n</div>\n	\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ActivationPage);
     return ActivationPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=activation.js.map
@@ -467,6 +466,19 @@ var GroupsPage = (function () {
         this.servicesProvider.SelectWhere("groups", "survey_id", this.ids).then(function (result) {
             _this.groupsResult = result.rows;
             console.log(_this.groupsResult);
+            _this.servicesProvider.SelectWhere("survey_meta", "form_id", _this.ids).then(function (form) {
+                for (var keys in form.rows) {
+                    if (form.rows[keys].value == "survey") {
+                        localStorage.setItem("questionType", 'save_survey');
+                    }
+                    else if (form.rows[keys].value == "section") {
+                        localStorage.setItem("questionType", 'save_section');
+                    }
+                    else if (form.rows[keys].value == "question") {
+                        localStorage.setItem("questionType", 'questions');
+                    }
+                }
+            });
         });
     };
     GroupsPage = __decorate([
@@ -512,6 +524,7 @@ var QuestionPage = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.questions = [];
+        this.surveyQuestion = [];
     }
     QuestionPage.prototype.showConfirm = function () {
         var _this = this;
@@ -551,69 +564,83 @@ var QuestionPage = (function () {
         var dataColumns;
         var anotherjson;
         this.questionTitle = localStorage.getItem("ApplicationName");
+        this.questionType = localStorage.getItem("questionType");
         this.id = this.navParams.get('id');
         this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
-            //this.questions.push(result.rows);
-            console.log(result.rows);
-            // this.questions=result.rows;
-            var values = [];
-            console.log(typeof (_this.questions));
             for (var key in result.rows) {
                 _this.questions.push(result.rows[key]);
             }
             console.log(_this.questions);
+            if (_this.questionType == "save_survey") {
+                _this.surveyQuestion = _this.questions;
+                console.log(_this.surveyQuestion);
+                // this.surveyBasedQuestion(this.questions).then(()=>{
+                // })  
+            }
+            else if (_this.questionType == "save_section") {
+                _this.sectionBasedQuestion().then(function () {
+                });
+            }
+            else if (_this.questionType == "question") {
+                _this.questionBasedQuestion().then(function () {
+                });
+            }
             //mynew coding
             _this.questions.forEach(function (valuedd, keydd) {
-                var dataset = [];
-                dataColumns = [];
+                var json;
                 Object.keys(valuedd).forEach(function (keyvalue, keydata) {
-                    var json;
-                    var anotherjson;
-                    console.log(valuedd[keyvalue]);
-                    // if(typeof valuedd[keyvalue]=="object"){
-                    //   json=JSON.parse(valuedd[keyvalue]);
-                    //   // json=anotherjson.replace(/"/g, "'");
-                    // }else{
-                    //   json=valuedd[keyvalue];
-                    // }
-                    // dataset.push(json);
-                    // dataColumns.push(keyvalue);
+                    // console.log(valuedd[keyvalue]);  
+                    //   this.textData(this.questions[0], i).then(()=>{
+                    // // console.log(this.questions[0]);
+                    //  })  
                 });
-                insertContent.push(dataset);
-                //  console.log(insertContent);
-            });
-            _this.textData(_this.questions[0], i).then(function () {
-                // console.log(this.questions[0]);
             });
         });
     };
-    QuestionPage.prototype.textData = function (questions, i) {
+    QuestionPage.prototype.surveyBasedQuestion = function (questions) {
         return new Promise(function (resolve, reject) {
-            //   console.log(questions[0]);
-            //    questions.forEach((value,key)=>{
-            //      console.log(value[i]);
-            //      console.log(value[i][key]);
-            //      console.log(value[i][value]);
-            //        if(typeof value[i]=="object"){
-            //         // anotherjson=JSON.stringify(valuedd[keyvalue]);
-            //         console.log("object");
-            //       }else{
-            //       }
-            //       this.OriginalContent=value[i]; 
-            //       if(this.OriginalContent.idss==1 ){
-            //         this.previousButton=false;
-            //       }else{
-            //         this.previousButton=true;
-            //       }
-            //       let hh=questions[0].length;
-            //       // console.log(hh);
-            //       // console.log(i);
-            //       if(hh == i+1 ){
-            //         this.NextButton=false;
-            //       }else{
-            //         this.NextButton=true;
-            //       }
-            //     }); 
+            console.log(questions);
+        });
+    };
+    QuestionPage.prototype.sectionBasedQuestion = function () {
+        return new Promise(function (resolve, reject) {
+        });
+    };
+    QuestionPage.prototype.questionBasedQuestion = function () {
+        return new Promise(function (resolve, reject) {
+        });
+    };
+    QuestionPage.prototype.textData = function (questions, i) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(questions[0]);
+            questions.forEach(function (value, key) {
+                console.log(value[i]);
+                console.log(value[i][key]);
+                console.log(value[i][value]);
+                if (typeof value[i] == "object") {
+                    // anotherjson=JSON.stringify(valuedd[keyvalue]);
+                    console.log("object");
+                }
+                else {
+                }
+                _this.OriginalContent = value[i];
+                if (_this.OriginalContent.idss == 1) {
+                    _this.previousButton = false;
+                }
+                else {
+                    _this.previousButton = true;
+                }
+                var hh = questions[0].length;
+                // console.log(hh);
+                // console.log(i);
+                if (hh == i + 1) {
+                    _this.NextButton = false;
+                }
+                else {
+                    _this.NextButton = true;
+                }
+            });
         });
     };
     QuestionPage.prototype.next = function (id) {
@@ -649,18 +676,19 @@ var QuestionPage = (function () {
         }
         else {
             console.log("valid");
-            this.next(id);
-            console.log(formData.value);
+            // this.next(id);
+            // console.log(formData.value);
         }
         formData.reset();
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<ion-list>\n		<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			  <p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      <form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.idss)">\n				<div [ngSwitch]="OriginalContent?.question_type">\n			    <div *ngSwitchCase="\'text\'">\n			    \n			    <ion-item>\n				    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n				  </ion-item>\n				  \n	       \n			    </div>\n		      <div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n						    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						      <ion-option value="nes">NES</ion-option>\n						      <ion-option value="n64">Nintendo64</ion-option>\n						      <ion-option value="ps">PlayStation</ion-option>\n						      <ion-option value="genesis">Sega Genesis</ion-option>\n						      <ion-option value="saturn">Sega Saturn</ion-option>\n						      <ion-option value="snes">SNES</ion-option>\n						    </ion-select>\n  						</ion-item>\n		      </div>\n\n				</div>\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.idss)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<!-- <button *ngIf="NextButton" ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button> -->\n				<button  ion-button color="dark" outline>\n	                <ion-icon name="add"></ion-icon>Next</button>\n			</form>\n			\n\n	 </div> \n		    \n\n	</ion-list>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<ion-list>\n	\n		 \n		  <ion-item *ngFor="let survey of surveyQuestion">\n          <h1>{{survey?.question_text}}</h1>\n          <p>{{survey?.question_desc}}</p>\n          <p>{{survey.serialNo}}</p>\n           <p>{{survey?.question_type}}</p>\n         	\n    \n \n\n      </ion-item>\n			\n\n\n	\n	</ion-list>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _d || Object])
     ], QuestionPage);
     return QuestionPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=question.js.map
@@ -758,11 +786,11 @@ var map = {
 		5
 	],
 	"../pages/login/login.module": [
-		302,
+		301,
 		4
 	],
 	"../pages/question/question.module": [
-		301,
+		302,
 		3
 	],
 	"../pages/record-list/record-list.module": [
@@ -1255,8 +1283,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }

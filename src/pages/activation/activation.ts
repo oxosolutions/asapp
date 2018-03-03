@@ -98,7 +98,7 @@ export class ActivationPage {
       surveys.forEach((value,key)=>{
         keyColumns = [];
         surveyresult.push('surveyResult_'+value.id);
-        keyColumns.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
+        keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
         questions.forEach((qValue,qKey)=>{qValue
           let qresult=qValue.question_key+' TEXT';
           keyColumns.push(qresult); 
@@ -264,7 +264,7 @@ export class ActivationPage {
         if((Apidata[table] instanceof Array)){
           Apidata[table].forEach(function(key,value){
             let dataset=[];
-            dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
+            dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
             Object.keys(key).forEach(function(keyvalue,keydata){
               dataset.push(keyvalue + ' TEXT');     
             });
@@ -272,7 +272,7 @@ export class ActivationPage {
           })
         }else{
           let dataset=[];
-          dataset.push('idss INTEGER PRIMARY KEY AUTOINCREMENT') ;
+          dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
           for (let apikey in Apidata[table] ){
             dataset.push(apikey + ' TEXT');
           }
