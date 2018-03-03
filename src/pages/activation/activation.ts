@@ -131,6 +131,7 @@ export class ActivationPage {
         Object.keys(key).forEach(function(keyvalue,keydata){
           let json;
           let anotherjson
+          console.log(key[keyvalue]);
           if(typeof key[keyvalue]=="object"){
             anotherjson=JSON.stringify(key[keyvalue]);
             json=anotherjson.replace(/"/g, "'");
