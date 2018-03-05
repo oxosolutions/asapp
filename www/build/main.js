@@ -735,47 +735,47 @@ webpackEmptyAsyncContext.id = 125;
 
 var map = {
 	"../pages/about/about.module": [
-		296,
+		295,
 		10
 	],
 	"../pages/activation/activation.module": [
-		297,
+		296,
 		9
 	],
 	"../pages/dashboard/dashboard.module": [
-		298,
+		297,
 		8
 	],
 	"../pages/groups/groups.module": [
-		299,
+		298,
 		7
 	],
 	"../pages/help/help.module": [
-		300,
+		299,
 		6
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		301,
+		300,
 		5
 	],
 	"../pages/login/login.module": [
-		302,
+		301,
 		4
 	],
 	"../pages/question/question.module": [
-		303,
+		302,
 		3
 	],
 	"../pages/record-list/record-list.module": [
-		304,
+		303,
 		2
 	],
 	"../pages/select/select.module": [
-		305,
+		304,
 		1
 	],
 	"../pages/text/text.module": [
-		306,
+		305,
 		0
 	]
 };
