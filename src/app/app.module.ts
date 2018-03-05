@@ -29,8 +29,7 @@ import { QuestionPage } from '../pages/question/question';
 import { RecordListPage }  from '../pages/record-list/record-list';
 import { TextPage }  from '../pages/text/text';
 import { SelectPage } from '../pages/select/select';
-
-
+import { Toast } from '@ionic-native/toast';
 
 @NgModule({
   declarations: [
@@ -83,7 +82,7 @@ import { SelectPage } from '../pages/select/select';
     Device,
     Camera,
     Network,
-    SurveyProvider,Geolocation
+    SurveyProvider,Geolocation,Toast
   ]
 })
 export class AppModule {}

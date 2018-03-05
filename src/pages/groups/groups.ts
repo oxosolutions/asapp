@@ -4,7 +4,6 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import {QuestionPage} from '../../pages/question/question';
 
-
 @IonicPage()
 @Component({
   selector: 'page-groups',
@@ -24,7 +23,7 @@ export class GroupsPage {
     this.ids=this.navParams.get('id');
     this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
     	this.groupsResult=result.rows;
-    	console.log(this.groupsResult);
+    	//console.log(this.groupsResult);
       this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
         for(var keys in form.rows){
           if(form.rows[keys].value == "survey"){

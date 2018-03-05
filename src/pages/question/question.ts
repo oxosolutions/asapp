@@ -6,6 +6,8 @@ import { AlertController } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
 import { TextPage }  from '../../pages/text/text';
 import { SelectPage } from '../../pages/select/select';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+import {ToastController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-question',
@@ -25,7 +27,7 @@ export class QuestionPage {
   questionType:any;
   surveyQuestion=[];
 
-  constructor(public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   showConfirm() {
   	let prompt = this.alertCtrl.create({
@@ -46,6 +48,7 @@ export class QuestionPage {
           text: 'Save',
           handler: data => {
           	if(data[0] == ""){
+
           	}else{
           		 this.navCtrl.setRoot(DashboardPage);
             		console.log(data);
@@ -57,31 +60,34 @@ export class QuestionPage {
     prompt.present();
   }
   ionViewDidLoad(){
-    let single;
     let i=0;
     let insertContent=[];
-    let dataColumns;
-    let anotherjson;
-
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
     this.id=this.navParams.get('id');
 
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
-      for(var key in result.rows) {
-        this.questions.push(result.rows[key])
-      }
+      console.log(typeof(result.rows.length));
+      this.questions=result.rows;
       console.log(this.questions);
+      console.log(typeof(this.questions));
+
+
+      // for(var key in result.rows) {
+      //   console.log(result.rows[key]);
+      //   this.questions.push(result.rows[key]);
+      // }
+      // console.log(this.questions.length);
+      // console.log(typeof(this.questions));
+
+
       if(this.questionType == "save_survey"){
         this.surveyQuestion=this.questions;
-        console.log(this.surveyQuestion);
-          
+        console.log(this.surveyQuestion);    
       }else if(this.questionType == "save_section"){
-        this.sectionBasedQuestion().then(()=>{
 
-        }) 
       }else if(this.questionType == "questions"){
-        this.textData(this.questions,i).then(()=>{
+        this.textData(this.questions, i).then(()=>{
         })  
       }    
     })
@@ -100,21 +106,19 @@ export class QuestionPage {
           }else{
             this.previousButton=true;
           }
-          // let hh=questions.length;
-          // // console.log(hh);
- 
-          // if(hh == i+1 ){
-          //   this.NextButton=false;
-          // }else{
-          //   this.NextButton=true;
-          // }
-        });   
+    });   
   }
   next(id){
+    console.log(id);
+    let toast=this.toastctrl.create({
+        message:'Your Enquiry is Submitted',
+        duration:4000,
+        position:'top',
+    });
     let questionLength;
     questionLength=this.questions.length;
     if(id==questionLength){
-      console.log("there is no data");
+      toast.present();
       this.navCtrl.setRoot(DashboardPage);
     }else{
       console.log(id);
@@ -122,8 +126,11 @@ export class QuestionPage {
       });   
     }
   }
+  
   previous(id){
+    console.log(id);
     id=id-2;
+    console.log(id);
     let questionLength;
     questionLength=this.questions.length;
     if(id==questionLength){

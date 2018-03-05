@@ -36,9 +36,17 @@
 					  </ion-item>
 			    </div>
 		      <div *ngSwitchCase="'select'">
-		        	<ion-item>
+
+		     <!--  <div *ngFor = "let op of OriginalContent?.answers">
+		        <p>{{op?.option_value}}</p>
+		      </div> -->
+		        <ion-item>
 						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
 						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+						    	<!-- <ion-option *ngFor="let opt of OriginalContent?.question_text">
+						    	
+						    	</ion-option> -->
+						    	 <ion-option value="nes">NES</ion-option>
 						      <ion-option value="nes">NES</ion-option>
 						      <ion-option value="n64">Nintendo64</ion-option>
 						      <ion-option value="ps">PlayStation</ion-option>
@@ -46,13 +54,12 @@
 						      <ion-option value="saturn">Sega Saturn</ion-option>
 						      <ion-option value="snes">SNES</ion-option>
 						    </ion-select>
-  						</ion-item>
+  					</ion-item>
 		      </div>
 
 				</div>
 				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>
 				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>
-				<!-- <button *ngIf="NextButton" ion-button color="dark" outline (click)="next(OriginalContent.idss)">Next</button> -->
 				<button  ion-button color="dark" outline>
 	                <ion-icon name="add"></ion-icon>Next</button>
 			</form> 
