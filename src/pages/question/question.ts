@@ -75,32 +75,15 @@ export class QuestionPage {
       if(this.questionType == "save_survey"){
         this.surveyQuestion=this.questions;
         console.log(this.surveyQuestion);
-        // this.surveyBasedQuestion(this.questions).then(()=>{
-
-        // })  
+          
       }else if(this.questionType == "save_section"){
         this.sectionBasedQuestion().then(()=>{
 
         }) 
-      }else if(this.questionType == "question"){
-         this.questionBasedQuestion().then(()=>{
-
-        })    
-      }
-
-
-      //mynew coding
-       this.questions.forEach((valuedd,keydd)=>{
-        let json;
-        Object.keys(valuedd).forEach(function(keyvalue,keydata){
-         // console.log(valuedd[keyvalue]);  
-         //   this.textData(this.questions[0], i).then(()=>{
-         // // console.log(this.questions[0]);
-         //  })  
-        });
-      });  
-
-       
+      }else if(this.questionType == "questions"){
+        this.textData(this.questions,i).then(()=>{
+        })  
+      }    
     })
   }
   surveyBasedQuestion(questions){
@@ -108,50 +91,28 @@ export class QuestionPage {
       console.log(questions);
     })
   }
-  sectionBasedQuestion(){
-    return new Promise((resolve,reject)=>{
-    })
-  }
-  questionBasedQuestion(){
-    return new Promise((resolve,reject)=>{
-    })
-  }
   textData(questions,i){
-   
-     return new Promise((resolve,reject)=>{
-      console.log(questions[0]);
-       questions.forEach((value,key)=>{
-         console.log(value[i]);
-         console.log(value[i][key]);
-         console.log(value[i][value]);
-           if(typeof value[i]=="object"){
-            // anotherjson=JSON.stringify(valuedd[keyvalue]);
-            console.log("object");
-            
-          }else{
-            
-          }
-          this.OriginalContent=value[i]; 
-          if(this.OriginalContent.idss==1 ){
+    return new Promise((resolve,reject)=>{
+          console.log(questions[i]);
+          this.OriginalContent=questions[i]; 
+          if(this.OriginalContent.serialNo==1 ){
             this.previousButton=false;
           }else{
             this.previousButton=true;
           }
-          let hh=questions[0].length;
-          // console.log(hh);
-          // console.log(i);
-          if(hh == i+1 ){
-            this.NextButton=false;
-          }else{
-            this.NextButton=true;
-          }
-        }); 
-
-     })   
+          // let hh=questions.length;
+          // // console.log(hh);
+ 
+          // if(hh == i+1 ){
+          //   this.NextButton=false;
+          // }else{
+          //   this.NextButton=true;
+          // }
+        });   
   }
   next(id){
     let questionLength;
-    questionLength=this.questions[0].length;
+    questionLength=this.questions.length;
     if(id==questionLength){
       console.log("there is no data");
       this.navCtrl.setRoot(DashboardPage);
@@ -164,7 +125,7 @@ export class QuestionPage {
   previous(id){
     id=id-2;
     let questionLength;
-    questionLength=this.questions[0].length;
+    questionLength=this.questions.length;
     if(id==questionLength){
       console.log("there is no data");
       this.navCtrl.setRoot(DashboardPage);
@@ -179,19 +140,9 @@ export class QuestionPage {
         console.log("not valid");
     }else{
       console.log("valid");
-      // this.next(id);
-      // console.log(formData.value);
+      this.next(id);
+      console.log(formData.value);
     }
     formData.reset();   
   }
-  // onSubmit(formData,id){
-  //   if(!formData.valid){
-  //       console.log("not valid");
-  //   }else{
-  //     console.log("valid");
-  //     this.next(id);
-  //     console.log(formData.value);
-  //   }
-  //   formData.reset();   
-  // }
 }
