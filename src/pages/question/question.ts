@@ -8,6 +8,7 @@ import { TextPage }  from '../../pages/text/text';
 import { SelectPage } from '../../pages/select/select';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {ToastController } from 'ionic-angular';
+
 @IonicPage()
 @Component({
   selector: 'page-question',
