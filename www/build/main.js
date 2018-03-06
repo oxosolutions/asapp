@@ -564,30 +564,59 @@ var QuestionPage = (function () {
     QuestionPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         var i = 0;
-        var insertContent = [];
+        var Content = [];
         this.questionTitle = localStorage.getItem("ApplicationName");
         this.questionType = localStorage.getItem("questionType");
         this.id = this.navParams.get('id');
         this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
-            console.log(typeof (result.rows.length));
-            _this.questions = result.rows;
-            console.log(_this.questions);
-            console.log(typeof (_this.questions));
-            // for(var key in result.rows) {
-            //   console.log(result.rows[key]);
-            //   this.questions.push(result.rows[key]);
-            // }
-            // console.log(this.questions.length);
-            // console.log(typeof(this.questions));
-            if (_this.questionType == "save_survey") {
-                _this.surveyQuestion = _this.questions;
-                console.log(_this.surveyQuestion);
-            }
-            else if (_this.questionType == "save_section") {
-            }
-            else if (_this.questionType == "questions") {
-                _this.textData(_this.questions, i).then(function () {
+            Content.push(result.rows);
+            console.log(Content);
+            //code for converting json 
+            var collection;
+            var newcollection;
+            var replacedArray = [];
+            Content.forEach(function (key, value) {
+                collection = [];
+                Object.keys(key).forEach(function (keyvalue, keydata) {
+                    newcollection = [];
+                    var newcolumn = [];
+                    collection = key[keyvalue];
+                    //console.log(collection);
+                    Object.keys(collection).forEach(function (valuekey, valuedata) {
+                        var newData;
+                        var replace;
+                        try {
+                            replace = collection[valuekey].replace(/'/g, '"');
+                            newData = JSON.parse(replace);
+                        }
+                        catch (e) {
+                            newData = collection[valuekey];
+                        }
+                        newcollection.push(newData);
+                        newcolumn.push(valuekey);
+                    });
+                    var replacedData = {};
+                    i;
+                    for (i = 0; i < newcollection.length; i++) {
+                        replacedData[newcolumn[i]] = newcollection[i];
+                    }
+                    replacedArray.push(replacedData);
                 });
+            });
+            _this.questions = replacedArray;
+            console.log(_this.questions);
+            if (_this.questions != undefined) {
+                if (_this.questionType == "save_survey") {
+                    _this.surveyQuestion = _this.questions;
+                    console.log(_this.surveyQuestion);
+                }
+                else if (_this.questionType == "save_section") {
+                }
+                else if (_this.questionType == "questions") {
+                    var i_1 = 0;
+                    _this.textData(_this.questions, i_1).then(function () {
+                    });
+                }
             }
         });
     };
@@ -657,11 +686,12 @@ var QuestionPage = (function () {
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<!-- survey based-->\n	<ion-list>\n		  <ion-item *ngFor="let survey of surveyQuestion">\n          <h1>{{survey?.question_text}}</h1>\n          <p>{{survey?.question_desc}}</p>\n          <p>{{survey.serialNo}}</p>\n           <p>{{survey?.question_type}}</p>\n      </ion-item>\n	</ion-list>\n\n\n	<!--question based-->\n	<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			  <p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      <form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo)">\n				<div [ngSwitch]="OriginalContent?.question_type">\n			    <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n		      <div *ngSwitchCase="\'select\'">\n\n		     <!--  <div *ngFor = "let op of OriginalContent?.answers">\n		        <p>{{op?.option_value}}</p>\n		      </div> -->\n		        <ion-item>\n						    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						    	<!-- <ion-option *ngFor="let opt of OriginalContent?.question_text">\n						    	\n						    	</ion-option> -->\n						    	 <ion-option value="nes">NES</ion-option>\n						      <ion-option value="nes">NES</ion-option>\n						      <ion-option value="n64">Nintendo64</ion-option>\n						      <ion-option value="ps">PlayStation</ion-option>\n						      <ion-option value="genesis">Sega Genesis</ion-option>\n						      <ion-option value="saturn">Sega Saturn</ion-option>\n						      <ion-option value="snes">SNES</ion-option>\n						    </ion-select>\n  					</ion-item>\n		      </div>\n\n				</div>\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	                <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<!-- survey based-->\n	<ion-list>\n		  <ion-item *ngFor="let survey of surveyQuestion">\n          <h1>{{survey?.question_text}}</h1>\n          <p>{{survey?.question_desc}}</p>\n          <p>{{survey.serialNo}}</p>\n           <p>{{survey?.question_type}}</p>\n      </ion-item>\n	</ion-list>\n\n\n	<!--question based-->\n	<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			  <p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      <form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo)">\n				<div [ngSwitch]="OriginalContent?.question_type">\n			    <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n		      <div *ngSwitchCase="\'select\'">\n\n		      <div *ngFor = "let op of OriginalContent?.answers">\n		        <p>{{op?.option_value}}</p>\n		      </div>\n		      \n		        <ion-item>\n						    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						    	<!-- <ion-option *ngFor="let opt of OriginalContent?.question_text">\n						    	\n						    	</ion-option> -->\n						    	 <ion-option value="nes">NES</ion-option>\n						      <ion-option value="nes">NES</ion-option>\n						      <ion-option value="n64">Nintendo64</ion-option>\n						      <ion-option value="ps">PlayStation</ion-option>\n						      <ion-option value="genesis">Sega Genesis</ion-option>\n						      <ion-option value="saturn">Sega Saturn</ion-option>\n						      <ion-option value="snes">SNES</ion-option>\n						    </ion-select>\n  					</ion-item>\n		      </div>\n\n				</div>\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	                <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _f || Object])
     ], QuestionPage);
     return QuestionPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=question.js.map

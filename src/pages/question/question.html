@@ -37,9 +37,10 @@
 			    </div>
 		      <div *ngSwitchCase="'select'">
 
-		     <!--  <div *ngFor = "let op of OriginalContent?.answers">
+		      <div *ngFor = "let op of OriginalContent?.answers">
 		        <p>{{op?.option_value}}</p>
-		      </div> -->
+		      </div>
+		      
 		        <ion-item>
 						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
 						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">

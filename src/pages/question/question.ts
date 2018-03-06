@@ -27,18 +27,19 @@ export class QuestionPage {
   subData: any;
   questionType:any;
   surveyQuestion=[];
+  
 
   constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   showConfirm() {
-  	let prompt = this.alertCtrl.create({
+    let prompt = this.alertCtrl.create({
       message: "Enter Incomplete Survey Name",
       inputs: [
         {
           placeholder: 'survey name'
         },
       ],
-      buttons: [
+      buttons:[
         {
           text: 'Cancel',
           handler: data => {
@@ -48,12 +49,12 @@ export class QuestionPage {
         {
           text: 'Save',
           handler: data => {
-          	if(data[0] == ""){
+            if(data[0] == ""){
 
-          	}else{
-          		 this.navCtrl.setRoot(DashboardPage);
-            		console.log(data);
-          	}        
+            }else{
+               this.navCtrl.setRoot(DashboardPage);
+                console.log(data);
+            }        
           }
         }
       ]
@@ -62,35 +63,62 @@ export class QuestionPage {
   }
   ionViewDidLoad(){
     let i=0;
-    let insertContent=[];
+    let Content=[];
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
     this.id=this.navParams.get('id');
 
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
-      console.log(typeof(result.rows.length));
-      this.questions=result.rows;
+      Content.push(result.rows);
+      console.log(Content);
+      
+
+      //code for converting json 
+      let collection;
+      let newcollection; 
+      let replacedArray=[]
+      Content.forEach((key,value)=>{
+        collection=[];
+        Object.keys(key).forEach(function(keyvalue,keydata){
+          newcollection=[];
+          let  newcolumn=[];
+          collection=key[keyvalue];
+          //console.log(collection);
+          Object.keys(collection).forEach(function(valuekey,valuedata){
+            let newData;
+            let replace;
+            try{
+              replace=collection[valuekey].replace(/'/g,'"');
+              newData = JSON.parse(replace);
+            }catch(e){
+              newData = collection[valuekey];
+            }
+            newcollection.push(newData);
+            newcolumn.push(valuekey); 
+          })
+          let replacedData={};
+          i;
+          for(i=0; i< newcollection.length; i++){
+            replacedData[newcolumn[i]]=newcollection[i];
+          }
+          replacedArray.push(replacedData);
+        });
+      });
+      this.questions=replacedArray;
       console.log(this.questions);
-      console.log(typeof(this.questions));
 
+      if(this.questions != undefined){
+        if(this.questionType == "save_survey"){
+          this.surveyQuestion=this.questions;
+          console.log(this.surveyQuestion);    
+        }else if(this.questionType == "save_section"){
 
-      // for(var key in result.rows) {
-      //   console.log(result.rows[key]);
-      //   this.questions.push(result.rows[key]);
-      // }
-      // console.log(this.questions.length);
-      // console.log(typeof(this.questions));
-
-
-      if(this.questionType == "save_survey"){
-        this.surveyQuestion=this.questions;
-        console.log(this.surveyQuestion);    
-      }else if(this.questionType == "save_section"){
-
-      }else if(this.questionType == "questions"){
-        this.textData(this.questions, i).then(()=>{
-        })  
-      }    
+        }else if(this.questionType == "questions"){
+          let i=0;
+          this.textData(this.questions, i).then(()=>{
+          })  
+        }    
+      }
     })
   }
   surveyBasedQuestion(questions){
