@@ -27,7 +27,7 @@
 			  <p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
 			
-      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo)">
+      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text)">
 				<div [ngSwitch]="OriginalContent?.question_type">
 			    <div *ngSwitchCase="'text'">
 				    <ion-item>
@@ -46,12 +46,24 @@
 						    </ion-select>
   					</ion-item>
 		      </div>
+		      <div *ngSwitchCase="'checkbox'">
+		      	<ion-list>
 
+						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
+							  <ion-label>{{check?.option_text}}</ion-label>
+							  <ion-checkbox   formControlName="{{ check?.option_text }}" color="red" ></ion-checkbox>
+							</ion-item>
+
+						</ion-list>
+		      </div>
+		      <div *ngSwitchCase="'radio'">
+		      
+		      </div>
 				</div>
 				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>
 				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>
 				<button  ion-button color="dark" outline>
-	                <ion-icon name="add"></ion-icon>Next</button>
+	          <ion-icon name="add"></ion-icon>Next</button>
 			</form> 
 			
 

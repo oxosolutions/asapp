@@ -70,7 +70,7 @@ export class QuestionPage {
 
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
-      
+
       //code for converting json 
       let collection;
       let newcollection; 
@@ -104,7 +104,6 @@ export class QuestionPage {
       });
       this.questions=replacedArray;
       console.log(this.questions);
-
       if(this.questions != undefined){
         if(this.questionType == "save_survey"){
           this.surveyQuestion=this.questions;
@@ -114,7 +113,7 @@ export class QuestionPage {
         }else if(this.questionType == "questions"){
           let i=0;
           this.textData(this.questions, i).then(()=>{
-          })  
+          });
         }    
       }
     })
@@ -126,13 +125,13 @@ export class QuestionPage {
   }
   textData(questions,i){
     return new Promise((resolve,reject)=>{
-          console.log(questions[i]);
-          this.OriginalContent=questions[i]; 
-          if(this.OriginalContent.serialNo==1 ){
-            this.previousButton=false;
-          }else{
-            this.previousButton=true; 
-          }
+      console.log(questions[i]);
+      this.OriginalContent=questions[i]; 
+      if(this.OriginalContent.serialNo==1 ){
+        this.previousButton=false;
+      }else{
+        this.previousButton=true; 
+      }
     });   
   }
   next(id){
@@ -169,13 +168,28 @@ export class QuestionPage {
       });   
     }
   }
-  onSubmit(formData,id){
+  onSubmit(formData,id,questionKey,survey_id,questionText){
     if(!formData.valid){
         console.log("not valid");
     }else{
       console.log("valid");
-      this.next(id);
+      let formValue=[];
       console.log(formData.value);
+      formValue.push(formData.value[questionText]);
+      console.log(formValue);
+      let tablename="surveyResult_"+survey_id;
+      //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
+        //console.log(result.rows.length);
+        //if(result.rows.length < 1){
+          //console.log("empty");
+          this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
+            this.next(id);
+         // });
+       // }else{
+          //console.log("should be updated");
+       // }
+      })
+      
     }
     formData.reset();   
   }

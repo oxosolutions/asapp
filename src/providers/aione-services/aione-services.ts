@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+	import { Injectable } from '@angular/core';
 // import { HTTP } from '@ionic-native/http';
 import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
@@ -89,6 +89,7 @@ export class AioneServicesProvider {
 		
 	}
 	Insert(tableName,Cols,Values){
+		//console.log(Values);
 		return new Promise((resolve,reject)=>{
 			let questionMarks=[]
 			if(this.db!= undefined){
@@ -97,7 +98,7 @@ export class AioneServicesProvider {
 					questionMarks.push("?");
 				}
 				this.query='insert into '+tableName + '(' + Cols + ') VALUES (' +questionMarks + ')'; 
-				//console.log(this.query);
+				console.log(this.query);
 				this.ExecuteRun(this.query, Values).then((insertRes:any)=>{
 					resolve(insertRes);
 				})
@@ -159,7 +160,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				 // console.log(this.query);
+				 console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	
