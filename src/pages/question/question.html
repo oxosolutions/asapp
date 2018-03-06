@@ -36,24 +36,13 @@
 					  </ion-item>
 			    </div>
 		      <div *ngSwitchCase="'select'">
-
-		      <div *ngFor = "let op of OriginalContent?.answers">
-		        <p>{{op?.option_value}}</p>
-		      </div>
-		      
 		        <ion-item>
 						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
 						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
-						    	<!-- <ion-option *ngFor="let opt of OriginalContent?.question_text">
-						    	
-						    	</ion-option> -->
-						    	 <ion-option value="nes">NES</ion-option>
-						      <ion-option value="nes">NES</ion-option>
-						      <ion-option value="n64">Nintendo64</ion-option>
-						      <ion-option value="ps">PlayStation</ion-option>
-						      <ion-option value="genesis">Sega Genesis</ion-option>
-						      <ion-option value="saturn">Sega Saturn</ion-option>
-						      <ion-option value="snes">SNES</ion-option>
+						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
+						    	 <ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
+						    	</ion-option>
+						      
 						    </ion-select>
   					</ion-item>
 		      </div>

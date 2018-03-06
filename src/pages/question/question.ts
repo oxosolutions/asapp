@@ -70,9 +70,7 @@ export class QuestionPage {
 
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
-      console.log(Content);
       
-
       //code for converting json 
       let collection;
       let newcollection; 
@@ -133,7 +131,7 @@ export class QuestionPage {
           if(this.OriginalContent.serialNo==1 ){
             this.previousButton=false;
           }else{
-            this.previousButton=true;
+            this.previousButton=true; 
           }
     });   
   }
