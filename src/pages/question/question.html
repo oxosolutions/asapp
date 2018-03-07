@@ -27,7 +27,7 @@
 			  <p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
 			
-      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text)">
+      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,question_type)">
 				<div [ngSwitch]="OriginalContent?.question_type">
 			    <div *ngSwitchCase="'text'">
 				    <ion-item>
@@ -40,24 +40,56 @@
 						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
 						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
 						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
-						    	 <ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
+						    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
 						    	</ion-option>
 						      
 						    </ion-select>
   					</ion-item>
 		      </div>
 		      <div *ngSwitchCase="'checkbox'">
-		      	<ion-list>
-
+		      	<ion-list [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox   formControlName="{{ check?.option_text }}" color="red" ></ion-checkbox>
-							</ion-item>
+							 <!--  <ion-checkbox  [(ngModel)]="check.option_text" #option_text="ngModel"
+							   name="{{check?.option_text}}"  data="" color="red" ></ion-checkbox> -->
+							  <!-- {option_text: true} -->
 
+						<!-- 	  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"
+							   color="red" ></ion-checkbox> -->
+							   <input type="checkbox"  value="{{check?.option_text}}">I have a ca
+							   <!-- {ram: true, sham: true}-->
+							    <!-- <ion-checkbox name="{{check.option_text}}"
+    								[(ngModel)]="check.selected" 
+							   		color="red" >
+							   	 </ion-checkbox> -->
+							  <!--  <ion-checkbox ng-repeat="extra in extras" ng-model="order.extras[extra.id]" checklist-value="{{ extra.id }}"><strong>{{ extra.name }}</strong></ion-checkbox> -->
+    
+
+
+							</ion-item>
 						</ion-list>
 		      </div>
+		      <!--radio button-->
 		      <div *ngSwitchCase="'radio'">
-		      
+		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
+						    <ion-label>{{radio?.option_text}}</ion-label>
+						    <ion-radio value="{{radio?.option_text}}"></ion-radio>
+						  </ion-item>
+ 						</ion-list>
+		      </div>
+
+		      <!--textarea-->
+		      <div *ngSwitchCase="'textarea'">
+		      	<ion-item>
+					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
+					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
+					  </ion-item>
+		      </div>
+
+		      <!--datepicker-->
+		      <div *ngSwitchCase="'datepicker'">
+		      	
 		      </div>
 				</div>
 				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>

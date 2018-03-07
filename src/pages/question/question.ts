@@ -168,14 +168,18 @@ export class QuestionPage {
       });   
     }
   }
-  onSubmit(formData,id,questionKey,survey_id,questionText){
+  onSubmit(formData,id,questionKey,survey_id,questionText,QuestionType){
     if(!formData.valid){
         console.log("not valid");
     }else{
-      console.log("valid");
+      // console.log("valid");
       let formValue=[];
       console.log(formData.value);
+      if(QuestionType="checkbox"){
+        
+      }else{
       formValue.push(formData.value[questionText]);
+      }
       console.log(formValue);
       let tablename="surveyResult_"+survey_id;
       //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
