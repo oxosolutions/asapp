@@ -799,7 +799,7 @@ var map = {
 		9
 	],
 	"../pages/dashboard/dashboard.module": [
-		297,
+		300,
 		8
 	],
 	"../pages/groups/groups.module": [
@@ -807,11 +807,11 @@ var map = {
 		7
 	],
 	"../pages/help/help.module": [
-		299,
+		297,
 		6
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		300,
+		299,
 		5
 	],
 	"../pages/login/login.module": [
@@ -1029,7 +1029,7 @@ var AioneServicesProvider = (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + Where + ' = ' + Value;
-                //console.log(this.query);
+                console.log(_this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });
@@ -1311,10 +1311,10 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
@@ -1916,7 +1916,8 @@ var ListsurveyPage = (function () {
         var metaSurvey = [];
         var SurveySelect = [];
         this.surveyTitle = localStorage.getItem("ApplicationName");
-        this.servicesProvider.SelectWhere("survey_meta", "key", "'enable_survey'").then(function (survey_meta) {
+        var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+        this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
             metaSurvey.push(survey_meta.rows);
             if (metaSurvey.length > 0) {
                 metaSurvey.forEach(function (value, key) {
@@ -1932,8 +1933,8 @@ var ListsurveyPage = (function () {
                         }
                     }
                 });
-                //this.listSurvey=SurveySelect[0];
-                //sconsole.log(this.listSurvey);
+                _this.listSurvey = SurveySelect[0];
+                console.log(_this.listSurvey);
             }
             else {
                 console.log("no survey");

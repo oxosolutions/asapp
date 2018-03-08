@@ -26,8 +26,8 @@ ionViewDidLoad(){
 	let metaSurvey=[];
 	let SurveySelect=[];
 	this.surveyTitle=localStorage.getItem("ApplicationName");
-
-	this.servicesProvider.SelectWhere("survey_meta","key","'enable_survey'").then((survey_meta:any)=>{
+	let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
+	this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
 		metaSurvey.push(survey_meta.rows);
 		if(metaSurvey.length > 0){
 			metaSurvey.forEach((value,key)=>{
@@ -46,8 +46,8 @@ ionViewDidLoad(){
 				}
 
 			});
-			//this.listSurvey=SurveySelect[0];
-			//sconsole.log(this.listSurvey);
+		this.listSurvey=SurveySelect[0];
+		console.log(this.listSurvey);
 
 		}else{
 			console.log("no survey");
