@@ -14,11 +14,11 @@ export class ListsurveyPage {
 	listSurvey = [];
 	data:any;
 	questionLength=[];
+	nullSurvey;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id){
   	this.navCtrl.setRoot(GroupsPage,{'id': id});
-
   }
 ionViewDidLoad(){
 	let questionId;
@@ -29,7 +29,9 @@ ionViewDidLoad(){
 	let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
 	this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
 		metaSurvey.push(survey_meta.rows);
-		if(metaSurvey.length > 0){
+		console.log(metaSurvey);
+		console.log(survey_meta.rows.length);
+		if(survey_meta.rows.length > 0){
 			metaSurvey.forEach((value,key)=>{
 				console.log(value);
 				let content=[];
@@ -40,8 +42,6 @@ ionViewDidLoad(){
 					}); 
 					if(content != undefined){
 						SurveySelect.push(content);
-						
-
 					}
 				}
 
@@ -51,6 +51,7 @@ ionViewDidLoad(){
 
 		}else{
 			console.log("no survey");
+			this.nullSurvey="there is no survey";
 		}
 		// if(survey_meta.rows.length > 0){
 		// 	let loopLength=0;
