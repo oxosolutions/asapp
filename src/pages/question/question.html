@@ -100,7 +100,15 @@
 				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
 			      </ion-item>
 		      </div>
+
+		      <!--location picker-->
+				<div *ngSwitchCase="'location_picker'">
+
 				</div>
+			</div>
+
+				
+				
 				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>
 				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>
 				<button  ion-button color="dark" outline>

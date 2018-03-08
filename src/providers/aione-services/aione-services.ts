@@ -153,20 +153,21 @@ export class AioneServicesProvider {
 					resolve(selectresult);
 				})
 			}
-		})
-		
+		})	
 	}
+
 	SelectWhere(tableName, Where, Value){
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				 console.log(this.query);
+				 //console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	
 			}
 		});		
 	}
+
 	MultipleSelectWhere(tableName,ConditionWhere1,ConditionValue1,ConditionValue2,ConditionWhere2){
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
