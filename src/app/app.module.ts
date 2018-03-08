@@ -29,8 +29,9 @@ import { QuestionPage } from '../pages/question/question';
 import { RecordListPage }  from '../pages/record-list/record-list';
 import { TextPage }  from '../pages/text/text';
 import { SelectPage } from '../pages/select/select';
-// import { Toast } from '@ionic-native/toast';
+//import { MyDatePickerModule } from 'mydatepicker';
 
+ 
 @NgModule({
   declarations: [
     MyApp,
@@ -52,7 +53,8 @@ import { SelectPage } from '../pages/select/select';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    //MyDatePickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -169,6 +169,7 @@ export class QuestionPage {
     }
   }
   onSubmit(formData,id,questionKey,survey_id,questionText,QuestionType){
+    let json;
     if(!formData.valid){
         console.log("not valid");
     }else{
@@ -176,9 +177,10 @@ export class QuestionPage {
       let formValue=[];
       console.log(formData.value);
       if(QuestionType="checkbox"){
-        
+         json=JSON.stringify(formData.value);
+         formValue.push(json);
       }else{
-      formValue.push(formData.value[questionText]);
+        formValue.push(formData.value[questionText]);
       }
       console.log(formValue);
       let tablename="surveyResult_"+survey_id;
@@ -196,5 +198,9 @@ export class QuestionPage {
       
     }
     formData.reset();   
+  }
+  updateCucumber() {
+   let  cucumber:any
+    console.log('Cucumbers new state:' + cucumber);
   }
 }

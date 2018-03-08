@@ -47,22 +47,16 @@
   					</ion-item>
 		      </div>
 		      <div *ngSwitchCase="'checkbox'">
-		      	<ion-list [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+		      	<ion-list >
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
-							 <!--  <ion-checkbox  [(ngModel)]="check.option_text" #option_text="ngModel"
-							   name="{{check?.option_text}}"  data="" color="red" ></ion-checkbox> -->
-							  <!-- {option_text: true} -->
+							  <!-- <ion-checkbox  [(ngModel)]="check.option_text" #option_text="ngModel"
+							   name="{{check?.option_text}}"  data="" color="red" ></ion-checkbox> 
+							   --><!-- {option_text: true} -->
 
-						<!-- 	  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"
-							   color="red" ></ion-checkbox> -->
-							   <input type="checkbox"  value="{{check?.option_text}}">I have a ca
-							   <!-- {ram: true, sham: true}-->
-							    <!-- <ion-checkbox name="{{check.option_text}}"
-    								[(ngModel)]="check.selected" 
-							   		color="red" >
-							   	 </ion-checkbox> -->
-							  <!--  <ion-checkbox ng-repeat="extra in extras" ng-model="order.extras[extra.id]" checklist-value="{{ extra.id }}"><strong>{{ extra.name }}</strong></ion-checkbox> -->
+							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"
+							   color="red" ></ion-checkbox>
+							 <!--  <ion-checkbox  ng-model="check[check.option_text]" checklist-value="{{ check.option_text }}"><strong>{{ extra.name }}</strong></ion-checkbox> -->
     
 
 
