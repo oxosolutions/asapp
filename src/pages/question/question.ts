@@ -169,6 +169,7 @@ export class QuestionPage {
     }
   }
   onSubmit(formData,id,questionKey,survey_id,questionText,QuestionType){
+    console.log(QuestionType);
     let json;
     if(!formData.valid){
         console.log("not valid");
@@ -176,7 +177,8 @@ export class QuestionPage {
       // console.log("valid");
       let formValue=[];
       console.log(formData.value);
-      if(QuestionType="checkbox"){
+      if(QuestionType=="checkbox"){
+        console.log(QuestionType);
          json=JSON.stringify(formData.value);
          formValue.push(json);
       }else{
