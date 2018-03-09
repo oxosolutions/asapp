@@ -14,7 +14,7 @@
 <ion-content padding>
 <h1>List Of Surveys</h1>
 <ion-list>
-<div *ngFor="let survey of listSurvey">
+<div *ngFor="let survey of listSurvey[0]">
 
   <ion-item (click)="groups(survey.id)">
     <ion-thumbnail item-start>

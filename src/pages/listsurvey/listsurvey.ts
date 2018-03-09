@@ -20,89 +20,46 @@ export class ListsurveyPage {
   groups(id){
   	this.navCtrl.setRoot(GroupsPage,{'id': id});
   }
-ionViewDidLoad(){
-	let questionId;
-	let questionData:any;
-	let metaSurvey=[];
-	let SurveySelect=[];
-	this.surveyTitle=localStorage.getItem("ApplicationName");
-	let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
-	this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
-		metaSurvey.push(survey_meta.rows);
-		console.log(metaSurvey);
-		console.log(survey_meta.rows.length);
-		if(survey_meta.rows.length > 0){
-			metaSurvey.forEach((value,key)=>{
-				console.log(value);
-				let content=[];
-				for(let i=0; i < value.length; i++){
-					this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
-						//console.log(survey.rows[0]);
-						content.push(survey.rows[0]);						
-					}); 
-					if(content != undefined){
-						SurveySelect.push(content);
+	ionViewDidLoad(){  
+		let questionId;
+		let questionData:any;
+		let metaSurvey=[];
+		let SurveySelect=[];
+		this.surveyTitle=localStorage.getItem("ApplicationName");
+		let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
+		let timerquery=''
+		this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
+			console.log(survey_meta.rows);
+			metaSurvey.push(survey_meta.rows);
+			if(survey_meta.rows.length > 0){
+				let forloop=0;
+				metaSurvey.forEach((value,key)=>{
+					//console.log(value);
+					let content=[];
+					for(let i=0; i < value.length; i++){
+						this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
+							//console.log(survey.rows[0]);
+							content.push(survey.rows[0]);						
+						}); 
+						if(content != undefined){
+							SurveySelect.push(content);
+							forloop++;
+							if(forloop == survey_meta.rows.length ){
+								this.listSurvey=SurveySelect;
+
+								console.log(this.listSurvey);
+								console.log(this.listSurvey[0]);
+							}
+						}
 					}
-				}
 
-			});
-		this.listSurvey=SurveySelect[0];
-		console.log(this.listSurvey);
-
-		}else{
-			console.log("no survey");
-			this.nullSurvey="there is no survey";
-		}
-		// if(survey_meta.rows.length > 0){
-		// 	let loopLength=0;
-		// 	metaSurvey.forEach((value,key)=>{
-		// 	 	console.log(value);
-		// 	 	let Surveydata;	
-		// 	 	Object.keys(value).forEach((metavalue,metaKey)=>{
-		// 	 			this.servicesProvider.SelectWhere("surveys","id",value[metavalue].form_id).then((survey:any)=>{
-		// 					console.log(survey.rows);
-		// 					Surveydata=survey.rows;
-		// 				}); 
-		// 				if(Surveydata != undefined){
-
-		// 				console.log(Surveydata);
-		// 				}
-		// 				//this.listSurvey.push(Surveydata);
-		// 				//console.log(this.listSurvey);
-		// 				//loopLength++;
-		// 				// console.log(loopLength);
-
-		// 				// if(loopLength==value.length){
-		// 				// 	console.log("yess length");
-		// 				// console.log(this.listSurvey);
-		// 				// }
-		// 	 	});
-			 	
-
-		// 	 });
-
-		// 	// for(let i=0; i < survey_meta.rows.length;){
-		// 	// 	console.log(survey_meta.rows.length);
-		// 	// 	console.log(survey_meta.rows[i].form_id);
-		// 	// 	this.servicesProvider.SelectWhere("surveys","id",survey_meta.rows[i].form_id).then((survey:any)=>{
-		// 	// 		console.log(survey.rows);
-		// 	// 		metaSurvey.push(survey.rows);
-		// 	// 		i++;
-		// 	// 	}); 
-		// 	//}
-		// 	// console.log(metaSurvey);
-		// 	// if(survey_meta.rows.length == metaSurvey.length){
-		// 	// 		this.listSurvey=metaSurvey;
-		// 	//   console.log(this.listSurvey)
-		// 	// }
-			
-		// }
-		//  //else{
-		// // 	// console.log("no survey");
-		// // }
-		
-  });
-}
+				});
+			}else{
+				this.nullSurvey="there is no survey";
+				console.log(this.nullSurvey);
+			}
+	  });
+	}
 // questionCount(){
 // 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
 // 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
