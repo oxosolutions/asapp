@@ -1,4 +1,4 @@
-
+<!-- 
 <ion-header>
 
   <ion-navbar>
@@ -6,21 +6,40 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
-<h2>Enter Activation code</h2>
-<div *ngIf="loginForm">
-<form [formGroup]="loginForm">
-	<ion-list>
-	  <ion-item>
-	    <ion-label floating>Enter Acitvation code1</ion-label>
-	    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>
-	  </ion-item>
-	  
-	  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> 
-	   
-	  
-	</ion-list>
-</form>
-</div>
-	
+ --><ion-content padding>
+	<!-- <h2>Enter Activation code</h2>
+	<div *ngIf="loginForm">
+		<form [formGroup]="loginForm">
+			<ion-list>
+			  <ion-item>
+			    <ion-label floating>Enter Acitvation code1</ion-label>
+			    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>
+			  </ion-item>
+			  
+			  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> 
+			   
+			  
+			</ion-list>
+		</form>
+	</div>
+ -->
+	<div class="activation-page-content-wrapper" *ngIf="loginForm">
+		<div class="activation-page-content">
+			<div class="app-title">IRIS</div>
+			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+		</div>
+		<div class="activation-field-wrapper">
+			<form [formGroup]="loginForm">
+			    <div class="field-wrapper">
+			    	<ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>
+			    </div>
+			    <div class="button-wrapper">
+			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>
+			    </div>
+			    <div class="clearfix">
+			    	
+			    </div>
+			</form>	
+		</div>
+	</div>
 </ion-content>

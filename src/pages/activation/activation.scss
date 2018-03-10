@@ -1,19 +1,78 @@
 page-activation {
+	
+	.content-md{
+		background: linear-gradient(45deg, #1d466e 0%,#1695ec 100%);
+
+	}
+
 	ion-spinner * {
-  width: 28px;
-  height: 28px;
-  stroke: #444;
-  fill: #222;
-}p{
-}
-.failure{
-	color:red;
-	font-weight:bold;
-	font-size:15px;
-}
-.success{
-	color:green;
-	font-weight:bold;
-	font-size:15px;
-}
+		  width: 28px;
+		  height: 28px;
+		  stroke: #444;
+		  fill: #222;
+	}	  
+	.activation-page-content-wrapper{
+		position: absolute;
+    	bottom: 16px;
+    	left: 16px;
+    	right: 16px;
+
+		.activation-page-content{
+			color: white;
+
+			.app-title{
+				font-size: 40px;
+				font-weight:300;
+				margin-bottom: 16px
+			}
+			.app-description{
+				line-height: 30px;
+    			font-size: 18px;
+    			color: #ccc;
+    			margin-bottom: 16px
+
+			}
+		}	
+		.activation-field-wrapper{
+
+			.field-wrapper{
+				float: left;
+    			width: calc( 100% - 100px);
+			}
+			.button-wrapper{
+				float: right;
+				width: 100px
+			}
+			
+			.verify-button{
+				width: 100%;
+			}
+			.clearfix{
+				clear: both;
+			}
+		}
+	}
+
+	ion-input{
+		background: white;
+		height: 3.6rem;
+		margin: 4px 0px;
+
+		.text-input-md{
+			margin: 10px 8px;
+		}
+	}
+
+	.failure{
+		color:red;
+		font-weight:bold;
+		font-size:15px;
+	}
+	.success{
+		color:green;
+		font-weight:bold;
+		font-size:15px;
+	}
 }	
+
+		
