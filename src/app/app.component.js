@@ -8,29 +8,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AioneServicesProvider } from '../providers/aione-services/aione-services';
 import { ActivationPage } from '../pages/activation/activation';
 import { LoginPage } from '../pages/login/login';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { LoadingController } from 'ionic-angular';
+import { HelpPage } from '../pages/help/help';
+import { AboutPage } from '../pages/about/about';
+import { RecordListPage } from '../pages/record-list/record-list';
+import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 var MyApp = /** @class */ (function () {
-    function MyApp(servicesProvider, platform, statusBar, splashScreen) {
+    function MyApp(loaderCtrl, app, servicepro, servicesProvider, platform, statusBar, splashScreen) {
+        this.loaderCtrl = loaderCtrl;
+        this.app = app;
+        this.servicepro = servicepro;
         this.servicesProvider = servicesProvider;
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
         this.initializeApp();
         this.pages = [
-            { title: 'List', component: ListPage },
-            { title: 'Home', component: HomePage }
+            { title: 'Home', component: DashboardPage },
+            { title: 'Enter Record', component: ListsurveyPage },
+            { title: 'Review Record', component: RecordListPage },
+            { title: 'About', component: AboutPage },
+            { title: 'Help', component: HelpPage },
         ];
-        var storgae = localStorage.getItem("activation");
-        console.log(storgae);
         if (localStorage.getItem("activation") != undefined) {
             this.rootPage = LoginPage;
+            if (localStorage.getItem("username") != undefined) {
+                this.rootPage = DashboardPage;
+            }
+            else {
+                this.rootPage = LoginPage;
+            }
         }
         else {
             this.rootPage = ActivationPage;
@@ -38,13 +52,34 @@ var MyApp = /** @class */ (function () {
     }
     MyApp.prototype.initializeApp = function () {
         var _this = this;
-        this.platform.ready().then(function () {
-            _this.statusBar.styleDefault();
-            _this.splashScreen.hide();
+        this.servicepro.PlatformCheck('asapp').then(function (db) {
+            _this.platform.ready().then(function () {
+                _this.statusBar.styleDefault();
+                _this.splashScreen.hide();
+            });
         });
     };
     MyApp.prototype.openPage = function (page) {
         this.nav.setRoot(page.component);
+    };
+    MyApp.prototype.presentLoading = function (message) {
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + message + "</div>\n      </div>",
+        });
+        this.loader.present();
+    };
+    MyApp.prototype.dismissLoader = function () {
+        this.loader.dismiss();
+    };
+    MyApp.prototype.logout = function () {
+        this.presentLoading("log out");
+        localStorage.removeItem("activation");
+        localStorage.removeItem("username");
+        if (localStorage.getItem("activation") == undefined) {
+            this.rootPage = ActivationPage;
+            this.dismissLoader();
+        }
     };
     __decorate([
         ViewChild(Nav),
@@ -54,7 +89,7 @@ var MyApp = /** @class */ (function () {
         Component({
             templateUrl: 'app.html',
         }),
-        __metadata("design:paramtypes", [AioneServicesProvider, Platform, StatusBar, SplashScreen])
+        __metadata("design:paramtypes", [LoadingController, App, AioneServicesProvider, AioneServicesProvider, Platform, StatusBar, SplashScreen])
     ], MyApp);
     return MyApp;
 }());

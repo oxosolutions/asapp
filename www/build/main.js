@@ -135,7 +135,7 @@ var ActivationPage = (function () {
                                                 _this.insersurveyMeta(Apidata).then(function (survey_meta) {
                                                     _this.resultSurvey(Apidata.questions, Apidata.surveys).then(function (resultSurvey) {
                                                         if (resultSurvey != undefined) {
-                                                            //console.log(resultSurvey);
+                                                            console.log(resultSurvey);
                                                             _this.loader.dismiss();
                                                             _this.nav.setRoot(__WEBPACK_IMPORTED_MODULE_8__pages_login_login__["a" /* LoginPage */]);
                                                             localStorage.setItem("activation", 'Success');
@@ -1041,7 +1041,7 @@ var AioneServicesProvider = (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + ConditionWhere1 + ' = ' + ConditionValue1 + ' AND ' + ConditionValue2 + '= ' + ConditionWhere2;
-                console.log(_this.query);
+                //console.log(this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });
@@ -1909,72 +1909,159 @@ var ListsurveyPage = (function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */], { 'id': id });
     };
     ListsurveyPage.prototype.ionViewDidLoad = function () {
+        this.surveyTitle = localStorage.getItem("ApplicationName");
+        this.EnabledSurvey();
+    };
+    ListsurveyPage.prototype.EnabledSurvey = function () {
         var _this = this;
         var questionId;
         var questionData;
         var metaSurvey = [];
         var SurveySelect = [];
-        this.surveyTitle = localStorage.getItem("ApplicationName");
-        var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
-        this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
-            console.log(survey_meta.rows);
-            metaSurvey.push(survey_meta.rows);
-            if (survey_meta.rows.length > 0) {
-                var forloop_1 = 0;
-                metaSurvey.forEach(function (value, key) {
-                    //console.log(value);
-                    var content = [];
-                    var _loop_1 = function (i) {
-                        var timerquery = '';
-                        var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + value[i].form_id;
-                        var survey_timer = 'select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = ' + value[i].form_id;
-                        var survey_limit = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + value[i].form_id;
-                        _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
-                            console.log(value[i].form_id);
-                            console.log(value[i].key);
-                            if (scheduling.rows.length > 0) {
-                                console.log('yes scheduling exist');
-                                console.log(scheduling.rows[0]);
-                                //c
+        return new Promise(function (resolve, reject) {
+            var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+            _this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
+                metaSurvey.push(survey_meta.rows);
+                if (survey_meta.rows.length > 0) {
+                    var forloop_1 = 0;
+                    metaSurvey.forEach(function (value, key) {
+                        var content = [];
+                        var _loop_1 = function (i) {
+                            var formId = value[i].form_id;
+                            console.log(formId);
+                            _this.surveyScheduling(formId).then(function (surveySch) {
+                                _this.surveytimer(formId).then(function () {
+                                    _this.servicesProvider.SelectWhere("surveys", "id", formId).then(function (survey) {
+                                        //console.log(survey.rows[0]);
+                                        content.push(survey.rows[0]);
+                                    });
+                                });
+                            });
+                            if (content != undefined) {
+                                SurveySelect.push(content);
+                                forloop_1++;
+                                if (forloop_1 == survey_meta.rows.length) {
+                                    _this.listSurvey = SurveySelect;
+                                    console.log(_this.listSurvey);
+                                    //console.log(this.listSurvey[0]);
+                                }
                             }
-                            else {
-                                console.log("global available");
-                            }
-                        });
-                        _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                            //console.log(survey.rows[0]);
-                            content.push(survey.rows[0]);
-                        });
-                        if (content != undefined) {
-                            SurveySelect.push(content);
-                            forloop_1++;
-                            if (forloop_1 == survey_meta.rows.length) {
-                                _this.listSurvey = SurveySelect;
-                                console.log(_this.listSurvey);
-                                //console.log(this.listSurvey[0]);
-                            }
+                        };
+                        for (var i = 0; i < value.length; i++) {
+                            _loop_1(i);
                         }
-                    };
-                    for (var i = 0; i < value.length; i++) {
-                        _loop_1(i);
-                    }
-                });
-            }
-            else {
-                _this.nullSurvey = "there is no survey";
-                console.log(_this.nullSurvey);
-            }
+                    });
+                }
+                else {
+                    _this.nullSurvey = "there is no survey";
+                    console.log(_this.nullSurvey);
+                }
+            });
+        });
+    };
+    ListsurveyPage.prototype.surveyScheduling = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var timerquery = '';
+            var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
+            var survey_timer = 'select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = ' + formId;
+            var survey_limit = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
+                if (scheduling.rows.length > 0) {
+                    console.log("yes survey schelduling");
+                    console.log(scheduling.rows);
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'start_date'", "form_id", formId).then(function (startDate) {
+                        _this.StartDate = startDate.rows[0].value;
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expire) {
+                            _this.ExpireDate = expire.rows[0].value;
+                            _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
+                                _this.StartTime = startTime.rows[0].value;
+                                _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
+                                    _this.ExpireTime = expireTime.rows[0].value;
+                                    // console.log(this.StartDate);
+                                    // console.log(this.ExpireDate);
+                                    // console.log(this.StartTime);
+                                    // console.log(this.ExpireTime);
+                                    if (_this.StartDate != "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime == "") {
+                                        console.log(_this.StartDate);
+                                    }
+                                    if (_this.StartDate == "" && _this.ExpireDate != "" && _this.StartTime == "" && _this.ExpireTime == "") {
+                                        console.log(_this.ExpireDate);
+                                    }
+                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime != "" && _this.ExpireTime == "") {
+                                        console.log(_this.StartTime);
+                                    }
+                                    if (_this.StartDate != "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime != "") {
+                                        console.log(_this.ExpireTime);
+                                    }
+                                    if (_this.StartDate != "" && _this.ExpireDate != "" && _this.StartTime == "" && _this.ExpireTime == "") {
+                                        console.log("today's date");
+                                        console.log(_this.StartDate);
+                                        console.log(_this.ExpireDate);
+                                        console.log("today's date");
+                                        resolve("df");
+                                    }
+                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime != "" && _this.ExpireTime != "") {
+                                        console.log("got time");
+                                        console.log(_this.StartTime);
+                                        console.log(_this.ExpireTime);
+                                        resolve("got time");
+                                    }
+                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime == "") {
+                                        console.log("no time");
+                                    }
+                                    //resolve("data");
+                                });
+                            });
+                        });
+                    });
+                }
+                else {
+                    console.log("global available");
+                    resolve("global avaliable");
+                }
+            });
+        });
+    };
+    ListsurveyPage.prototype.surveytimer = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var query = 'select * from survey_meta where key="survey_timer" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
+                if (data.rows.length > 0) {
+                    resolve("has timer");
+                }
+                else {
+                    console.log("no timer");
+                    resolve("no timer");
+                }
+            });
         });
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar>\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content padding>\n<h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">\n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], ListsurveyPage);
     return ListsurveyPage;
+    var _a, _b, _c;
 }());
 
+// questionCount(){
+// 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
+// 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
+// 			// 	this.questionLength.push(SelResult.rows);
+// 			// 	this.listSurvey.forEach((key,value,)=>{
+// 			// 		this.questionLength.forEach((keys,values,)=>{
+// 			// 			Object.keys(key).forEach(function(svalue,skey){
+// 		 //    			questionData=key[svalue].id;																																																								 
+// 		 //    			//console.log(questionData);		    				
+// 		 //    			});
+// 	  // 			});
+// 			// 	});
+// 			// });
+// }
 //# sourceMappingURL=listsurvey.js.map
 
 /***/ }),

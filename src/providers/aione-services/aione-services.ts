@@ -172,7 +172,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+ tableName+' where '+ ConditionWhere1 +' = '+ConditionValue1+' AND '+ConditionValue2+ '= '+ ConditionWhere2;
-				 console.log(this.query);
+				 //console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	
@@ -235,7 +235,4 @@ export class AioneServicesProvider {
 
 
 }
-
-
-
 

@@ -70,7 +70,7 @@ export class ActivationPage {
 
                             this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
                               if(resultSurvey != undefined){
-                                //console.log(resultSurvey);
+                                console.log(resultSurvey);
                                 this.loader.dismiss();
                                 this.nav.setRoot(LoginPage);
                                 localStorage.setItem("activation", 'Success');

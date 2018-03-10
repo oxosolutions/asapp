@@ -9,19 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-/**
- * Generated class for the DashboardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
+import { ListsurveyPage } from '../../pages/listsurvey/listsurvey';
+import { RecordListPage } from '../../pages/record-list/record-list';
 var DashboardPage = /** @class */ (function () {
-    function DashboardPage(navCtrl, navParams) {
+    function DashboardPage(servicesProvider, navCtrl, navParams) {
+        this.servicesProvider = servicesProvider;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
     DashboardPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DashboardPage');
+        var _this = this;
+        this.servicesProvider.SelectAll("settings").then(function (result) {
+            _this.dashboard = result.rows[0];
+            console.log(_this.dashboard);
+            localStorage.setItem("ApplicationName", _this.dashboard.android_application_title);
+        });
+    };
+    DashboardPage.prototype.recordList = function () {
+        this.navCtrl.setRoot(RecordListPage);
+    };
+    DashboardPage.prototype.listSurvey = function () {
+        this.navCtrl.setRoot(ListsurveyPage);
     };
     DashboardPage = __decorate([
         IonicPage(),
@@ -29,7 +38,7 @@ var DashboardPage = /** @class */ (function () {
             selector: 'page-dashboard',
             templateUrl: 'dashboard.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams])
+        __metadata("design:paramtypes", [AioneServicesProvider, NavController, NavParams])
     ], DashboardPage);
     return DashboardPage;
 }());

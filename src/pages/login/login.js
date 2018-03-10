@@ -13,8 +13,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { SurveyProvider } from '../../providers/survey/survey';
+import { LoadingController } from 'ionic-angular';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 var LoginPage = /** @class */ (function () {
-    function LoginPage(nav, AioneService, formBuilder, AioneHelp, survey, navCtrl, navParams) {
+    function LoginPage(loaderCtrl, nav, AioneService, formBuilder, AioneHelp, survey, navCtrl, navParams) {
+        this.loaderCtrl = loaderCtrl;
         this.nav = nav;
         this.AioneService = AioneService;
         this.formBuilder = formBuilder;
@@ -24,17 +27,43 @@ var LoginPage = /** @class */ (function () {
         this.navParams = navParams;
     }
     LoginPage.prototype.Login = function () {
-        // this.username=this.loginUser.value.username;
-        // this.password=this.loginUser.value.password;
-        //  	console.log(this.username);
-        //  	console.log(this.password);
-        console.log('login');
-        this.AioneService.check('users');
+        var _this = this;
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Verifying Your Details' + "</div>\n      </div>",
+        });
+        this.loader.present();
+        if (this.loginUser.invalid) {
+            this.loginUser;
+            this.loader.dismiss();
+        }
+        else {
+            var name_1;
+            this.username = this.loginUser.value.username;
+            this.password = this.loginUser.value.password;
+            this.user = "'" + this.username + "'";
+            this.pass = "'" + this.password + "'";
+            this.AioneService.MultipleSelectWhere("users", "email", this.user, "app_password", this.pass).then(function (userDetail) {
+                _this.loginUser.reset();
+                _this.loader.dismiss();
+                if (userDetail.rows.length >= 1) {
+                    _this.navCtrl.setRoot(DashboardPage);
+                    localStorage.setItem("username", _this.user);
+                }
+                else {
+                    _this.AioneHelp.showAlert("Error", "Wrong Credentials");
+                }
+            });
+        }
     };
     LoginPage.prototype.ionViewWillEnter = function () {
         this.loginUser = this.formBuilder.group({
-            username: ["", Validators.compose([])],
-            password: ["", Validators.compose([])],
+            username: ["", Validators.compose([
+                    Validators.required,
+                ])],
+            password: ["", Validators.compose([
+                    Validators.required,
+                ])],
         });
     };
     LoginPage = __decorate([
@@ -43,7 +72,7 @@ var LoginPage = /** @class */ (function () {
             selector: 'page-login',
             templateUrl: 'login.html',
         }),
-        __metadata("design:paramtypes", [NavController, AioneServicesProvider, FormBuilder, AioneHelperProvider, SurveyProvider, NavController, NavParams])
+        __metadata("design:paramtypes", [LoadingController, NavController, AioneServicesProvider, FormBuilder, AioneHelperProvider, SurveyProvider, NavController, NavParams])
     ], LoginPage);
     return LoginPage;
 }());
