@@ -1,15 +1,15 @@
 
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>login</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
 <ion-content padding>
-  <div *ngIf="loginUser">
+  <!-- <div *ngIf="loginUser">
     <form [formGroup]="loginUser">
     	<ion-list>
       <ion-item>
@@ -31,6 +31,50 @@
       <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>
     	</ion-list>	
     </form>
-  </div>
+  </div> -->
 	
+
+
+    <div *ngIf="loginUser">
+        <form [formGroup]="loginUser">
+            <div class="app-logo">
+                logo area
+            </div>
+            <div class="page-title">
+                Login
+            </div>
+            <div>
+                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>
+                <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">
+                    <p>Username is required</p>
+                </div>
+            </div>
+            <div>
+                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>
+            </div>
+            <ion-item class="checkbox-wrapper">
+                <ion-label>Remember me</ion-label>
+                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>
+            </ion-item>
+            <div class="btn-wrapper">
+                <button ion-button  full (click)="Login()">Submit</button>
+                
+            </div>
+            <div class="btn-wrapper">
+                <button ion-button color="secondary"  full>Cancel</button>
+                
+            </div>
+            <ion-grid class="extra-options">
+                <ion-row>
+                    <ion-col col-sm-6 >
+                        Forgot password
+                    </ion-col>
+                    <ion-col col-sm-6 >
+                        New User?   
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+      
+    </div>
 </ion-content>
