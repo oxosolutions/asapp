@@ -42,16 +42,17 @@ export class ListsurveyPage {
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					for(let i=0; i < value.length; i++){
-						let formId=value[i].form_id;
-						console.log(formId);
-						this.surveyScheduling(formId).then((surveySch)=>{
-							this.surveytimer(formId).then(()=>{
-								this.servicesProvider.SelectWhere("surveys","id",formId).then((survey:any)=>{
+						console.log(value[i].form_id);
+						this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+								if(surveySch != undefined){
+									this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 									//console.log(survey.rows[0]);
 									content.push(survey.rows[0]);						
 								}); 
-							})
-						})
+								}
+								
+							
+						});
 						
 						if(content != undefined){
 							SurveySelect.push(content);
@@ -77,8 +78,8 @@ export class ListsurveyPage {
 
 				let timerquery='';
 				let survey_scheduling='select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = '+formId;
-				let survey_timer='select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = '+formId;
-				let survey_limit='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
+				// let survey_timer='select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = '+formId;
+				// let survey_limit='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
 				this.servicesProvider.ExecuteRun(survey_scheduling,[]).then((scheduling:any)=>{
 					if(scheduling.rows.length > 0){
 						console.log("yes survey schelduling");
@@ -116,18 +117,20 @@ export class ListsurveyPage {
 													console.log(this.StartDate);
 													console.log(this.ExpireDate);
 													console.log("today's date");
-													resolve("df");
+													//resolve("df");
 												}
 												if(this.StartDate == "" && this.ExpireDate == "" && this.StartTime != "" && this.ExpireTime != "" ){
 													console.log("got time");
 													console.log(this.StartTime);
 													console.log(this.ExpireTime);
-													resolve("got time");
+													//resolve("got time");
 												}
 												if(this.StartDate == "" && this.ExpireDate == "" && this.StartTime == "" && this.ExpireTime == "" ){
 													console.log("no time");
 												}
-
+												this.surveytimer(formId).then((surveyTim)=>{
+													resolve(surveyTim);
+												});
 
 												//resolve("data");
 											});
@@ -137,8 +140,11 @@ export class ListsurveyPage {
 								});
 
 					}else{
+						this.surveytimer(formId).then((surveyTim)=>{
 						console.log("global available");
-						resolve("global avaliable");
+							resolve(surveyTim);
+						});	
+						//resolve("global avaliable");
 					}
 
 					
@@ -147,10 +153,23 @@ export class ListsurveyPage {
 	}
 	surveytimer(formId){
 		return new Promise ((resolve,reject)=>{
+			let duration
+			console.log(formId);
 			let query='select * from survey_meta where key="survey_timer" AND value=1 AND form_id = '+formId;
 			this.servicesProvider.ExecuteRun(query,[]).then((data:any)=>{
+				console.log(data.rows);
 				if(data.rows.length > 0){
-					resolve("has timer");
+					this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_duration'","form_id",formId).then((dur:any)=>{
+						duration=dur.rows[0].value;
+						if(duration != ""){
+						console.log(duration);
+						resolve(duration);
+						}else{
+							console.log("no timer");
+							resolve(" no timer");
+						}
+					});
+					
 				}else{
 					console.log("no timer");
 					resolve("no timer");

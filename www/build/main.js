@@ -4,6 +4,51 @@ webpackJsonp([11],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the AboutPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var AboutPage = (function () {
+    function AboutPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    AboutPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad AboutPage');
+    };
+    AboutPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-about',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/about/about.html"*/'<!--\n  Generated template for the AboutPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  	<ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title>About</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/about/about.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], AboutPage);
+    return AboutPage;
+}());
+
+//# sourceMappingURL=about.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActivationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
@@ -372,7 +417,7 @@ var ActivationPage = (function () {
     };
     ActivationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-activation',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/'<ion-content padding>\n\n	<!-- <h2>Enter Activation code</h2>\n\n	<div *ngIf="loginForm">\n\n		<form [formGroup]="loginForm">\n\n			<ion-list>\n\n			  <ion-item>\n\n			    <ion-label floating>Enter Acitvation code1</ion-label>\n\n			    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n\n			  </ion-item>\n\n			  \n\n			  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> \n\n			   \n\n			  \n\n			</ion-list>\n\n		</form>\n\n	</div>\n\n -->\n\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n\n		<div class="activation-page-content">\n\n			<div class="app-title">IRIS</div>\n\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n\n		</div>\n\n		<div class="activation-field-wrapper">\n\n			<form [formGroup]="loginForm">\n\n			    <div class="field-wrapper">\n\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n\n			    </div>\n\n			    <div class="button-wrapper">\n\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n\n			    </div>\n\n			    <div class="clearfix">\n\n			    	\n\n			    </div>\n\n			</form>	\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/,
+            selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/'<ion-content padding>\n	<!-- <h2>Enter Activation code</h2>\n	<div *ngIf="loginForm">\n		<form [formGroup]="loginForm">\n			<ion-list>\n			  <ion-item>\n			    <ion-label floating>Enter Acitvation code1</ion-label>\n			    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n			  </ion-item>\n			  \n			  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> \n			   \n			  \n			</ion-list>\n		</form>\n	</div>\n -->\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n		<div class="activation-page-content">\n			<div class="app-title">IRIS</div>\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ActivationPage);
@@ -383,7 +428,7 @@ var ActivationPage = (function () {
 
 /***/ }),
 
-/***/ 110:
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -391,7 +436,7 @@ var ActivationPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(112);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -438,7 +483,7 @@ var GroupsPage = (function () {
     };
     GroupsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-groups',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n 	 <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title> <span *ngIf="groupTitle">{{groupTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<h1>Groups</h1>\n\n<ion-list>\n\n<div  class="groups" *ngFor="let groups of groupsResult">\n\n  <ion-item (click)="questionid(groups.id)">  \n\n  <h1>{{groups.survey_id}}</h1>\n\n    <h2>{{groups.title}}</h2>\n\n    <p>{{groups.description}}</p>   \n\n  </ion-item>\n\n</div>\n\n</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/,
+            selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/'\n<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n 	 <ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title> <span *ngIf="groupTitle">{{groupTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<h1>Groups</h1>\n<ion-list>\n<div  class="groups" *ngFor="let groups of groupsResult">\n  <ion-item (click)="questionid(groups.id)">  \n  <h1>{{groups.survey_id}}</h1>\n    <h2>{{groups.title}}</h2>\n    <p>{{groups.description}}</p>   \n  </ion-item>\n</div>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], GroupsPage);
@@ -449,7 +494,7 @@ var GroupsPage = (function () {
 
 /***/ }),
 
-/***/ 111:
+/***/ 112:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -668,7 +713,7 @@ var QuestionPage = (function () {
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question\question.html"*/'<ion-header>\n\n\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n  <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n\n    \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding>\n\n	<!-- survey based-->\n\n	<ion-list>\n\n		  <ion-item *ngFor="let survey of surveyQuestion">\n\n          <h1>{{survey?.question_text}}</h1>\n\n          <p>{{survey?.question_desc}}</p>\n\n          <p>{{survey.serialNo}}</p>\n\n           <p>{{survey?.question_type}}</p>\n\n      </ion-item>\n\n	</ion-list>\n\n\n\n\n\n	<!--question based-->\n\n	<div  *ngIf ="OriginalContent">\n\n			<h1>{{OriginalContent?.question_text}}</h1>\n\n			  <p>{{OriginalContent?.idss}}</p>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			\n\n      <form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n\n				<div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n					<!--text-->\n\n			    <div *ngSwitchCase="\'text\'">\n\n				    <ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n			    </div>\n\n\n\n			    <!--select-->\n\n		      <div *ngSwitchCase="\'select\'">\n\n		        <ion-item>\n\n						    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n						    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n						    	</ion-option>\n\n						      \n\n						    </ion-select>\n\n  					</ion-item>\n\n		      </div>\n\n\n\n		      <!--checkbox-->\n\n		      <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n\n							   color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div>\n\n\n\n		      <!--radio button-->\n\n		      <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n\n\n		      <!--textarea-->\n\n		      <div *ngSwitchCase="\'textarea\'">\n\n		      	<ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n		      </div>\n\n\n\n		      <!--datepicker-->\n\n		      <div *ngSwitchCase="\'datepicker\'">\n\n		      	\n\n		      </div>\n\n\n\n		      <!--message-->\n\n		      <div *ngSwitchCase="\'message\'">\n\n			      <ion-item>\n\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--number-->\n\n		      <div *ngSwitchCase="\'number\'">\n\n		      	<ion-item>\n\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--location picker-->\n\n				<div *ngSwitchCase="\'location_picker\'">\n\n\n\n				</div>\n\n			</div>\n\n\n\n				\n\n				\n\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n\n				<button  ion-button color="dark" outline>\n\n	          <ion-icon name="add"></ion-icon>Next</button>\n\n			</form> \n\n			\n\n\n\n	</div>\n\n</ion-content>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question\question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button>\n     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	<!-- survey based-->\n	<ion-list>\n		  <ion-item *ngFor="let survey of surveyQuestion">\n          <h1>{{survey?.question_text}}</h1>\n          <p>{{survey?.question_desc}}</p>\n          <p>{{survey.serialNo}}</p>\n           <p>{{survey?.question_type}}</p>\n      </ion-item>\n	</ion-list>\n\n\n	<!--question based-->\n	<div  *ngIf ="OriginalContent">\n			<h1>{{OriginalContent?.question_text}}</h1>\n			  <p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      <form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n				<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!--text-->\n			    <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n\n			    <!--select-->\n		      <div *ngSwitchCase="\'select\'">\n		        <ion-item>\n						    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n						    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n						    	</ion-option>\n						      \n						    </ion-select>\n  					</ion-item>\n		      </div>\n\n		      <!--checkbox-->\n		      <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div>\n\n		      <!--radio button-->\n		      <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n\n		      <!--textarea-->\n		      <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n\n		      <!--datepicker-->\n		      <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div>\n\n		      <!--message-->\n		      <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div>\n\n		      <!--number-->\n		      <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div>\n\n		      <!--location picker-->\n				<div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div>\n\n				\n				\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div>\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/question/question.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], QuestionPage);
@@ -676,51 +721,6 @@ var QuestionPage = (function () {
 }());
 
 //# sourceMappingURL=question.js.map
-
-/***/ }),
-
-/***/ 112:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the AboutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AboutPage = (function () {
-    function AboutPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    AboutPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad AboutPage');
-    };
-    AboutPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\about\about.html"*/'<!--\n\n  Generated template for the AboutPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title>About</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\about\about.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], AboutPage);
-    return AboutPage;
-}());
-
-//# sourceMappingURL=about.js.map
 
 /***/ }),
 
@@ -758,7 +758,7 @@ var HelpPage = (function () {
     };
     HelpPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\help\help.html"*/'<!--\n\n  Generated template for the HelpPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Help</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\help\help.html"*/,
+            selector: 'page-help',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/help/help.html"*/'<!--\n  Generated template for the HelpPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title>Help</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/help/help.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], HelpPage);
@@ -791,11 +791,11 @@ webpackEmptyAsyncContext.id = 125;
 
 var map = {
 	"../pages/about/about.module": [
-		296,
+		295,
 		10
 	],
 	"../pages/activation/activation.module": [
-		295,
+		296,
 		9
 	],
 	"../pages/dashboard/dashboard.module": [
@@ -1141,7 +1141,7 @@ var SelectPage = (function () {
     };
     SelectPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-select',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\select\select.html"*/'<ion-content padding>\n\n<h1>this is select text</h1>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\select\select.html"*/,
+            selector: 'page-select',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/select/select.html"*/'<ion-content padding>\n<h1>this is select text</h1>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/select/select.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], SelectPage);
@@ -1188,7 +1188,7 @@ var TextPage = (function () {
     };
     TextPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-text',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\text\text.html"*/'<ion-content padding>\n\n  <ion-item>\n\n				    <ion-label color="primary">Inline Label</ion-label>\n\n				    <ion-input placeholder="Text Input"></ion-input>\n\n				  </ion-item>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\text\text.html"*/,
+            selector: 'page-text',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/'<ion-content padding>\n  <ion-item>\n				    <ion-label color="primary">Inline Label</ion-label>\n				    <ion-input placeholder="Text Input"></ion-input>\n				  </ion-item>\n</ion-content>\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/text/text.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], TextPage);
@@ -1235,15 +1235,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_survey_survey__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_geolocation__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_dashboard_dashboard__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_help_help__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_about_about__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_about_about__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_listsurvey_listsurvey__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_groups_groups__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_question_question__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_groups_groups__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_question_question__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_text_text__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_select_select__ = __webpack_require__(215);
@@ -1308,8 +1308,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
@@ -1372,11 +1372,11 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1467,7 +1467,7 @@ var MyApp = (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"E:\ionic projects\asapp\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>Menu</ion-title>\n\n       <button ion-button menuToggle>\n\n      <ion-icon name="close"></ion-icon>\n\n    </button>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n      <button menuClose ion-item (click)="logout()">\n\n        Logout\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"E:\ionic projects\asapp\src\app\app.html"*/,
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n       <button ion-button menuToggle>\n      <ion-icon name="close"></ion-icon>\n    </button>\n    </ion-toolbar>\n  </ion-header>\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n      <button menuClose ion-item (click)="logout()">\n        Logout\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/app/app.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -1505,7 +1505,7 @@ var HomePage = (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  \n\n<button ion-button secondary menuToggle>Toggle Menu</button>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n<button ion-button secondary menuToggle>Toggle Menu</button>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
     ], HomePage);
@@ -1571,7 +1571,7 @@ var ListPage = (function () {
     };
     ListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\list\list.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>List</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <button ion-button (click)="Device()">Default</button>\n\n \n\n  <span>{{result}}</span>\n\n  <ion-card-content>\n\n    Latest Picture:\n\n   \n\n    <img [src]="(base64Image)" *ngIf="base64Image" />\n\n  </ion-card-content>\n\n  <button ion-button (click)="camera1()">Camera</button>\n\n  <button ion-button (click)="internetCheck()">Internet</button> \n\n  <button ion-button (click)="wifiCheck()">Wifi</button>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\list\list.html"*/
+            selector: 'page-list',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <button ion-button (click)="Device()">Default</button>\n \n  <span>{{result}}</span>\n  <ion-card-content>\n    Latest Picture:\n   \n    <img [src]="(base64Image)" *ngIf="base64Image" />\n  </ion-card-content>\n  <button ion-button (click)="camera1()">Camera</button>\n  <button ion-button (click)="internetCheck()">Internet</button> \n  <button ion-button (click)="wifiCheck()">Wifi</button>'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/list/list.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ListPage);
@@ -1720,7 +1720,7 @@ var DashboardPage = (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/'<!-- <ion-header >\n\n  <ion-navbar color="headerClassic">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n\n  </ion-navbar>\n\n</ion-header> -->\n\n\n\n\n\n<ion-content>\n\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n\n		<p>{{dashboard.android_application_description}}</p>\n\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n\n	</div> -->\n\n\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n\n\n		<div class="dashbaord-background">\n\n			<div class="overlay">\n\n				<div class="dashboard-title">\n\n					IRIS Application\n\n				</div>\n\n				<div class="dashbaord-description">\n\n					{{dashboard.android_application_description}}\n\n				</div>\n\n			</div>\n\n			<div class="dashboard-stats">\n\n				<ion-grid>\n\n					<ion-row>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number" >\n\n      								12\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Surveys\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								104\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Completed\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								6\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								In-complete\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								1\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Update\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n  					</ion-row>\n\n				</ion-grid>\n\n			</div>\n\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n\n  				<ion-icon name="menu"></ion-icon>\n\n			</button>\n\n			\n\n		</div>\n\n		<div class="dashboard-links">\n\n			<ion-grid>\n\n				<ion-row>\n\n					<ion-col col-6 (click)="listSurvey()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="briefcase"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_start_survey_text}}\n\n								</div>\n\n							</div>		\n\n					</ion-col>\n\n					<ion-col col-6 (click)="recordList()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="easel"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_manage_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="list-box"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_sync_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									 <ion-icon name="cloud-download"></ion-icon>\n\n									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_update_app_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n				</ion-row>\n\n			</ion-grid>\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n\n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <ion-title>Footer</ion-title>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/,
+            selector: 'page-dashboard',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/dashboard/dashboard.html"*/'<!-- <ion-header >\n  <ion-navbar color="headerClassic">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n  </ion-navbar>\n</ion-header> -->\n\n\n<ion-content>\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n		<p>{{dashboard.android_application_description}}</p>\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n	</div> -->\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n		<div class="dashbaord-background">\n			<div class="overlay">\n				<div class="dashboard-title">\n					IRIS Application\n				</div>\n				<div class="dashbaord-description">\n					{{dashboard.android_application_description}}\n				</div>\n			</div>\n			<div class="dashboard-stats">\n				<ion-grid>\n					<ion-row>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number" >\n      								12\n      							</div>\n      							<div class="stat-name">\n      								Surveys\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								104\n      							</div>\n      							<div class="stat-name">\n      								Completed\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								6\n      							</div>\n      							<div class="stat-name">\n      								In-complete\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								1\n      							</div>\n      							<div class="stat-name">\n      								Update\n      							</div>\n      						</div>\n    					</ion-col>\n  					</ion-row>\n				</ion-grid>\n			</div>\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n  				<ion-icon name="menu"></ion-icon>\n			</button>\n			\n		</div>\n		<div class="dashboard-links">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_update_app_text}}\n								</div>\n							</div>\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div>\n	</div>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <ion-title>Footer</ion-title>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/dashboard/dashboard.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], DashboardPage);
@@ -1864,7 +1864,7 @@ var LoginPage = (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\login\login.html"*/'\n\n<!-- <ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>login</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header> -->\n\n\n\n\n\n<ion-content padding>\n\n  <!-- <div *ngIf="loginUser">\n\n    <form [formGroup]="loginUser">\n\n    	<ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Username</ion-label>\n\n        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n        <p>Username is required</p>\n\n      </div>\n\n\n\n      <ion-item>\n\n        <ion-label floating>Password</ion-label>\n\n        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.password.invalid && loginUser.controls.password.touched && loginUser.controls.password.dirty" class="alert alert-danger">\n\n        <p>Password is required</p>\n\n      </div>\n\n\n\n      <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>\n\n    	</ion-list>	\n\n    </form>\n\n  </div> -->\n\n	\n\n\n\n\n\n    <div *ngIf="loginUser">\n\n        <form [formGroup]="loginUser">\n\n            <div class="app-logo">\n\n                logo area\n\n            </div>\n\n            <div class="page-title">\n\n                Login\n\n            </div>\n\n            <div>\n\n                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>\n\n                <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n                    <p>Username is required</p>\n\n                </div>\n\n            </div>\n\n            <div>\n\n                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n            </div>\n\n            <ion-item class="checkbox-wrapper">\n\n                <ion-label>Remember me</ion-label>\n\n                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>\n\n            </ion-item>\n\n            <div class="btn-wrapper">\n\n                <button ion-button  full (click)="Login()">Submit</button>\n\n                \n\n            </div>\n\n            <div class="btn-wrapper">\n\n                <button ion-button color="secondary"  full>Cancel</button>\n\n                \n\n            </div>\n\n            <ion-grid class="extra-options">\n\n                <ion-row>\n\n                    <ion-col col-sm-6 >\n\n                        Forgot password\n\n                    </ion-col>\n\n                    <ion-col col-sm-6 >\n\n                        New User?   \n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </form>\n\n      \n\n    </div>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/login/login.html"*/'\n<!-- <ion-header>\n\n  <ion-navbar>\n    <ion-title>login</ion-title>\n  </ion-navbar>\n\n</ion-header> -->\n\n\n<ion-content padding>\n  <!-- <div *ngIf="loginUser">\n    <form [formGroup]="loginUser">\n    	<ion-list>\n      <ion-item>\n        <ion-label floating>Username</ion-label>\n        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>\n      </ion-item>\n      <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n        <p>Username is required</p>\n      </div>\n\n      <ion-item>\n        <ion-label floating>Password</ion-label>\n        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>\n      </ion-item>\n      <div *ngIf="loginUser.controls.password.invalid && loginUser.controls.password.touched && loginUser.controls.password.dirty" class="alert alert-danger">\n        <p>Password is required</p>\n      </div>\n\n      <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>\n    	</ion-list>	\n    </form>\n  </div> -->\n	\n\n\n    <div *ngIf="loginUser">\n        <form [formGroup]="loginUser">\n            <div class="app-logo">\n                logo area\n            </div>\n            <div class="page-title">\n                Login\n            </div>\n            <div>\n                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>\n                <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n                    <p>Username is required</p>\n                </div>\n            </div>\n            <div>\n                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>\n            </div>\n            <ion-item class="checkbox-wrapper">\n                <ion-label>Remember me</ion-label>\n                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>\n            </ion-item>\n            <div class="btn-wrapper">\n                <button ion-button  full (click)="Login()">Submit</button>\n                \n            </div>\n            <div class="btn-wrapper">\n                <button ion-button color="secondary"  full>Cancel</button>\n                \n            </div>\n            <ion-grid class="extra-options">\n                <ion-row>\n                    <ion-col col-sm-6 >\n                        Forgot password\n                    </ion-col>\n                    <ion-col col-sm-6 >\n                        New User?   \n                    </ion-col>\n                </ion-row>\n            </ion-grid>\n        </form>\n      \n    </div>\n</ion-content>\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/login/login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], LoginPage);
@@ -1883,7 +1883,7 @@ var LoginPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(111);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1927,15 +1927,14 @@ var ListsurveyPage = (function () {
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
                         var _loop_1 = function (i) {
-                            var formId = value[i].form_id;
-                            console.log(formId);
-                            _this.surveyScheduling(formId).then(function (surveySch) {
-                                _this.surveytimer(formId).then(function () {
-                                    _this.servicesProvider.SelectWhere("surveys", "id", formId).then(function (survey) {
+                            console.log(value[i].form_id);
+                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
+                                if (surveySch != undefined) {
+                                    _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
                                         //console.log(survey.rows[0]);
                                         content.push(survey.rows[0]);
                                     });
-                                });
+                                }
                             });
                             if (content != undefined) {
                                 SurveySelect.push(content);
@@ -1964,8 +1963,8 @@ var ListsurveyPage = (function () {
         return new Promise(function (resolve, reject) {
             var timerquery = '';
             var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
-            var survey_timer = 'select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = ' + formId;
-            var survey_limit = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + formId;
+            // let survey_timer='select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = '+formId;
+            // let survey_limit='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
             _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
                 if (scheduling.rows.length > 0) {
                     console.log("yes survey schelduling");
@@ -1999,17 +1998,20 @@ var ListsurveyPage = (function () {
                                         console.log(_this.StartDate);
                                         console.log(_this.ExpireDate);
                                         console.log("today's date");
-                                        resolve("df");
+                                        //resolve("df");
                                     }
                                     if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime != "" && _this.ExpireTime != "") {
                                         console.log("got time");
                                         console.log(_this.StartTime);
                                         console.log(_this.ExpireTime);
-                                        resolve("got time");
+                                        //resolve("got time");
                                     }
                                     if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime == "") {
                                         console.log("no time");
                                     }
+                                    _this.surveytimer(formId).then(function (surveyTim) {
+                                        resolve(surveyTim);
+                                    });
                                     //resolve("data");
                                 });
                             });
@@ -2017,8 +2019,11 @@ var ListsurveyPage = (function () {
                     });
                 }
                 else {
-                    console.log("global available");
-                    resolve("global avaliable");
+                    _this.surveytimer(formId).then(function (surveyTim) {
+                        console.log("global available");
+                        resolve(surveyTim);
+                    });
+                    //resolve("global avaliable");
                 }
             });
         });
@@ -2026,10 +2031,23 @@ var ListsurveyPage = (function () {
     ListsurveyPage.prototype.surveytimer = function (formId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            var duration;
+            console.log(formId);
             var query = 'select * from survey_meta where key="survey_timer" AND value=1 AND form_id = ' + formId;
             _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
+                console.log(data.rows);
                 if (data.rows.length > 0) {
-                    resolve("has timer");
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_duration'", "form_id", formId).then(function (dur) {
+                        duration = dur.rows[0].value;
+                        if (duration != "") {
+                            console.log(duration);
+                            resolve(duration);
+                        }
+                        else {
+                            console.log("no timer");
+                            resolve(" no timer");
+                        }
+                    });
                 }
                 else {
                     console.log("no timer");
@@ -2040,7 +2058,7 @@ var ListsurveyPage = (function () {
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content padding>\n\n<h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">\n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
+            selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar>\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content padding>\n<h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">\n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], ListsurveyPage);
@@ -2103,7 +2121,7 @@ var RecordListPage = (function () {
     };
     RecordListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-record-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/'<!--\n\n  Generated template for the RecordListPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<ion-row>\n\n	  <ion-col>\n\n      <strong>Title</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Total questions</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Complete rocords</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Imcomplete records</strong>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n\n 		<ion-col>\n\n 		{{record.name}}\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n  </ion-row>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/,
+            selector: 'page-record-list',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/'<!--\n  Generated template for the RecordListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n  <button ion-button menuToggle>\n  	<ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<ion-row>\n	  <ion-col>\n      <strong>Title</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Total questions</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Complete rocords</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Imcomplete records</strong>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n 		<ion-col>\n 		{{record.name}}\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n  </ion-row>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], RecordListPage);
