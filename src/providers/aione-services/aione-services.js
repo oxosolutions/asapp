@@ -19,16 +19,12 @@ var AioneServicesProvider = /** @class */ (function () {
         this.AppkitProducts = [];
         console.log('Hello AioneServicesProvider Provider');
     }
-    AioneServicesProvider.prototype.check = function (tableName) {
-        // if(this.db!= undefined){
-        this.query = 'Select * from ' + tableName;
-        console.log();
-        this.ExecuteRun(this.query, []).then(function (selectresult) {
-            console.log(selectresult);
-            console.log('check');
-            //resolve(selectresult);
+    AioneServicesProvider.prototype.dbClose = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(_this.db);
+            resolve(_this.db);
         });
-        // }
     };
     AioneServicesProvider.prototype.PlatformCheck = function (databaseName) {
         var _this = this;
@@ -83,7 +79,7 @@ var AioneServicesProvider = /** @class */ (function () {
     AioneServicesProvider.prototype.TableBulk = function (TableName, Col) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(Col);
+            // console.log(Col);
             if (_this.db != undefined) {
                 for (var i = 0; i < TableName.length; i++) {
                     _this.query = "CREATE TABLE IF NOT EXISTS " + TableName[i] + ' (' + Col[i] + ')';
@@ -97,6 +93,7 @@ var AioneServicesProvider = /** @class */ (function () {
     };
     AioneServicesProvider.prototype.Insert = function (tableName, Cols, Values) {
         var _this = this;
+        //console.log(Values);
         return new Promise(function (resolve, reject) {
             var questionMarks = [];
             if (_this.db != undefined) {
@@ -105,7 +102,7 @@ var AioneServicesProvider = /** @class */ (function () {
                     questionMarks_1.push("?");
                 }
                 _this.query = 'insert into ' + tableName + '(' + Cols + ') VALUES (' + questionMarks_1 + ')';
-                //console.log(this.query);
+                console.log(_this.query);
                 _this.ExecuteRun(_this.query, Values).then(function (insertRes) {
                     resolve(insertRes);
                 });
@@ -149,7 +146,8 @@ var AioneServicesProvider = /** @class */ (function () {
                 _this.query = 'Delete  from ' + tableName + ' where ' + Where + ' = ' + Value;
                 console.log(_this.query);
                 _this.ExecuteRun(_this.query, []).then(function (Delres) {
-                    console.log(Delres);
+                    // console.log(Delres); 
+                    resolve(Delres);
                 });
             }
         });
@@ -170,7 +168,19 @@ var AioneServicesProvider = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + Where + ' = ' + Value;
-                console.log(_this.query);
+                //console.log(this.query);
+                _this.ExecuteRun(_this.query, []).then(function (SelResult) {
+                    resolve(SelResult);
+                });
+            }
+        });
+    };
+    AioneServicesProvider.prototype.MultipleSelectWhere = function (tableName, ConditionWhere1, ConditionValue1, ConditionValue2, ConditionWhere2) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.db != undefined) {
+                _this.query = 'Select * from ' + tableName + ' where ' + ConditionWhere1 + ' = ' + ConditionValue1 + ' AND ' + ConditionValue2 + '= ' + ConditionWhere2;
+                //console.log(this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });

@@ -22,13 +22,9 @@ var SurveyProvider = /** @class */ (function () {
         this.submitAttempt = false;
         // this.ionViewWillEnter();
     }
-    SurveyProvider.prototype.details = function () {
+    SurveyProvider.prototype.questionsid = function (result) {
         return new Promise(function (resolve) {
-            // this.AioneService.SelectAll("users").then((userDetail:any)=>{
-            //   console.log('skdjf')
-            //   console.log(userDetail);
-            // })
-            //   console.log('dkejf');
+            console.log(result);
         });
     };
     SurveyProvider = __decorate([

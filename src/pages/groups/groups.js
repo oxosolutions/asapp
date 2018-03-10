@@ -26,7 +26,20 @@ var GroupsPage = /** @class */ (function () {
         this.ids = this.navParams.get('id');
         this.servicesProvider.SelectWhere("groups", "survey_id", this.ids).then(function (result) {
             _this.groupsResult = result.rows;
-            console.log(_this.groupsResult);
+            //console.log(this.groupsResult);
+            _this.servicesProvider.SelectWhere("survey_meta", "form_id", _this.ids).then(function (form) {
+                for (var keys in form.rows) {
+                    if (form.rows[keys].value == "survey") {
+                        localStorage.setItem("questionType", 'save_survey');
+                    }
+                    else if (form.rows[keys].value == "section") {
+                        localStorage.setItem("questionType", 'save_section');
+                    }
+                    else if (form.rows[keys].value == "question") {
+                        localStorage.setItem("questionType", 'questions');
+                    }
+                }
+            });
         });
     };
     GroupsPage = __decorate([

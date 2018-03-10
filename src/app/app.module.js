@@ -24,6 +24,16 @@ import { SurveyProvider } from '../providers/survey/survey';
 import { ActivationPage } from '../pages/activation/activation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LoginPage } from '../pages/login/login';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { HelpPage } from '../pages/help/help';
+import { AboutPage } from '../pages/about/about';
+import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
+import { GroupsPage } from '../pages/groups/groups';
+import { QuestionPage } from '../pages/question/question';
+import { RecordListPage } from '../pages/record-list/record-list';
+import { TextPage } from '../pages/text/text';
+import { SelectPage } from '../pages/select/select';
+//import { MyDatePickerModule } from 'mydatepicker';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -34,13 +44,21 @@ var AppModule = /** @class */ (function () {
                 HomePage,
                 ListPage,
                 ActivationPage,
-                LoginPage
+                LoginPage,
+                DashboardPage,
+                HelpPage,
+                AboutPage,
+                ListsurveyPage,
+                GroupsPage,
+                QuestionPage,
+                RecordListPage,
+                TextPage,
+                SelectPage
             ],
-            //exports: [AioneServicesProvider],
             imports: [
                 BrowserModule,
                 IonicModule.forRoot(MyApp),
-                HttpModule
+                HttpModule,
             ],
             bootstrap: [IonicApp],
             entryComponents: [
@@ -48,12 +66,20 @@ var AppModule = /** @class */ (function () {
                 HomePage,
                 ListPage,
                 ActivationPage,
-                LoginPage
+                LoginPage,
+                DashboardPage,
+                HelpPage,
+                AboutPage,
+                ListsurveyPage,
+                GroupsPage,
+                QuestionPage,
+                RecordListPage,
+                TextPage,
+                SelectPage
             ],
             providers: [
                 StatusBar,
                 SplashScreen,
-                // HttpModule,
                 { provide: ErrorHandler, useClass: IonicErrorHandler },
                 AioneServicesProvider,
                 AioneHelperProvider,
@@ -62,7 +88,7 @@ var AppModule = /** @class */ (function () {
                 Device,
                 Camera,
                 Network,
-                SurveyProvider, Geolocation
+                SurveyProvider, Geolocation,
             ]
         })
     ], AppModule);

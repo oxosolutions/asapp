@@ -15,7 +15,6 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { LoadingController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 var ActivationPage = /** @class */ (function () {
@@ -58,24 +57,24 @@ var ActivationPage = /** @class */ (function () {
     ActivationPage.prototype.CreateSurvey = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var tableName = ["questions", "surveys", "groups", "users", "settings"];
-            var dropTable = ["questions", "surveys", "groups", "users", "settings", "surveyResult_157"];
-            _this.servicepro.PlatformCheck('asapp').then(function (db) {
-                _this.AioneService.DropTable(dropTable).then(function (drop) {
-                    console.log(drop);
-                    _this.Api().then(function (Apidata) {
-                        var i;
-                        _this.table(Apidata, tableName, 0).then(function (result) {
-                            _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
-                                _this.dismissLoader();
-                                _this.insertUser(Apidata).then(function (user) {
-                                    _this.insertsurveys(Apidata).then(function (surveys) {
-                                        _this.insertgroups(Apidata).then(function (groups) {
-                                            _this.insertquestions(Apidata).then(function (questions) {
-                                                _this.insertsettings(Apidata).then(function (setting) {
+            var tableName = ["questions", "surveys", "groups", "users", "settings", "survey_meta"];
+            var dropTable = ["questions", "surveys", "groups", "users", "settings", "survey_meta"];
+            _this.AioneService.DropTable(dropTable).then(function (drop) {
+                _this.Api().then(function (Apidata) {
+                    var i;
+                    _this.table(Apidata, tableName, 0).then(function (result) {
+                        _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
+                            _this.dismissLoader();
+                            _this.insertUser(Apidata).then(function (user) {
+                                console.log(user);
+                                _this.insertsurveys(Apidata).then(function (surveys) {
+                                    _this.insertgroups(Apidata).then(function (groups) {
+                                        _this.insertquestions(Apidata).then(function (questions) {
+                                            _this.insertsettings(Apidata).then(function (setting) {
+                                                _this.insersurveyMeta(Apidata).then(function (survey_meta) {
                                                     _this.resultSurvey(Apidata.questions, Apidata.surveys).then(function (resultSurvey) {
                                                         if (resultSurvey != undefined) {
-                                                            //this.dismissLoader();
+                                                            console.log(resultSurvey);
                                                             _this.loader.dismiss();
                                                             _this.nav.setRoot(LoginPage);
                                                             localStorage.setItem("activation", 'Success');
@@ -100,9 +99,11 @@ var ActivationPage = /** @class */ (function () {
             var keyqColumns = [];
             var loopLength = 0;
             var surveyresult = [];
+            //console.log(surveys);
             surveys.forEach(function (value, key) {
                 keyColumns = [];
                 surveyresult.push('surveyResult_' + value.id);
+                keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                 questions.forEach(function (qValue, qKey) {
                     qValue;
                     var qresult = qValue.question_key + ' TEXT';
@@ -118,17 +119,60 @@ var ActivationPage = /** @class */ (function () {
             });
         });
     };
+    ActivationPage.prototype.insersurveyMeta = function (Apidata) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if ("survey_meta" in Apidata) {
+                _this.insertExecute(Apidata.survey_meta).then(function (insertExe) {
+                    console.log(insertExe);
+                    _this.AioneService.InsertBulk("survey_meta", insertExe.dataColumns, insertExe.insertContent).then(function (surveys) {
+                        resolve(surveys);
+                    });
+                });
+            }
+        });
+    };
     ActivationPage.prototype.insertquestions = function (Apidata) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if ("questions" in Apidata) {
                 console.log(Apidata.questions);
-                _this.insertExecute(Apidata.questions).then(function (insertExe) {
+                _this.insertExecuteObject(Apidata.questions).then(function (insertExe) {
                     _this.AioneService.InsertBulk("questions", insertExe.dataColumns, insertExe.insertContent).then(function (questions) {
                         resolve(questions);
                     });
                 });
             }
+        });
+    };
+    ActivationPage.prototype.insertExecuteObject = function (result) {
+        return new Promise(function (resolve, reject) {
+            var insertContent = [];
+            var dataColumns;
+            console.log(result);
+            result.forEach(function (key, value) {
+                var dataset = [];
+                dataColumns = [];
+                Object.keys(key).forEach(function (keyvalue, keydata) {
+                    var json;
+                    var anotherjson;
+                    //console.log(key[keyvalue]);
+                    if (typeof key[keyvalue] == "object") {
+                        anotherjson = JSON.stringify(key[keyvalue]);
+                        json = anotherjson.replace(/"/g, "'");
+                    }
+                    else {
+                        json = key[keyvalue];
+                    }
+                    dataset.push(json);
+                    dataColumns.push(keyvalue);
+                });
+                insertContent.push(dataset);
+            });
+            var collection = {};
+            collection['dataColumns'] = dataColumns;
+            collection['insertContent'] = insertContent;
+            resolve(collection);
         });
     };
     ActivationPage.prototype.insertsettings = function (Apidata) {
@@ -234,6 +278,7 @@ var ActivationPage = /** @class */ (function () {
                 if ((Apidata[table] instanceof Array)) {
                     Apidata[table].forEach(function (key, value) {
                         var dataset = [];
+                        dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                         Object.keys(key).forEach(function (keyvalue, keydata) {
                             dataset.push(keyvalue + ' TEXT');
                         });
@@ -242,6 +287,7 @@ var ActivationPage = /** @class */ (function () {
                 }
                 else {
                     var dataset = [];
+                    dataset.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
                     for (var apikey in Apidata[table]) {
                         dataset.push(apikey + ' TEXT');
                     }
@@ -270,7 +316,6 @@ var ActivationPage = /** @class */ (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if (!_this.loginForm.valid) {
-                console.log('not valid');
                 _this.loginForm;
             }
             else {
@@ -286,6 +331,7 @@ var ActivationPage = /** @class */ (function () {
                         _this.AioneHelp.showAlert("Error", _this.apiresult.message);
                     }
                     else {
+                        console.log(_this.apiresult);
                         resolve(_this.apiresult);
                     }
                 }, function (err) {
