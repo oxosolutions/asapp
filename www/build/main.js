@@ -419,9 +419,10 @@ var ActivationPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/'<ion-content padding>\n	<!-- <h2>Enter Activation code</h2>\n	<div *ngIf="loginForm">\n		<form [formGroup]="loginForm">\n			<ion-list>\n			  <ion-item>\n			    <ion-label floating>Enter Acitvation code1</ion-label>\n			    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n			  </ion-item>\n			  \n			  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> \n			   \n			  \n			</ion-list>\n		</form>\n	</div>\n -->\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n		<div class="activation-page-content">\n			<div class="app-title">IRIS</div>\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
     ], ActivationPage);
     return ActivationPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=activation.js.map
@@ -1041,7 +1042,7 @@ var AioneServicesProvider = (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + ConditionWhere1 + ' = ' + ConditionValue1 + ' AND ' + ConditionValue2 + '= ' + ConditionWhere2;
-                //console.log(this.query);
+                console.log(_this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });
@@ -1909,15 +1910,12 @@ var ListsurveyPage = (function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */], { 'id': id });
     };
     ListsurveyPage.prototype.ionViewDidLoad = function () {
-        this.surveyTitle = localStorage.getItem("ApplicationName");
-        this.EnabledSurvey();
-    };
-    ListsurveyPage.prototype.EnabledSurvey = function () {
         var _this = this;
         var questionId;
         var questionData;
         var metaSurvey = [];
         var SurveySelect = [];
+<<<<<<< HEAD
         return new Promise(function (resolve, reject) {
             var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
             _this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
@@ -1944,11 +1942,34 @@ var ListsurveyPage = (function () {
                                     console.log(_this.listSurvey);
                                     //console.log(this.listSurvey[0]);
                                 }
+=======
+        this.surveyTitle = localStorage.getItem("ApplicationName");
+        var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+        var timerquery = '';
+        this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
+            console.log(survey_meta.rows);
+            metaSurvey.push(survey_meta.rows);
+            if (survey_meta.rows.length > 0) {
+                var forloop_1 = 0;
+                metaSurvey.forEach(function (value, key) {
+                    //console.log(value);
+                    var content = [];
+                    for (var i = 0; i < value.length; i++) {
+                        _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                            //console.log(survey.rows[0]);
+                            content.push(survey.rows[0]);
+                        });
+                        if (content != undefined) {
+                            SurveySelect.push(content);
+                            forloop_1++;
+                            if (forloop_1 == survey_meta.rows.length) {
+                                _this.listSurvey = SurveySelect;
+                                console.log(_this.listSurvey);
+                                console.log(_this.listSurvey[0]);
+>>>>>>> 4eee64843bc34908e863cc11d93f647f0bf429b0
                             }
-                        };
-                        for (var i = 0; i < value.length; i++) {
-                            _loop_1(i);
                         }
+<<<<<<< HEAD
                     });
                 }
                 else {
@@ -2054,32 +2075,30 @@ var ListsurveyPage = (function () {
                     resolve("no timer");
                 }
             });
+=======
+                    }
+                });
+            }
+            else {
+                _this.nullSurvey = "there is no survey";
+                console.log(_this.nullSurvey);
+            }
+>>>>>>> 4eee64843bc34908e863cc11d93f647f0bf429b0
         });
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar>\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content padding>\n<h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">\n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
+=======
+            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content>\n\n<!-- <h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">      \n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list> -->\n\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n\n    <ion-item (click)="groups(survey.id)">\n\n        <div class="icon-wrapper">\n\n            <ion-icon name="map"></ion-icon>\n\n            \n\n        </div>  \n\n        <div class="list-content-wrapper">\n\n            <div class="item-title">{{survey.name}}</div>\n\n            <div class="item-description">{{survey.description}}</div>\n\n            <div class="item-time">\n\n                30 Mar 2018\n\n            </div>\n\n        </div> \n\n\n\n\n\n    </ion-item>\n\n   \n\n</ion-item-group>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
+>>>>>>> 4eee64843bc34908e863cc11d93f647f0bf429b0
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ListsurveyPage);
     return ListsurveyPage;
-    var _a, _b, _c;
 }());
 
-// questionCount(){
-// 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
-// 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
-// 			// 	this.questionLength.push(SelResult.rows);
-// 			// 	this.listSurvey.forEach((key,value,)=>{
-// 			// 		this.questionLength.forEach((keys,values,)=>{
-// 			// 			Object.keys(key).forEach(function(svalue,skey){
-// 		 //    			questionData=key[svalue].id;																																																								 
-// 		 //    			//console.log(questionData);		    				
-// 		 //    			});
-// 	  // 			});
-// 			// 	});
-// 			// });
-// }
 //# sourceMappingURL=listsurvey.js.map
 
 /***/ }),

@@ -30711,6 +30711,50 @@ page-groups .groups ion-item {
   margin-bottom: 14px;
 }
 
+page-listsurvey .scroll-content {
+  padding: 0;
+}
+
+page-listsurvey .icon-wrapper {
+  display: inline-block;
+  background-color: #0077d6;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+}
+
+page-listsurvey .icon-wrapper ion-icon {
+  line-height: 40px;
+  width: 40px;
+}
+
+page-listsurvey .list-content-wrapper {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 10px;
+  position: relative;
+}
+
+page-listsurvey .list-content-wrapper .item-title {
+  font-size: 15px;
+  color: #676767;
+  padding-bottom: 3px;
+}
+
+page-listsurvey .list-content-wrapper .item-description {
+  font-size: 11px;
+  color: #757575;
+}
+
+page-listsurvey .list-content-wrapper .item-time {
+  position: absolute;
+  top: 0;
+  right: 50px;
+  font-size: 11px;
+  color: #757575;
+}
+
 page-login .alert {
   color: red;
 }
