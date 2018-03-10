@@ -1916,6 +1916,7 @@ var ListsurveyPage = (function () {
         var SurveySelect = [];
         this.surveyTitle = localStorage.getItem("ApplicationName");
         var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+        var timerquery = '';
         this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
             console.log(survey_meta.rows);
             metaSurvey.push(survey_meta.rows);
@@ -1924,23 +1925,7 @@ var ListsurveyPage = (function () {
                 metaSurvey.forEach(function (value, key) {
                     //console.log(value);
                     var content = [];
-                    var _loop_1 = function (i) {
-                        var timerquery = '';
-                        var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + value[i].form_id;
-                        var survey_timer = 'select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = ' + value[i].form_id;
-                        var survey_limit = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + value[i].form_id;
-                        _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
-                            console.log(value[i].form_id);
-                            console.log(value[i].key);
-                            if (scheduling.rows.length > 0) {
-                                console.log('yes scheduling exist');
-                                console.log(scheduling.rows[0]);
-                                //c
-                            }
-                            else {
-                                console.log("global available");
-                            }
-                        });
+                    for (var i = 0; i < value.length; i++) {
                         _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
                             //console.log(survey.rows[0]);
                             content.push(survey.rows[0]);
@@ -1951,12 +1936,9 @@ var ListsurveyPage = (function () {
                             if (forloop_1 == survey_meta.rows.length) {
                                 _this.listSurvey = SurveySelect;
                                 console.log(_this.listSurvey);
-                                //console.log(this.listSurvey[0]);
+                                console.log(_this.listSurvey[0]);
                             }
                         }
-                    };
-                    for (var i = 0; i < value.length; i++) {
-                        _loop_1(i);
                     }
                 });
             }
@@ -1968,12 +1950,11 @@ var ListsurveyPage = (function () {
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content padding>\n\n<h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">\n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
+            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content>\n\n<!-- <h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">      \n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list> -->\n\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n\n    <ion-item (click)="groups(survey.id)">\n\n        <div class="icon-wrapper">\n\n            <ion-icon name="map"></ion-icon>\n\n            \n\n        </div>  \n\n        <div class="list-content-wrapper">\n\n            <div class="item-title">{{survey.name}}</div>\n\n            <div class="item-description">{{survey.description}}</div>\n\n            <div class="item-time">\n\n                30 Mar 2018\n\n            </div>\n\n        </div> \n\n\n\n\n\n    </ion-item>\n\n   \n\n</ion-item-group>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ListsurveyPage);
     return ListsurveyPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=listsurvey.js.map
