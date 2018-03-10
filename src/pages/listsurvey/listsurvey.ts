@@ -27,7 +27,8 @@ export class ListsurveyPage {
 		let SurveySelect=[];
 		this.surveyTitle=localStorage.getItem("ApplicationName");
 		let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
-		let timerquery=''
+		
+
 		this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
 			console.log(survey_meta.rows);
 			metaSurvey.push(survey_meta.rows);
@@ -35,8 +36,27 @@ export class ListsurveyPage {
 				let forloop=0;
 				metaSurvey.forEach((value,key)=>{
 					//console.log(value);
+					
 					let content=[];
 					for(let i=0; i < value.length; i++){
+						let timerquery='';
+						let survey_scheduling='select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = '+value[i].form_id;
+						let survey_timer='select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = '+value[i].form_id;
+						let survey_limit='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+value[i].form_id;
+
+						this.servicesProvider.ExecuteRun(survey_scheduling,[]).then((scheduling:any)=>{
+						console.log(value[i].form_id);
+						console.log(value[i].key)
+							if(scheduling.rows.length > 0){
+								console.log('yes scheduling exist');
+								console.log(scheduling.rows[0]);
+								//c
+							}else{
+								console.log("global available");
+							}
+						});
+
+
 						this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 							//console.log(survey.rows[0]);
 							content.push(survey.rows[0]);						
@@ -48,7 +68,7 @@ export class ListsurveyPage {
 								this.listSurvey=SurveySelect;
 
 								console.log(this.listSurvey);
-								console.log(this.listSurvey[0]);
+								//console.log(this.listSurvey[0]);
 							}
 						}
 					}
