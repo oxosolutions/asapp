@@ -43,17 +43,13 @@ export class ListsurveyPage {
 					let content=[];
 					for(let i=0; i < value.length; i++){
 						console.log(value[i].form_id);
-						this.surveyScheduling(value[i].form_id).then((surveySch)=>{
-								if(surveySch != undefined){
-									this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
+						// this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+								this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 									//console.log(survey.rows[0]);
-									content.push(survey.rows[0]);						
-								}); 
-								}
-								
-							
-						});
-						
+									content.push(survey.rows[0]);	
+									console.log(content);								
+						// 		});						
+						 });
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
@@ -131,6 +127,9 @@ export class ListsurveyPage {
 												this.surveytimer(formId).then((surveyTim)=>{
 													resolve(surveyTim);
 												});
+												this.responseLimit(formId).then((limit)=>{
+
+												})
 
 												//resolve("data");
 											});
@@ -151,23 +150,54 @@ export class ListsurveyPage {
 				});
 		});
 	}
+	responseLimit(formId){
+		return new Promise ((resolve,reject)=>{
+			console.log(formId);
+			let value;
+			let json;
+			let query='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
+			this.servicesProvider.ExecuteRun(query,[]).then((data:any)=>{
+				if(data.rows.length > 0){
+						this.servicesProvider.MultipleSelectWhere("survey_meta","key","'response_limit'","form_id",formId).then((num:any)=>{
+							value=num.rows[0].value;
+							this.servicesProvider.MultipleSelectWhere("survey_meta","key","'response_limit_type'","form_id",formId).then((type:any)=>{
+								if(type.rows[0].value=="per_user"){
+									json=type.rows[0].value;
+								}else{
+									json=type.rows[0].value;
+								}
+								console.log(json);
+								console.log(value);
+							});
+						});
+				}else{
+					console.log("no limit selected");
+					resolve("no timer");
+				}
+			});
+		})
+	}
 	surveytimer(formId){
 		return new Promise ((resolve,reject)=>{
 			let duration
 			console.log(formId);
+			let json;
 			let query='select * from survey_meta where key="survey_timer" AND value=1 AND form_id = '+formId;
 			this.servicesProvider.ExecuteRun(query,[]).then((data:any)=>{
-				console.log(data.rows);
 				if(data.rows.length > 0){
 					this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_duration'","form_id",formId).then((dur:any)=>{
-						duration=dur.rows[0].value;
-						if(duration != ""){
-						console.log(duration);
-						resolve(duration);
+					this.servicesProvider.MultipleSelectWhere("survey_meta","key","'timer_type'","form_id",formId).then((type:any)=>{
+						if(type.rows[0].value == "survey_duration"){
+							json=type.rows[0].value;
+							duration=dur.rows[0].value;
 						}else{
-							console.log("no timer");
-							resolve(" no timer");
+							json=type.rows[0].value;
 						}
+						console.log(json);
+						console.log(duration);
+					
+					});
+						
 					});
 					
 				}else{

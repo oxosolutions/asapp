@@ -803,15 +803,15 @@ var map = {
 		8
 	],
 	"../pages/groups/groups.module": [
-		300,
+		298,
 		7
 	],
 	"../pages/help/help.module": [
-		298,
+		299,
 		6
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		299,
+		300,
 		5
 	],
 	"../pages/login/login.module": [
@@ -1311,9 +1311,9 @@ var AppModule = (function () {
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
@@ -1926,15 +1926,14 @@ var ListsurveyPage = (function () {
                     var forloop_1 = 0;
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
-                        var _loop_1 = function (i) {
+                        for (var i = 0; i < value.length; i++) {
                             console.log(value[i].form_id);
-                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
-                                if (surveySch != undefined) {
-                                    _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                                        //console.log(survey.rows[0]);
-                                        content.push(survey.rows[0]);
-                                    });
-                                }
+                            // this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+                            _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                                //console.log(survey.rows[0]);
+                                content.push(survey.rows[0]);
+                                console.log(content);
+                                // 		});						
                             });
                             if (content != undefined) {
                                 SurveySelect.push(content);
@@ -1945,9 +1944,6 @@ var ListsurveyPage = (function () {
                                     //console.log(this.listSurvey[0]);
                                 }
                             }
-                        };
-                        for (var i = 0; i < value.length; i++) {
-                            _loop_1(i);
                         }
                     });
                 }
@@ -2012,6 +2008,8 @@ var ListsurveyPage = (function () {
                                     _this.surveytimer(formId).then(function (surveyTim) {
                                         resolve(surveyTim);
                                     });
+                                    _this.responseLimit(formId).then(function (limit) {
+                                    });
                                     //resolve("data");
                                 });
                             });
@@ -2028,25 +2026,57 @@ var ListsurveyPage = (function () {
             });
         });
     };
+    ListsurveyPage.prototype.responseLimit = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(formId);
+            var value;
+            var json;
+            var query = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
+                if (data.rows.length > 0) {
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'response_limit'", "form_id", formId).then(function (num) {
+                        value = num.rows[0].value;
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'response_limit_type'", "form_id", formId).then(function (type) {
+                            if (type.rows[0].value == "per_user") {
+                                json = type.rows[0].value;
+                            }
+                            else {
+                                json = type.rows[0].value;
+                            }
+                            console.log(json);
+                            console.log(value);
+                        });
+                    });
+                }
+                else {
+                    console.log("no limit selected");
+                    resolve("no timer");
+                }
+            });
+        });
+    };
     ListsurveyPage.prototype.surveytimer = function (formId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             var duration;
             console.log(formId);
+            var json;
             var query = 'select * from survey_meta where key="survey_timer" AND value=1 AND form_id = ' + formId;
             _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
-                console.log(data.rows);
                 if (data.rows.length > 0) {
                     _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_duration'", "form_id", formId).then(function (dur) {
-                        duration = dur.rows[0].value;
-                        if (duration != "") {
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'timer_type'", "form_id", formId).then(function (type) {
+                            if (type.rows[0].value == "survey_duration") {
+                                json = type.rows[0].value;
+                                duration = dur.rows[0].value;
+                            }
+                            else {
+                                json = type.rows[0].value;
+                            }
+                            console.log(json);
                             console.log(duration);
-                            resolve(duration);
-                        }
-                        else {
-                            console.log("no timer");
-                            resolve(" no timer");
-                        }
+                        });
                     });
                 }
                 else {
@@ -2060,9 +2090,10 @@ var ListsurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <span *ngIf="surveyTitle">{{surveyTitle}}</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n<!-- <h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list> -->\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n    <ion-item (click)="groups(survey.id)">\n        <div class="icon-wrapper">\n            <ion-icon name="map"></ion-icon>\n            \n        </div>  \n        <div class="list-content-wrapper">\n            <div class="item-title">{{survey.name}}</div>\n            <div class="item-description">{{survey.description}}</div>\n            <div class="item-time">\n                30 Mar 2018\n            </div>\n        </div> \n\n\n    </ion-item>\n   \n</ion-item-group>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], ListsurveyPage);
     return ListsurveyPage;
+    var _a, _b, _c;
 }());
 
 // questionCount(){
