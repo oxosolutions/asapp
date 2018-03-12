@@ -1,4 +1,4 @@
-<!--
+  <!--
   Generated template for the RecordListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -6,18 +6,37 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+ <!--  <ion-navbar color="headerClassic">
   <button ion-button menuToggle>
   	<ion-icon name="menu"></ion-icon>
   </button>
     <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
 
+
+    <ion-toolbar color="headerClassic">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
-	<ion-row>
+<ion-content>
+	<!-- <ion-row>
 	  <ion-col>
       <strong>Title</strong>
     </ion-col>
@@ -46,4 +65,33 @@
  		0
  		</ion-col>
   </ion-row>
+ -->
+    <div>
+        <ion-list class="custom-border" >
+            <ion-item-sliding *ngFor="let record of listSurvey[0]">
+                <ion-item>
+                
+                    <h2>{{record.name}}</h2>
+                    <p>
+                        <ion-icon name="done-all"></ion-icon>
+                        17 Completed | 
+                         <ion-icon name="refresh"></ion-icon>
+                         12 Incompleted
+                    </p>
+                    <button ion-button icon-only color="transparent" class="btn-rotate">
+                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>
+                    </button>
+                </ion-item>
+            
+
+                <ion-item-options side="right">
+                    <button ion-button color="primary">View Completed</button>
+                    <button ion-button color="Secondary">View Incomplete</button>
+                </ion-item-options>
+  
+            </ion-item-sliding>
+             
+        </ion-list>
+    </div>
+
 </ion-content>

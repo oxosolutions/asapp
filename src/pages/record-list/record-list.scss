@@ -1,4 +1,66 @@
 page-record-list {
+    $ItemColors: #ff5a54, #54a7ff, #c554ff, #49e969, #ffbf54;
+  .icon-wrapper{
+      display: inline-block;
+      background-color: rgb(0, 119, 214);
+      color: white;
+      text-align: center;
+      border-radius: 50%;
+
+      ion-icon{
+          line-height: 40px;
+      width: 40px;  
+      }
+    }
+    .custom-border{
+        .item-md {
+            position: relative;
+
+            h2{
+                font-size: 1.4rem;
+                line-height: 1.5
+            }
+            p{
+                font-size:1.2rem;
+                color: #999
+            }
+            button{
+                
+                position: absolute;
+                right: 10px;
+                top: 20px;
+                color: grey;
+                width: 20px;
+                box-shadow: none
+            }
+
+        }
+        .button-md-primary{
+            background-color: green;
+        }
+        .button-md-Secondary{
+            background-color: grey; 
+        }
+            
+        @for $i from 1 through 5 {
+            .item-wrapper:nth-child(5n+#{$i}){
+                border-left: 3px solid nth($ItemColors,$i);
+            }
+        }
+        .item-wrapper.active-slide{
+            .btn-rotate{
+                transform: rotate(180deg);
+            }
+        } 
+        
+    } 
+
+
+
+
+
+
+
 	.col{
 		border: 1px solid #e8e8e8;
     padding: 20px 6px;
