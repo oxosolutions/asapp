@@ -27,8 +27,14 @@ export class ListsurveyPage {
   }
 	ionViewDidLoad(){  
 		this.surveyTitle=localStorage.getItem("ApplicationName");
-		this.date=Date.now();
-					console.log(this.date);
+		let currentdate = new Date(); 
+let datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+					console.log(datetime);
 		this.EnabledSurvey();
 	}
 	EnabledSurvey(){
