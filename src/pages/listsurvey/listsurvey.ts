@@ -51,13 +51,13 @@ export class ListsurveyPage {
 					let content=[];
 					for(let i=0; i < value.length; i++){
 						console.log(value[i].form_id);
-						 this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+						 //this.surveyScheduling(value[i].form_id).then((surveySch)=>{
 								this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 									//console.log(survey.rows[0]);
 									content.push(survey.rows[0]);	
 									console.log(content);								
 							});						
-						 });
+						 //});
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
@@ -89,21 +89,24 @@ export class ListsurveyPage {
 					if(scheduling.rows.length > 0){
 						console.log("yes survey schelduling");
 								this.servicesProvider.MultipleSelectWhere("survey_meta","key","'start_date'","form_id",formId).then((startDate:any)=>{
-									// startdate=startDate.rows[0].value;
-
 									this.servicesProvider.MultipleSelectWhere("survey_meta","key","'expire_date'","form_id",formId).then((expiredate:any)=>{
-										// expiredate=expire.rows[0].value;
-
-										this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_start_time'","form_id",formId).then((startTime:any)=>{
-											// starttime=startTime.rows[0].value;
-
+										this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_start_time'","form_id",formId).then((startTime:any)=>{	
 											this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_expire_time'","form_id",formId).then((expireTime:any)=>{
-												// expiretime=expireTime.rows[0].value;
-
-						
+												
 												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiredate=expireTime.rows[0].value;
-													
+													expiredate=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													expiredate=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													expiredate=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													expiredate=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													expiredate=expireTime.rows[0].value;			
 												}
 												
 												// this.surveytimer(formId).then((surveyTim)=>{
@@ -122,7 +125,7 @@ export class ListsurveyPage {
 					}else{
 						console.log("global available");
 					}
-				
+
 					console.log(expiredate);
 
 					
