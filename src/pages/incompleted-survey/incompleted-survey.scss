@@ -1,0 +1,70 @@
+page-incompleted-survey {
+	.custom-card{
+		border:1px solid #e8e8e8;
+
+		.percentage-wrapper{
+			width: 70px;
+			float: left;
+			text-align: center;
+		}
+		.content-wrapper{
+			width: calc(100% - 70px);
+			float: left;
+			padding: 10px;
+
+			.item-title{
+				font-size: 15px;
+				color: #757575;
+				line-height: 1.5
+			}
+			.pause-location{
+				font-size: 14px;
+				color: #999;
+				line-height: 1.5
+			}
+			.start-end-date{
+				font-size: 11px;
+				line-height: 1.5;
+				color: grey;
+
+				span{
+					margin-right: 30px;
+				}
+
+				ion-icon{
+					color: grey
+				}
+			}
+		}
+		.custom-card-footer{
+			background-color: #efefef;
+			border-top: 1px solid #e8e8e8;
+			font-size: 11px;
+
+			.question-incomplete{
+				display: inline-block;
+				padding: 10px;
+
+				ion-icon{
+					color: #dd4c3d;
+				}
+			}
+			.resume-survey{
+				display: inline-block;
+				padding: 10px;
+				border-left: 1px solid #e8e8e8;
+				border-right: 1px solid #e8e8e8;
+				float: right;
+
+				ion-icon{
+					color: green;
+				}
+			}
+
+
+		}
+	}
+	.clear{
+		clear: both;
+	}
+}

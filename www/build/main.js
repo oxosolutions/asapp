@@ -726,47 +726,55 @@ webpackEmptyAsyncContext.id = 125;
 var map = {
 	"../pages/about/about.module": [
 		295,
-		10
+		26
 	],
 	"../pages/activation/activation.module": [
 		296,
-		9
+		25
+	],
+	"../pages/completed-survey/completed-survey.module": [
+		306,
+		1
 	],
 	"../pages/dashboard/dashboard.module": [
 		297,
-		8
+		10
 	],
 	"../pages/groups/groups.module": [
 		298,
-		7
+		9
 	],
 	"../pages/help/help.module": [
 		299,
-		6
+		8
+	],
+	"../pages/incompleted-survey/incompleted-survey.module": [
+		308,
+		0
 	],
 	"../pages/listsurvey/listsurvey.module": [
 		300,
-		5
+		7
 	],
 	"../pages/login/login.module": [
 		301,
-		4
+		6
 	],
 	"../pages/question/question.module": [
 		302,
-		3
+		5
 	],
 	"../pages/record-list/record-list.module": [
 		303,
-		2
+		4
 	],
 	"../pages/select/select.module": [
 		304,
-		1
+		3
 	],
 	"../pages/text/text.module": [
 		305,
-		0
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -1181,12 +1189,16 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_text_text__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_select_select__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_completed_survey_completed_survey__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(309);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1236,7 +1248,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_25__pages_question_question__["a" /* QuestionPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__["a" /* RecordListPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_text_text__["a" /* TextPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_select_select__["a" /* SelectPage */]
+                __WEBPACK_IMPORTED_MODULE_28__pages_select_select__["a" /* SelectPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_completed_survey_completed_survey__["a" /* CompletedSurveyPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_incompleted_survey_incompleted_survey__["a" /* IncompletedSurveyPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1252,7 +1266,9 @@ var AppModule = (function () {
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/incompleted-survey/incompleted-survey.module#IncompletedSurveyPageModule', name: 'IncompletedSurveyPage', segment: 'incompleted-survey', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
@@ -1272,7 +1288,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_25__pages_question_question__["a" /* QuestionPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__["a" /* RecordListPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_text_text__["a" /* TextPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_select_select__["a" /* SelectPage */]
+                __WEBPACK_IMPORTED_MODULE_28__pages_select_select__["a" /* SelectPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_completed_survey_completed_survey__["a" /* CompletedSurveyPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_incompleted_survey_incompleted_survey__["a" /* IncompletedSurveyPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
@@ -1513,6 +1531,96 @@ var ListPage = (function () {
 }());
 
 //# sourceMappingURL=list.js.map
+
+/***/ }),
+
+/***/ 307:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompletedSurveyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the CompletedSurveyPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var CompletedSurveyPage = (function () {
+    function CompletedSurveyPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    CompletedSurveyPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad CompletedSurveyPage');
+    };
+    CompletedSurveyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-completed-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/'<!--\n  Generated template for the CompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>completed-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], CompletedSurveyPage);
+    return CompletedSurveyPage;
+}());
+
+//# sourceMappingURL=completed-survey.js.map
+
+/***/ }),
+
+/***/ 309:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IncompletedSurveyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the IncompletedSurveyPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var IncompletedSurveyPage = (function () {
+    function IncompletedSurveyPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    IncompletedSurveyPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad IncompletedSurveyPage');
+    };
+    IncompletedSurveyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-incompleted-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/'<!--\n  Generated template for the IncompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<p>12</p>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<div class="pause-location">7th question, Section 3</div>\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						12-12-2017\n					</span>\n					<span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question remaining\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Resume				\n			</div>\n		</div>\n		\n    	\n	</div>\n</ion-content>\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], IncompletedSurveyPage);
+    return IncompletedSurveyPage;
+}());
+
+//# sourceMappingURL=incompleted-survey.js.map
 
 /***/ }),
 
@@ -2108,6 +2216,8 @@ var GroupsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_completed_survey_completed_survey__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(309);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2117,6 +2227,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -2142,13 +2254,20 @@ var RecordListPage = (function () {
         var popover = this.popoverCtrl.create(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */]);
         popover.present();
     };
+    RecordListPage.prototype.completedSurveyPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_completed_survey_completed_survey__["a" /* CompletedSurveyPage */]);
+    };
+    RecordListPage.prototype.incompletedSurveyPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__pages_incompleted_survey_incompleted_survey__["a" /* IncompletedSurveyPage */]);
+    };
     RecordListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-record-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/'  <!--\n\n  Generated template for the RecordListPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n <!--  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n  </ion-navbar> -->\n\n\n\n\n\n    <ion-toolbar color="headerClassic">\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="search"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="more"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n	<!-- <ion-row>\n\n	  <ion-col>\n\n      <strong>Title</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Total questions</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Complete rocords</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Imcomplete records</strong>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n\n 		<ion-col>\n\n 		{{record.name}}\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n  </ion-row>\n\n -->\n\n    <div>\n\n        <ion-list class="custom-border" >\n\n            <ion-item-sliding *ngFor="let record of listSurvey[0]">\n\n                <ion-item>\n\n                \n\n                    <h2>{{record.name}}</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        17 Completed | \n\n                         <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n            \n\n\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">View Completed</button>\n\n                    <button ion-button color="Secondary">View Incomplete</button>\n\n                </ion-item-options>\n\n  \n\n            </ion-item-sliding>\n\n             \n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/,
+            selector: 'page-record-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/'  <!--\n\n  Generated template for the RecordListPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n <!--  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n  </ion-navbar> -->\n\n\n\n\n\n    <ion-toolbar color="headerClassic">\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="search"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="more"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n	<!-- <ion-row>\n\n	  <ion-col>\n\n      <strong>Title</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Total questions</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Complete rocords</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Imcomplete records</strong>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n\n 		<ion-col>\n\n 		{{record.name}}\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n  </ion-row>\n\n -->\n\n    <div>\n\n        <ion-list class="custom-border" >\n\n            <ion-item-sliding *ngFor="let record of listSurvey[0]">\n\n                <ion-item>\n\n                \n\n                    <h2>{{record.name}}</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        17 Completed | \n\n                         <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n            \n\n\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>\n\n                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>\n\n                </ion-item-options>\n\n  \n\n            </ion-item-sliding>\n\n             \n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]) === "function" && _d || Object])
     ], RecordListPage);
     return RecordListPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=record-list.js.map

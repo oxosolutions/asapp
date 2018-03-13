@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {GroupsPage} from '../../pages/groups/groups';
 import { PopoverController } from 'ionic-angular';
+import { CompletedSurveyPage } from '../../pages/completed-survey/completed-survey';
+import { IncompletedSurveyPage } from '../../pages/incompleted-survey/incompleted-survey';
 
 @IonicPage()
 @Component({
@@ -25,6 +27,12 @@ export class RecordListPage {
   presentPopover() {
     let popover = this.popoverCtrl.create(GroupsPage);
     popover.present();
+  }
+  completedSurveyPage(){
+     this.navCtrl.push(CompletedSurveyPage);
+  }
+  incompletedSurveyPage(){
+    this.navCtrl.push(IncompletedSurveyPage);
   }
 
 }
