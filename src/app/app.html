@@ -1,19 +1,36 @@
 <ion-menu [content]="content">
-  <ion-header>
+  <ion-header class="custom-menu-header">
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+        <ion-item color="transparent">
+            <ion-avatar item-start>
+                <div class="icon-wrapper">
+                    <ion-icon name="person"></ion-icon>
+                </div>    
+
+            </ion-avatar>
+            <h2>Lorem Ipsum</h2>
+            <p>loremipsum@gmail.com</p>
+        </ion-item>
+        
      <!--   <button ion-button menuToggle>
       <ion-icon name="close"></ion-icon>
     </button> -->
+
     </ion-toolbar>
+    <div class="custom-menu-title">
+        MAIN MENU
+    </div>
   </ion-header>
-  <ion-content>
+  <ion-content class="custom-menu-content">
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+         <ion-icon name="ios-home-outline"></ion-icon>
+         <span class="menu-item-text">{{p.title}}</span>
+        
       </button>
       <button menuClose ion-item (click)="logout()">
-        Logout
+        <ion-icon name="ios-home-outline"></ion-icon>
+        <span class="menu-item-text">Logout</span>
       </button>
     </ion-list>
   </ion-content>

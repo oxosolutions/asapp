@@ -17,3 +17,56 @@
 
 
 
+.custom-menu-content{
+	ion-icon{
+		margin-right: 10px
+	} 
+	.menu-item-text{
+		vertical-align: top;
+		color: #757575;
+		    font-weight: 900;
+    color: #757575;
+	}
+	.list-md .item-block .item-inner{
+		border:none
+	}
+	.item-md{
+		padding: 6px 20px;
+	}
+}
+.custom-menu-header{
+
+	.toolbar-background{
+		background: linear-gradient(180deg, #55a4e7 0%,#86bde6 100%);;
+	}
+	.icon-wrapper{
+	  	display: inline-block;
+	  	background-color: wheat;
+    	color: grey;
+	  	text-align: center;
+	  	border-radius: 50%;
+
+	  	ion-icon{
+	      	line-height: 40px;
+	  		width: 40px;  
+	  	}
+	}
+	.item-md{
+		h2{
+			line-height: 1.6;
+    		font-size: 20px;
+    		font-weight: 300;
+		}
+	} 
+	.item-md.item-block .item-inner{
+		border:none;
+	}
+	.custom-menu-title{
+		background-color: #a8cfec;
+		padding: 16px;
+		text-align: center;
+		font-weight: 900;
+		color: white;
+		font-size: 13px;
+	}
+}

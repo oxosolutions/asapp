@@ -126,6 +126,54 @@
 				</ion-row>
 			</ion-grid>
 		</div>
+		<div class="dashboard-links-second-design">
+			<ion-grid>
+				<ion-row>
+					<ion-col col-5 (click)="listSurvey()">
+							<div class="link-wrapper">
+								<div class="link-icons">
+									<ion-icon name="briefcase"></ion-icon>									
+								</div>
+								<div class="link-name">
+									{{dashboard.link_to_start_survey_text}}
+								</div>
+							</div>		
+					</ion-col>
+					<ion-col col-7 (click)="recordList()">
+							<div class="link-wrapper">
+								<div class="link-icons">
+									<ion-icon name="easel"></ion-icon>									
+								</div>
+								<div class="link-name">
+									{{dashboard.link_to_manage_survey_text}}
+								</div>
+							</div>
+					</ion-col>
+					<ion-col col-7 >
+							<div class="link-wrapper">
+								<div class="link-icons">
+									<ion-icon name="list-box"></ion-icon>									
+								</div>
+								<div class="link-name">
+									{{dashboard.link_to_sync_survey_text}}
+								</div>
+							</div>
+					</ion-col>
+					<ion-col col-5 >
+							<div class="link-wrapper">
+								<div class="link-icons">
+									 <ion-icon name="cloud-download"></ion-icon>
+									
+								</div>
+								<div class="link-name">
+									Update
+								</div>
+							</div>
+
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
 	</div>
 </ion-content>
 

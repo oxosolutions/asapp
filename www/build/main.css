@@ -30530,6 +30530,62 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.custom-menu-content ion-icon {
+  margin-right: 10px;
+}
+
+.custom-menu-content .menu-item-text {
+  vertical-align: top;
+  color: #757575;
+  font-weight: 900;
+  color: #757575;
+}
+
+.custom-menu-content .list-md .item-block .item-inner {
+  border: none;
+}
+
+.custom-menu-content .item-md {
+  padding: 6px 20px;
+}
+
+.custom-menu-header .toolbar-background {
+  background: -webkit-gradient(linear, left top, left bottom, from(#55a4e7), to(#86bde6));
+  background: linear-gradient(180deg, #55a4e7 0%, #86bde6 100%);
+}
+
+.custom-menu-header .icon-wrapper {
+  display: inline-block;
+  background-color: wheat;
+  color: grey;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.custom-menu-header .icon-wrapper ion-icon {
+  line-height: 40px;
+  width: 40px;
+}
+
+.custom-menu-header .item-md h2 {
+  line-height: 1.6;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.custom-menu-header .item-md.item-block .item-inner {
+  border: none;
+}
+
+.custom-menu-header .custom-menu-title {
+  background-color: #a8cfec;
+  padding: 16px;
+  text-align: center;
+  font-weight: 900;
+  color: white;
+  font-size: 13px;
+}
+
 page-activation .content-md {
   background: linear-gradient(45deg, #1d466e 0%, #1695ec 100%);
 }
@@ -30704,6 +30760,41 @@ page-dashboard .dashboard-links .link-name {
   line-height: 2;
 }
 
+page-dashboard .dashboard-links-second-design ion-col:nth-child(1) > .link-wrapper {
+  background-color: #b9e66a;
+  padding: 30px;
+  text-align: center;
+}
+
+page-dashboard .dashboard-links-second-design ion-col:nth-child(2) > .link-wrapper {
+  background-color: #8ed3f9;
+  padding: 30px;
+  text-align: center;
+}
+
+page-dashboard .dashboard-links-second-design ion-col:nth-child(3) > .link-wrapper {
+  background-color: #fcb549;
+  padding: 30px;
+  text-align: center;
+}
+
+page-dashboard .dashboard-links-second-design ion-col:nth-child(4) > .link-wrapper {
+  background-color: #f7805d;
+  padding: 30px;
+  text-align: center;
+}
+
+page-dashboard .dashboard-links-second-design .link-icons ion-icon {
+  font-size: 50px;
+  color: white;
+}
+
+page-dashboard .dashboard-links-second-design .link-wrapper .link-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+}
+
 page-groups .groups ion-item {
   background: #f5f5f5;
   text-align: center;
@@ -30820,14 +30911,53 @@ page-login .extra-options ion-col:last-child {
   text-align: right;
 }
 
-page-question .groups ion-item {
+page-question.ion-page ion-content {
+  background-color: #f5f5f5;
+}
+
+page-question.ion-page .card {
+  min-height: 100%;
+  background-color: white;
+  padding: 16px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+page-question.ion-page .card .question-number {
+  display: inline-block;
+  background-color: teal;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+page-question.ion-page .card .question-text {
+  font-size: 20px;
+  line-height: 1.8;
+  padding: 16px 0;
+}
+
+page-question.ion-page .card .question-options {
+  border: 1px solid #e8e8e8;
+  min-height: 300px;
+}
+
+page-question.ion-page .card .action-buttons {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  text-align: center;
+}
+
+page-question.ion-page .groups ion-item {
   background: #f5f5f5;
   text-align: center;
   padding: 5px 0 9px 0px;
   margin-bottom: 14px;
 }
 
-page-question .button-outline-md {
+page-question.ion-page .button-outline-md {
   margin-top: 65px;
 }
 
