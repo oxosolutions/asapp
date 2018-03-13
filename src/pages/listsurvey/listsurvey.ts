@@ -50,14 +50,14 @@ export class ListsurveyPage {
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					for(let i=0; i < value.length; i++){
-						console.log(value[i].form_id);
-						 //this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+						// console.log(value[i].form_id);
+							//this.surveyScheduling(value[i].form_id).then((surveySch)=>{
 								this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 									//console.log(survey.rows[0]);
 									content.push(survey.rows[0]);	
 									console.log(content);								
 							});						
-						 //});
+						//});
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
@@ -83,6 +83,9 @@ export class ListsurveyPage {
 				let expiredate;
 				let starttime;
 				let expiretime;
+				let date;
+				let time;
+				let noSuceduling;
 				let survey_scheduling='select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = '+formId;
 				
 				this.servicesProvider.ExecuteRun(survey_scheduling,[]).then((scheduling:any)=>{
@@ -93,29 +96,27 @@ export class ListsurveyPage {
 										this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_start_time'","form_id",formId).then((startTime:any)=>{	
 											this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_expire_time'","form_id",formId).then((expireTime:any)=>{
 												
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiredate=expireTime.rows[0].value;			
+												if(startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){
+													startdate=startDate.rows[0].value;			
 												}
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiredate=expireTime.rows[0].value;			
-												}
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiredate=expireTime.rows[0].value;			
-												}
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiredate=expireTime.rows[0].value;			
-												}
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){
 													expiredate=expireTime.rows[0].value;			
 												}
 												
-												// this.surveytimer(formId).then((surveyTim)=>{
-												// 	resolve(surveyTim);
-												// 	this.responseLimit(formId).then((limit)=>{
-												// 	});
-												// })
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													starttime=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
+													expiretime=expireTime.rows[0].value;			
+												}
 
-												//resolve("data");
+												if(startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){
+													date=expireTime.rows[0].value;			
+												}
+												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "" ){
+													time=expireTime.rows[0].value;			
+												}
+												
 											});
 											
 										});
@@ -123,17 +124,23 @@ export class ListsurveyPage {
 								});
 
 					}else{
-						console.log("global available");
+						noSuceduling="it has no scheduling";
+						console.log(noSuceduling);
 					}
 
-					console.log(expiredate);
-
-					
 				});
 		});
 	}
 	responseLimit(formId){
 		return new Promise ((resolve,reject)=>{
+
+				// this.surveytimer(formId).then((surveyTim)=>{
+												// 	resolve(surveyTim);
+												// 	this.responseLimit(formId).then((limit)=>{
+												// 	});
+												// })
+
+
 			console.log(formId);
 			let value;
 			let json;

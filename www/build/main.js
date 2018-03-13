@@ -1866,7 +1866,7 @@ var ListsurveyPage = (function () {
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
                         for (var i = 0; i < value.length; i++) {
-                            console.log(value[i].form_id);
+                            // console.log(value[i].form_id);
                             //this.surveyScheduling(value[i].form_id).then((surveySch)=>{
                             _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
                                 //console.log(survey.rows[0]);
@@ -1900,6 +1900,9 @@ var ListsurveyPage = (function () {
             var expiredate;
             var starttime;
             var expiretime;
+            var date;
+            var time;
+            var noSuceduling;
             var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
             _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
                 if (scheduling.rows.length > 0) {
@@ -1908,42 +1911,44 @@ var ListsurveyPage = (function () {
                         _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expiredate) {
                             _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
                                 _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
+                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
+                                        startdate = startDate.rows[0].value;
+                                    }
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
                                         expiredate = expireTime.rows[0].value;
                                     }
                                     if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        expiredate = expireTime.rows[0].value;
+                                        starttime = expireTime.rows[0].value;
                                     }
                                     if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        expiredate = expireTime.rows[0].value;
+                                        expiretime = expireTime.rows[0].value;
                                     }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        expiredate = expireTime.rows[0].value;
+                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
+                                        date = expireTime.rows[0].value;
                                     }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        expiredate = expireTime.rows[0].value;
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "") {
+                                        time = expireTime.rows[0].value;
                                     }
-                                    // this.surveytimer(formId).then((surveyTim)=>{
-                                    // 	resolve(surveyTim);
-                                    // 	this.responseLimit(formId).then((limit)=>{
-                                    // 	});
-                                    // })
-                                    //resolve("data");
                                 });
                             });
                         });
                     });
                 }
                 else {
-                    console.log("global available");
+                    noSuceduling = "it has no scheduling";
+                    console.log(noSuceduling);
                 }
-                console.log(expiredate);
             });
         });
     };
     ListsurveyPage.prototype.responseLimit = function (formId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            // this.surveytimer(formId).then((surveyTim)=>{
+            // 	resolve(surveyTim);
+            // 	this.responseLimit(formId).then((limit)=>{
+            // 	});
+            // })
             console.log(formId);
             var value;
             var json;
