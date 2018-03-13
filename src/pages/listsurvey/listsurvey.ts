@@ -20,6 +20,8 @@ export class ListsurveyPage {
 	ExpireDate:any;
 	StartDate:any;
 	date:any;
+	currentDate:any;
+	currentTime:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id){
@@ -28,13 +30,10 @@ export class ListsurveyPage {
 	ionViewDidLoad(){  
 		this.surveyTitle=localStorage.getItem("ApplicationName");
 		let currentdate = new Date(); 
-let datetime = "Last Sync: " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-					console.log(datetime);
+		this.currentDate = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/"  + currentdate.getFullYear();  
+		this.currentTime = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+    console.log(this.currentTime);
+		console.log(this.currentDate);
 		this.EnabledSurvey();
 	}
 	EnabledSurvey(){
