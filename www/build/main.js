@@ -1844,11 +1844,6 @@ var ListsurveyPage = (function () {
     };
     ListsurveyPage.prototype.ionViewDidLoad = function () {
         this.surveyTitle = localStorage.getItem("ApplicationName");
-        var currentdate = new Date();
-        this.currentDate = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear();
-        this.currentTime = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-        console.log(this.currentTime);
-        console.log(this.currentDate);
         this.EnabledSurvey();
     };
     ListsurveyPage.prototype.EnabledSurvey = function () {
@@ -1865,24 +1860,24 @@ var ListsurveyPage = (function () {
                     var forloop_1 = 0;
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
-                        for (var i = 0; i < value.length; i++) {
-                            // console.log(value[i].form_id);
-                            //this.surveyScheduling(value[i].form_id).then((surveySch)=>{
-                            _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                                //console.log(survey.rows[0]);
-                                content.push(survey.rows[0]);
-                                console.log(content);
+                        var _loop_1 = function (i) {
+                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
+                                _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                                    console.log(survey.rows[0]);
+                                    content.push(survey.rows[0]);
+                                });
                             });
-                            //});
                             if (content != undefined) {
                                 SurveySelect.push(content);
                                 forloop_1++;
                                 if (forloop_1 == survey_meta.rows.length) {
                                     _this.listSurvey = SurveySelect;
-                                    console.log(_this.listSurvey);
-                                    //console.log(this.listSurvey[0]);
+                                    //console.log(this.listSurvey);
                                 }
                             }
+                        };
+                        for (var i = 0; i < value.length; i++) {
+                            _loop_1(i);
                         }
                     });
                 }
@@ -1904,6 +1899,7 @@ var ListsurveyPage = (function () {
             var time;
             var noSuceduling;
             var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
+            _this.today = new Date();
             _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
                 if (scheduling.rows.length > 0) {
                     console.log("yes survey schelduling");
@@ -1912,22 +1908,37 @@ var ListsurveyPage = (function () {
                             _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
                                 _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
                                     if (startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
-                                        startdate = startDate.rows[0].value;
+                                        var firstDate = new Date(startDate.rows[0].value);
+                                        console.log(firstDate);
+                                        console.log(_this.today);
+                                        if (firstDate > _this.today) {
+                                            console.log("greater");
+                                        }
+                                        else {
+                                            console.log("no greater");
+                                        }
+                                        // this.StartDate = (firstDate.getTime() - secondDate.getTime());
+                                        // console.log(this.StartDate);	
                                     }
                                     if (startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
                                         expiredate = expireTime.rows[0].value;
+                                        console.log(expiredate);
                                     }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        starttime = expireTime.rows[0].value;
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value == "") {
+                                        starttime = startTime.rows[0].value;
+                                        console.log(starttime);
                                     }
                                     if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
                                         expiretime = expireTime.rows[0].value;
+                                        console.log(expiretime);
                                     }
                                     if (startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
-                                        date = expireTime.rows[0].value;
+                                        date = expiredate.rows[0].value;
+                                        console.log(date);
                                     }
                                     if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "") {
                                         time = expireTime.rows[0].value;
+                                        console.log(time);
                                     }
                                 });
                             });
@@ -1938,17 +1949,25 @@ var ListsurveyPage = (function () {
                     noSuceduling = "it has no scheduling";
                     console.log(noSuceduling);
                 }
+                // let mydate;
+                // let mytime;
+                // mydate="26-02-2012";
+                // mytime="28-02-2012";
+                // mydate=mydate.split("-");
+                // var newDate=mydate[1]+"/"+mydate[0]+"/"+mydate[2];
+                // mytime=mytime.split("-");
+                // var newDate2=mytime[1]+"/"+mytime[0]+"/"+mytime[2];
+                // console.log(new Date(newDate).getTime());
+                // console.log(new Date(newDate2).getTime());
+                // let fixed=new Date(newDate).getTime()-new Date(newDate2).getTime();
+                // console.log(fixed);
+                //console.log(surveylist);
             });
         });
     };
     ListsurveyPage.prototype.responseLimit = function (formId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            // this.surveytimer(formId).then((surveyTim)=>{
-            // 	resolve(surveyTim);
-            // 	this.responseLimit(formId).then((limit)=>{
-            // 	});
-            // })
             console.log(formId);
             var value;
             var json;
@@ -2008,7 +2027,7 @@ var ListsurveyPage = (function () {
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n<!-- <h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list> -->\n\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n    <ion-item (click)="groups(survey.id)">\n        <div class="icon-wrapper">\n            <ion-icon name="map"></ion-icon>\n            \n        </div>  \n        <div class="list-content-wrapper">\n            <div class="item-title">{{survey.name}}</div>\n            <div class="item-description">{{survey.description}}</div>\n            <div class="item-time">\n                30 Mar 2018\n            </div>\n        </div> \n\n\n    </ion-item>\n   \n</ion-item-group>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
+            selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n<!-- <h1>List Of Surveys</h1>\n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n\n  <ion-item (click)="groups(survey.id)">\n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n    <button ion-button clear item-end>View</button>\n  </ion-item>\n</div>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-list> -->\n<p *ngIf="today">{{today | date: \'medium\'}}</p>\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n    <ion-item (click)="groups(survey.id)">\n        <div class="icon-wrapper">\n            <ion-icon name="map"></ion-icon>\n            \n        </div>  \n        <div class="list-content-wrapper">\n            <div class="item-title">{{survey.name}}</div>\n            <div class="item-description">{{survey.description}}</div>\n            <div class="item-time">\n                30 Mar 2018\n            </div>\n        </div> \n\n\n    </ion-item>\n   \n</ion-item-group>\n<div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], ListsurveyPage);
@@ -2017,6 +2036,11 @@ var ListsurveyPage = (function () {
 }());
 
 // questionCount(){
+//this.surveytimer(formId).then((surveyTim)=>{
+// 	resolve(surveyTim);
+// 	this.responseLimit(formId).then((limit)=>{
+// 	});
+// })
 // 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
 // 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
 // 			// 	this.questionLength.push(SelResult.rows);
