@@ -30760,27 +30760,31 @@ page-dashboard .dashboard-links .link-name {
   line-height: 2;
 }
 
+page-dashboard .dashboard-links-second-design {
+  margin-top: 52px;
+}
+
 page-dashboard .dashboard-links-second-design ion-col:nth-child(1) > .link-wrapper {
   background-color: #b9e66a;
-  padding: 30px;
+  padding: 20px 0;
   text-align: center;
 }
 
 page-dashboard .dashboard-links-second-design ion-col:nth-child(2) > .link-wrapper {
   background-color: #8ed3f9;
-  padding: 30px;
+  padding: 20px 0;
   text-align: center;
 }
 
 page-dashboard .dashboard-links-second-design ion-col:nth-child(3) > .link-wrapper {
   background-color: #fcb549;
-  padding: 30px;
+  padding: 20px 0;
   text-align: center;
 }
 
 page-dashboard .dashboard-links-second-design ion-col:nth-child(4) > .link-wrapper {
   background-color: #f7805d;
-  padding: 30px;
+  padding: 20px 0;
   text-align: center;
 }
 
@@ -30790,8 +30794,8 @@ page-dashboard .dashboard-links-second-design .link-icons ion-icon {
 }
 
 page-dashboard .dashboard-links-second-design .link-wrapper .link-name {
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 300;
   color: white;
 }
 

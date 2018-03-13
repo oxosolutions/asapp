@@ -1398,15 +1398,14 @@ var MyApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"E:\ionic projects\asapp\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header class="custom-menu-header">\n\n    <ion-toolbar>\n\n        <ion-item color="transparent">\n\n            <ion-avatar item-start>\n\n                <div class="icon-wrapper">\n\n                    <ion-icon name="person"></ion-icon>\n\n                </div>    \n\n\n\n            </ion-avatar>\n\n            <h2>Lorem Ipsum</h2>\n\n            <p>loremipsum@gmail.com</p>\n\n        </ion-item>\n\n        \n\n     <!--   <button ion-button menuToggle>\n\n      <ion-icon name="close"></ion-icon>\n\n    </button> -->\n\n\n\n    </ion-toolbar>\n\n    <div class="custom-menu-title">\n\n        MAIN MENU\n\n    </div>\n\n  </ion-header>\n\n  <ion-content class="custom-menu-content">\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n         <ion-icon name="{{p.icon}}"></ion-icon>\n\n         <span class="menu-item-text">{{p.title}}</span>\n\n        \n\n      </button>\n\n      <button menuClose ion-item (click)="logout()">\n\n        <ion-icon name="ios-log-out-outline"></ion-icon>\n\n        <span class="menu-item-text">Logout</span>\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"E:\ionic projects\asapp\src\app\app.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _h || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
-    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -1655,7 +1654,7 @@ var DashboardPage = (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/'<!-- <ion-header >\n\n  <ion-navbar color="headerClassic">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n\n  </ion-navbar>\n\n</ion-header> -->\n\n\n\n\n\n<ion-content>\n\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n\n		<p>{{dashboard.android_application_description}}</p>\n\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n\n	</div> -->\n\n\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n\n\n		<div class="dashbaord-background">\n\n			<div class="overlay">\n\n				<div class="dashboard-title">\n\n					IRIS Application\n\n				</div>\n\n				<div class="dashbaord-description">\n\n					{{dashboard.android_application_description}}\n\n				</div>\n\n			</div>\n\n			<div class="dashboard-stats">\n\n				<ion-grid>\n\n					<ion-row>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number" >\n\n      								12\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Surveys\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								104\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Completed\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								6\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								In-complete\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								1\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Update\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n  					</ion-row>\n\n				</ion-grid>\n\n			</div>\n\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n\n  				<ion-icon name="menu"></ion-icon>\n\n			</button>\n\n			\n\n		</div>\n\n		<div class="dashboard-links">\n\n			<ion-grid>\n\n				<ion-row>\n\n					<ion-col col-6 (click)="listSurvey()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="briefcase"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_start_survey_text}}\n\n								</div>\n\n							</div>		\n\n					</ion-col>\n\n					<ion-col col-6 (click)="recordList()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="easel"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_manage_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="list-box"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_sync_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									 <ion-icon name="cloud-download"></ion-icon>\n\n									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_update_app_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n				</ion-row>\n\n			</ion-grid>\n\n		</div>\n\n		<div class="dashboard-links-second-design">\n\n			<ion-grid>\n\n				<ion-row>\n\n					<ion-col col-5 (click)="listSurvey()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="briefcase"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_start_survey_text}}\n\n								</div>\n\n							</div>		\n\n					</ion-col>\n\n					<ion-col col-7 (click)="recordList()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="easel"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_manage_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-7 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="list-box"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_sync_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-5 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									 <ion-icon name="cloud-download"></ion-icon>\n\n									\n\n								</div>\n\n								<div class="link-name">\n\n									Update\n\n								</div>\n\n							</div>\n\n\n\n					</ion-col>\n\n				</ion-row>\n\n			</ion-grid>\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n\n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <ion-title>Footer</ion-title>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/,
+            selector: 'page-dashboard',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/'<!-- <ion-header >\n\n  <ion-navbar color="headerClassic">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n\n  </ion-navbar>\n\n</ion-header> -->\n\n\n\n\n\n<ion-content>\n\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n\n		<p>{{dashboard.android_application_description}}</p>\n\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n\n	</div> -->\n\n\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n\n\n		<div class="dashbaord-background">\n\n			<div class="overlay">\n\n				<div class="dashboard-title">\n\n					IRIS Application\n\n				</div>\n\n				<div class="dashbaord-description">\n\n					{{dashboard.android_application_description}}\n\n				</div>\n\n			</div>\n\n			<div class="dashboard-stats">\n\n				<ion-grid>\n\n					<ion-row>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number" >\n\n      								12\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Surveys\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								104\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Completed\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								6\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								In-complete\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n    					<ion-col>\n\n      						<div>\n\n      							<div class="stat-number">\n\n      								1\n\n      							</div>\n\n      							<div class="stat-name">\n\n      								Update\n\n      							</div>\n\n      						</div>\n\n    					</ion-col>\n\n  					</ion-row>\n\n				</ion-grid>\n\n			</div>\n\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n\n  				<ion-icon name="menu"></ion-icon>\n\n			</button>\n\n			\n\n		</div>\n\n		<!-- <div class="dashboard-links">\n\n			<ion-grid>\n\n				<ion-row>\n\n					<ion-col col-6 (click)="listSurvey()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="briefcase"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_start_survey_text}}\n\n								</div>\n\n							</div>		\n\n					</ion-col>\n\n					<ion-col col-6 (click)="recordList()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="easel"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_manage_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="list-box"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_sync_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-6 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									 <ion-icon name="cloud-download"></ion-icon>\n\n									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_update_app_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n				</ion-row>\n\n			</ion-grid>\n\n		</div> -->\n\n		<div class="dashboard-links-second-design">\n\n			<ion-grid>\n\n				<ion-row>\n\n					<ion-col col-6 (click)="listSurvey()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="briefcase"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_start_survey_text}}\n\n								</div>\n\n							</div>		\n\n					</ion-col>\n\n					<ion-col col-6 (click)="recordList()">\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="easel"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_manage_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-8 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									<ion-icon name="list-box"></ion-icon>									\n\n								</div>\n\n								<div class="link-name">\n\n									{{dashboard.link_to_sync_survey_text}}\n\n								</div>\n\n							</div>\n\n					</ion-col>\n\n					<ion-col col-4 >\n\n							<div class="link-wrapper">\n\n								<div class="link-icons">\n\n									 <ion-icon name="cloud-download"></ion-icon>\n\n									\n\n								</div>\n\n								<div class="link-name">\n\n									Update\n\n								</div>\n\n							</div>\n\n\n\n					</ion-col>\n\n				</ion-row>\n\n			</ion-grid>\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n\n\n<ion-footer>\n\n  <ion-toolbar>\n\n    <ion-title>Footer</ion-title>\n\n  </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\dashboard\dashboard.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], DashboardPage);
@@ -1846,13 +1845,10 @@ var ListsurveyPage = (function () {
     ListsurveyPage.prototype.ionViewDidLoad = function () {
         this.surveyTitle = localStorage.getItem("ApplicationName");
         var currentdate = new Date();
-        var datetime = "Last Sync: " + currentdate.getDate() + "/"
-            + (currentdate.getMonth() + 1) + "/"
-            + currentdate.getFullYear() + " @ "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
-        console.log(datetime);
+        this.currentDate = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear();
+        this.currentTime = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+        console.log(this.currentTime);
+        console.log(this.currentDate);
         this.EnabledSurvey();
     };
     ListsurveyPage.prototype.EnabledSurvey = function () {
@@ -1869,15 +1865,15 @@ var ListsurveyPage = (function () {
                     var forloop_1 = 0;
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
-                        var _loop_1 = function (i) {
-                            console.log(value[i].form_id);
-                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
-                                _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                                    //console.log(survey.rows[0]);
-                                    content.push(survey.rows[0]);
-                                    console.log(content);
-                                });
+                        for (var i = 0; i < value.length; i++) {
+                            // console.log(value[i].form_id);
+                            //this.surveyScheduling(value[i].form_id).then((surveySch)=>{
+                            _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                                //console.log(survey.rows[0]);
+                                content.push(survey.rows[0]);
+                                console.log(content);
                             });
+                            //});
                             if (content != undefined) {
                                 SurveySelect.push(content);
                                 forloop_1++;
@@ -1887,9 +1883,6 @@ var ListsurveyPage = (function () {
                                     //console.log(this.listSurvey[0]);
                                 }
                             }
-                        };
-                        for (var i = 0; i < value.length; i++) {
-                            _loop_1(i);
                         }
                     });
                 }
@@ -1907,42 +1900,55 @@ var ListsurveyPage = (function () {
             var expiredate;
             var starttime;
             var expiretime;
+            var date;
+            var time;
+            var noSuceduling;
             var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
             _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
                 if (scheduling.rows.length > 0) {
                     console.log("yes survey schelduling");
                     _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'start_date'", "form_id", formId).then(function (startDate) {
-                        // startdate=startDate.rows[0].value;
                         _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expiredate) {
-                            // expiredate=expire.rows[0].value;
                             _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
-                                // starttime=startTime.rows[0].value;
                                 _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
-                                    // expiretime=expireTime.rows[0].value;
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
+                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
+                                        startdate = startDate.rows[0].value;
+                                    }
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
                                         expiredate = expireTime.rows[0].value;
                                     }
-                                    // this.surveytimer(formId).then((surveyTim)=>{
-                                    // 	resolve(surveyTim);
-                                    // 	this.responseLimit(formId).then((limit)=>{
-                                    // 	});
-                                    // })
-                                    //resolve("data");
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
+                                        starttime = expireTime.rows[0].value;
+                                    }
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
+                                        expiretime = expireTime.rows[0].value;
+                                    }
+                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
+                                        date = expireTime.rows[0].value;
+                                    }
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "") {
+                                        time = expireTime.rows[0].value;
+                                    }
                                 });
                             });
                         });
                     });
                 }
                 else {
-                    console.log("global available");
+                    noSuceduling = "it has no scheduling";
+                    console.log(noSuceduling);
                 }
-                console.log(expiredate);
             });
         });
     };
     ListsurveyPage.prototype.responseLimit = function (formId) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            // this.surveytimer(formId).then((surveyTim)=>{
+            // 	resolve(surveyTim);
+            // 	this.responseLimit(formId).then((limit)=>{
+            // 	});
+            // })
             console.log(formId);
             var value;
             var json;
