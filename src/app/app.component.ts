@@ -22,17 +22,17 @@ import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, icon: string, component: any}>;
   loader:any;
-  db:any;
+  db:any;  
   constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
         this.pages = [
-          { title: 'Home', component: DashboardPage },
-          { title: 'Enter Record', component: ListsurveyPage},
-          { title: 'Review Record', component: RecordListPage },
-          { title: 'About', component: AboutPage },
-          { title: 'Help', component: HelpPage },
+          { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
+          { title: 'Enter Record',icon: 'ios-home-outline', component: ListsurveyPage},
+          { title: 'Review Record',icon: 'ios-home-outline', component: RecordListPage },
+          { title: 'About',icon: 'ios-home-outline', component: AboutPage },
+          { title: 'Help',icon: 'ios-home-outline', component: HelpPage },
 
     ]; 
     if(localStorage.getItem("activation") != undefined){

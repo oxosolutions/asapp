@@ -88,4 +88,45 @@ page-dashboard {
 			line-height: 2;
 		}
 	}
+
+
+
+	.dashboard-links-second-design{
+		ion-col:nth-child(1) > .link-wrapper{
+			background-color: #b9e66a;
+			padding: 30px;
+			text-align: center;
+
+		}
+		ion-col:nth-child(2) > .link-wrapper{
+			background-color: #8ed3f9;
+			padding: 30px;
+			text-align: center;
+		}
+		ion-col:nth-child(3) > .link-wrapper{
+			background-color: #fcb549;
+			padding: 30px;
+			text-align: center;
+		}
+		ion-col:nth-child(4) > .link-wrapper{
+			background-color: #f7805d;
+			padding: 30px;
+			text-align: center;
+		}
+		
+
+		.link-icons{
+			ion-icon{
+				font-size:50px;
+				color: white;
+			}
+		}
+		.link-wrapper{
+			.link-name{
+				font-size: 20px;
+				font-weight: 900;
+				color: white;
+			}
+		}
+	}
 }

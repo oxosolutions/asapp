@@ -1,34 +1,50 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="headerClassic">
   <button ion-button menuToggle>
   <ion-icon name="menu"></ion-icon>
   </button>
-     <ion-title> <span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>
+     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>
     
   </ion-navbar>
 
 </ion-header>
 <ion-content padding>
+	<div class="card">
+		<span class="question-number">
+			Question 1
+		</span>
+		<div class="question-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?
+		</div>
+		<div class="question-options">
+			
+		</div>
+		<div class="action-buttons">
+			<button ion-button >Previous</button>
+			<button ion-button color="secondary">Stop</button>
+			<button ion-button>Next</button>
+		</div>
+	</div>
 	<!-- survey based-->
-	<ion-list>
-		  <ion-item *ngFor="let survey of surveyQuestion">
-          <h1>{{survey?.question_text}}</h1>
-          <p>{{survey?.question_desc}}</p>
-          <p>{{survey.serialNo}}</p>
-           <p>{{survey?.question_type}}</p>
-      </ion-item>
+	<ion-list style="display: none">
+		<ion-item *ngFor="let survey of surveyQuestion">
+          	<h1>{{survey?.question_text}}</h1>
+          	<p>{{survey?.question_desc}}</p>
+          	<p>{{survey.serialNo}}</p>
+           	<p>{{survey?.question_type}}</p>
+  		</ion-item>
 	</ion-list>
 
 
 	<!--question based-->
-	<div  *ngIf ="OriginalContent">
-			<h1>{{OriginalContent?.question_text}}</h1>
-			  <p>{{OriginalContent?.idss}}</p>
+	<div *ngIf ="OriginalContent" style="display: none">
+		<h1>{{OriginalContent?.question_text}}</h1>
+			<p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
 			
-      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
-				<div [ngSwitch]="OriginalContent?.question_type">
+      	<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
+			<div [ngSwitch]="OriginalContent?.question_type">
 
 					<!--text-->
 			    <div *ngSwitchCase="'text'">
@@ -39,17 +55,17 @@
 			    </div>
 
 			    <!--select-->
-		      <div *ngSwitchCase="'select'">
-		        <ion-item>
-						    <ion-label>{{OriginalContent?.question_text}}</ion-label>
-						    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
-						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
-						    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
-						    	</ion-option>
-						      
-						    </ion-select>
+		      	<div *ngSwitchCase="'select'">
+		        	<ion-item>
+					    <ion-label>{{OriginalContent?.question_text}}</ion-label>
+					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
+					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
+					    	</ion-option>
+					      
+					    </ion-select>
   					</ion-item>
-		      </div>
+		      	</div>
 
 		      <!--checkbox-->
 		      <div *ngSwitchCase="'checkbox'">
