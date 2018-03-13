@@ -68,8 +68,8 @@
  -->
     <div>
         <ion-list class="custom-border" >
-            <ion-item-sliding *ngFor="let record of listSurvey[0]">
-                <ion-item>
+            <ion-item-sliding *ngFor="let record of listSurvey[0]" class="">
+                <ion-item >
                 
                     <h2>{{record.name}}</h2>
                     <p>
@@ -85,8 +85,8 @@
             
 
                 <ion-item-options side="right">
-                    <button ion-button color="primary">View Completed</button>
-                    <button ion-button color="Secondary">View Incomplete</button>
+                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>
+                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>
                 </ion-item-options>
   
             </ion-item-sliding>

@@ -29,6 +29,8 @@ import { QuestionPage } from '../pages/question/question';
 import { RecordListPage }  from '../pages/record-list/record-list';
 import { TextPage }  from '../pages/text/text';
 import { SelectPage } from '../pages/select/select';
+import { CompletedSurveyPage } from '../pages/completed-survey/completed-survey';
+import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-survey';
 //import { MyDatePickerModule } from 'mydatepicker';
 
  
@@ -47,7 +49,9 @@ import { SelectPage } from '../pages/select/select';
     QuestionPage,
     RecordListPage,
     TextPage,
-    SelectPage
+    SelectPage,
+    CompletedSurveyPage,
+    IncompletedSurveyPage
   ],
 
   imports: [
@@ -71,7 +75,9 @@ import { SelectPage } from '../pages/select/select';
     QuestionPage,
     RecordListPage,
     TextPage,
-    SelectPage
+    SelectPage,
+     CompletedSurveyPage,
+    IncompletedSurveyPage
   ],
   providers: [
     StatusBar,

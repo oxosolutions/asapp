@@ -29,10 +29,10 @@ export class MyApp {
     this.initializeApp();
         this.pages = [
           { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
-          { title: 'Enter Record',icon: 'ios-home-outline', component: ListsurveyPage},
-          { title: 'Review Record',icon: 'ios-home-outline', component: RecordListPage },
-          { title: 'About',icon: 'ios-home-outline', component: AboutPage },
-          { title: 'Help',icon: 'ios-home-outline', component: HelpPage },
+          { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
+          { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
+          { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
+          { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
 
     ]; 
     if(localStorage.getItem("activation") != undefined){
