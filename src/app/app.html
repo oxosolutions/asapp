@@ -24,12 +24,12 @@
   <ion-content class="custom-menu-content">
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-         <ion-icon name="ios-home-outline"></ion-icon>
+         <ion-icon name="{{p.icon}}"></ion-icon>
          <span class="menu-item-text">{{p.title}}</span>
         
       </button>
       <button menuClose ion-item (click)="logout()">
-        <ion-icon name="ios-home-outline"></ion-icon>
+        <ion-icon name="ios-log-out-outline"></ion-icon>
         <span class="menu-item-text">Logout</span>
       </button>
     </ion-list>
