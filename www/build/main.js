@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 109:
+/***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45,361 +45,20 @@ var AboutPage = (function () {
 
 /***/ }),
 
-/***/ 110:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the HelpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HelpPage = (function () {
-    function HelpPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    HelpPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HelpPage');
-    };
-    HelpPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\help\help.html"*/'<!--\n\n  Generated template for the HelpPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Help</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\help\help.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], HelpPage);
-    return HelpPage;
-}());
-
-//# sourceMappingURL=help.js.map
-
-/***/ }),
-
 /***/ 111:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GroupsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(112);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var GroupsPage = (function () {
-    function GroupsPage(servicesProvider, navCtrl, navParams) {
-        this.servicesProvider = servicesProvider;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    GroupsPage.prototype.questionid = function (id) {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id });
-    };
-    GroupsPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.groupTitle = localStorage.getItem("ApplicationName");
-        this.ids = this.navParams.get('id');
-        this.servicesProvider.SelectWhere("groups", "survey_id", this.ids).then(function (result) {
-            _this.groupsResult = result.rows;
-            //console.log(this.groupsResult);
-            _this.servicesProvider.SelectWhere("survey_meta", "form_id", _this.ids).then(function (form) {
-                for (var keys in form.rows) {
-                    if (form.rows[keys].value == "survey") {
-                        localStorage.setItem("questionType", 'save_survey');
-                    }
-                    else if (form.rows[keys].value == "section") {
-                        localStorage.setItem("questionType", 'save_section');
-                    }
-                    else if (form.rows[keys].value == "question") {
-                        localStorage.setItem("questionType", 'questions');
-                    }
-                }
-            });
-        });
-    };
-    GroupsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-groups',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n 	 <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title> <!-- <span *ngIf="groupTitle">{{groupTitle}}</span> -->\n\n        Sections\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n<!-- 	<h1>Groups</h1>\n\n<ion-list>\n\n<div  class="groups" *ngFor="let groups of groupsResult">\n\n  <ion-item (click)="questionid(groups.id)">  \n\n  <h1>{{groups.survey_id}}</h1>\n\n    <h2>{{groups.title}}</h2>\n\n    <p>{{groups.description}}</p>   \n\n  </ion-item>\n\n</div>\n\n</ion-list> -->\n\n\n\n    <ion-list class="" >\n\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n\n            <p>\n\n               {{groups.description}}\n\n            </p>\n\n        </ion-item>        \n\n                 \n\n    </ion-list>\n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], GroupsPage);
-    return GroupsPage;
-}());
-
-//# sourceMappingURL=groups.js.map
-
-/***/ }),
-
-/***/ 112:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__ = __webpack_require__(42);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-var QuestionPage = (function () {
-    function QuestionPage(toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
-        this.toastctrl = toastctrl;
-        this.AioneHelp = AioneHelp;
-        this.alertCtrl = alertCtrl;
-        this.servicesProvider = servicesProvider;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.questions = [];
-        this.surveyQuestion = [];
-    }
-    QuestionPage.prototype.showConfirm = function () {
-        var _this = this;
-        var prompt = this.alertCtrl.create({
-            message: "Enter Incomplete Survey Name",
-            inputs: [
-                {
-                    placeholder: 'survey name'
-                },
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: 'Save',
-                    handler: function (data) {
-                        if (data[0] == "") {
-                        }
-                        else {
-                            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-                            console.log(data);
-                        }
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    QuestionPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        var i = 0;
-        var Content = [];
-        this.questionTitle = localStorage.getItem("ApplicationName");
-        this.questionType = localStorage.getItem("questionType");
-        this.id = this.navParams.get('id');
-        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
-            Content.push(result.rows);
-            //code for converting json 
-            var collection;
-            var newcollection;
-            var replacedArray = [];
-            Content.forEach(function (key, value) {
-                collection = [];
-                Object.keys(key).forEach(function (keyvalue, keydata) {
-                    newcollection = [];
-                    var newcolumn = [];
-                    collection = key[keyvalue];
-                    //console.log(collection);
-                    Object.keys(collection).forEach(function (valuekey, valuedata) {
-                        var newData;
-                        var replace;
-                        try {
-                            replace = collection[valuekey].replace(/'/g, '"');
-                            newData = JSON.parse(replace);
-                        }
-                        catch (e) {
-                            newData = collection[valuekey];
-                        }
-                        newcollection.push(newData);
-                        newcolumn.push(valuekey);
-                    });
-                    var replacedData = {};
-                    i;
-                    for (i = 0; i < newcollection.length; i++) {
-                        replacedData[newcolumn[i]] = newcollection[i];
-                    }
-                    replacedArray.push(replacedData);
-                });
-            });
-            _this.questions = replacedArray;
-            console.log(_this.questions);
-            if (_this.questions != undefined) {
-                if (_this.questionType == "save_survey") {
-                    _this.surveyQuestion = _this.questions;
-                    console.log(_this.surveyQuestion);
-                }
-                else if (_this.questionType == "save_section") {
-                }
-                else if (_this.questionType == "questions") {
-                    var i_1 = 0;
-                    _this.textData(_this.questions, i_1).then(function () {
-                    });
-                }
-            }
-        });
-    };
-    QuestionPage.prototype.surveyBasedQuestion = function (questions) {
-        return new Promise(function (resolve, reject) {
-            console.log(questions);
-        });
-    };
-    QuestionPage.prototype.textData = function (questions, i) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            console.log(questions[i]);
-            _this.OriginalContent = questions[i];
-            if (_this.OriginalContent.serialNo == 1) {
-                _this.previousButton = false;
-            }
-            else {
-                _this.previousButton = true;
-            }
-        });
-    };
-    QuestionPage.prototype.next = function (id) {
-        console.log(id);
-        var toast = this.toastctrl.create({
-            message: 'Your Enquiry is Submitted',
-            duration: 4000,
-            position: 'top',
-        });
-        var questionLength;
-        questionLength = this.questions.length;
-        if (id == questionLength) {
-            toast.present();
-            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-        }
-        else {
-            console.log(id);
-            this.textData(this.questions, id).then(function () {
-            });
-        }
-    };
-    QuestionPage.prototype.previous = function (id) {
-        console.log(id);
-        id = id - 2;
-        console.log(id);
-        var questionLength;
-        questionLength = this.questions.length;
-        if (id == questionLength) {
-            console.log("there is no data");
-            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-        }
-        else {
-            console.log(id);
-            this.textData(this.questions, id).then(function () {
-            });
-        }
-    };
-    QuestionPage.prototype.onSubmit = function (formData, id, questionKey, survey_id, questionText, QuestionType) {
-        var _this = this;
-        console.log(QuestionType);
-        var json;
-        if (!formData.valid) {
-            console.log("not valid");
-        }
-        else {
-            // console.log("valid");
-            var formValue = [];
-            console.log(formData.value);
-            if (QuestionType == "checkbox") {
-                console.log(QuestionType);
-                json = JSON.stringify(formData.value);
-                formValue.push(json);
-            }
-            else {
-                formValue.push(formData.value[questionText]);
-            }
-            console.log(formValue);
-            var tablename = "surveyResult_" + survey_id;
-            //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
-            //console.log(result.rows.length);
-            //if(result.rows.length < 1){
-            //console.log("empty");
-            this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave) {
-                _this.next(id);
-                // });
-                // }else{
-                //console.log("should be updated");
-                // }
-            });
-        }
-        formData.reset();
-    };
-    QuestionPage.prototype.updateCucumber = function () {
-        var cucumber;
-        console.log('Cucumbers new state:' + cucumber);
-    };
-    QuestionPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question\question.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n\n    \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="card">\n\n		<span class="question-number">\n\n			Question 1\n\n		</span>\n\n		<div class="question-text">\n\n			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?\n\n		</div>\n\n		<div class="question-options">\n\n			\n\n		</div>\n\n		<div class="action-buttons">\n\n			<button ion-button >Previous</button>\n\n			<button ion-button color="secondary">Stop</button>\n\n			<button ion-button>Next</button>\n\n		</div>\n\n	</div>\n\n	<!-- survey based-->\n\n	<ion-list style="display: none">\n\n		<ion-item *ngFor="let survey of surveyQuestion">\n\n          	<h1>{{survey?.question_text}}</h1>\n\n          	<p>{{survey?.question_desc}}</p>\n\n          	<p>{{survey.serialNo}}</p>\n\n           	<p>{{survey?.question_type}}</p>\n\n  		</ion-item>\n\n	</ion-list>\n\n\n\n\n\n	<!--question based-->\n\n	<div *ngIf ="OriginalContent" style="display: none">\n\n		<h1>{{OriginalContent?.question_text}}</h1>\n\n			<p>{{OriginalContent?.idss}}</p>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			\n\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n					<!--text-->\n\n			    <div *ngSwitchCase="\'text\'">\n\n				    <ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n			    </div>\n\n\n\n			    <!--select-->\n\n		      	<div *ngSwitchCase="\'select\'">\n\n		        	<ion-item>\n\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					      \n\n					    </ion-select>\n\n  					</ion-item>\n\n		      	</div>\n\n\n\n		      <!--checkbox-->\n\n		      <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n\n							   color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div>\n\n\n\n		      <!--radio button-->\n\n		      <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n\n\n		      <!--textarea-->\n\n		      <div *ngSwitchCase="\'textarea\'">\n\n		      	<ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n		      </div>\n\n\n\n		      <!--datepicker-->\n\n		      <div *ngSwitchCase="\'datepicker\'">\n\n		      	\n\n		      </div>\n\n\n\n		      <!--message-->\n\n		      <div *ngSwitchCase="\'message\'">\n\n			      <ion-item>\n\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--number-->\n\n		      <div *ngSwitchCase="\'number\'">\n\n		      	<ion-item>\n\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--location picker-->\n\n				<div *ngSwitchCase="\'location_picker\'">\n\n\n\n				</div>\n\n			</div>\n\n\n\n				\n\n				\n\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n\n				<button  ion-button color="dark" outline>\n\n	          <ion-icon name="add"></ion-icon>Next</button>\n\n			</form> \n\n			\n\n\n\n	</div>\n\n</ion-content>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question\question.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], QuestionPage);
-    return QuestionPage;
-}());
-
-//# sourceMappingURL=question.js.map
-
-/***/ }),
-
-/***/ 113:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActivationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -769,6 +428,281 @@ var ActivationPage = (function () {
 
 /***/ }),
 
+/***/ 112:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__ = __webpack_require__(42);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var QuestionPage = (function () {
+    function QuestionPage(toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
+        this.toastctrl = toastctrl;
+        this.AioneHelp = AioneHelp;
+        this.alertCtrl = alertCtrl;
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.questions = [];
+        this.surveyQuestion = [];
+    }
+    QuestionPage.prototype.showConfirm = function () {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            message: "Enter Incomplete Survey Name",
+            inputs: [
+                {
+                    placeholder: 'survey name'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'Save',
+                    handler: function (data) {
+                        if (data[0] == "") {
+                        }
+                        else {
+                            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+                            console.log(data);
+                        }
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    QuestionPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        var i = 0;
+        var Content = [];
+        this.questionTitle = localStorage.getItem("ApplicationName");
+        this.questionType = localStorage.getItem("questionType");
+        this.id = this.navParams.get('id');
+        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
+            Content.push(result.rows);
+            //code for converting json 
+            var collection;
+            var newcollection;
+            var replacedArray = [];
+            Content.forEach(function (key, value) {
+                collection = [];
+                Object.keys(key).forEach(function (keyvalue, keydata) {
+                    newcollection = [];
+                    var newcolumn = [];
+                    collection = key[keyvalue];
+                    //console.log(collection);
+                    Object.keys(collection).forEach(function (valuekey, valuedata) {
+                        var newData;
+                        var replace;
+                        try {
+                            replace = collection[valuekey].replace(/'/g, '"');
+                            newData = JSON.parse(replace);
+                        }
+                        catch (e) {
+                            newData = collection[valuekey];
+                        }
+                        newcollection.push(newData);
+                        newcolumn.push(valuekey);
+                    });
+                    var replacedData = {};
+                    i;
+                    for (i = 0; i < newcollection.length; i++) {
+                        replacedData[newcolumn[i]] = newcollection[i];
+                    }
+                    replacedArray.push(replacedData);
+                });
+            });
+            _this.questions = replacedArray;
+            console.log(_this.questions);
+            if (_this.questions != undefined) {
+                if (_this.questionType == "save_survey") {
+                    _this.surveyQuestion = _this.questions;
+                    console.log(_this.surveyQuestion);
+                }
+                else if (_this.questionType == "save_section") {
+                }
+                else if (_this.questionType == "questions") {
+                    var i_1 = 0;
+                    _this.textData(_this.questions, i_1).then(function () {
+                    });
+                }
+            }
+        });
+    };
+    QuestionPage.prototype.surveyBasedQuestion = function (questions) {
+        return new Promise(function (resolve, reject) {
+            console.log(questions);
+        });
+    };
+    QuestionPage.prototype.textData = function (questions, i) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(questions[i]);
+            _this.OriginalContent = questions[i];
+            if (_this.OriginalContent.serialNo == 1) {
+                _this.previousButton = false;
+            }
+            else {
+                _this.previousButton = true;
+            }
+        });
+    };
+    QuestionPage.prototype.next = function (id) {
+        console.log(id);
+        var toast = this.toastctrl.create({
+            message: 'Your Enquiry is Submitted',
+            duration: 4000,
+            position: 'top',
+        });
+        var questionLength;
+        questionLength = this.questions.length;
+        if (id == questionLength) {
+            toast.present();
+            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+        }
+        else {
+            console.log(id);
+            this.textData(this.questions, id).then(function () {
+            });
+        }
+    };
+    QuestionPage.prototype.previous = function (id) {
+        console.log(id);
+        id = id - 2;
+        console.log(id);
+        var questionLength;
+        questionLength = this.questions.length;
+        if (id == questionLength) {
+            console.log("there is no data");
+            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+        }
+        else {
+            console.log(id);
+            this.textData(this.questions, id).then(function () {
+            });
+        }
+    };
+    QuestionPage.prototype.onSubmit = function (formData, id, questionKey, survey_id, questionText, QuestionType) {
+        var _this = this;
+        console.log(QuestionType);
+        var json;
+        if (!formData.valid) {
+            console.log("not valid");
+        }
+        else {
+            // console.log("valid");
+            var formValue = [];
+            console.log(formData.value);
+            if (QuestionType == "checkbox") {
+                console.log(QuestionType);
+                json = JSON.stringify(formData.value);
+                formValue.push(json);
+            }
+            else {
+                formValue.push(formData.value[questionText]);
+            }
+            console.log(formValue);
+            var tablename = "surveyResult_" + survey_id;
+            //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
+            //console.log(result.rows.length);
+            //if(result.rows.length < 1){
+            //console.log("empty");
+            this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave) {
+                _this.next(id);
+                // });
+                // }else{
+                //console.log("should be updated");
+                // }
+            });
+        }
+        formData.reset();
+    };
+    QuestionPage.prototype.updateCucumber = function () {
+        var cucumber;
+        console.log('Cucumbers new state:' + cucumber);
+    };
+    QuestionPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-question',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question\question.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span></ion-title>\n\n    \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="card">\n\n		<span class="question-number">\n\n			Question 1\n\n		</span>\n\n		<div class="question-text">\n\n			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?\n\n		</div>\n\n		<div class="question-options">\n\n			\n\n		</div>\n\n		<div class="action-buttons">\n\n			<button ion-button >Previous</button>\n\n			<button ion-button color="secondary">Stop</button>\n\n			<button ion-button>Next</button>\n\n		</div>\n\n	</div>\n\n	<!-- survey based-->\n\n	<ion-list style="display: none">\n\n		<ion-item *ngFor="let survey of surveyQuestion">\n\n          	<h1>{{survey?.question_text}}</h1>\n\n          	<p>{{survey?.question_desc}}</p>\n\n          	<p>{{survey.serialNo}}</p>\n\n           	<p>{{survey?.question_type}}</p>\n\n  		</ion-item>\n\n	</ion-list>\n\n\n\n\n\n	<!--question based-->\n\n	<div *ngIf ="OriginalContent" style="display: none">\n\n		<h1>{{OriginalContent?.question_text}}</h1>\n\n			<p>{{OriginalContent?.idss}}</p>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			\n\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n					<!--text-->\n\n			    <div *ngSwitchCase="\'text\'">\n\n				    <ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n			    </div>\n\n\n\n			    <!--select-->\n\n		      	<div *ngSwitchCase="\'select\'">\n\n		        	<ion-item>\n\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					      \n\n					    </ion-select>\n\n  					</ion-item>\n\n		      	</div>\n\n\n\n		      <!--checkbox-->\n\n		      <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n\n							   color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div>\n\n\n\n		      <!--radio button-->\n\n		      <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n\n\n		      <!--textarea-->\n\n		      <div *ngSwitchCase="\'textarea\'">\n\n		      	<ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n		      </div>\n\n\n\n		      <!--datepicker-->\n\n		      <div *ngSwitchCase="\'datepicker\'">\n\n		      	\n\n		      </div>\n\n\n\n		      <!--message-->\n\n		      <div *ngSwitchCase="\'message\'">\n\n			      <ion-item>\n\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--number-->\n\n		      <div *ngSwitchCase="\'number\'">\n\n		      	<ion-item>\n\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div>\n\n\n\n		      <!--location picker-->\n\n				<div *ngSwitchCase="\'location_picker\'">\n\n\n\n				</div>\n\n			</div>\n\n\n\n				\n\n				\n\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n\n				<button  ion-button color="dark" outline>\n\n	          <ion-icon name="add"></ion-icon>Next</button>\n\n			</form> \n\n			\n\n\n\n	</div>\n\n</ion-content>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question\question.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], QuestionPage);
+    return QuestionPage;
+}());
+
+//# sourceMappingURL=question.js.map
+
+/***/ }),
+
+/***/ 113:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the HelpPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HelpPage = (function () {
+    function HelpPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    HelpPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HelpPage');
+    };
+    HelpPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-help',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\help\help.html"*/'<!--\n\n  Generated template for the HelpPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Help</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\help\help.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], HelpPage);
+    return HelpPage;
+}());
+
+//# sourceMappingURL=help.js.map
+
+/***/ }),
+
 /***/ 125:
 /***/ (function(module, exports) {
 
@@ -795,43 +729,43 @@ var map = {
 		10
 	],
 	"../pages/activation/activation.module": [
-		305,
+		296,
 		9
 	],
 	"../pages/dashboard/dashboard.module": [
-		299,
+		297,
 		8
 	],
 	"../pages/groups/groups.module": [
-		297,
+		298,
 		7
 	],
 	"../pages/help/help.module": [
-		296,
+		299,
 		6
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		298,
+		300,
 		5
 	],
 	"../pages/login/login.module": [
-		303,
+		301,
 		4
 	],
 	"../pages/question/question.module": [
-		300,
+		302,
 		3
 	],
 	"../pages/record-list/record-list.module": [
-		302,
+		303,
 		2
 	],
 	"../pages/select/select.module": [
-		301,
+		304,
 		1
 	],
 	"../pages/text/text.module": [
-		304,
+		305,
 		0
 	]
 };
@@ -858,7 +792,7 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AioneServicesProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(170);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1228,23 +1162,23 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_aione_services_aione_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_aione_helper_aione_helper__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_sqlite__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_calendar__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_device__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_sqlite__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_calendar__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_device__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_survey_survey__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_geolocation__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_login_login__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_geolocation__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_dashboard_dashboard__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_help_help__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_about_about__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_listsurvey_listsurvey__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_groups_groups__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_help_help__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_about_about__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_listsurvey_listsurvey__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_groups_groups__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_question_question__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_text_text__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_select_select__ = __webpack_require__(215);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1309,16 +1243,16 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
@@ -1372,13 +1306,13 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1412,11 +1346,11 @@ var MyApp = (function () {
         this.splashScreen = splashScreen;
         this.initializeApp();
         this.pages = [
-            { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__["a" /* DashboardPage */] },
-            { title: 'Enter Record', component: __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__["a" /* ListsurveyPage */] },
-            { title: 'Review Record', component: __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__["a" /* RecordListPage */] },
-            { title: 'About', component: __WEBPACK_IMPORTED_MODULE_9__pages_about_about__["a" /* AboutPage */] },
-            { title: 'Help', component: __WEBPACK_IMPORTED_MODULE_8__pages_help_help__["a" /* HelpPage */] },
+            { title: 'Home', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__["a" /* DashboardPage */] },
+            { title: 'Enter Record', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__["a" /* ListsurveyPage */] },
+            { title: 'Review Record', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__["a" /* RecordListPage */] },
+            { title: 'About', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_9__pages_about_about__["a" /* AboutPage */] },
+            { title: 'Help', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_8__pages_help_help__["a" /* HelpPage */] },
         ];
         if (localStorage.getItem("activation") != undefined) {
             this.rootPage = __WEBPACK_IMPORTED_MODULE_6__pages_login_login__["a" /* LoginPage */];
@@ -1524,7 +1458,7 @@ var HomePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_helper_aione_helper__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(88);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1588,10 +1522,10 @@ var ListPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AioneHelperProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_calendar__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(86);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_calendar__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(6);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1682,8 +1616,8 @@ var AioneHelperProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_listsurvey_listsurvey__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_record_list_record_list__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_listsurvey_listsurvey__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_record_list_record_list__ = __webpack_require__(58);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1739,7 +1673,7 @@ var DashboardPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_aione_services_aione_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1783,262 +1717,6 @@ var SurveyProvider = (function () {
 /***/ }),
 
 /***/ 55:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListsurveyPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(111);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var ListsurveyPage = (function () {
-    function ListsurveyPage(servicesProvider, navCtrl, navParams) {
-        this.servicesProvider = servicesProvider;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.listSurvey = [];
-        this.questionLength = [];
-    }
-    ListsurveyPage.prototype.groups = function (id) {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */], { 'id': id });
-    };
-    ListsurveyPage.prototype.ionViewDidLoad = function () {
-        this.surveyTitle = localStorage.getItem("ApplicationName");
-        this.EnabledSurvey();
-    };
-    ListsurveyPage.prototype.EnabledSurvey = function () {
-        var _this = this;
-        var questionId;
-        var questionData;
-        var metaSurvey = [];
-        var SurveySelect = [];
-        return new Promise(function (resolve, reject) {
-            var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
-            _this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
-                metaSurvey.push(survey_meta.rows);
-                if (survey_meta.rows.length > 0) {
-                    var forloop_1 = 0;
-                    metaSurvey.forEach(function (value, key) {
-                        var content = [];
-                        var _loop_1 = function (i) {
-                            console.log(value[i].form_id);
-                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
-                                if (surveySch != undefined) {
-                                    _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                                        //console.log(survey.rows[0]);
-                                        content.push(survey.rows[0]);
-                                    });
-                                }
-                            });
-                            if (content != undefined) {
-                                SurveySelect.push(content);
-                                forloop_1++;
-                                if (forloop_1 == survey_meta.rows.length) {
-                                    _this.listSurvey = SurveySelect;
-                                    console.log(_this.listSurvey);
-                                    //console.log(this.listSurvey[0]);
-                                }
-                            }
-                        };
-                        for (var i = 0; i < value.length; i++) {
-                            _loop_1(i);
-                        }
-                    });
-                }
-                else {
-                    _this.nullSurvey = "there is no survey";
-                    console.log(_this.nullSurvey);
-                }
-            });
-        });
-    };
-    ListsurveyPage.prototype.surveyScheduling = function (formId) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var timerquery = '';
-            var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
-            // let survey_timer='select * from survey_meta where key= "survey_timer" AND value=1 AND form_id = '+formId;
-            // let survey_limit='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
-            _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
-                if (scheduling.rows.length > 0) {
-                    console.log("yes survey schelduling");
-                    console.log(scheduling.rows);
-                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'start_date'", "form_id", formId).then(function (startDate) {
-                        _this.StartDate = startDate.rows[0].value;
-                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expire) {
-                            _this.ExpireDate = expire.rows[0].value;
-                            _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
-                                _this.StartTime = startTime.rows[0].value;
-                                _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
-                                    _this.ExpireTime = expireTime.rows[0].value;
-                                    // console.log(this.StartDate);
-                                    // console.log(this.ExpireDate);
-                                    // console.log(this.StartTime);
-                                    // console.log(this.ExpireTime);
-                                    if (_this.StartDate != "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime == "") {
-                                        console.log(_this.StartDate);
-                                    }
-                                    if (_this.StartDate == "" && _this.ExpireDate != "" && _this.StartTime == "" && _this.ExpireTime == "") {
-                                        console.log(_this.ExpireDate);
-                                    }
-                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime != "" && _this.ExpireTime == "") {
-                                        console.log(_this.StartTime);
-                                    }
-                                    if (_this.StartDate != "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime != "") {
-                                        console.log(_this.ExpireTime);
-                                    }
-                                    if (_this.StartDate != "" && _this.ExpireDate != "" && _this.StartTime == "" && _this.ExpireTime == "") {
-                                        console.log("today's date");
-                                        console.log(_this.StartDate);
-                                        console.log(_this.ExpireDate);
-                                        console.log("today's date");
-                                        //resolve("df");
-                                    }
-                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime != "" && _this.ExpireTime != "") {
-                                        console.log("got time");
-                                        console.log(_this.StartTime);
-                                        console.log(_this.ExpireTime);
-                                        //resolve("got time");
-                                    }
-                                    if (_this.StartDate == "" && _this.ExpireDate == "" && _this.StartTime == "" && _this.ExpireTime == "") {
-                                        console.log("no time");
-                                    }
-                                    _this.surveytimer(formId).then(function (surveyTim) {
-                                        resolve(surveyTim);
-                                    });
-                                    //resolve("data");
-                                });
-                            });
-                        });
-                    });
-                }
-                else {
-                    _this.surveytimer(formId).then(function (surveyTim) {
-                        console.log("global available");
-                        resolve(surveyTim);
-                    });
-                    //resolve("global avaliable");
-                }
-            });
-        });
-    };
-    ListsurveyPage.prototype.surveytimer = function (formId) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var duration;
-            console.log(formId);
-            var query = 'select * from survey_meta where key="survey_timer" AND value=1 AND form_id = ' + formId;
-            _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
-                console.log(data.rows);
-                if (data.rows.length > 0) {
-                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_duration'", "form_id", formId).then(function (dur) {
-                        duration = dur.rows[0].value;
-                        if (duration != "") {
-                            console.log(duration);
-                            resolve(duration);
-                        }
-                        else {
-                            console.log("no timer");
-                            resolve(" no timer");
-                        }
-                    });
-                }
-                else {
-                    console.log("no timer");
-                    resolve("no timer");
-                }
-            });
-        });
-    };
-    ListsurveyPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n\n        Surveys\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content>\n\n<!-- <h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">      \n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list> -->\n\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n\n    <ion-item (click)="groups(survey.id)">\n\n        <div class="icon-wrapper">\n\n            <ion-icon name="map"></ion-icon>\n\n            \n\n        </div>  \n\n        <div class="list-content-wrapper">\n\n            <div class="item-title">{{survey.name}}</div>\n\n            <div class="item-description">{{survey.description}}</div>\n\n            <div class="item-time">\n\n                30 Mar 2018\n\n            </div>\n\n        </div> \n\n\n\n\n\n    </ion-item>\n\n   \n\n</ion-item-group>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], ListsurveyPage);
-    return ListsurveyPage;
-}());
-
-// questionCount(){
-// 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
-// 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
-// 			// 	this.questionLength.push(SelResult.rows);
-// 			// 	this.listSurvey.forEach((key,value,)=>{
-// 			// 		this.questionLength.forEach((keys,values,)=>{
-// 			// 			Object.keys(key).forEach(function(svalue,skey){
-// 		 //    			questionData=key[svalue].id;																																																								 
-// 		 //    			//console.log(questionData);		    				
-// 		 //    			});
-// 	  // 			});
-// 			// 	});
-// 			// });
-// }
-//# sourceMappingURL=listsurvey.js.map
-
-/***/ }),
-
-/***/ 56:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecordListPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var RecordListPage = (function () {
-    function RecordListPage(servicesProvider, navCtrl, navParams) {
-        this.servicesProvider = servicesProvider;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.listSurvey = [];
-    }
-    RecordListPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.recordTitle = localStorage.getItem("ApplicationName");
-        this.servicesProvider.SelectAll("surveys").then(function (survey) {
-            _this.listSurvey.push(survey.rows);
-            console.log(_this.listSurvey);
-        });
-    };
-    RecordListPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-record-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/'  <!--\n\n  Generated template for the RecordListPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n <!--  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n  </ion-navbar> -->\n\n\n\n\n\n    <ion-toolbar color="headerClassic">\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="search"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="more"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n	<!-- <ion-row>\n\n	  <ion-col>\n\n      <strong>Title</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Total questions</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Complete rocords</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Imcomplete records</strong>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n\n 		<ion-col>\n\n 		{{record.name}}\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n  </ion-row>\n\n -->\n\n    <div>\n\n        <ion-list class="custom-border" >\n\n            <ion-item-sliding *ngFor="let record of listSurvey[0]">\n\n                <ion-item>\n\n                \n\n                    <h2>{{record.name}}</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        17 Completed | \n\n                         <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n            \n\n\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">View Completed</button>\n\n                    <button ion-button color="Secondary">View Incomplete</button>\n\n                </ion-item-options>\n\n  \n\n            </ion-item-sliding>\n\n             \n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], RecordListPage);
-    return RecordListPage;
-}());
-
-//# sourceMappingURL=record-list.js.map
-
-/***/ }),
-
-/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2128,6 +1806,345 @@ var LoginPage = (function () {
 }());
 
 //# sourceMappingURL=login.js.map
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListsurveyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(57);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ListsurveyPage = (function () {
+    function ListsurveyPage(servicesProvider, navCtrl, navParams) {
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.listSurvey = [];
+        this.questionLength = [];
+    }
+    ListsurveyPage.prototype.groups = function (id) {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */], { 'id': id });
+    };
+    ListsurveyPage.prototype.ionViewDidLoad = function () {
+        this.surveyTitle = localStorage.getItem("ApplicationName");
+        var currentdate = new Date();
+        var datetime = "Last Sync: " + currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + " @ "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
+        console.log(datetime);
+        this.EnabledSurvey();
+    };
+    ListsurveyPage.prototype.EnabledSurvey = function () {
+        var _this = this;
+        var questionId;
+        var questionData;
+        var metaSurvey = [];
+        var SurveySelect = [];
+        return new Promise(function (resolve, reject) {
+            var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+            _this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
+                metaSurvey.push(survey_meta.rows);
+                if (survey_meta.rows.length > 0) {
+                    var forloop_1 = 0;
+                    metaSurvey.forEach(function (value, key) {
+                        var content = [];
+                        var _loop_1 = function (i) {
+                            console.log(value[i].form_id);
+                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
+                                _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                                    //console.log(survey.rows[0]);
+                                    content.push(survey.rows[0]);
+                                    console.log(content);
+                                });
+                            });
+                            if (content != undefined) {
+                                SurveySelect.push(content);
+                                forloop_1++;
+                                if (forloop_1 == survey_meta.rows.length) {
+                                    _this.listSurvey = SurveySelect;
+                                    console.log(_this.listSurvey);
+                                    //console.log(this.listSurvey[0]);
+                                }
+                            }
+                        };
+                        for (var i = 0; i < value.length; i++) {
+                            _loop_1(i);
+                        }
+                    });
+                }
+                else {
+                    _this.nullSurvey = "there is no survey";
+                    console.log(_this.nullSurvey);
+                }
+            });
+        });
+    };
+    ListsurveyPage.prototype.surveyScheduling = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var startdate;
+            var expiredate;
+            var starttime;
+            var expiretime;
+            var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
+                if (scheduling.rows.length > 0) {
+                    console.log("yes survey schelduling");
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'start_date'", "form_id", formId).then(function (startDate) {
+                        // startdate=startDate.rows[0].value;
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expiredate) {
+                            // expiredate=expire.rows[0].value;
+                            _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
+                                // starttime=startTime.rows[0].value;
+                                _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
+                                    // expiretime=expireTime.rows[0].value;
+                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
+                                        expiredate = expireTime.rows[0].value;
+                                    }
+                                    // this.surveytimer(formId).then((surveyTim)=>{
+                                    // 	resolve(surveyTim);
+                                    // 	this.responseLimit(formId).then((limit)=>{
+                                    // 	});
+                                    // })
+                                    //resolve("data");
+                                });
+                            });
+                        });
+                    });
+                }
+                else {
+                    console.log("global available");
+                }
+                console.log(expiredate);
+            });
+        });
+    };
+    ListsurveyPage.prototype.responseLimit = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(formId);
+            var value;
+            var json;
+            var query = 'select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
+                if (data.rows.length > 0) {
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'response_limit'", "form_id", formId).then(function (num) {
+                        value = num.rows[0].value;
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'response_limit_type'", "form_id", formId).then(function (type) {
+                            if (type.rows[0].value == "per_user") {
+                                json = type.rows[0].value;
+                            }
+                            else {
+                                json = type.rows[0].value;
+                            }
+                            console.log(json);
+                            console.log(value);
+                        });
+                    });
+                }
+                else {
+                    console.log("no limit selected");
+                    resolve("no timer");
+                }
+            });
+        });
+    };
+    ListsurveyPage.prototype.surveytimer = function (formId) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var duration;
+            console.log(formId);
+            var json;
+            var query = 'select * from survey_meta where key="survey_timer" AND value=1 AND form_id = ' + formId;
+            _this.servicesProvider.ExecuteRun(query, []).then(function (data) {
+                if (data.rows.length > 0) {
+                    _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_duration'", "form_id", formId).then(function (dur) {
+                        _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'timer_type'", "form_id", formId).then(function (type) {
+                            if (type.rows[0].value == "survey_duration") {
+                                json = type.rows[0].value;
+                                duration = dur.rows[0].value;
+                            }
+                            else {
+                                json = type.rows[0].value;
+                            }
+                            console.log(json);
+                            console.log(duration);
+                        });
+                    });
+                }
+                else {
+                    console.log("no timer");
+                    resolve("no timer");
+                }
+            });
+        });
+    };
+    ListsurveyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-listsurvey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n\n        Surveys\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n  \n\n<ion-content>\n\n<!-- <h1>List Of Surveys</h1>\n\n<ion-list>\n\n<div *ngFor="let survey of listSurvey[0]">      \n\n\n\n  <ion-item (click)="groups(survey.id)">\n\n    <ion-thumbnail item-start>\n\n      <img src="../../assets/imgs/survey.png">\n\n    </ion-thumbnail>\n\n    <h2>{{survey.name}}</h2>\n\n    <p>{{survey.description}}</p>\n\n    <button ion-button clear item-end>View</button>\n\n  </ion-item>\n\n</div>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-list> -->\n\n\n\n<ion-item-group *ngFor="let survey of listSurvey[0]">\n\n    <ion-item (click)="groups(survey.id)">\n\n        <div class="icon-wrapper">\n\n            <ion-icon name="map"></ion-icon>\n\n            \n\n        </div>  \n\n        <div class="list-content-wrapper">\n\n            <div class="item-title">{{survey.name}}</div>\n\n            <div class="item-description">{{survey.description}}</div>\n\n            <div class="item-time">\n\n                30 Mar 2018\n\n            </div>\n\n        </div> \n\n\n\n\n\n    </ion-item>\n\n   \n\n</ion-item-group>\n\n<div *ngIf="nullSurvey">\n\n  <p>{{nullSurvey}}</p>\n\n</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\listsurvey\listsurvey.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], ListsurveyPage);
+    return ListsurveyPage;
+}());
+
+// questionCount(){
+// 	// this.data="SELECT  questions.question_key,surveys.* FROM surveys LEFT JOIN questions ON surveys.id = questions.survey_id";
+// 			// this.servicesProvider.ExecuteRun(this.data,[]).then((SelResult:any)=>{
+// 			// 	this.questionLength.push(SelResult.rows);
+// 			// 	this.listSurvey.forEach((key,value,)=>{
+// 			// 		this.questionLength.forEach((keys,values,)=>{
+// 			// 			Object.keys(key).forEach(function(svalue,skey){
+// 		 //    			questionData=key[svalue].id;																																																								 
+// 		 //    			//console.log(questionData);		    				
+// 		 //    			});
+// 	  // 			});
+// 			// 	});
+// 			// });
+// }
+//# sourceMappingURL=listsurvey.js.map
+
+/***/ }),
+
+/***/ 57:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GroupsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(112);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GroupsPage = (function () {
+    function GroupsPage(servicesProvider, navCtrl, navParams) {
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    GroupsPage.prototype.questionid = function (id) {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id });
+    };
+    GroupsPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.groupTitle = localStorage.getItem("ApplicationName");
+        this.ids = this.navParams.get('id');
+        this.servicesProvider.SelectWhere("groups", "survey_id", this.ids).then(function (result) {
+            _this.groupsResult = result.rows;
+            //console.log(this.groupsResult);
+            _this.servicesProvider.SelectWhere("survey_meta", "form_id", _this.ids).then(function (form) {
+                for (var keys in form.rows) {
+                    if (form.rows[keys].value == "survey") {
+                        localStorage.setItem("questionType", 'save_survey');
+                    }
+                    else if (form.rows[keys].value == "section") {
+                        localStorage.setItem("questionType", 'save_section');
+                    }
+                    else if (form.rows[keys].value == "question") {
+                        localStorage.setItem("questionType", 'questions');
+                    }
+                }
+            });
+        });
+    };
+    GroupsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-groups',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n 	 <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title> <!-- <span *ngIf="groupTitle">{{groupTitle}}</span> -->\n\n        Sections\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n<!-- 	<h1>Groups</h1>\n\n<ion-list>\n\n<div  class="groups" *ngFor="let groups of groupsResult">\n\n  <ion-item (click)="questionid(groups.id)">  \n\n  <h1>{{groups.survey_id}}</h1>\n\n    <h2>{{groups.title}}</h2>\n\n    <p>{{groups.description}}</p>   \n\n  </ion-item>\n\n</div>\n\n</ion-list> -->\n\n\n\n    <ion-list class="" >\n\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n\n            <p>\n\n               {{groups.description}}\n\n            </p>\n\n        </ion-item>        \n\n                 \n\n    </ion-list>\n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\groups\groups.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], GroupsPage);
+    return GroupsPage;
+}());
+
+//# sourceMappingURL=groups.js.map
+
+/***/ }),
+
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecordListPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(57);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var RecordListPage = (function () {
+    function RecordListPage(servicesProvider, navCtrl, navParams, popoverCtrl) {
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.popoverCtrl = popoverCtrl;
+        this.listSurvey = [];
+    }
+    RecordListPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.recordTitle = localStorage.getItem("ApplicationName");
+        this.servicesProvider.SelectAll("surveys").then(function (survey) {
+            _this.listSurvey.push(survey.rows);
+            console.log(_this.listSurvey);
+        });
+    };
+    RecordListPage.prototype.presentPopover = function () {
+        var popover = this.popoverCtrl.create(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */]);
+        popover.present();
+    };
+    RecordListPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-record-list',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/'  <!--\n\n  Generated template for the RecordListPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n <!--  <ion-navbar color="headerClassic">\n\n  <button ion-button menuToggle>\n\n  	<ion-icon name="menu"></ion-icon>\n\n  </button>\n\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n  </ion-navbar> -->\n\n\n\n\n\n    <ion-toolbar color="headerClassic">\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="search"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="more"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n	<!-- <ion-row>\n\n	  <ion-col>\n\n      <strong>Title</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Total questions</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Complete rocords</strong>\n\n    </ion-col>\n\n    <ion-col>\n\n      <strong>Imcomplete records</strong>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n\n 		<ion-col>\n\n 		{{record.name}}\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n 		<ion-col>\n\n 		0\n\n 		</ion-col>\n\n  </ion-row>\n\n -->\n\n    <div>\n\n        <ion-list class="custom-border" >\n\n            <ion-item-sliding *ngFor="let record of listSurvey[0]">\n\n                <ion-item>\n\n                \n\n                    <h2>{{record.name}}</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        17 Completed | \n\n                         <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n            \n\n\n\n                <ion-item-options side="right">\n\n                    <button ion-button color="primary">View Completed</button>\n\n                    <button ion-button color="Secondary">View Incomplete</button>\n\n                </ion-item-options>\n\n  \n\n            </ion-item-sliding>\n\n             \n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\record-list\record-list.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]])
+    ], RecordListPage);
+    return RecordListPage;
+}());
+
+//# sourceMappingURL=record-list.js.map
 
 /***/ })
 
