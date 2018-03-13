@@ -30661,6 +30661,135 @@ page-activation .success {
   font-size: 15px;
 }
 
+page-completed-survey .custom-card:nth-child(5n+1) {
+  border-left: 4px solid #dd4c3d;
+}
+
+page-completed-survey .custom-card:nth-child(5n+2) {
+  border-left: 4px solid #d17b2a;
+}
+
+page-completed-survey .custom-card:nth-child(5n+3) {
+  border-left: 4px solid #81ceb2;
+}
+
+page-completed-survey .custom-card:nth-child(5n+4) {
+  border-left: 4px solid #099dc6;
+}
+
+page-completed-survey .custom-card:nth-child(5n+5) {
+  border-left: 4px solid #bebebe;
+}
+
+page-completed-survey .custom-card {
+  border: 1px solid #e8e8e8;
+  margin-bottom: 16px;
+}
+
+page-completed-survey .custom-card .percentage-wrapper {
+  width: 70px;
+  float: left;
+  text-align: center;
+  margin-top: 16px;
+}
+
+page-completed-survey .custom-card .percentage-wrapper div {
+  background-color: #24b56f;
+  display: inline-block;
+  line-height: 46px;
+  width: 46px;
+  border-radius: 50%;
+}
+
+page-completed-survey .custom-card .percentage-wrapper span {
+  display: inline-block;
+  background-color: white;
+  line-height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  color: green;
+}
+
+page-completed-survey .custom-card .percentage-wrapper span ion-icon {
+  font-size: 24px;
+}
+
+page-completed-survey .custom-card .percentage-wrapper span .ion-md-checkmark:before {
+  vertical-align: sub;
+}
+
+page-completed-survey .custom-card .content-wrapper {
+  width: calc(100% - 70px);
+  float: left;
+  padding: 10px;
+}
+
+page-completed-survey .custom-card .content-wrapper .item-title {
+  font-size: 15px;
+  color: #757575;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+page-completed-survey .custom-card .content-wrapper .pause-location {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+
+page-completed-survey .custom-card .content-wrapper .start-end-date {
+  font-size: 11px;
+  line-height: 1.5;
+  color: grey;
+}
+
+page-completed-survey .custom-card .content-wrapper .start-end-date span {
+  margin-right: 30px;
+}
+
+page-completed-survey .custom-card .content-wrapper .start-end-date ion-icon {
+  color: grey;
+}
+
+page-completed-survey .custom-card .custom-card-footer {
+  background-color: #efefef;
+  border-top: 1px solid #e8e8e8;
+  font-size: 11px;
+}
+
+page-completed-survey .custom-card .custom-card-footer .question-incomplete {
+  display: inline-block;
+  padding: 10px;
+}
+
+page-completed-survey .custom-card .custom-card-footer .question-incomplete ion-icon {
+  color: #dd4c3d;
+}
+
+page-completed-survey .custom-card .custom-card-footer .resume-survey {
+  display: inline-block;
+  padding: 10px;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+  float: right;
+}
+
+page-completed-survey .custom-card .custom-card-footer .resume-survey ion-icon {
+  color: green;
+}
+
+page-completed-survey .custom-card .custom-card-footer .trash-survey {
+  display: inline-block;
+  float: right;
+  padding: 10px;
+  color: grey;
+}
+
+page-completed-survey .clear {
+  clear: both;
+}
+
 page-dashboard .button-block {
   padding: 42px 0px;
   margin: 30px 0px;
@@ -30806,14 +30935,53 @@ page-groups .groups ion-item {
   margin-bottom: 14px;
 }
 
+page-incompleted-survey .custom-card:nth-child(5n+1) {
+  border-left: 4px solid #dd4c3d;
+}
+
+page-incompleted-survey .custom-card:nth-child(5n+2) {
+  border-left: 4px solid #d17b2a;
+}
+
+page-incompleted-survey .custom-card:nth-child(5n+3) {
+  border-left: 4px solid #81ceb2;
+}
+
+page-incompleted-survey .custom-card:nth-child(5n+4) {
+  border-left: 4px solid #099dc6;
+}
+
+page-incompleted-survey .custom-card:nth-child(5n+5) {
+  border-left: 4px solid #bebebe;
+}
+
 page-incompleted-survey .custom-card {
   border: 1px solid #e8e8e8;
+  margin-bottom: 16px;
 }
 
 page-incompleted-survey .custom-card .percentage-wrapper {
   width: 70px;
   float: left;
   text-align: center;
+  margin-top: 16px;
+}
+
+page-incompleted-survey .custom-card .percentage-wrapper div {
+  background-color: #24b56f;
+  display: inline-block;
+  line-height: 46px;
+  width: 46px;
+  border-radius: 50%;
+}
+
+page-incompleted-survey .custom-card .percentage-wrapper span {
+  display: inline-block;
+  background-color: white;
+  line-height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  font-weight: 700;
 }
 
 page-incompleted-survey .custom-card .content-wrapper {
@@ -30832,6 +31000,7 @@ page-incompleted-survey .custom-card .content-wrapper .pause-location {
   font-size: 14px;
   color: #999;
   line-height: 1.5;
+  margin-bottom: 3px;
 }
 
 page-incompleted-survey .custom-card .content-wrapper .start-end-date {
@@ -30873,6 +31042,13 @@ page-incompleted-survey .custom-card .custom-card-footer .resume-survey {
 
 page-incompleted-survey .custom-card .custom-card-footer .resume-survey ion-icon {
   color: green;
+}
+
+page-incompleted-survey .custom-card .custom-card-footer .trash-survey {
+  display: inline-block;
+  float: right;
+  padding: 10px;
+  color: grey;
 }
 
 page-incompleted-survey .clear {

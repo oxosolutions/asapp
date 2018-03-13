@@ -1,3 +1,110 @@
 page-completed-survey {
+	$ItemColors: #dd4c3d, #d17b2a, #81ceb2, #099dc6, #bebebe;
+	 @for $i from 1 through 5 {
+        .custom-card:nth-child(5n+#{$i}){
+            border-left: 4px solid nth($ItemColors,$i);
+        }
+    }
+	.custom-card{
+		border:1px solid #e8e8e8;
+		margin-bottom: 16px;
 
+		.percentage-wrapper{
+			width: 70px;
+			float: left;
+			text-align: center;
+			margin-top: 16px;
+
+			div{
+				background-color: #24b56f;
+				display: inline-block;
+				line-height: 46px;
+				width: 46px;
+				border-radius: 50%;
+			}
+			span{
+				display: inline-block;
+				background-color: white;
+				line-height: 38px;
+				width: 38px;
+				border-radius: 50%;	
+				color: green;
+
+				ion-icon{
+					font-size: 24px;
+
+				}
+				.ion-md-checkmark:before{
+					vertical-align: sub;
+				}
+			}
+		}
+		.content-wrapper{
+			width: calc(100% - 70px);
+			float: left;
+			padding: 10px;
+
+			.item-title{
+				font-size: 15px;
+				color: #757575;
+				line-height: 1.5;
+				margin-bottom: 10px;
+			}
+			.pause-location{
+				font-size: 14px;
+				color: #999;
+				line-height: 1.5;
+				margin-bottom: 3px;
+			}
+			.start-end-date{
+				font-size: 11px;
+				line-height: 1.5;
+				color: grey;
+
+				span{
+					margin-right: 30px;
+				}
+
+				ion-icon{
+					color: grey
+				}
+			}
+		}
+		.custom-card-footer{
+			background-color: #efefef;
+			border-top: 1px solid #e8e8e8;
+			font-size: 11px;
+
+			.question-incomplete{
+				display: inline-block;
+				padding: 10px;
+
+				ion-icon{
+					color: #dd4c3d;
+				}
+			}
+			.resume-survey{
+				display: inline-block;
+				padding: 10px;
+				border-left: 1px solid #e8e8e8;
+				border-right: 1px solid #e8e8e8;
+				float: right;
+
+				ion-icon{
+					color: green;
+				}
+			}
+			.trash-survey{
+				display: inline-block;
+				float: right;
+				padding: 10px;
+				color: grey
+			}
+
+
+		}
+	}
+	.clear{
+		clear: both;
+	}
 }
