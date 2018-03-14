@@ -220,16 +220,22 @@ export class ListsurveyPage {
 					let dateDataG=new Date(startdate);
 					let eExpireDate=new Date(expiredate);
 					let sTime=starttime;
-
-				break;
+					break;
 
 				case "case H":
 					let dateDataH = new Date(startdate);
-					let hExpireDate = new Date(expiredate);
-					let htime=starttime.split(":");
-					console.log(dateDataH);
-					console.log(htime);
+					let ExpireDateH = new Date(expiredate);
+					let dt=starttime.split(":");
+					console.log(ExpireDateH);
+					let Htime=new Date(dateDataH.getFullYear(),dateDataH.getMonth(), dateDataH.getDate(),parseInt(dt[0]),parseInt(dt[1]));
+					let Stime=new Date(ExpireDateH.getFullYear(),ExpireDateH.getMonth(),ExpireDateH.getDate(),parseInt(dt[0]),parseInt(dt[1]));
 
+					console.log(Htime);
+					console.log(Stime);
+					if((this.today >= Htime  )){
+
+					}
+					
 
 
 				break;

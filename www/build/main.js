@@ -2131,10 +2131,15 @@ var ListsurveyPage = (function () {
                     break;
                 case "case H":
                     var dateDataH = new Date(startdate);
-                    var hExpireDate = new Date(expiredate);
-                    var htime = starttime.split(":");
-                    console.log(dateDataH);
-                    console.log(htime);
+                    var ExpireDateH = new Date(expiredate);
+                    var dt = starttime.split(":");
+                    console.log(ExpireDateH);
+                    var Htime = new Date(dateDataH.getFullYear(), dateDataH.getMonth(), dateDataH.getDate(), parseInt(dt[0]), parseInt(dt[1]));
+                    var Stime = new Date(ExpireDateH.getFullYear(), ExpireDateH.getMonth(), ExpireDateH.getDate(), parseInt(dt[0]), parseInt(dt[1]));
+                    console.log(Htime);
+                    console.log(Stime);
+                    if ((_this.today >= Htime)) {
+                    }
                     break;
                 case "case I":
                     break;
