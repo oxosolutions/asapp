@@ -224,8 +224,8 @@ export class ListsurveyPage {
 				break;
 
 				case "case H":
-					let dateDataH=new Date(startdate);
-					let hExpireDate=new Date(expiredate);
+					let dateDataH = new Date(startdate);
+					let hExpireDate = new Date(expiredate);
 					let htime=starttime.split(":");
 					console.log(dateDataH);
 					console.log(htime);
