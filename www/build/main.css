@@ -30633,6 +30633,7 @@ page-activation .activation-page-content-wrapper .activation-field-wrapper .butt
 
 page-activation .activation-page-content-wrapper .activation-field-wrapper .verify-button {
   width: 100%;
+  height: 4.6rem;
 }
 
 page-activation .activation-page-content-wrapper .activation-field-wrapper .clearfix {
@@ -30641,12 +30642,12 @@ page-activation .activation-page-content-wrapper .activation-field-wrapper .clea
 
 page-activation ion-input {
   background: white;
-  height: 3.6rem;
+  height: 4.6rem;
   margin: 4px 0px;
 }
 
 page-activation ion-input .text-input-md {
-  margin: 10px 8px;
+  margin: 15px 8px;
 }
 
 page-activation .failure {
@@ -30928,6 +30929,105 @@ page-dashboard .dashboard-links-second-design .link-wrapper .link-name {
   color: white;
 }
 
+page-groups {
+  background-color: grey;
+}
+
+page-groups ion-header {
+  background-image: none;
+}
+
+page-groups .survey-info {
+  background-color: #0077d6;
+  text-align: center;
+  padding: 16px;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+page-groups .survey-info .button-md {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+page-groups .survey-info .survey-title {
+  font-size: 20px;
+  color: white;
+  line-height: 2;
+}
+
+page-groups .survey-info .survey-description {
+  color: white;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+page-groups .survey-info .section-list {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+page-groups .survey-info .section-list .list-header {
+  background-color: white;
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 16px;
+}
+
+page-groups .survey-info .section-list .list-content {
+  padding: 10px;
+  background: white;
+  max-height: 74vh;
+  min-height: 74vh;
+}
+
+page-groups .survey-info .section-list .list-content .list-icon {
+  text-align: center;
+  margin-right: 10px;
+}
+
+page-groups .survey-info .section-list .list-content .list-icon ion-icon {
+  font-size: 26px;
+  line-height: 40px;
+  font-weight: 900;
+}
+
+page-groups .survey-info .section-list .list-content ion-item {
+  border: 1px solid #e8e8e8;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+page-groups .survey-info .section-list .list-content ion-item .item-inner {
+  border: none;
+}
+
+page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+1) ion-icon {
+  color: #f78663;
+}
+
+page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+2) ion-icon {
+  color: #48afaa;
+}
+
+page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+3) ion-icon {
+  color: #f7b04b;
+}
+
+page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+4) ion-icon {
+  color: #4bc9db;
+}
+
+page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+5) ion-icon {
+  color: #7cc17f;
+}
+
 page-groups .groups ion-item {
   background: #f5f5f5;
   text-align: center;
@@ -31061,15 +31161,33 @@ page-listsurvey .scroll-content {
 
 page-listsurvey .icon-wrapper {
   display: inline-block;
-  background-color: #0077d6;
   color: white;
   text-align: center;
-  border-radius: 50%;
 }
 
 page-listsurvey .icon-wrapper ion-icon {
   line-height: 40px;
   width: 40px;
+}
+
+page-listsurvey ion-item-group:nth-child(5n+1) .icon-wrapper {
+  background-color: #f78663;
+}
+
+page-listsurvey ion-item-group:nth-child(5n+2) .icon-wrapper {
+  background-color: #48afaa;
+}
+
+page-listsurvey ion-item-group:nth-child(5n+3) .icon-wrapper {
+  background-color: #f7b04b;
+}
+
+page-listsurvey ion-item-group:nth-child(5n+4) .icon-wrapper {
+  background-color: #4bc9db;
+}
+
+page-listsurvey ion-item-group:nth-child(5n+5) .icon-wrapper {
+  background-color: #7cc17f;
 }
 
 page-listsurvey .list-content-wrapper {
@@ -31126,13 +31244,13 @@ page-login .content-md .page-title {
 
 page-login ion-input {
   background: white;
-  height: 3.6rem;
+  height: 4.6rem;
   margin: 4px 0px;
   margin-bottom: 16px;
 }
 
 page-login ion-input .text-input-md {
-  margin: 10px 8px;
+  margin: 15px 8px;
 }
 
 page-login .item.item-md.checkbox-wrapper {
@@ -31154,6 +31272,10 @@ page-login .item.item-md.checkbox-wrapper .item-inner {
 
 page-login .btn-wrapper {
   margin-bottom: 16px;
+}
+
+page-login .btn-wrapper .button-full-md {
+  height: 4.6rem;
 }
 
 page-login .extra-options {
