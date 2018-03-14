@@ -1,5 +1,10 @@
 page-groups {
 	background-color: grey;
+
+	.ion-page > ion-content{
+		background-color: #e8e8e8;
+	}
+
 	ion-header{
 		background-image: none;
 	}
@@ -11,13 +16,11 @@ page-groups {
 		padding-bottom: 50px;
 		position: relative;
 
-
 		.button-md{
 			position: absolute;
 		    left: 16px;
 		    top: 16px;
 		    box-shadow: none;
-		   
 		}
 		.survey-title{
 			font-size:20px;

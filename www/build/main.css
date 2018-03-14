@@ -30933,6 +30933,10 @@ page-groups {
   background-color: grey;
 }
 
+page-groups .ion-page > ion-content {
+  background-color: #e8e8e8;
+}
+
 page-groups ion-header {
   background-image: none;
 }
