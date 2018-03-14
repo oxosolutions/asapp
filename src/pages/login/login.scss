@@ -26,12 +26,12 @@ page-login {
 	}
 	ion-input{
 		background: white;
-		height: 3.6rem;
+		height: 4.6rem;
 		margin: 4px 0px;
 		margin-bottom: 16px;
 
 		.text-input-md{
-			margin: 10px 8px;
+			margin: 15px 8px;
 		}
 	}
 	.item.item-md.checkbox-wrapper{
@@ -52,6 +52,10 @@ page-login {
 	}
 	.btn-wrapper{
 		margin-bottom: 16px;
+
+		.button-full-md{
+			height: 4.6rem
+		}
 	}
 
 	.extra-options{

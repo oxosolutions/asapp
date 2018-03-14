@@ -1,31 +1,9 @@
 
-<ion-header>
 
-  <ion-navbar color="headerClassic">
-  <button ion-button menuToggle>
- 	 <ion-icon name="menu"></ion-icon>
-  </button>
-    <ion-title> <!-- <span *ngIf="groupTitle">{{groupTitle}}</span> -->
-        Sections
-    </ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 
 <ion-content>
-<!-- 	<h1>Groups</h1>
-<ion-list>
-<div  class="groups" *ngFor="let groups of groupsResult">
-  <ion-item (click)="questionid(groups.id)">  
-  <h1>{{groups.survey_id}}</h1>
-    <h2>{{groups.title}}</h2>
-    <p>{{groups.description}}</p>   
-  </ion-item>
-</div>
-</ion-list> -->
-
-    <ion-list class="" >
+    <!-- <ion-list class="" >
         <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">
             <h2>{{groups.survey_id}} | {{groups.title}}</h2>
             <p>
@@ -33,7 +11,39 @@
             </p>
         </ion-item>        
                  
-    </ion-list>
+    </ion-list> -->
+    
+    <div class="survey-info">
+        <button ion-button menuToggle color="transparent">
+            <ion-icon name="menu"></ion-icon>
+            
+        </button>   
+        <div class="survey-title">
+            Survey Name
+        </div>
+        <div class="survey-description">
+            this is the description of the survey
+        </div>
+        <ion-list class="section-list" >
+            <div class="list-header">
+                List of sections
+            </div>
+            <div class="list-content">
+                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">
+                    <ion-avatar item-start class="list-icon">
+                      <ion-icon name="ios-photos-outline"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{groups.title}}</h2>
+                    <p>
+                       {{groups.description}}
+                    </p>
+                </ion-item>        
+                 
+            </div>
+                        
+        </ion-list>
+    </div>
+    
 </ion-content>
 
 

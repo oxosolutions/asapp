@@ -32,25 +32,61 @@
 </div>
 </ion-list> -->
 <p *ngIf="today">{{today | date: 'medium'}}</p>
-<ion-item-group *ngFor="let survey of listSurvey[0]">
-    <ion-item (click)="groups(survey.id)">
-        <div class="icon-wrapper">
-            <ion-icon name="map"></ion-icon>
-            
-        </div>  
-        <div class="list-content-wrapper">
-            <div class="item-title">{{survey.name}}</div>
-            <div class="item-description">{{survey.description}}</div>
-            <div class="item-time">
-                30 Mar 2018
-            </div>
-        </div> 
+    <ion-item-group *ngFor="let survey of listSurvey[0]">
+        <ion-item (click)="groups(survey.id)">
+            <div class="icon-wrapper">
+                <ion-icon name="ios-paper"></ion-icon>
+                
+            </div>  
+            <div class="list-content-wrapper">
+                <div class="item-title">{{survey.name}}</div>
+                <div class="item-description">{{survey.description}}</div>
+                <div class="item-time">
+                    30 Mar 2018
+                </div>
+            </div> 
 
 
-    </ion-item>
-   
-</ion-item-group>
-<div *ngIf="nullSurvey">
-  <p>{{nullSurvey}}</p>
-</div>
+        </ion-item>
+       
+    </ion-item-group>
+    <ion-item-group *ngFor="let survey of listSurvey[0]">
+        <ion-item (click)="groups(survey.id)">
+            <div class="icon-wrapper">
+                <ion-icon name="ios-paper"></ion-icon>
+                
+            </div>  
+            <div class="list-content-wrapper">
+                <div class="item-title">{{survey.name}}</div>
+                <div class="item-description">{{survey.description}}</div>
+                <div class="item-time">
+                    30 Mar 2018
+                </div>
+            </div> 
+
+
+        </ion-item>
+       
+    </ion-item-group>
+    <ion-item-group *ngFor="let survey of listSurvey[0]">
+        <ion-item (click)="groups(survey.id)">
+            <div class="icon-wrapper">
+                <ion-icon name="ios-paper"></ion-icon>
+                
+            </div>  
+            <div class="list-content-wrapper">
+                <div class="item-title">{{survey.name}}</div>
+                <div class="item-description">{{survey.description}}</div>
+                <div class="item-time">
+                    30 Mar 2018
+                </div>
+            </div> 
+
+
+        </ion-item>
+       
+    </ion-item-group>
+    <div *ngIf="nullSurvey">
+      <p>{{nullSurvey}}</p>
+    </div>
 </ion-content>

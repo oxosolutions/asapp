@@ -49,12 +49,12 @@ export class ListsurveyPage {
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					for(let i=0; i < value.length; i++){
-						this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
+						//this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
 							this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 								console.log(survey.rows[0]);
 								content.push(survey.rows[0]);			
 							});						
-						});
+						//});
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;

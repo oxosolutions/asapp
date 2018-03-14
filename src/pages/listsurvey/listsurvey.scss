@@ -1,20 +1,24 @@
 page-listsurvey {
+	$ItemColors: #f78663, #48afaa, #f7b04b, #4bc9db, #7cc17f;
 	.scroll-content{
 		padding: 0
 	}
+	
 	.icon-wrapper{
 		display: inline-block;
-		background-color: rgb(0, 119, 214);
 		color: white;
-		
 		text-align: center;
-		border-radius: 50%;
 
 		ion-icon{
 				line-height: 40px;
 		width: 40px;	
 		}
 	}	
+	@for $i from 1 through 5 {
+        ion-item-group:nth-child(5n+#{$i}) .icon-wrapper{
+            background-color:nth($ItemColors,$i);
+        }
+    }
 	.list-content-wrapper{
 		width: 100%;
 		display: inline-block;
