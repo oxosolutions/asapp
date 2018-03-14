@@ -66,8 +66,6 @@ export class ActivationPage {
                       this.insertquestions(Apidata).then((questions)=>{
                         this.insertsettings(Apidata).then((setting)=>{
                           this.insersurveyMeta(Apidata).then((survey_meta)=>{
-
-
                             this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
                               if(resultSurvey != undefined){
                                 console.log(resultSurvey);
