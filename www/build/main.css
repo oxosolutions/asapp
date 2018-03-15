@@ -30531,7 +30531,7 @@ ion-navbar.toolbar {
 }
 
 .custom-menu-content ion-icon {
-  margin-right: 10px;
+  width: 30px;
 }
 
 .custom-menu-content .menu-item-text {
@@ -30587,7 +30587,7 @@ ion-navbar.toolbar {
 }
 
 page-activation .content-md {
-  background: linear-gradient(45deg, #1d466e 0%, #1695ec 100%);
+  background: linear-gradient(45deg, #0a93e1 0%, #0a93e1 100%);
 }
 
 page-activation ion-spinner * {
@@ -30931,6 +30931,10 @@ page-dashboard .dashboard-links-second-design .link-wrapper .link-name {
 
 page-groups {
   background-color: grey;
+}
+
+page-groups .scroll-content {
+  background: #e8e8e8;
 }
 
 page-groups .ion-page > ion-content {
@@ -31321,12 +31325,20 @@ page-question.ion-page .card .question-options {
   min-height: 300px;
 }
 
-page-question.ion-page .card .action-buttons {
+page-question.ion-page .action-buttons {
   position: absolute;
   bottom: 32px;
-  left: 32px;
-  right: 32px;
+  left: 0;
+  right: 0;
   text-align: center;
+}
+
+page-question.ion-page .action-buttons .previous, page-question.ion-page .action-buttons .next {
+  width: 33%;
+}
+
+page-question.ion-page .action-buttons .stop {
+  width: 27%;
 }
 
 page-question.ion-page .groups ion-item {
