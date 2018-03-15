@@ -10,12 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
+import { GroupsPage } from '../../pages/groups/groups';
+import { PopoverController } from 'ionic-angular';
+import { CompletedSurveyPage } from '../../pages/completed-survey/completed-survey';
+import { IncompletedSurveyPage } from '../../pages/incompleted-survey/incompleted-survey';
 var RecordListPage = /** @class */ (function () {
-    function RecordListPage(servicesProvider, navCtrl, navParams) {
+    function RecordListPage(servicesProvider, navCtrl, navParams, popoverCtrl) {
         this.servicesProvider = servicesProvider;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.popoverCtrl = popoverCtrl;
         this.listSurvey = [];
+        this.test = 'false';
     }
     RecordListPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -25,13 +31,23 @@ var RecordListPage = /** @class */ (function () {
             console.log(_this.listSurvey);
         });
     };
+    RecordListPage.prototype.presentPopover = function () {
+        var popover = this.popoverCtrl.create(GroupsPage);
+        popover.present();
+    };
+    RecordListPage.prototype.completedSurveyPage = function () {
+        this.navCtrl.push(CompletedSurveyPage);
+    };
+    RecordListPage.prototype.incompletedSurveyPage = function () {
+        this.navCtrl.push(IncompletedSurveyPage);
+    };
     RecordListPage = __decorate([
         IonicPage(),
         Component({
             selector: 'page-record-list',
             templateUrl: 'record-list.html',
         }),
-        __metadata("design:paramtypes", [AioneServicesProvider, NavController, NavParams])
+        __metadata("design:paramtypes", [AioneServicesProvider, NavController, NavParams, PopoverController])
     ], RecordListPage);
     return RecordListPage;
 }());

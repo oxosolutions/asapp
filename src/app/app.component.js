@@ -31,11 +31,11 @@ var MyApp = /** @class */ (function () {
         this.splashScreen = splashScreen;
         this.initializeApp();
         this.pages = [
-            { title: 'Home', component: DashboardPage },
-            { title: 'Enter Record', component: ListsurveyPage },
-            { title: 'Review Record', component: RecordListPage },
-            { title: 'About', component: AboutPage },
-            { title: 'Help', component: HelpPage },
+            { title: 'Home', icon: 'ios-home-outline', component: DashboardPage },
+            { title: 'Enter Record', icon: 'ios-create-outline', component: ListsurveyPage },
+            { title: 'Review Record', icon: 'ios-clipboard-outline', component: RecordListPage },
+            { title: 'About', icon: 'ios-easel-outline', component: AboutPage },
+            { title: 'Help', icon: 'ios-flag-outline', component: HelpPage },
         ];
         if (localStorage.getItem("activation") != undefined) {
             this.rootPage = LoginPage;
