@@ -419,9 +419,10 @@ var ActivationPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-activation',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/'<ion-content padding>\n\n	<!-- <h2>Enter Activation code</h2>\n\n	<div *ngIf="loginForm">\n\n		<form [formGroup]="loginForm">\n\n			<ion-list>\n\n			  <ion-item>\n\n			    <ion-label floating>Enter Acitvation code1</ion-label>\n\n			    <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n\n			  </ion-item>\n\n			  \n\n			  <button ion-button *ngIf="loginForm.valid" (click)="activation()">Internet</button> \n\n			   \n\n			  \n\n			</ion-list>\n\n		</form>\n\n	</div>\n\n -->\n\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n\n		<div class="activation-page-content">\n\n			<div class="app-title">IRIS</div>\n\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n\n		</div>\n\n		<div class="activation-field-wrapper">\n\n			<form [formGroup]="loginForm">\n\n			    <div class="field-wrapper">\n\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>\n\n			    </div>\n\n			    <div class="button-wrapper">\n\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n\n			    </div>\n\n			    <div class="clearfix">\n\n			    	\n\n			    </div>\n\n			</form>	\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
     ], ActivationPage);
     return ActivationPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=activation.js.map
@@ -1968,13 +1969,14 @@ var ListsurveyPage = (function () {
                     var forloop_1 = 0;
                     metaSurvey.forEach(function (value, key) {
                         var content = [];
-                        for (var i = 0; i < value.length; i++) {
-                            //this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
-                            _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
-                                console.log(survey.rows[0]);
-                                content.push(survey.rows[0]);
+                        var _loop_1 = function (i) {
+                            _this.surveyScheduling(value[i].form_id).then(function (surveySch) {
+                                //this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
+                                _this.servicesProvider.SelectWhere("surveys", "id", value[i].form_id).then(function (survey) {
+                                    console.log(survey.rows[0]);
+                                    content.push(survey.rows[0]);
+                                });
                             });
-                            //});
                             if (content != undefined) {
                                 SurveySelect.push(content);
                                 forloop_1++;
@@ -1983,6 +1985,9 @@ var ListsurveyPage = (function () {
                                     //console.log(this.listSurvey);
                                 }
                             }
+                        };
+                        for (var i = 0; i < value.length; i++) {
+                            _loop_1(i);
                         }
                     });
                 }
@@ -2005,6 +2010,7 @@ var ListsurveyPage = (function () {
             var noSuceduling;
             var survey_scheduling = 'select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = ' + formId;
             _this.today = new Date();
+            console.log(_this.today);
             _this.servicesProvider.ExecuteRun(survey_scheduling, []).then(function (scheduling) {
                 if (scheduling.rows.length > 0) {
                     console.log("yes survey schelduling");
@@ -2012,39 +2018,12 @@ var ListsurveyPage = (function () {
                         _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'expire_date'", "form_id", formId).then(function (expiredate) {
                             _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_start_time'", "form_id", formId).then(function (startTime) {
                                 _this.servicesProvider.MultipleSelectWhere("survey_meta", "key", "'survey_expire_time'", "form_id", formId).then(function (expireTime) {
-                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
-                                        var firstDate = new Date(startDate.rows[0].value);
-                                        console.log(firstDate);
-                                        console.log(_this.today);
-                                        if (firstDate > _this.today) {
-                                            console.log("greater");
-                                        }
-                                        else {
-                                            console.log("no greater");
-                                        }
-                                        // this.StartDate = (firstDate.getTime() - secondDate.getTime());
-                                        // console.log(this.StartDate);	
-                                    }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
-                                        expiredate = expireTime.rows[0].value;
-                                        console.log(expiredate);
-                                    }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value == "") {
-                                        starttime = startTime.rows[0].value;
-                                        console.log(starttime);
-                                    }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "") {
-                                        expiretime = expireTime.rows[0].value;
-                                        console.log(expiretime);
-                                    }
-                                    if (startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "") {
-                                        date = expiredate.rows[0].value;
-                                        console.log(date);
-                                    }
-                                    if (startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "") {
-                                        time = expireTime.rows[0].value;
-                                        console.log(time);
-                                    }
+                                    _this.caseCondtions(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value).then(function (caseResult) {
+                                        _this.caseValidations(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value, caseResult).then(function (collection) {
+                                            console.log(collection);
+                                            console.log(collection.message);
+                                        });
+                                    });
                                 });
                             });
                         });
@@ -2054,20 +2033,171 @@ var ListsurveyPage = (function () {
                     noSuceduling = "it has no scheduling";
                     console.log(noSuceduling);
                 }
-                // let mydate;
-                // let mytime;
-                // mydate="26-02-2012";
-                // mytime="28-02-2012";
-                // mydate=mydate.split("-");
-                // var newDate=mydate[1]+"/"+mydate[0]+"/"+mydate[2];
-                // mytime=mytime.split("-");
-                // var newDate2=mytime[1]+"/"+mytime[0]+"/"+mytime[2];
-                // console.log(new Date(newDate).getTime());
-                // console.log(new Date(newDate2).getTime());
-                // let fixed=new Date(newDate).getTime()-new Date(newDate2).getTime();
-                // console.log(fixed);
-                //console.log(surveylist);
             });
+        });
+    };
+    /**
+     * [caseValidate description]
+     * @param {[type]} startdate  [description]
+     * @param {[type]} expiredate [description]
+     * @param {[type]} starttime  [description]
+     * @param {[type]} expiretime [description]
+     *
+     */
+    ListsurveyPage.prototype.caseValidations = function (startdate, expiredate, starttime, expiretime, ConditionResult) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(ConditionResult);
+            var message;
+            var surveyResponse;
+            var s = starttime.split(":");
+            var StartTime = new Date(_this.today.getFullYear(), _this.today.getMonth(), _this.today.getDate(), parseInt(s[0]), parseInt(s[1]));
+            var e = expiretime.split(':');
+            var ExpireTime = new Date(_this.today.getFullYear(), _this.today.getMonth(), _this.today.getDate(), parseInt(e[0]), parseInt(e[1]));
+            console.log(StartTime);
+            console.log(ExpireTime);
+            switch (ConditionResult) {
+                case "case A":
+                    var dateDataA = new Date(expiredate);
+                    if (dateDataA >= _this.today) {
+                        message = "survey is visible";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    break;
+                case "case B":
+                    var dateDataB = new Date(startdate);
+                    var EDate = new Date(expiredate);
+                    console.log(startdate);
+                    console.log(expiredate);
+                    if (_this.today >= dateDataB && _this.today <= EDate) {
+                        message = "survey is visible";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    break;
+                case "case C":
+                    var dateDataC = new Date(startdate);
+                    console.log(startdate);
+                    if (_this.today >= dateDataC) {
+                        message = "survey is visible";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    break;
+                case "case D":
+                    if (_this.today >= StartTime && _this.today <= ExpireTime) {
+                        message = "survey available";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    break;
+                case "case E":
+                    if (_this.today >= StartTime) {
+                        message = "survey available";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    console.log(message);
+                    break;
+                case "case F":
+                    if (_this.today <= ExpireTime) {
+                        message = "survey available";
+                        surveyResponse = "true";
+                    }
+                    else {
+                        message = "survey not available";
+                        surveyResponse = "false";
+                    }
+                    console.log(message);
+                    break;
+                case "case G":
+                    var dateDataG = new Date(startdate);
+                    var eExpireDate = new Date(expiredate);
+                    var sTime = starttime;
+                    break;
+                case "case H":
+                    var dateDataH = new Date(startdate);
+                    var ExpireDateH = new Date(expiredate);
+                    var dt = starttime.split(":");
+                    console.log(ExpireDateH);
+                    var Htime = new Date(dateDataH.getFullYear(), dateDataH.getMonth(), dateDataH.getDate(), parseInt(dt[0]), parseInt(dt[1]));
+                    var Stime = new Date(ExpireDateH.getFullYear(), ExpireDateH.getMonth(), ExpireDateH.getDate(), parseInt(dt[0]), parseInt(dt[1]));
+                    console.log(Htime);
+                    console.log(Stime);
+                    if ((_this.today >= Htime)) {
+                    }
+                    break;
+                case "case I":
+                    break;
+                case "case J":
+                    break;
+                case "case K":
+                    break;
+            }
+            var collection1 = {};
+            collection1["surveyResponse"] = surveyResponse;
+            collection1["message"] = message;
+            resolve(collection1);
+        });
+    };
+    ListsurveyPage.prototype.caseCondtions = function (startdate, expiredate, starttime, expiretime) {
+        return new Promise(function (resolve, reject) {
+            if (startdate == "" && expiredate != "" && starttime == "" && expiretime == "") {
+                console.log(expiredate);
+                resolve("case A"); // only have expiredate;
+            }
+            if (startdate != "" && expiredate != "" && starttime == "" && expiretime == "") {
+                resolve("case B"); //have startdate and expiredate
+            }
+            if (startdate != "" && expiredate == "" && starttime == "" && expiretime == "") {
+                resolve("case C"); //have startdate
+            }
+            if (startdate == "" && expiredate == "" && starttime != "" && expiretime != "") {
+                resolve("case D"); //have starttime,expiretime
+            }
+            if (startdate == "" && expiredate == "" && starttime != "" && expiretime == "") {
+                resolve("case E"); //have starttime;
+            }
+            if (startdate == "" && expiredate == "" && starttime == "" && expiretime != "") {
+                resolve("case F"); // have expire time
+            }
+            if (startdate != "" && expiredate != "" && starttime != "" && expiretime != "") {
+                resolve("case G"); //have startdate, expiredate, starttime
+            }
+            if (startdate != "" && expiredate != "" && starttime != "" && expiretime == "") {
+                resolve("case H"); //have startdate,expiredate,starttime
+            }
+            if (startdate != "" && expiredate != "" && starttime == "" && expiretime != "") {
+                resolve("case I");
+            }
+            if (startdate != "" && expiredate == "" && starttime != "" && expiretime != "") {
+                resolve("case J");
+            }
+            if (startdate == "" && expiredate != "" && starttime == "" && expiretime != "") {
+                resolve("case K");
+            }
+            if (startdate == "" && expiredate != "" && starttime != "" && expiretime == "") {
+                resolve("case L");
+            }
+            if (startdate == "" && expiredate != "" && starttime == "" && expiretime != "") {
+                resolve("case M");
+            }
         });
     };
     ListsurveyPage.prototype.responseLimit = function (formId) {

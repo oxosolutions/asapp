@@ -49,12 +49,14 @@ export class ListsurveyPage {
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					for(let i=0; i < value.length; i++){
+
+						this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
 						//this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
 							this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 								console.log(survey.rows[0]);
 								content.push(survey.rows[0]);			
 							});						
-						//});
+						});
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
@@ -83,8 +85,8 @@ export class ListsurveyPage {
 				let time;
 				let noSuceduling;
 				let survey_scheduling='select * from survey_meta where key="survey_scheduling" AND value=1 AND form_id = '+formId;
-				 this.today = new Date();
-				 
+				this.today = new Date();
+				console.log(this.today);
 				this.servicesProvider.ExecuteRun(survey_scheduling,[]).then((scheduling:any)=>{
 					if(scheduling.rows.length > 0){
 						console.log("yes survey schelduling");
@@ -92,50 +94,17 @@ export class ListsurveyPage {
 									this.servicesProvider.MultipleSelectWhere("survey_meta","key","'expire_date'","form_id",formId).then((expiredate:any)=>{
 										this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_start_time'","form_id",formId).then((startTime:any)=>{	
 											this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_expire_time'","form_id",formId).then((expireTime:any)=>{
-											
-												if(startDate.rows[0].value != "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){	
-													let firstDate = new Date(startDate.rows[0].value);
-													console.log(firstDate);
-													console.log(this.today);
-													if(firstDate > this.today){
-														console.log("greater");
-													}else{
-														console.log("no greater");
-													}
-													// this.StartDate = (firstDate.getTime() - secondDate.getTime());
-													// console.log(this.StartDate);	
+												this.caseCondtions(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value).then((caseResult:any)=>{
+													this.caseValidations(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value,caseResult).then((collection:any)=>{
+														console.log(collection);
+														console.log(collection.message);
+														
+													});
+													
+												})
 
 
-												}
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){
-													expiredate=expireTime.rows[0].value;		
-													console.log(expiredate);			
-												}
 												
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value == "" ){
-													starttime=startTime.rows[0].value;	
-													console.log(starttime);				
-												}
-
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value == "" && expireTime.rows[0].value != "" ){
-													expiretime=expireTime.rows[0].value;	
-													console.log(expiretime);		
-												}
-
-												if(startDate.rows[0].value != "" && expiredate.rows[0].value != "" && startTime.rows[0].value == "" && expireTime.rows[0].value == "" ){
-													date=expiredate.rows[0].value;	
-													console.log(date);	
-
-												}
-
-
-												if(startDate.rows[0].value == "" && expiredate.rows[0].value == "" && startTime.rows[0].value != "" && expireTime.rows[0].value != "" ){
-													time=expireTime.rows[0].value;	
-													console.log(time);		
-												}
-												
-												
-
 											});
 											
 										});
@@ -147,23 +116,194 @@ export class ListsurveyPage {
 						console.log(noSuceduling);
 
 					}
-					// let mydate;
-					// let mytime;
-					// mydate="26-02-2012";
-					// mytime="28-02-2012";
-					// mydate=mydate.split("-");
-					// var newDate=mydate[1]+"/"+mydate[0]+"/"+mydate[2];
-					// mytime=mytime.split("-");
-					// var newDate2=mytime[1]+"/"+mytime[0]+"/"+mytime[2];
-					// console.log(new Date(newDate).getTime());
-					// console.log(new Date(newDate2).getTime());
-					// let fixed=new Date(newDate).getTime()-new Date(newDate2).getTime();
-					// console.log(fixed);
-					//console.log(surveylist);
+					
+				});
+		});
+	}
 
+	/**
+	 * [caseValidate description]
+	 * @param {[type]} startdate  [description]
+	 * @param {[type]} expiredate [description]
+	 * @param {[type]} starttime  [description]
+	 * @param {[type]} expiretime [description]
+	 * 
+	 */
+	
+
+	private caseValidations(startdate,expiredate,starttime,expiretime,ConditionResult){
+		return new Promise((resolve,reject)=>{
+			console.log(ConditionResult);
+			let message;
+			let surveyResponse;
+			let s=starttime.split(":");
+			var StartTime = new Date(this.today.getFullYear(), this.today.getMonth(),
+	                   this.today.getDate(),parseInt(s[0]), parseInt(s[1]));
+			var e = expiretime.split(':');
+			var ExpireTime = new Date(this.today.getFullYear(), this.today.getMonth(),
+	                   this.today.getDate(),parseInt(e[0]), parseInt(e[1]));
+			console.log(StartTime)
+			console.log(ExpireTime)
+			switch (ConditionResult){
+				case "case A":
+					let dateDataA=new Date(expiredate);
+					if(dateDataA >= this.today){
+						message="survey is visible";
+						surveyResponse="true";
+					}else{
+						message="survey not available";
+						surveyResponse="false";
+
+					}
+					break;
+				
+				case "case B":
+					let dateDataB= new Date(startdate);
+					let EDate=new Date(expiredate);
+					console.log(startdate); console.log(expiredate);
+					if(this.today >= dateDataB && this.today <= EDate){
+						message="survey is visible";
+						surveyResponse="true";
+					}
+					else{
+						message="survey not available";
+						surveyResponse="false";
+					}
+					break;
+
+				case "case C":
+					let dateDataC=new Date(startdate);
+					console.log(startdate);
+					if(this.today >= dateDataC){
+						message="survey is visible";
+						surveyResponse="true";
+					}else{
+						message="survey not available";
+						surveyResponse="false";
+					}
+					break;
+
+				case "case D":
+					if(this.today >= StartTime && this.today <= ExpireTime){
+						message="survey available";
+							surveyResponse="true";
+					}else{
+						message="survey not available";
+							surveyResponse="false";
+					}
+					break;
+
+				case "case E":
+					if(this.today >= StartTime){
+						message="survey available";
+						surveyResponse="true";
+					}else{
+						message="survey not available";
+						surveyResponse="false";
+					}
+					console.log(message);
+					break;
+
+
+				case "case F":
+					if(this.today <= ExpireTime){
+						message="survey available";
+						surveyResponse="true";
+					}else{
+						message="survey not available";
+						surveyResponse="false";
+					}
+					console.log(message);
+					break;
+
+
+				case "case G":
+					let dateDataG=new Date(startdate);
+					let eExpireDate=new Date(expiredate);
+					let sTime=starttime;
+					break;
+
+				case "case H":
+					let dateDataH = new Date(startdate);
+					let ExpireDateH = new Date(expiredate);
+					let dt=starttime.split(":");
+					console.log(ExpireDateH);
+					let Htime=new Date(dateDataH.getFullYear(),dateDataH.getMonth(), dateDataH.getDate(),parseInt(dt[0]),parseInt(dt[1]));
+					let Stime=new Date(ExpireDateH.getFullYear(),ExpireDateH.getMonth(),ExpireDateH.getDate(),parseInt(dt[0]),parseInt(dt[1]));
+
+					console.log(Htime);
+					console.log(Stime);
+					if((this.today >= Htime  )){
+
+					}
 					
 
-				});
+
+				break;
+
+				case "case I":
+				break;
+
+				case "case J":
+				break;
+
+				case "case K":
+				break;
+
+			}
+
+			let collection1={};
+					collection1["surveyResponse"]=surveyResponse;
+					collection1["message"]=message;
+					resolve(collection1);
+			
+			
+		});
+	}
+	caseCondtions(startdate,expiredate,starttime,expiretime){
+		return new Promise((resolve,reject)=>{
+			if(startdate == "" && expiredate != "" && starttime == "" && expiretime=="" ){
+				console.log(expiredate);
+				resolve ("case A"); // only have expiredate;
+			}
+			if(startdate != "" && expiredate != "" && starttime == "" && expiretime=="" ){
+				resolve ("case B"); //have startdate and expiredate
+			}
+			if(startdate != "" && expiredate == "" && starttime == "" && expiretime=="" ){
+				resolve ("case C"); //have startdate
+			}	
+			if(startdate == "" && expiredate == "" && starttime != "" && expiretime != "" ){
+				resolve ("case D"); //have starttime,expiretime
+			}
+			if(startdate == "" && expiredate == "" && starttime != "" && expiretime == "" ){
+				resolve ("case E"); //have starttime;
+			}
+			if(startdate == "" && expiredate == "" && starttime == "" && expiretime !="" ){
+				resolve ("case F"); // have expire time
+			}
+			if(startdate != "" && expiredate != "" && starttime != "" && expiretime != "" ){
+				resolve ("case G"); //have startdate, expiredate, starttime
+			}
+			if(startdate != "" && expiredate != "" && starttime != "" && expiretime == "" ){
+				resolve ("case H");  //have startdate,expiredate,starttime
+			}
+			if(startdate != "" && expiredate != "" && starttime == "" && expiretime != "" ){
+				resolve ("case I");
+			}
+			if(startdate != "" && expiredate == "" && starttime != "" && expiretime != "" ){
+				resolve ("case J");
+			}
+			if(startdate 	== "" && expiredate != "" && starttime == "" && expiretime != "" ){
+				resolve ("case K");
+			}
+			if(startdate == "" && expiredate != "" && starttime != "" && expiretime == "" ){
+				resolve ("case L");
+			}
+			if(startdate == "" && expiredate != "" && starttime == "" && expiretime != "" ){
+				resolve ("case M");	
+			}
+
+			
 		});
 	}
 	responseLimit(formId){
