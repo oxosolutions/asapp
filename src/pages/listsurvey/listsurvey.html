@@ -18,7 +18,8 @@
 <ion-list>
 <div *ngFor="let survey of listSurvey[0]">      ?
   <ion-item (click)="groups(survey.id)">
-  <p>{{survey["details"].responenumber}}</p>
+  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>
+  <p>Duration is {{survey["timer"].timerDuration}}</p>
     <ion-thumbnail item-start>
       <img src="../../assets/imgs/survey.png">
     </ion-thumbnail>

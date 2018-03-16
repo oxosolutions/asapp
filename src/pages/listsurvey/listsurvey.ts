@@ -84,23 +84,23 @@ export class ListsurveyPage {
 					let content=[];
 					//value.length;
 					for(let i=0; i < value.length; i++){
-						//this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
+						this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
 								this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
 									this.responseLimit(value[i].form_id).then((responseData:any)=>{
 										this.surveytimer(value[i].form_id).then((timerData:any)=>{
-											console.log(timerData);
+											// console.log(surveySch);
 											let rowsData = survey.rows[0];
 											rowsData["details"]=responseData;
-											rowsData["timer"]=timerData
+											rowsData["timer"]=timerData;
+											rowsData["scheduling"]=surveySch;
 											console.log(rowsData);
 										// console.log(rowsData["details"].responenumber);
-
 											content.push(rowsData);	
 										})	
 												
 								});	
 							});					
-						//});
+						});
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
@@ -117,6 +117,18 @@ export class ListsurveyPage {
 				console.log(this.nullSurvey);
 			}
 		  });
+		})
+	}
+	customError(formId){
+		return new Promise ((resolve,reject)=>{
+			let query='select * from survey_meta where key="custom_error_messages" AND value=1 AND form_id = '+formId;
+			this.servicesProvider.ExecuteRun(query,[]).then((data:any)=>{
+				if(data.rows.length > 0){
+					console.log("error exists");
+				}else{
+					console.log("no error");
+				}
+			});
 		})
 	}
 	surveyScheduling(formId){
@@ -140,8 +152,8 @@ export class ListsurveyPage {
 											this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_expire_time'","form_id",formId).then((expireTime:any)=>{
 												this.caseCondtions(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value).then((caseResult:any)=>{
 													this.caseValidations(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value,caseResult).then((collection:any)=>{
-														console.log(collection);
-		
+														// console.log(collection);
+														resolve(collection);
 													});	
 												});												
 											});
@@ -152,6 +164,10 @@ export class ListsurveyPage {
 					}else{
 						noSuceduling="it has no scheduling";
 						console.log(noSuceduling);
+						let collection1={};
+						collection1["surveyResponse"]="false";
+						collection1["message"]="survey not available";
+						resolve(collection1);
 					}	
 				});
 		});
