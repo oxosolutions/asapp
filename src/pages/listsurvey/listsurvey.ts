@@ -32,7 +32,7 @@ export class ListsurveyPage {
   	console.log(id);
   	console.log(message);
   	//this.showConfirm();
-  	this.navCtrl.setRoot(GroupsPage,{'id': id});
+  	//this.navCtrl.setRoot(GroupsPage,{'id': id});
   }
   showConfirm() {
     let prompt = this.alertCtrl.create({
