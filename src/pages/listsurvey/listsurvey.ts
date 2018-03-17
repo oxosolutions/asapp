@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {GroupsPage} from '../../pages/groups/groups';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -26,43 +27,28 @@ export class ListsurveyPage {
 
 	today:any;
 	tomarrow:"14/03/2018 17:23:41 +0530";
-  constructor(public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id,message){
   	console.log(id);
-  	console.log(message);
+  	console.log(message["scheduling"].surveyResponse);
+  	if(message["scheduling"].surveyResponse == "true"){
+  		console.log("survey is available");
+  		this.navCtrl.setRoot(GroupsPage,{'id': id});
+  	}else{
+  		this.presentToast();
+  	}
   	//this.showConfirm();
-  	//this.navCtrl.setRoot(GroupsPage,{'id': id});
+  	
   }
-  showConfirm() {
-    let prompt = this.alertCtrl.create({
-      message: "Enter Incomplete Survey Name",
-      inputs: [
-        {
-          placeholder: 'survey name'
-        },
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          handler: data => {
-            
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            if(data[0] == ""){
-
-            }else{
-               //this.navCtrl.setRoot(DashboardPage);
-                console.log(data);
-            }        
-          }
-        }
-      ]
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Survey is not available',
+      duration: 5500,
+      showCloseButton:true,
+      closeButtonText: 'Ok'
     });
-    prompt.present();
+    toast.present();
   }
 	ionViewDidLoad(){  
 		this.surveyTitle=localStorage.getItem("ApplicationName");

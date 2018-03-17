@@ -16,24 +16,25 @@
 <ion-content>
  
 <ion-list>
-<div *ngFor="let survey of listSurvey[0]">      ?
-  <ion-item (click)="groups(survey.id)">
+<div *ngFor="let survey of listSurvey[0]">      
+  <ion-item (click)="groups(survey.id,survey)">
+  <p>{{survey["scheduling"].surveyResponse}}</p>
   <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>
-  <p>Duration is {{survey["timer"].timerDuration}}</p>
+  
     <ion-thumbnail item-start>
       <img src="../../assets/imgs/survey.png">
     </ion-thumbnail>
     <h2>{{survey.name}}</h2>
     <p>{{survey.description}}</p>
 
-    <p style="color:#32b93d;">survey will start on 10pm</p>
+    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>
     <button ion-button clear item-end style="color: #f7805; font-weight: bold;">0 times filled</button>
     <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
   </ion-item>
 </div>
-<div *ngIf="nullSurvey">
+<!-- <div *ngIf="nullSurvey">
   <p>{{nullSurvey}}</p>
-</div>
+</div> -->
 </ion-list> 
 
 <!-- <p *ngIf="today">{{today | date: 'medium'}}</p>
