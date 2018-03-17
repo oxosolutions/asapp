@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 309:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectPageModule", function() { return SelectPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SectionalQuestionsPageModule", function() { return SectionalQuestionsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sectional_questions__ = __webpack_require__(113);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SelectPageModule = (function () {
-    function SelectPageModule() {
+var SectionalQuestionsPageModule = (function () {
+    function SectionalQuestionsPageModule() {
     }
-    SelectPageModule = __decorate([
+    SectionalQuestionsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */],
+                __WEBPACK_IMPORTED_MODULE_2__sectional_questions__["a" /* SectionalQuestionsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sectional_questions__["a" /* SectionalQuestionsPage */]),
             ],
         })
-    ], SelectPageModule);
-    return SelectPageModule;
+    ], SectionalQuestionsPageModule);
+    return SectionalQuestionsPageModule;
 }());
 
-//# sourceMappingURL=select.module.js.map
+//# sourceMappingURL=sectional-questions.module.js.map
 
 /***/ })
 

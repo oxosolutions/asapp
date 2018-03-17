@@ -16,7 +16,7 @@ export class TextPage {
   }
   ionViewDidLoad() {
     // this.data=this.navParams.get("value");
-    //console.log(this.data);  
+    console.log("text");  
   }
   next(){
  		// console.log(this.data);

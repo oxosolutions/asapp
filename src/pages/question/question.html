@@ -4,34 +4,39 @@
   <button ion-button menuToggle>
   <ion-icon name="menu"></ion-icon>
   </button>
-     <ion-title><!-- <span *ngIf="questionTitle">{{questionTitle}}</span> -->
-     	Section: Demo Survey
+     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>
+    <!--  	Section: Demo Survey -->
      </ion-title>
     
   </ion-navbar>
 
 </ion-header>
 <ion-content padding>
-	<div class="card"  style="display: none">
+<div *ngIf ="OriginalContent">
+	<div class="card" >
 		<span class="question-number">
 			Question 1
 		</span>
 		of 20
 		<div class="question-text">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?
+			{{OriginalContent?.question_text}}
 		</div>
-		<div class="question-options">
-			
-		</div>
-		
+		<p>{{OriginalContent?.question_desc}}</p>
+
+	<!-- 	<div class="question-options">
+		</div> -->
+
+		 <div ng-include src="'./../pages/text/text'"></div>
+		<page-text></page-text>
 	</div>
-	<div class="action-buttons"  style="display: none">
+	<div class="action-buttons"   >
 		<button ion-button class="previous">Previous</button>
 		<button ion-button color="secondary" class="stop">Stop</button>
 		<button ion-button class="next">Next</button>
 	</div>
+</div>
 	<!-- survey based-->
-	<ion-list style="display: none">
+	<!-- <ion-list style="display: none">
 		<ion-item *ngFor="let survey of surveyQuestion">
           	<h1>{{survey?.question_text}}</h1>
           	<p>{{survey?.question_desc}}</p>
@@ -39,10 +44,10 @@
            	<p>{{survey?.question_type}}</p>
   		</ion-item>
 	</ion-list>
-
+ -->
 
 	<!--question based-->
-	<div *ngIf ="OriginalContent">
+	<!-- <div *ngIf ="OriginalContent">
 		<h1>{{OriginalContent?.question_text}}</h1>
 			<p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>
@@ -51,15 +56,15 @@
 			<div [ngSwitch]="OriginalContent?.question_type">
 
 					<!--text-->
-			    <div *ngSwitchCase="'text'">
+			   <!--  <div *ngSwitchCase="'text'">
 				    <ion-item>
 					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
 					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
 					  </ion-item>
 			    </div>
-
+ -->
 			    <!--select-->
-		      	<div *ngSwitchCase="'select'">
+		      <!-- 	<div *ngSwitchCase="'select'">
 		        	<ion-item>
 					    <ion-label>{{OriginalContent?.question_text}}</ion-label>
 					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
@@ -69,10 +74,10 @@
 					      
 					    </ion-select>
   					</ion-item>
-		      	</div>
+		      	</div> -->
 
 		      <!--checkbox-->
-		      <div *ngSwitchCase="'checkbox'">
+		     <!--  <div *ngSwitchCase="'checkbox'">
 		      	<ion-list >
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
@@ -80,10 +85,10 @@
 							   color="red" ></ion-checkbox>
 							</ion-item>
 						</ion-list>
-		      </div>
+		      </div> -->
 
 		      <!--radio button-->
-		      <div *ngSwitchCase="'radio'">
+		     <!--  <div *ngSwitchCase="'radio'">
 		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
 						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
 						    <ion-label>{{radio?.option_text}}</ion-label>
@@ -91,44 +96,44 @@
 						  </ion-item>
  						</ion-list>
 		      </div>
-
+ -->
 		      <!--textarea-->
-		      <div *ngSwitchCase="'textarea'">
+		     <!--  <div *ngSwitchCase="'textarea'">
 		      	<ion-item>
 					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
 					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
 					  </ion-item>
 		      </div>
-
+ -->
 		      <!--datepicker-->
-		      <div *ngSwitchCase="'datepicker'">
+		      <!-- <div *ngSwitchCase="'datepicker'">
 		      	
-		      </div>
+		      </div> -->
 
 		      <!--message-->
-		      <div *ngSwitchCase="'message'">
+		      <!-- <div *ngSwitchCase="'message'">
 			      <ion-item>
 				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
 				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
 			      </ion-item>
-		      </div>
+		      </div> -->
 
 		      <!--number-->
-		      <div *ngSwitchCase="'number'">
+		     <!--  <div *ngSwitchCase="'number'">
 		      	<ion-item>
 		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
 				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
 			      </ion-item>
-		      </div>
+		      </div> -->
 
 		      <!--location picker-->
-				<div *ngSwitchCase="'location_picker'">
+				<!-- <div *ngSwitchCase="'location_picker'">
 
 				</div>
-			</div>
+			</div> -->
 
 				
-				
+				<!-- 
 				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>
 				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>
 				<button  ion-button color="dark" outline>
@@ -136,5 +141,6 @@
 			</form> 
 			
 
-	</div>
+	</div> -->
+	
 </ion-content>
