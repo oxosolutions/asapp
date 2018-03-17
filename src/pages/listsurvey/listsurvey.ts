@@ -30,11 +30,28 @@ export class ListsurveyPage {
   constructor(public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id,message){
+  	let surveyMetaType;
   	console.log(id);
   	console.log(message["scheduling"].surveyResponse);
   	if(message["scheduling"].surveyResponse == "true"){
-  		console.log("survey is available");
-  		this.navCtrl.setRoot(GroupsPage,{'id': id});
+  		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
+        for(var keys in form.rows){
+          if(form.rows[keys].value == "survey"){
+          	surveyMetaType=form.rows[keys].value;
+            localStorage.setItem("questionType", 'save_survey');
+            
+          }else if(form.rows[keys].value == "section"){
+          	surveyMetaType=form.rows[keys].value;
+            localStorage.setItem("questionType", 'save_section');
+            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+          }else if(form.rows[keys].value == "question"){
+          	surveyMetaType=form.rows[keys].value;
+            localStorage.setItem("questionType", 'questions');
+            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+          }
+          
+        }
+      });
   	}else{
   		this.presentToast();
   	}
@@ -262,7 +279,7 @@ export class ListsurveyPage {
 					break;
 
 				case "case H":
-				let finish= "23:59:59";
+					let finish= "23:59:59";
 					let dateDataH = new Date(startdate);
 					let ExpireDateH = new Date(expiredate);
 					let dt=starttime.split(":");
@@ -421,7 +438,6 @@ export class ListsurveyPage {
 	}
 	responseLimit(formId){
 		return new Promise ((resolve,reject)=>{
-			console.log(formId);
 			let responenumber:any;
 			let responsetype:any;
 			let query='select * from survey_meta where key="survey_response_limit" AND value=1 AND form_id = '+formId;
@@ -460,7 +476,7 @@ export class ListsurveyPage {
 	surveytimer(formId){
 		return new Promise ((resolve,reject)=>{
 			let duration
-			console.log(formId);
+			//console.log(formId);
 			let timerType;
 			let query='select * from survey_meta where key="survey_timer" AND value=1 AND form_id = '+formId;
 			this.servicesProvider.ExecuteRun(query,[]).then((data:any)=>{

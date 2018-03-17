@@ -12,7 +12,7 @@
 
 </ion-header>
 <ion-content padding>
-	<div class="card">
+	<div class="card"  style="display: none">
 		<span class="question-number">
 			Question 1
 		</span>
@@ -25,7 +25,7 @@
 		</div>
 		
 	</div>
-	<div class="action-buttons">
+	<div class="action-buttons"  style="display: none">
 		<button ion-button class="previous">Previous</button>
 		<button ion-button color="secondary" class="stop">Stop</button>
 		<button ion-button class="next">Next</button>
@@ -42,7 +42,7 @@
 
 
 	<!--question based-->
-	<div *ngIf ="OriginalContent" style="display: none">
+	<div *ngIf ="OriginalContent">
 		<h1>{{OriginalContent?.question_text}}</h1>
 			<p>{{OriginalContent?.idss}}</p>
 			<p>{{OriginalContent?.question_desc}}</p>

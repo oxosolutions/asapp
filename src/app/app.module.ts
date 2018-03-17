@@ -32,6 +32,8 @@ import { SelectPage } from '../pages/select/select';
 import { CompletedSurveyPage } from '../pages/completed-survey/completed-survey';
 import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-survey';
 //import { MyDatePickerModule } from 'mydatepicker';
+import {SectionalQuestionsPage} from '../pages/sectional-questions/sectional-questions';
+import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 
  
 @NgModule({
@@ -51,7 +53,9 @@ import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-s
     TextPage,
     SelectPage,
     CompletedSurveyPage,
-    IncompletedSurveyPage
+    IncompletedSurveyPage,
+    SectionalQuestionsPage,
+    SurveyQuestionsPage
   ],
 
   imports: [
@@ -76,8 +80,10 @@ import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-s
     RecordListPage,
     TextPage,
     SelectPage,
-     CompletedSurveyPage,
-    IncompletedSurveyPage
+    CompletedSurveyPage,
+    IncompletedSurveyPage,
+    SectionalQuestionsPage,
+    SurveyQuestionsPage
   ],
   providers: [
     StatusBar,
