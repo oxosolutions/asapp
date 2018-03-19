@@ -17,7 +17,7 @@ import {ToastController } from 'ionic-angular';
 export class QuestionPage {
    @ViewChild(TextPage) child;
   parentMessage = "message from parent";
-  message:string;
+  //message:string;
 
   answer:{};
   OriginalContent:any;
@@ -66,7 +66,7 @@ export class QuestionPage {
     prompt.present();
   }
   ngAfterViewInit() {
-    this.message = this.child.message
+    // this.message = this.child.message
   }
   ionViewDidLoad(){
     let i=0;
@@ -191,7 +191,7 @@ export class QuestionPage {
       }else{
         formValue.push(formData.value[questionText]);
       }
-      console.log(formValue);
+      console.log(formValue);  
       let tablename="surveyResult_"+survey_id;
       //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
         //console.log(result.rows.length);

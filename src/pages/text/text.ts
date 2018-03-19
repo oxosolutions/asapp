@@ -12,18 +12,22 @@ import { SurveyProvider } from '../../providers/survey/survey';
 })
 export class TextPage {
 	public data:any;
-   @Input() childMessage: any;
-   message: string = "Hola Mundo!"
+  @Input() childMessage: any;
+  @Input() childMessageone:any;
+   // message: string = "Hola Mundo!"
   constructor( public surveyProvider:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
+  
   }
   ionViewDidLoad() {
-    // this.data=this.navParams.get("value");
     console.log("text");  
+    console.log(this.childMessage);
   }
   next(){
  		// console.log(this.data);
  		// this.surveyProvider.questionsid(this.data);
-  	
   }
+
+
+
 
 }
