@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupsPage} from '../../pages/groups/groups';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
@@ -15,6 +15,10 @@ import {ToastController } from 'ionic-angular';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+   @ViewChild(TextPage) child;
+  parentMessage = "message from parent";
+  message:string;
+
   answer:{};
   OriginalContent:any;
   dataUrl:any;
@@ -58,8 +62,11 @@ export class QuestionPage {
           }
         }
       ]
-    });
+    });  
     prompt.present();
+  }
+  ngAfterViewInit() {
+    this.message = this.child.message
   }
   ionViewDidLoad(){
     let i=0;

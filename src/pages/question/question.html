@@ -12,24 +12,57 @@
 
 </ion-header>
 <ion-content padding>
+<p>hiii</p>
+ <p>{{message}}</p>
+
+<page-text [childMessage]="parentMessage"></page-text>
+
+
+
+
 <div *ngIf ="OriginalContent">
 	<div class="card" >
 		<span class="question-number">
 			Question 1
 		</span>
 		of 20
-		<div class="question-text">
+    <div class="question-text">
 			{{OriginalContent?.question_text}}
 		</div>
 		<p>{{OriginalContent?.question_desc}}</p>
 
+
+
+
+
+		 <!-- 	<ng-include src="'../text/TextPage'"></ng-include>
+		<ng-include src="'../text/text.html'"></ng-include>
+		<ng-include src="'/text/text.html'"></ng-include>
+		<ng-include src="'./text/text.html'"></ng-include> -->
+		<!-- <ng-include src="''"></ng-include>
+		<ng-include src="'views/header.html'"></ng-include>
+ -->
+		
+
+
+
+
+
+
+
+
+
+		
+
 	<!-- 	<div class="question-options">
 		</div> -->
 
-		 <div ng-include src="'./../pages/text/text'"></div>
-		<page-text></page-text>
+		
+
+		
+	<!-- 	<page-text></page-text> -->
 	</div>
-	<div class="action-buttons"   >
+	<div class="action-buttons">
 		<button ion-button class="previous">Previous</button>
 		<button ion-button color="secondary" class="stop">Stop</button>
 		<button ion-button class="next">Next</button>

@@ -15,7 +15,7 @@ import {HelpPage} from '../pages/help/help';
 import {AboutPage} from '../pages/about/about';
 import { RecordListPage }  from '../pages/record-list/record-list';
 import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
-
+import { TextPage }  from '../pages/text/text';
 @Component({
   templateUrl: 'app.html',
 })

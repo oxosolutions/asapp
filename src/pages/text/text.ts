@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GroupsPage } from '../../pages/groups/groups';
 import { QuestionPage } from '../../pages/question/question';
@@ -12,6 +12,8 @@ import { SurveyProvider } from '../../providers/survey/survey';
 })
 export class TextPage {
 	public data:any;
+   @Input() childMessage: any;
+   message: string = "Hola Mundo!"
   constructor( public surveyProvider:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
