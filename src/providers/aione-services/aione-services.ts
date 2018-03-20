@@ -27,6 +27,7 @@ export class AioneServicesProvider {
 			resolve(this.db);
 		})
 	}
+
 	PlatformCheck(databaseName){
 		return new Promise ((resolve,reject)=>{
 			if(this.platform.is('cordova')){
@@ -71,6 +72,17 @@ export class AioneServicesProvider {
 			  console.log(res);
 		  });
 		}
+	}
+	SelectAllTable(){
+		return new Promise ((resolve,reject)=>{
+			console.log("table");
+			this.query="SELECT name FROM sqlite_master WHERE type = 'table' ";
+			this.ExecuteRun(this.query , []).then((res:any)=>{
+					resolve(res.rows);
+				})
+		})
+		
+		
 	}
 	TableBulk(TableName,Col){
 		return new Promise ((resolve,reject)=>{
@@ -192,15 +204,21 @@ export class AioneServicesProvider {
 	}
 	DropTable(tableName){
 		return new Promise ((resolve,reject)=>{
+			console.log(tableName.length);
 			if(this.db!= undefined){
-				//console.log(Col);		
-			  for(let i=0; i<tableName.length;i++){
-			  	this.query='DROP Table IF  EXISTS ' + tableName[i];
-					console.log(this.query);
-			 	  this.ExecuteRun(this.query,[]).then((res)=>{
-			 	  	resolve(res);
-			 	  });	
-			 	}																														
+				if(tableName.length >0){
+					//console.log(Col);		
+				  for(let i=0; i<tableName.length;i++){
+				  	this.query='DROP Table IF  EXISTS ' + tableName[i];
+						console.log(this.query);
+				 	  this.ExecuteRun(this.query,[]).then((res)=>{
+				 	  	resolve(res);
+				 	  });	
+				 	}		
+				}else{
+					resolve("res");
+				}
+																																
 			}	
 		})
 	

@@ -12,7 +12,7 @@
 
 </ion-header>
 <ion-content padding>
-<p>hiii</p>
+
  <!-- <p>{{message}}</p>
  -->
 <!-- survey based-->
@@ -31,7 +31,7 @@
 
 
 
-
+ 
 
 	<div >
 		<div class="card" >
@@ -39,86 +39,22 @@
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
 		
-			<input [(ngModel)]="name" #ctrl="ngModel" required>
-			<p>Value: {{ name }}</p>
+			
 		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
 			<div [ngSwitch]="OriginalContent?.question_type">
 
 					<!--text-->
 			    <div *ngSwitchCase="'text'">
-				   <!--  <ion-item>
+
+				    <ion-item>
 					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
 					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
-					  </ion-item> -->
+
+					  </ion-item>
+					   <p *ngIf="Errors" style="color:red;">{{Errors}}</p>
 			    </div>
 
-			    <!--select-->
-		      	<div *ngSwitchCase="'select'">
-		        	<ion-item>
-					    <ion-label>{{OriginalContent?.question_text}}</ion-label>
-					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
-					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
-					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
-					    	</ion-option>
-					      
-					    </ion-select>
-  					</ion-item>
-		      	</div>
-
-		      <!--checkbox-->
-		      <div *ngSwitchCase="'checkbox'">
-		      	<ion-list >
-						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
-							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"
-							   color="red" ></ion-checkbox>
-							</ion-item>
-						</ion-list>
-		      </div>
-
-		      <!--radio button-->
-		      <div *ngSwitchCase="'radio'">
-		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
-						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
-						    <ion-label>{{radio?.option_text}}</ion-label>
-						    <ion-radio value="{{radio?.option_text}}"></ion-radio>
-						  </ion-item>
- 						</ion-list>
-		      </div>
-
-		      <!--textarea-->
-		      <div *ngSwitchCase="'textarea'">
-		      	<ion-item>
-					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
-					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
-					  </ion-item>
-		      </div>
-
-		      <!--datepicker-->
-		      <div *ngSwitchCase="'datepicker'">
-		      	
-		      </div>
-
-		      <!--message-->
-		      <div *ngSwitchCase="'message'">
-			      <ion-item>
-				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
-				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
-			      </ion-item>
-		      </div>
-
-		      <!--number-->
-		      <div *ngSwitchCase="'number'">
-		      	<ion-item>
-		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
-				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
-			      </ion-item>
-		      </div>
-
-		      <!--location picker-->
-					<div *ngSwitchCase="'location_picker'">
-
-					</div>
+			   
 			</div>
 		
 			<div class="action-buttons">

@@ -213,7 +213,7 @@ export class ListsurveyPage {
 				
 				case "case B":
 					let dateDataB= new Date(startdate);
-					let EDate=new Date(expiredate);
+					let EDate = new Date(expiredate);
 					console.log(startdate); console.log(expiredate);
 					if(this.today >= dateDataB && this.today <= EDate){
 						message="survey is visible";
@@ -240,7 +240,7 @@ export class ListsurveyPage {
 				case "case D":
 					if(this.today >= StartTime && this.today <= ExpireTime){
 						message="survey available";
-							surveyResponse="true";
+						surveyResponse="true";
 					}else{
 						message="survey not available";
 							surveyResponse="false";

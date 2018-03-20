@@ -31,6 +31,7 @@ export class QuestionPage {
   subData: any;
   questionType:any;
   surveyQuestion=[];
+  Errors:any;
   
 
   constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -180,6 +181,7 @@ export class QuestionPage {
     let json;
     if(!formData.valid){
         console.log("not valid");
+        this.Errors="it is not valid";
     }else{
       // console.log("valid");
       let formValue=[];
@@ -193,16 +195,16 @@ export class QuestionPage {
       }
       console.log(formValue);  
       let tablename="surveyResult_"+survey_id;
-      //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
-        //console.log(result.rows.length);
-        //if(result.rows.length < 1){
-          //console.log("empty");
+      this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
+        console.log(result.rows.length);
+        if(result.rows.length < 1){
+          console.log("empty");
           this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
             this.next(id);
-         // });
-       // }else{
-          //console.log("should be updated");
-       // }
+         });
+       }else{
+          console.log("should be updated");
+       }
       })
       
     }
