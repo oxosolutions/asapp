@@ -145,7 +145,10 @@ export class QuestionPage {
     this.questionCheck.push(this.questions[index]);
     console.log(this.questionCheck);
     this.servicesProvider.SelectWhere(tablename,questionKey,"'"+formValue + "'").then((ans:any)=>{
-      console.log(ans);
+      console.log(ans.rows[0]);
+      let localArray=[];
+      localArray.push(ans.rows[0]);
+      console.log(localArray);
     })
 
 
