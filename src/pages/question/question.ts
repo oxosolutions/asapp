@@ -32,8 +32,8 @@ export class QuestionPage {
   questionType:any;
   surveyQuestion=[];
   Errors:any;
+  questionCheck=[];
   
-
   constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   showConfirm() {
@@ -112,18 +112,9 @@ export class QuestionPage {
       });
       this.questions=replacedArray;
       console.log(this.questions);
-      if(this.questions != undefined){
-        if(this.questionType == "save_survey"){
-          this.surveyQuestion=this.questions;
-          console.log(this.surveyQuestion);    
-        }else if(this.questionType == "save_section"){
-
-        }else if(this.questionType == "questions"){
-          let i=0;
-          this.textData(this.questions, i).then(()=>{
-          });
-        }    
-      }
+      let i=0;
+      this.textData(this.questions, i).then(()=>{
+      });
     })
   }
   surveyBasedQuestion(questions){
@@ -135,15 +126,30 @@ export class QuestionPage {
     return new Promise((resolve,reject)=>{
       console.log(questions[i]);
       this.OriginalContent=questions[i]; 
-      if(this.OriginalContent.serialNo==1 ){
+      if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
       }
+
+      // if(this.OriginalContent.serialNo==1 ){
+      //   this.previousButton=false;
+      // }else{
+      //   this.previousButton=true; 
+      // }
     });   
   }
-  next(id){
+  next(id,tablename,questionKey,formValue){
     console.log(id);
+    let index=id-1;
+    this.questionCheck.push(this.questions[index]);
+    console.log(this.questionCheck);
+    this.servicesProvider.SelectWhere(tablename,questionKey,"'"+formValue + "'").then((ans:any)=>{
+      console.log(ans);
+    })
+
+
+
     let toast=this.toastctrl.create({
         message:'Your Enquiry is Submitted',
         duration:4000,
@@ -163,10 +169,12 @@ export class QuestionPage {
   
   previous(id){
     console.log(id);
+
     id=id-2;
     console.log(id);
     let questionLength;
     questionLength=this.questions.length;
+
     if(id==questionLength){
       console.log("there is no data");
       this.navCtrl.setRoot(DashboardPage);
@@ -177,13 +185,11 @@ export class QuestionPage {
     }
   }
   onSubmit(formData,id,questionKey,survey_id,questionText,QuestionType){
-    console.log(QuestionType);
     let json;
     if(!formData.valid){
         console.log("not valid");
         this.Errors="it is not valid";
     }else{
-      // console.log("valid");
       let formValue=[];
       console.log(formData.value);
       if(QuestionType=="checkbox"){
@@ -195,21 +201,33 @@ export class QuestionPage {
       }
       console.log(formValue);  
       let tablename="surveyResult_"+survey_id;
-      this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
-        console.log(result.rows.length);
+      let query="Select "+ questionKey +" from " + tablename ;
+      this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         if(result.rows.length < 1){
           console.log("empty");
-          this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
-            this.next(id);
-         });
-       }else{
-          console.log("should be updated");
-       }
-      })
-      
+          this.insertSubmit(tablename,questionKey,formValue).then((questionSave)=>{
+            this.next(id,tablename,questionKey,formValue);
+          });
+        }else{
+          let query="UPDATE "+ tablename + " SET " + questionKey +"= '" +formValue +"'";
+          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+            this.next(id,tablename,questionKey,formValue);
+          });
+        }
+      }); 
     }
     formData.reset();   
   }
+
+  insertSubmit(tablename,questionKey,formValue){
+    return new Promise((resolve,rejct)=>{
+      this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave33)=>{
+        resolve(questionSave33);
+      });
+    })
+  }
+
+
   updateCucumber() {
    let  cucumber:any
     console.log('Cucumbers new state:' + cucumber);

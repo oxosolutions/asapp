@@ -56,7 +56,6 @@ export class ActivationPage {
       let dropTable=["questions","surveys","groups","users" ,"settings","survey_meta"];
       let selectBulkTable=[];
       this.AioneService.SelectAllTable().then((slectdrop:any)=>{
-
         Object.keys(slectdrop).forEach((dropkey,dropvalue)=>{
           selectBulkTable.push(slectdrop[dropkey].name);
         }); 
