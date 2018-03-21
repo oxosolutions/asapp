@@ -48,7 +48,7 @@ var ActivationPage = /** @class */ (function () {
             spinner: 'crescent',
             content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + message + "</div>\n      </div>",
         });
-        this.loader.present();
+        //this.loader.present(); 
     };
     ActivationPage.prototype.dismissLoader = function () {
         this.loader.dismiss();
@@ -59,26 +59,36 @@ var ActivationPage = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             var tableName = ["questions", "surveys", "groups", "users", "settings", "survey_meta"];
             var dropTable = ["questions", "surveys", "groups", "users", "settings", "survey_meta"];
-            _this.AioneService.DropTable(dropTable).then(function (drop) {
-                _this.Api().then(function (Apidata) {
-                    var i;
-                    _this.table(Apidata, tableName, 0).then(function (result) {
-                        _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
-                            _this.dismissLoader();
-                            _this.insertUser(Apidata).then(function (user) {
-                                console.log(user);
-                                _this.insertsurveys(Apidata).then(function (surveys) {
-                                    _this.insertgroups(Apidata).then(function (groups) {
-                                        _this.insertquestions(Apidata).then(function (questions) {
-                                            _this.insertsettings(Apidata).then(function (setting) {
-                                                _this.insersurveyMeta(Apidata).then(function (survey_meta) {
-                                                    _this.resultSurvey(Apidata.questions, Apidata.surveys).then(function (resultSurvey) {
-                                                        if (resultSurvey != undefined) {
-                                                            console.log(resultSurvey);
-                                                            _this.loader.dismiss();
-                                                            _this.nav.setRoot(LoginPage);
-                                                            localStorage.setItem("activation", 'Success');
-                                                        }
+            var selectBulkTable = [];
+            _this.AioneService.SelectAllTable().then(function (slectdrop) {
+                Object.keys(slectdrop).forEach(function (dropkey, dropvalue) {
+                    selectBulkTable.push(slectdrop[dropkey].name);
+                });
+                console.log(selectBulkTable);
+                var selectBulkTable2 = selectBulkTable.slice(1);
+                var droptable2 = selectBulkTable2.slice(1);
+                console.log(droptable2);
+                _this.AioneService.DropTable(droptable2).then(function (drop) {
+                    _this.Api().then(function (Apidata) {
+                        var i;
+                        _this.table(Apidata, tableName, 0).then(function (result) {
+                            _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
+                                _this.dismissLoader();
+                                _this.insertUser(Apidata).then(function (user) {
+                                    console.log(user);
+                                    _this.insertsurveys(Apidata).then(function (surveys) {
+                                        _this.insertgroups(Apidata).then(function (groups) {
+                                            _this.insertquestions(Apidata).then(function (questions) {
+                                                _this.insertsettings(Apidata).then(function (setting) {
+                                                    _this.insersurveyMeta(Apidata).then(function (survey_meta) {
+                                                        _this.resultSurvey(Apidata.questions, Apidata.surveys).then(function (resultSurvey) {
+                                                            if (resultSurvey != undefined) {
+                                                                console.log(resultSurvey);
+                                                                _this.loader.dismiss();
+                                                                _this.nav.setRoot(LoginPage);
+                                                                localStorage.setItem("activation", 'Success');
+                                                            }
+                                                        });
                                                     });
                                                 });
                                             });

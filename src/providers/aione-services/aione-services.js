@@ -76,6 +76,16 @@ var AioneServicesProvider = /** @class */ (function () {
             });
         }
     };
+    AioneServicesProvider.prototype.SelectAllTable = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log("table");
+            _this.query = "SELECT name FROM sqlite_master WHERE type = 'table' ";
+            _this.ExecuteRun(_this.query, []).then(function (res) {
+                resolve(res.rows);
+            });
+        });
+    };
     AioneServicesProvider.prototype.TableBulk = function (TableName, Col) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -202,14 +212,20 @@ var AioneServicesProvider = /** @class */ (function () {
     AioneServicesProvider.prototype.DropTable = function (tableName) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            console.log(tableName.length);
             if (_this.db != undefined) {
-                //console.log(Col);		
-                for (var i = 0; i < tableName.length; i++) {
-                    _this.query = 'DROP Table IF  EXISTS ' + tableName[i];
-                    console.log(_this.query);
-                    _this.ExecuteRun(_this.query, []).then(function (res) {
-                        resolve(res);
-                    });
+                if (tableName.length > 0) {
+                    //console.log(Col);		
+                    for (var i = 0; i < tableName.length; i++) {
+                        _this.query = 'DROP Table IF  EXISTS ' + tableName[i];
+                        console.log(_this.query);
+                        _this.ExecuteRun(_this.query, []).then(function (res) {
+                            resolve(res);
+                        });
+                    }
+                }
+                else {
+                    resolve("res");
                 }
             }
         });
