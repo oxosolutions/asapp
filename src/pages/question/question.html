@@ -40,7 +40,7 @@
 			<p>{{OriginalContent?.question_desc}}</p>
 		
 			
-		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
+		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
 			<div [ngSwitch]="OriginalContent?.question_type">
 
 					<!--text-->
@@ -53,6 +53,19 @@
 					  </ion-item>
 					   <p *ngIf="Errors" style="color:red;">{{Errors}}</p>
 			    </div>
+
+			      <!--select-->
+		      	<div *ngSwitchCase="'select'">
+		        	<ion-item>
+					    <ion-label>{{OriginalContent?.question_text}}</ion-label>
+					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
+					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
+					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
+					    	</ion-option>
+					      
+					    </ion-select>
+  					</ion-item>
+		      	</div>
 
 			   
 			</div>
