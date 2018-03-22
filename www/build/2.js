@@ -1,14 +1,23 @@
 webpackJsonp([2],{
 
+<<<<<<< HEAD
 /***/ 308:
+=======
+/***/ 311:
+>>>>>>> 125d48301fe56e5354dee0cbd7dfc829892860ab
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RecordListPageModule", function() { return RecordListPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectPageModule", function() { return SelectPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__record_list__ = __webpack_require__(57);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select__ = __webpack_require__(219);
+>>>>>>> 125d48301fe56e5354dee0cbd7dfc829892860ab
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +27,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var RecordListPageModule = (function () {
-    function RecordListPageModule() {
+var SelectPageModule = (function () {
+    function SelectPageModule() {
     }
-    RecordListPageModule = __decorate([
+    SelectPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__record_list__["a" /* RecordListPage */],
+                __WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__record_list__["a" /* RecordListPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */]),
             ],
         })
-    ], RecordListPageModule);
-    return RecordListPageModule;
+    ], SelectPageModule);
+    return SelectPageModule;
 }());
 
-//# sourceMappingURL=record-list.module.js.map
+//# sourceMappingURL=select.module.js.map
 
 /***/ })
 

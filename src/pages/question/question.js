@@ -7,11 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AlertController } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { TextPage } from '../../pages/text/text';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { ToastController } from 'ionic-angular';
 var QuestionPage = /** @class */ (function () {
@@ -22,8 +23,11 @@ var QuestionPage = /** @class */ (function () {
         this.servicesProvider = servicesProvider;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.parentMessage = "message from parent";
         this.questions = [];
         this.surveyQuestion = [];
+        this.questionCheck = [];
+        this.indexArray = 0;
     }
     QuestionPage.prototype.showConfirm = function () {
         var _this = this;
@@ -55,6 +59,9 @@ var QuestionPage = /** @class */ (function () {
         });
         prompt.present();
     };
+    QuestionPage.prototype.ngAfterViewInit = function () {
+        // this.message = this.child.message
+    };
     QuestionPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         var i = 0;
@@ -71,10 +78,11 @@ var QuestionPage = /** @class */ (function () {
             Content.forEach(function (key, value) {
                 collection = [];
                 Object.keys(key).forEach(function (keyvalue, keydata) {
+                    console.log(keyvalue);
                     newcollection = [];
                     var newcolumn = [];
                     collection = key[keyvalue];
-                    //console.log(collection);
+                    // console.log(collection);
                     Object.keys(collection).forEach(function (valuekey, valuedata) {
                         var newData;
                         var replace;
@@ -98,32 +106,17 @@ var QuestionPage = /** @class */ (function () {
             });
             _this.questions = replacedArray;
             console.log(_this.questions);
-            if (_this.questions != undefined) {
-                if (_this.questionType == "save_survey") {
-                    _this.surveyQuestion = _this.questions;
-                    console.log(_this.surveyQuestion);
-                }
-                else if (_this.questionType == "save_section") {
-                }
-                else if (_this.questionType == "questions") {
-                    var i_1 = 0;
-                    _this.textData(_this.questions, i_1).then(function () {
-                    });
-                }
-            }
-        });
-    };
-    QuestionPage.prototype.surveyBasedQuestion = function (questions) {
-        return new Promise(function (resolve, reject) {
-            console.log(questions);
+            _this.textData(_this.questions, _this.indexArray).then(function () {
+            });
         });
     };
     QuestionPage.prototype.textData = function (questions, i) {
         var _this = this;
+        console.log(i);
         return new Promise(function (resolve, reject) {
-            console.log(questions[i]);
+            //console.log(questions[i]);
             _this.OriginalContent = questions[i];
-            if (_this.OriginalContent.serialNo == 1) {
+            if (_this.questionCheck.length == 0) {
                 _this.previousButton = false;
             }
             else {
@@ -131,80 +124,100 @@ var QuestionPage = /** @class */ (function () {
             }
         });
     };
-    QuestionPage.prototype.next = function (id) {
-        console.log(id);
-        var toast = this.toastctrl.create({
-            message: 'Your Enquiry is Submitted',
-            duration: 4000,
-            position: 'top',
+    QuestionPage.prototype.next = function (id, tablename, questionKey, formValue) {
+        var local = [];
+        // console.log(this.questions);
+        //  console.log(id);
+        console.log(this.questions[id]);
+        this.questionCheck.push(this.questions[id]);
+        localStorage.setItem("local", JSON.stringify(this.questionCheck));
+        var storedNames = JSON.parse(localStorage.getItem("local"));
+        console.log(storedNames);
+        this.indexArray++;
+        this.textData(this.questions, this.indexArray).then(function () {
         });
-        var questionLength;
-        questionLength = this.questions.length;
-        if (id == questionLength) {
-            toast.present();
-            this.navCtrl.setRoot(DashboardPage);
-        }
-        else {
-            console.log(id);
-            this.textData(this.questions, id).then(function () {
-            });
-        }
+        // console.log(questionKey);
+        console.log(this.questions[id].question_key);
+        // this.servicesProvider.SelectWhere(tablename,questionKey,"'"+formValue + "'").then((ans:any)=>{
+        //   let localArray=[];
+        //   localArray.push(ans.rows[0]);
+        //   console.log(localArray);
+        //   id++;
+        // }) 
     };
-    QuestionPage.prototype.previous = function (id) {
-        console.log(id);
-        id = id - 2;
-        console.log(id);
-        var questionLength;
-        questionLength = this.questions.length;
-        if (id == questionLength) {
-            console.log("there is no data");
-            this.navCtrl.setRoot(DashboardPage);
-        }
-        else {
-            console.log(id);
-            this.textData(this.questions, id).then(function () {
-            });
-        }
-    };
+    // previous(id){
+    //   console.log(id);
+    //   id=id-2;
+    //   console.log(id);
+    //   let questionLength;
+    //   questionLength=this.questions.length;
+    //   if(id==questionLength){
+    //     console.log("there is no data");
+    //     this.navCtrl.setRoot(DashboardPage);
+    //   }else{
+    //     console.log(id);
+    //     this.textData(this.questions,id).then(()=>{
+    //     });   
+    //   }
+    // }
+    // 
     QuestionPage.prototype.onSubmit = function (formData, id, questionKey, survey_id, questionText, QuestionType) {
         var _this = this;
-        console.log(QuestionType);
+        console.log(questionKey);
+        var i = 0;
         var json;
         if (!formData.valid) {
             console.log("not valid");
+            this.Errors = "it is not valid";
         }
         else {
-            // console.log("valid");
-            var formValue = [];
-            console.log(formData.value);
+            var formValue_1 = [];
+            //console.log(formData.value);
             if (QuestionType == "checkbox") {
                 console.log(QuestionType);
                 json = JSON.stringify(formData.value);
-                formValue.push(json);
+                formValue_1.push(json);
             }
             else {
-                formValue.push(formData.value[questionText]);
+                formValue_1.push(formData.value[questionText]);
             }
-            console.log(formValue);
-            var tablename = "surveyResult_" + survey_id;
-            //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
-            //console.log(result.rows.length);
-            //if(result.rows.length < 1){
-            //console.log("empty");
-            this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave) {
-                _this.next(id);
-                // });
-                // }else{
-                //console.log("should be updated");
-                // }
+            console.log(this.indexArray);
+            var tablename_1 = "surveyResult_" + survey_id;
+            var query = "Select " + questionKey + " from " + tablename_1;
+            this.servicesProvider.ExecuteRun(query, []).then(function (result) {
+                if (result.rows.length < 1) {
+                    console.log("empty");
+                    _this.insertSubmit(tablename_1, questionKey, formValue_1).then(function (questionSave) {
+                        _this.next(_this.indexArray, tablename_1, questionKey, formValue_1);
+                    });
+                }
+                else {
+                    console.log("update");
+                    var query_1 = "UPDATE " + tablename_1 + " SET " + questionKey + "= '" + formValue_1 + "'";
+                    _this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
+                        _this.next(_this.indexArray, tablename_1, questionKey, formValue_1);
+                    });
+                }
             });
         }
         formData.reset();
+    };
+    QuestionPage.prototype.insertSubmit = function (tablename, questionKey, formValue) {
+        var _this = this;
+        return new Promise(function (resolve, rejct) {
+            _this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave33) {
+                resolve(questionSave33);
+            });
+        });
     };
     QuestionPage.prototype.updateCucumber = function () {
         var cucumber;
         console.log('Cucumbers new state:' + cucumber);
     };
+    __decorate([
+        ViewChild(TextPage),
+        __metadata("design:type", Object)
+    ], QuestionPage.prototype, "child", void 0);
     QuestionPage = __decorate([
         IonicPage(),
         Component({

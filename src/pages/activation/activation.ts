@@ -44,7 +44,7 @@ export class ActivationPage {
         <div class="custom-spinner-box">`+message+`</div>
       </div>`,
     });
-    this.loader.present(); 
+    //this.loader.present(); 
   }
   dismissLoader(){
     this.loader.dismiss();
@@ -54,7 +54,16 @@ export class ActivationPage {
     return new Promise ((resolve,reject)=>{
       let tableName=["questions","surveys","groups","users" ,"settings","survey_meta"];
       let dropTable=["questions","surveys","groups","users" ,"settings","survey_meta"];
-       this.AioneService.DropTable(dropTable).then((drop)=>{
+      let selectBulkTable=[];
+      this.AioneService.SelectAllTable().then((slectdrop:any)=>{
+        Object.keys(slectdrop).forEach((dropkey,dropvalue)=>{
+          selectBulkTable.push(slectdrop[dropkey].name);
+        }); 
+        console.log(selectBulkTable);
+        let selectBulkTable2=selectBulkTable.slice(1);
+        let droptable2=selectBulkTable2.slice(1);
+        console.log(droptable2);
+        this.AioneService.DropTable(droptable2).then((drop)=>{
           this.Api().then((Apidata:any)=>{
             let i
             this.table(Apidata,tableName, 0).then(result => {
@@ -81,9 +90,10 @@ export class ActivationPage {
                   })
                 })
               })
-            });  
+             });  
+            })   
           })    
-        });
+         });
       }) 
   }
   resultSurvey(questions,surveys){

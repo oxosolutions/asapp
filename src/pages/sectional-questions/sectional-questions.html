@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{questionTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<div *ngFor="let question of questions let i = index;" >
+		<div class="card">
+		<span class="question-number">
+			Question {{i+1}}
+		</span>
+		of 20
+		<div class="question-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?
+		</div>
+		<div class="question-options">
+			
+		</div>
+		
+	</div>
+	<!-- <div class="action-buttons">
+		<button ion-button class="previous">Previous</button>
+		<button ion-button color="secondary" class="stop">Stop</button>
+		<button ion-button class="next">Next</button>
+	</div> -->
+	
+	</div>
+</ion-content>

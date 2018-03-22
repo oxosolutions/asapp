@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupsPage} from '../../pages/groups/groups';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
@@ -15,6 +15,10 @@ import {ToastController } from 'ionic-angular';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+   @ViewChild(TextPage) child;
+  parentMessage = "message from parent";
+  //message:string;
+
   answer:{};
   OriginalContent:any;
   dataUrl:any;
@@ -27,8 +31,10 @@ export class QuestionPage {
   subData: any;
   questionType:any;
   surveyQuestion=[];
+  Errors:any;
+  questionCheck=[];
+  indexArray=0;
   
-
   constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   showConfirm() {
@@ -58,8 +64,11 @@ export class QuestionPage {
           }
         }
       ]
-    });
+    });  
     prompt.present();
+  }
+  ngAfterViewInit() {
+    // this.message = this.child.message
   }
   ionViewDidLoad(){
     let i=0;
@@ -78,10 +87,11 @@ export class QuestionPage {
       Content.forEach((key,value)=>{
         collection=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
+          console.log(keyvalue);
           newcollection=[];
           let  newcolumn=[];
           collection=key[keyvalue];
-          //console.log(collection);
+         // console.log(collection);
           Object.keys(collection).forEach(function(valuekey,valuedata){
             let newData;
             let replace;
@@ -104,103 +114,137 @@ export class QuestionPage {
       });
       this.questions=replacedArray;
       console.log(this.questions);
-      if(this.questions != undefined){
-        if(this.questionType == "save_survey"){
-          this.surveyQuestion=this.questions;
-          console.log(this.surveyQuestion);    
-        }else if(this.questionType == "save_section"){
+      this.textData(this.questions, this.indexArray).then(()=>{
+      });
+    })
+  }
 
-        }else if(this.questionType == "questions"){
-          let i=0;
-          this.textData(this.questions, i).then(()=>{
-          });
-        }    
-      }
-    })
-  }
-  surveyBasedQuestion(questions){
-    return new Promise((resolve,reject)=>{
-      console.log(questions);
-    })
-  }
   textData(questions,i){
+
+    console.log(i);
     return new Promise((resolve,reject)=>{
-      console.log(questions[i]);
+      //console.log(questions[i]);
       this.OriginalContent=questions[i]; 
-      if(this.OriginalContent.serialNo==1 ){
+      if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
+        this.preButton();
       }
     });   
   }
-  next(id){
-    console.log(id);
-    let toast=this.toastctrl.create({
-        message:'Your Enquiry is Submitted',
-        duration:4000,
-        position:'top',
-    });
-    let questionLength;
-    questionLength=this.questions.length;
-    if(id==questionLength){
-      toast.present();
-      this.navCtrl.setRoot(DashboardPage);
-    }else{
-      console.log(id);
-      this.textData(this.questions,id).then(()=>{
-      });   
-    }
+
+  next(id,tablename,questionKey,formValue){
+    let local=[];
+    // console.log(this.questions);
+    //  console.log(id);
+     console.log(this.questions[id]);
+     this.questionCheck.push(this.questions[id]);
+     localStorage.setItem( "local", JSON.stringify(this.questionCheck));
+    // var storedNames = JSON.parse(localStorage.getItem("local"));
+    // console.log(storedNames); 
+     
+    // console.log(questionKey);
+    console.log(this.questions[id].question_key);
+    this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
+      let localArray=[];
+      localArray.push(ans.rows[0]);
+      console.log(localArray);
+      this.indexArray++;
+      this.textData(this.questions,this.indexArray).then(()=>{
+      }); 
+        
+      
+    }) ;
   }
+  preButton(){
+    var storedNames = JSON.parse(localStorage.getItem("local"));
+    console.log(storedNames);
+    let newss =storedNames.pop(); 
+    console.log(newss);
+  }
+
   
-  previous(id){
-    console.log(id);
-    id=id-2;
-    console.log(id);
-    let questionLength;
-    questionLength=this.questions.length;
-    if(id==questionLength){
-      console.log("there is no data");
-      this.navCtrl.setRoot(DashboardPage);
-    }else{
-      console.log(id);
-      this.textData(this.questions,id).then(()=>{
-      });   
-    }
-  }
-  onSubmit(formData,id,questionKey,survey_id,questionText,QuestionType){
-    console.log(QuestionType);
+
+  // previous(id){
+  //   console.log(id);
+
+  //   id=id-2;
+  //   console.log(id);
+  //   let questionLength;
+  //   questionLength=this.questions.length;
+
+  //   if(id==questionLength){
+  //     console.log("there is no data");
+  //     this.navCtrl.setRoot(DashboardPage);
+  //   }else{
+  //     console.log(id);
+  //     this.textData(this.questions,id).then(()=>{
+  //     });   
+  //   }
+  // }
+  // 
+  // 
+
+ 
+
+  onSubmit(formData,questionKey,survey_id,questionText,QuestionType){
+    
+    let i=0;
     let json;
     if(!formData.valid){
-        console.log("not valid");
+       //console.log("not valid");
+        this.Errors="it is not valid";
     }else{
-      // console.log("valid");
       let formValue=[];
-      console.log(formData.value);
+      //console.log(formData.value);
+
       if(QuestionType=="checkbox"){
-        console.log(QuestionType);
+        //console.log(QuestionType);
          json=JSON.stringify(formData.value);
          formValue.push(json);
       }else{
+        //c//onsole.log(formData.value);
+        //console.log(questionText);
         formValue.push(formData.value[questionText]);
+        formData.value[questionText]="";
       }
-      console.log(formValue);
+      //console.log(formValue);
+     // console.log(this.indexArray);  
       let tablename="surveyResult_"+survey_id;
-      //this.servicesProvider.SelectWhere(tablename,questionKey,'"'+formValue+'"').then((result:any)=>{
+      let query="Select "+ questionKey +" from " + tablename ;
+      //console.log(query);
+      this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
+        //console.log(result.rows);
         //console.log(result.rows.length);
-        //if(result.rows.length < 1){
-          //console.log("empty");
+        if(result.rows.length < 1 ){
+          console.log("empty");
           this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
-            this.next(id);
-         // });
-       // }else{
-          //console.log("should be updated");
-       // }
-      })
-      
+           // console.log(questionSave);
+            this.next(this.indexArray,tablename,questionKey,formValue);
+          });
+        }else{
+         // console.log("update");
+          let query="UPDATE "+ tablename + " SET " + questionKey +"= '" +formValue +"'";
+          //console.log(query);
+          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+            this.next(this.indexArray,tablename,questionKey,formValue);
+          });
+        }
+      }); 
     }
     formData.reset();   
   }
+
+  insertSubmit(tablename,questionKey,formValue){
+    return new Promise((resolve,rejct)=>{
+      this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave33)=>{
+        resolve(questionSave33);
+      });
+    })
+  }
+
+
   updateCucumber() {
    let  cucumber:any
     console.log('Cucumbers new state:' + cucumber);

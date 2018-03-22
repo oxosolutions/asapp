@@ -6,7 +6,7 @@
   		<ion-icon name="menu"></ion-icon>
   	</button>
     <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->
-        Surveys
+        List Of Surveys
     </ion-title>
   </ion-navbar>
 
@@ -14,33 +14,50 @@
 
   
 <ion-content>
-<!-- <h1>List Of Surveys</h1>
+ 
 <ion-list>
 <div *ngFor="let survey of listSurvey[0]">      
-
-  <ion-item (click)="groups(survey.id)">
+  <ion-item (click)="groups(survey.id,survey)">
+  <p>{{survey["scheduling"].surveyResponse}}</p>
+  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>
+  
     <ion-thumbnail item-start>
       <img src="../../assets/imgs/survey.png">
     </ion-thumbnail>
     <h2>{{survey.name}}</h2>
     <p>{{survey.description}}</p>
-    <button ion-button clear item-end>View</button>
+
+    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>
+    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">0 times filled</button>
+    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
   </ion-item>
 </div>
-<div *ngIf="nullSurvey">
+<!-- <div *ngIf="nullSurvey">
   <p>{{nullSurvey}}</p>
-</div>
+</div> -->
+</ion-list> 
+
+<!-- <p *ngIf="today">{{today | date: 'medium'}}</p>
+ -->
+<!-- <ion-list>
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="../../assets/imgs/survey.png">
+    </ion-avatar>
+    <h2>Finn</h2>
+    <h3>Don't Know What To Do!</h3>
+    <p>I've had a pretty messed up day. If we just...</p>
+  </ion-item>
 </ion-list> -->
-<p *ngIf="today">{{today | date: 'medium'}}</p>
-    <ion-item-group *ngFor="let survey of listSurvey[0]">
+
+    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">
         <ion-item (click)="groups(survey.id)">
-            <div class="icon-wrapper">
-                <ion-icon name="ios-paper"></ion-icon>
-                
-            </div>  
+           
+            <img src="../../assets/imgs/survey.png">
             <div class="list-content-wrapper">
                 <div class="item-title">{{survey.name}}</div>
                 <div class="item-description">{{survey.description}}</div>
+                <div class=""></div>
                 <div class="item-time">
                     30 Mar 2018
                 </div>
@@ -49,44 +66,7 @@
 
         </ion-item>
        
-    </ion-item-group>
-    <ion-item-group *ngFor="let survey of listSurvey[0]">
-        <ion-item (click)="groups(survey.id)">
-            <div class="icon-wrapper">
-                <ion-icon name="ios-paper"></ion-icon>
-                
-            </div>  
-            <div class="list-content-wrapper">
-                <div class="item-title">{{survey.name}}</div>
-                <div class="item-description">{{survey.description}}</div>
-                <div class="item-time">
-                    30 Mar 2018
-                </div>
-            </div> 
-
-
-        </ion-item>
-       
-    </ion-item-group>
-    <ion-item-group *ngFor="let survey of listSurvey[0]">
-        <ion-item (click)="groups(survey.id)">
-            <div class="icon-wrapper">
-                <ion-icon name="ios-paper"></ion-icon>
-                
-            </div>  
-            <div class="list-content-wrapper">
-                <div class="item-title">{{survey.name}}</div>
-                <div class="item-description">{{survey.description}}</div>
-                <div class="item-time">
-                    30 Mar 2018
-                </div>
-            </div> 
-
-
-        </ion-item>
-       
-    </ion-item-group>
-    <div *ngIf="nullSurvey">
-      <p>{{nullSurvey}}</p>
-    </div>
+    </ion-item-group> -->
+    
+   
 </ion-content>

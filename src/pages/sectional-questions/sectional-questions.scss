@@ -1,0 +1,61 @@
+page-sectional-questions {
+	ion-content{
+		background-color: #f5f5f5;
+	}
+
+	.card{
+		min-height: 100%;
+		background-color: white;
+		padding: 16px;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+		
+		.question-number{
+			display: inline-block;
+			background-color: teal;
+			color: white;
+			padding: 5px;
+			border-radius: 4px;
+		}
+		.question-text{
+			font-size: 20px;
+			line-height: 1.8;
+			padding: 16px 0;
+		}
+		.question-options{
+			border: 1px solid #e8e8e8;
+			min-height: 300px;
+		}
+		
+	}
+	.action-buttons{
+			position: absolute;
+			bottom: 32px;
+			left: 0;
+			right:0;
+			text-align: center;
+			
+			%width{
+				width: 33%;
+			}
+			.previous{
+				@extend %width;
+			}
+
+			.stop{
+				width: 27%;
+				
+			}
+			.next{
+				@extend %width;
+			}
+		}
+	.groups ion-item{
+		background: #f5f5f5;
+    text-align: center;
+    padding: 5px 0 9px 0px;
+    margin-bottom: 14px;
+   }
+   .button-outline-md{
+   	    margin-top: 65px;
+   }
+}
