@@ -17,7 +17,7 @@ export class DashboardPage {
   }
   ionViewDidLoad() {
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
-    	this.dashboard=result.rows[0];
+    	this.dashboard=result.rows.item(0);
       console.log(this.dashboard);
       localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
     });
