@@ -35,22 +35,31 @@ export class ListsurveyPage {
   	console.log(message["scheduling"].surveyResponse);
   	if(message["scheduling"].surveyResponse == "true"){
   		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
-        for(var keys in form.rows){
-          if(form.rows[keys].value == "survey"){
-          	surveyMetaType=form.rows[keys].value;
+  		console.log(form);
+  			//console.log(form.rows.item);
+  			var row = {};
+      	for(var i=0; i < form.rows.length; i++) {
+          	row[i] = form.rows.item(i)
+      	}
+       	let SurveyData = row;
+       	console.log(SurveyData);
+
+        for(let keys in SurveyData){
+          if(SurveyData[keys].value == "survey"){
+          	surveyMetaType=SurveyData[keys].value;
             localStorage.setItem("questionType", 'save_survey');
             
-          }else if(form.rows[keys].value == "section"){
-          	surveyMetaType=form.rows[keys].value;
+          }else if(SurveyData[keys].value == "section"){
+          	surveyMetaType=SurveyData[keys].value;
             localStorage.setItem("questionType", 'save_section');
             this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
-          }else if(form.rows[keys].value == "question"){
-          	surveyMetaType=form.rows[keys].value;
+          }else if(SurveyData[keys].value == "question"){
+          	surveyMetaType=SurveyData[keys].value;
             localStorage.setItem("questionType", 'questions');
             this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
           }
           
-        }
+         }
       });
   	}else{
   		this.presentToast();
@@ -81,24 +90,28 @@ export class ListsurveyPage {
 			let query='Select * from survey_meta where key = "enable_survey" AND value = 1';
 			this.servicesProvider.ExecuteRun(query,[]).then((survey_meta:any)=>{
 				metaSurvey.push(survey_meta.rows);
+				console.log(metaSurvey);
 				if(survey_meta.rows.length > 0){
 				let forloop=0;
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					//value.length;
 					for(let i=0; i < value.length; i++){
-						this.surveyScheduling(value[i].form_id).then((surveySch : any)=>{
-								this.servicesProvider.SelectWhere("surveys","id",value[i].form_id).then((survey:any)=>{
-									this.responseLimit(value[i].form_id).then((responseData:any)=>{
-										this.surveytimer(value[i].form_id).then((timerData:any)=>{
+						console.log(value.item(i).form_id);
+						this.surveyScheduling(value.item(i).form_id).then((surveySch : any)=>{
+							console.log(surveySch);
+								this.servicesProvider.SelectWhere("surveys","id",value.item(i).form_id).then((survey:any)=>{ console.log(survey);
+									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
+										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
 											// console.log(surveySch);
-											let rowsData = survey.rows[0];
+											let rowsData = survey.rows.item(0);
 											rowsData["details"]=responseData;
 											rowsData["timer"]=timerData;
 											rowsData["scheduling"]=surveySch;
 											console.log(rowsData);
 										// console.log(rowsData["details"].responenumber);
 											content.push(rowsData);	
+											console.log(content);
 										})	
 												
 								});	
@@ -107,7 +120,7 @@ export class ListsurveyPage {
 						if(content != undefined){
 							SurveySelect.push(content);
 							forloop++;
-							if(forloop == survey_meta.rows.length ){
+							if(forloop == survey_meta.rows.item.length ){
 								this.listSurvey=SurveySelect;
 								console.log(this.listSurvey);
 							}
@@ -153,8 +166,8 @@ export class ListsurveyPage {
 									this.servicesProvider.MultipleSelectWhere("survey_meta","key","'expire_date'","form_id",formId).then((expiredate:any)=>{
 										this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_start_time'","form_id",formId).then((startTime:any)=>{	
 											this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_expire_time'","form_id",formId).then((expireTime:any)=>{
-												this.caseCondtions(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value).then((caseResult:any)=>{
-													this.caseValidations(startDate.rows[0].value, expiredate.rows[0].value, startTime.rows[0].value, expireTime.rows[0].value,caseResult).then((collection:any)=>{
+												this.caseCondtions(startDate.rows.item(0).value, expiredate.rows.item(0).value, startTime.rows.item(0).value, expireTime.rows.item(0).value).then((caseResult:any)=>{ 
+													this.caseValidations(startDate.rows.item(0).value, expiredate.rows.item(0).value, startTime.rows.item(0).value, expireTime.rows.item(0).value,caseResult).then((collection:any)=>{
 														// console.log(collection);
 														resolve(collection);
 													});	
@@ -431,6 +444,9 @@ export class ListsurveyPage {
 			if(startdate == "" && expiredate != "" && starttime != "" && expiretime != "" ){
 				resolve ("case N");	 //expiredate ,starttime expiretime
 			}
+				// starttime,startdate
+			//also M case pending
+
 
 
 			
@@ -445,12 +461,12 @@ export class ListsurveyPage {
 				if(data.rows.length > 0){
 						//console.log("response dffdexits");
 						this.servicesProvider.MultipleSelectWhere("survey_meta","key","'response_limit'","form_id",formId).then((num:any)=>{
-							responenumber=num.rows[0].value;
+							responenumber=num.rows.item(0).value;
 							this.servicesProvider.MultipleSelectWhere("survey_meta","key","'response_limit_type'","form_id",formId).then((type:any)=>{
-								if(type.rows[0].value=="per_user"){
-									responsetype=type.rows[0].value;
+								if(type.rows.item(0).value=="per_user"){
+									responsetype=type.rows.item(0).value;
 								}else{
-									responsetype=type.rows[0].value;
+									responsetype=type.rows.item(0).value;
 								}
 								let responseResult=this.sruveyResponseExecution(responenumber,responsetype);
 								resolve(responseResult);
@@ -484,11 +500,11 @@ export class ListsurveyPage {
 					console.log("timer extis");
 					this.servicesProvider.MultipleSelectWhere("survey_meta","key","'survey_duration'","form_id",formId).then((dur:any)=>{
 					this.servicesProvider.MultipleSelectWhere("survey_meta","key","'timer_type'","form_id",formId).then((type:any)=>{
-						if(type.rows[0].value == "survey_duration"){
-							timerType=type.rows[0].value;
-							duration=dur.rows[0].value;
+						if(type.rows.item(0).value == "survey_duration"){
+							timerType=type.rows.item(0).value;
+							duration=dur.rows.item(0).value;
 						}else{
-							timerType=type.rows[0].value;
+							timerType=type.rows.item(0).value;
 							duration="";
 						}
 					

@@ -43,7 +43,7 @@ export class LoginPage {
     	this.AioneService.MultipleSelectWhere("users","email", this.user, "app_password" ,this.pass).then((userDetail:any)=>{
   			this.loginUser.reset();
   			this.loader.dismiss();
-    		if(userDetail.rows.length >= 1){
+    		if(userDetail.rows.item.length >= 1){
     			this.navCtrl.setRoot(DashboardPage);
     			localStorage.setItem("username", this.user);
     		}else{
