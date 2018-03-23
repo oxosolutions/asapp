@@ -127,19 +127,26 @@ export class QuestionPage {
       this.OriginalContent=questions[i]; 
       if(this.questionCheck.length==0){
         this.previousButton=false;
+
       }else{
+
         this.previousButton=true; 
+      }
+      let questionLength=this.questions.length;
+      if(this.questionCheck.length == (questionLength-1)){
+        console.log("not show");
+        this.NextButton==false;
+      }else{
+        console.log("show button");
+        this.NextButton=true;
       }
     });   
   }
 
   next(id,tablename,questionKey,formValue){
-    // this.questionCheck.push(id);
     console.log(id);
-
-localStorage.setItem("lastquestionIndex", id);
-    this.questionIndex(id).then((id)=>{ 
-      
+    localStorage.setItem("lastquestionIndex", id);
+    this.questionIndex(id).then((id)=>{      
       this.indexArray++;
       this.textData(this.questions,this.indexArray).then(()=>{
       }); 
@@ -149,8 +156,8 @@ localStorage.setItem("lastquestionIndex", id);
   questionIndex(check){
     return new Promise ((resolve,reject)=>{
       this.questionCheck.push(check);
-       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
-       resolve("index");
+      localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
+      resolve("index");
     })
   }
 
@@ -161,19 +168,21 @@ localStorage.setItem("lastquestionIndex", id);
     this.lastPopId= storedNames.pop();
     let lastindex2=this.lastPopId-1;
     this.questionCheck=storedNames;
-    console.log(storedNames);
-     localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
-    //this.questionIndex(storedNames).then((id)=>{ 
-       localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
-        console.log(this.indexArray);
-        this.indexArray=this.indexArray-1;
-        console.log(this.indexArray)
+    localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck)); 
+    localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
+      this.indexArray=this.indexArray-1;
+      console.log(this.indexArray);
+      this.previousData().then(()=>{
         this.textData(this.questions,this.indexArray).then(()=>{
         }); 
-    //});
-  
+      })
+      
   }
-
+  previousData(){
+    return new Promise((resolve,reject)=>{
+      resolve("pre data");
+    });
+  }
   
 
   // previous(id){
