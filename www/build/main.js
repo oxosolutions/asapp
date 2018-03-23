@@ -565,7 +565,7 @@ var QuestionPage = (function () {
         var _this = this;
         console.log(i);
         return new Promise(function (resolve, reject) {
-            //console.log(questions[i]);
+            console.log(questions[i]);
             _this.OriginalContent = questions[i];
             if (_this.questionCheck.length == 0) {
                 _this.previousButton = false;
@@ -576,33 +576,31 @@ var QuestionPage = (function () {
         });
     };
     QuestionPage.prototype.next = function (id, tablename, questionKey, formValue) {
-        var _this = this;
-        var local = [];
-        // console.log(this.questions);
-        //  console.log(id);
-        //console.log(this.questions[id]);
-        this.questionCheck.push(this.questions[id]);
-        localStorage.setItem("local", JSON.stringify(this.questionCheck));
-        var storedNames = JSON.parse(localStorage.getItem("local"));
-        console.log(storedNames);
-        //console.log(questionKey);
-        // console.log(this.questions[id].question_key);
-        this.servicesProvider.SelectWhere(tablename, this.questions[id].question_key, "'" + formValue + "'").then(function (ans) {
-            var localArray = [];
-            localArray.push(ans.rows.item(0));
-            //console.log(localArray);
-            _this.indexArray++;
-            _this.textData(_this.questions, _this.indexArray).then(function () {
-            });
+        console.log(id);
+        this.questionCheck.push(id);
+        localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
+        localStorage.setItem("lastquestionIndex", id);
+        // this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
+        //   let localArray=[];
+        //   localArray.push(ans.rows.item(0));
+        //console.log(localArray);
+        this.indexArray++;
+        this.textData(this.questions, this.indexArray).then(function () {
         });
+        // }) ;
     };
     QuestionPage.prototype.previous = function () {
         var storedNames;
-        console.log(JSON.parse(localStorage.getItem("local")));
-        storedNames = JSON.parse(localStorage.getItem("local"));
-        //let newss =storedNames.splice(-1);
-        var newss = storedNames.pop();
-        console.log(newss);
+        storedNames = JSON.parse(localStorage.getItem("questionIndex"));
+        this.lastPopId = storedNames.pop();
+        var lastindex2 = this.lastPopId - 1;
+        localStorage.setItem("questionIndex", JSON.stringify(storedNames));
+        localStorage.setItem("lastquestionIndex", lastindex2);
+        console.log(this.indexArray);
+        this.indexArray = this.indexArray - 1;
+        console.log(this.indexArray);
+        this.textData(this.questions, this.indexArray).then(function () {
+        });
     };
     // previous(id){
     //   console.log(id);
@@ -651,6 +649,7 @@ var QuestionPage = (function () {
             this.servicesProvider.ExecuteRun(query, []).then(function (result) {
                 //console.log(result.rows);
                 //console.log(result.rows.length);
+                console.log(_this.indexArray);
                 if (result.rows.length < 1) {
                     console.log("empty");
                     _this.servicesProvider.Insert(tablename_1, questionKey, formValue_1).then(function (questionSave) {

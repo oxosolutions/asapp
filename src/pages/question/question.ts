@@ -34,6 +34,7 @@ export class QuestionPage {
   Errors:any;
   questionCheck=[];
   indexArray=0;
+  lastPopId:any;
   
   constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -120,50 +121,47 @@ export class QuestionPage {
   }
 
   textData(questions,i){
-
     console.log(i);
     return new Promise((resolve,reject)=>{
-      //console.log(questions[i]);
+      console.log(questions[i]);
       this.OriginalContent=questions[i]; 
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
-      
       }
     });   
   }
 
   next(id,tablename,questionKey,formValue){
-    let local=[];
-    // console.log(this.questions);
-    //  console.log(id);
-     //console.log(this.questions[id]);
-     this.questionCheck.push(this.questions[id]);
-     localStorage.setItem( "local", JSON.stringify(this.questionCheck));
-      var storedNames = JSON.parse(localStorage.getItem("local"));
-      console.log(storedNames); 
-       
-     //console.log(questionKey);
-   // console.log(this.questions[id].question_key);
-    this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
-      let localArray=[];
-      localArray.push(ans.rows.item(0));
+    console.log(id);
+    this.questionCheck.push(id);
+    localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
+    localStorage.setItem("lastquestionIndex",id);
+    // this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
+    //   let localArray=[];
+    //   localArray.push(ans.rows.item(0));
       //console.log(localArray);
       this.indexArray++;
       this.textData(this.questions,this.indexArray).then(()=>{
       }); 
         
       
-    }) ;
+   // }) ;
   }
   previous(){
     let storedNames:any;
-    console.log(JSON.parse(localStorage.getItem("local")));
-    storedNames = JSON.parse(localStorage.getItem("local"));
-    //let newss =storedNames.splice(-1);
-    let newss =storedNames.pop();
-    console.log(newss);
+    storedNames = JSON.parse(localStorage.getItem("questionIndex"));
+    this.lastPopId= storedNames.pop();
+    let lastindex2=this.lastPopId-1;
+    localStorage.setItem( "questionIndex", JSON.stringify(storedNames));
+    localStorage.setItem("lastquestionIndex", lastindex2);
+    console.log(this.indexArray);
+    this.indexArray=this.indexArray-1;
+    console.log(this.indexArray)
+   
+      this.textData(this.questions,this.indexArray).then(()=>{
+      }); 
   }
 
   
@@ -219,7 +217,9 @@ export class QuestionPage {
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         //console.log(result.rows);
         //console.log(result.rows.length);
+       console.log(this.indexArray);
         if(result.rows.length < 1 ){
+
           console.log("empty");
           this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
            // console.log(questionSave);
