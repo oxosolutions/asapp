@@ -576,31 +576,40 @@ var QuestionPage = (function () {
         });
     };
     QuestionPage.prototype.next = function (id, tablename, questionKey, formValue) {
+        var _this = this;
+        // this.questionCheck.push(id);
         console.log(id);
-        this.questionCheck.push(id);
-        localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
         localStorage.setItem("lastquestionIndex", id);
-        // this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
-        //   let localArray=[];
-        //   localArray.push(ans.rows.item(0));
-        //console.log(localArray);
-        this.indexArray++;
-        this.textData(this.questions, this.indexArray).then(function () {
+        this.questionIndex(id).then(function (id) {
+            _this.indexArray++;
+            _this.textData(_this.questions, _this.indexArray).then(function () {
+            });
         });
-        // }) ;
+    };
+    QuestionPage.prototype.questionIndex = function (check) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.questionCheck.push(check);
+            localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
+            resolve("index");
+        });
     };
     QuestionPage.prototype.previous = function () {
         var storedNames;
         storedNames = JSON.parse(localStorage.getItem("questionIndex"));
         this.lastPopId = storedNames.pop();
         var lastindex2 = this.lastPopId - 1;
-        localStorage.setItem("questionIndex", JSON.stringify(storedNames));
-        localStorage.setItem("lastquestionIndex", lastindex2);
+        this.questionCheck = storedNames;
+        console.log(storedNames);
+        localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
+        //this.questionIndex(storedNames).then((id)=>{ 
+        localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
         console.log(this.indexArray);
         this.indexArray = this.indexArray - 1;
         console.log(this.indexArray);
         this.textData(this.questions, this.indexArray).then(function () {
         });
+        //});
     };
     // previous(id){
     //   console.log(id);

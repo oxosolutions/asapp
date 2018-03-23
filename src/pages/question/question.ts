@@ -134,34 +134,44 @@ export class QuestionPage {
   }
 
   next(id,tablename,questionKey,formValue){
+    // this.questionCheck.push(id);
     console.log(id);
-    this.questionCheck.push(id);
-    localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
-    localStorage.setItem("lastquestionIndex",id);
-    // this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
-    //   let localArray=[];
-    //   localArray.push(ans.rows.item(0));
-      //console.log(localArray);
+
+localStorage.setItem("lastquestionIndex", id);
+    this.questionIndex(id).then((id)=>{ 
+      
       this.indexArray++;
       this.textData(this.questions,this.indexArray).then(()=>{
       }); 
-        
-      
-   // }) ;
+    })  
   }
+
+  questionIndex(check){
+    return new Promise ((resolve,reject)=>{
+      this.questionCheck.push(check);
+       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
+       resolve("index");
+    })
+  }
+
+
   previous(){
     let storedNames:any;
     storedNames = JSON.parse(localStorage.getItem("questionIndex"));
     this.lastPopId= storedNames.pop();
     let lastindex2=this.lastPopId-1;
-    localStorage.setItem( "questionIndex", JSON.stringify(storedNames));
-    localStorage.setItem("lastquestionIndex", lastindex2);
-    console.log(this.indexArray);
-    this.indexArray=this.indexArray-1;
-    console.log(this.indexArray)
-   
-      this.textData(this.questions,this.indexArray).then(()=>{
-      }); 
+    this.questionCheck=storedNames;
+    console.log(storedNames);
+     localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
+    //this.questionIndex(storedNames).then((id)=>{ 
+       localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
+        console.log(this.indexArray);
+        this.indexArray=this.indexArray-1;
+        console.log(this.indexArray)
+        this.textData(this.questions,this.indexArray).then(()=>{
+        }); 
+    //});
+  
   }
 
   
