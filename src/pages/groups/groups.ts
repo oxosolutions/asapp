@@ -43,11 +43,10 @@ export class GroupsPage {
             row[i] = result.rows.item(i)
       }
       let SurveyData = row;
-      console.log(SurveyData);
-         this.groupsResult=SurveyData;
-        console.log( this.groupsResult);
+      this.groupsResult=SurveyData;
+      console.log( this.groupsResult);
 
-      let elem = this;
+      // let elem = this;
       
       // setTimeout(function(){
       //   elem.groupsResult=SurveyData;

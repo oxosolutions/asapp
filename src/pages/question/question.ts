@@ -129,7 +129,7 @@ export class QuestionPage {
         this.previousButton=false;
       }else{
         this.previousButton=true; 
-        this.preButton();
+      
       }
     });   
   }
@@ -138,18 +138,18 @@ export class QuestionPage {
     let local=[];
     // console.log(this.questions);
     //  console.log(id);
-     console.log(this.questions[id]);
+     //console.log(this.questions[id]);
      this.questionCheck.push(this.questions[id]);
      localStorage.setItem( "local", JSON.stringify(this.questionCheck));
-    // var storedNames = JSON.parse(localStorage.getItem("local"));
-    // console.log(storedNames); 
-     
-    // console.log(questionKey);
-    console.log(this.questions[id].question_key);
+      var storedNames = JSON.parse(localStorage.getItem("local"));
+      console.log(storedNames); 
+       
+     //console.log(questionKey);
+   // console.log(this.questions[id].question_key);
     this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
       let localArray=[];
-      localArray.push(ans.rows[0]);
-      console.log(localArray);
+      localArray.push(ans.rows.item(0));
+      //console.log(localArray);
       this.indexArray++;
       this.textData(this.questions,this.indexArray).then(()=>{
       }); 
@@ -157,10 +157,12 @@ export class QuestionPage {
       
     }) ;
   }
-  preButton(){
-    var storedNames = JSON.parse(localStorage.getItem("local"));
-    console.log(storedNames);
-    let newss =storedNames.pop(); 
+  previous(){
+    let storedNames:any;
+    console.log(JSON.parse(localStorage.getItem("local")));
+    storedNames = JSON.parse(localStorage.getItem("local"));
+    //let newss =storedNames.splice(-1);
+    let newss =storedNames.pop();
     console.log(newss);
   }
 
@@ -246,7 +248,7 @@ export class QuestionPage {
 
 
   updateCucumber() {
-   let  cucumber:any
+    let  cucumber:any
     console.log('Cucumbers new state:' + cucumber);
   }
 }
