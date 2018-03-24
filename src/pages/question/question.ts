@@ -135,13 +135,14 @@ export class QuestionPage {
       let questionLength=this.questions.length;
       if(this.questionCheck.length == (questionLength-1)){
         console.log("not show");
-        this.NextButton==false;
+        this.NextButton=false;
       }else{
         console.log("show button");
         this.NextButton=true;
       }
     });   
   }
+
 
   next(id,tablename,questionKey,formValue){
     console.log(id);
