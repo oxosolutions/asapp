@@ -44,7 +44,7 @@ export class ActivationPage {
         <div class="custom-spinner-box">`+message+`</div>
       </div>`,
     });
-    //this.loader.present(); 
+    this.loader.present(); 
   }
   dismissLoader(){
     this.loader.dismiss();

@@ -40,18 +40,44 @@
 			<p>{{OriginalContent?.question_desc}}</p>
 		
 			
-		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
+		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.question_key,OriginalContent.survey_id,QuestionKeyText,OriginalContent?.question_type)">
 			<div [ngSwitch]="OriginalContent?.question_type">
 
 					<!--text-->
 			    <div *ngSwitchCase="'text'">
 
-				    <ion-item>
+			      <input type="text" [(ngModel)]="name" name="{{QuestionKeyText}}"   required> 			      <!-- <input type="text" class="form-control" id="name"  
+                   [(ngModel)]="QuestionKeyText" required> -->
+				   	<ion-item>
 					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
-					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
+<!-- 							  <input type="text"  [(ngModel)]="name"  name="sDefaultEmail"> -->
+					
+					  <!--   <ion-input type="text" [(ngModel)]="name" name="{{QuestionKeyText}}"  required></ion-input>
+ -->
+
+					   
+					    <!-- <input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" value="dfdfd" required><br> -->
+
+					  <!--   {{OriginalContent?.question_text}}<br>
+					    <input type="text" [(ngModel)]="najme"  name="firstname" value="dfdfd" required><br>
+
+					    <input type='text' name='textAnswer' ng-model='textAnswer.value' class='surveyTextBox' ng-readonly="readonlyText.status" data-validation="required" /> -->
 					  </ion-item>
-					   <p *ngIf="Errors" style="color:red;">{{Errors}}</p>
+					 <!--  <input type="text" name="dfkjd"  [(ngModel)]="name"> -->
+					 <!--   <p *ngIf="Errors" style="color:red;">{{Errors}}</p> -->
 			    </div>
+
+
+			     <!--textarea-->
+		      <div *ngSwitchCase="'textarea'">
+		          <input type="text" [(ngModel)]="name" name="{{QuestionKeyText}}" required> 	
+		      	<ion-item>
+		      	 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
+					   <!--  <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
+					    <ion-input type="text" [(ngModel)]="name" name="{{QuestionKeyText}}" required></ion-input> -->
+					  </ion-item>
+		      </div>
+
 
 			      <!--select-->
 		      	<div *ngSwitchCase="'select'">
