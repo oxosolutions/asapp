@@ -132,10 +132,15 @@ export class QuestionPage {
       this.questions=replacedArray;
       console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-       this.form = new FormGroup({
-      fatherName: new FormControl(),
-      // Country: new FormControl()
-    })
+
+
+
+      this.form = new FormGroup({
+        fatherName: new FormControl(),
+        Country: new FormControl()
+      })
+
+
       console.log(this.QuestionKeyText);
       this.textData(this.questions, this.indexArray, this.QuestionKeyText).then(()=>{
       });
@@ -214,8 +219,11 @@ export class QuestionPage {
       resolve("pre data");
     });
   }
-  onSubmit2(form){
+  onSubmit2(form,questionText){
      console.log(form.value);
+     let formValue=[];
+     formValue.push(form.value[questionText]);
+     console.log(formValue);
   }
 
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){

@@ -15,7 +15,7 @@
 
 
 	<div *ngIf="OriginalContent">
-			<form novalidate (ngSubmit)="onSubmit2(form)" [formGroup]="form">
+			<form novalidate (ngSubmit)="onSubmit2(form,OriginalContent?.question_text)" [formGroup]="form">
    <div [ngSwitch]="OriginalContent?.question_type">
 
       <input *ngSwitchCase="'textarea'"
