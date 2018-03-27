@@ -15,24 +15,42 @@
 
 
 	<div *ngIf="OriginalContent">
-	<h1>{{OriginalContent?.question_text}}</h1>
+	<div class="card" >
+			<span class="question-number">Question 1</span>of 20
+	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
 			<form novalidate (ngSubmit)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" [formGroup]="form">
    <div [ngSwitch]="OriginalContent?.question_type">
+	
+	<div  *ngSwitchCase="'textarea'">
+      <input  [formControlName]="OriginalContent?.question_text"
+        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" required> 
+		<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
 
-      <input *ngSwitchCase="'textarea'"
-        [formControlName]="OriginalContent?.question_text"
-        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.question_text" required> 
+	</div>
 
-         <input *ngSwitchCase="'text'"
-        [formControlName]="OriginalContent?.question_text"
-        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.question_text" required>  
-
+	<div  *ngSwitchCase="'text'">
+         <input  [formControlName]="OriginalContent?.question_text"
+        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
+        <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
     </div>
 
-    <button type="submit">Save</button>
-</form>
 
+     
+		
+    </div>
+	
+    <div class="action-buttons">
+				<!-- <button ion-button class="previous">Previous</button>
+				<button ion-button color="secondary" class="stop">Stop</button>
+				<button ion-button class="next">Next</button> -->
+			
+				<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
+				<button (click)="showConfirm()" ion-button color="secondary" class="stop">Exit</button>
+				<button  ion-button class="next"><ion-icon name="add"></ion-icon>Next</button>
+			</div>
+</form>
+</div>
 	</div>
 
 

@@ -39,7 +39,7 @@ export class QuestionPage {
   lastPopId:any;
   tablename:any;
   answerValue:string;
-  sDefaultEmail:string;
+  sDefaultEmail:any;
   QuestionKeyText:any;
   textAnswer:any;
   
@@ -141,7 +141,7 @@ export class QuestionPage {
     //end 
     
     console.log(this.QuestionKeyText);
-      this.textData(this.questions, this.indexArray, this.QuestionKeyText).then(()=>{
+      this.textData(this.questions, this.indexArray, "").then(()=>{
       });
     })
   }
@@ -151,9 +151,11 @@ export class QuestionPage {
     return new Promise((resolve,reject)=>{
       this.QuestionKeyText=questionKey;
       //console.log(this.QuestionKeyText);
-
-      this.OriginalContent=questions[i]; 
-      this.OriginalContent.prefill = '';
+      let content=[]
+      content=questions[i]; 
+      content["prefill"]=questionKey;
+      this.OriginalContent = content ;
+      console.log(this.OriginalContent);
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
@@ -200,6 +202,7 @@ export class QuestionPage {
       this.indexArray=this.indexArray-1;
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
       this.answerGet(this.indexArray).then((answerKey:any)=>{
+        console.log(answerKey);
         this.textData(this.questions,this.indexArray, answerKey).then(()=>{
         }); 
       })    
@@ -209,6 +212,7 @@ export class QuestionPage {
       let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename;
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
+        console.log(this.answerValue);
         resolve(this.answerValue[this.questions[id].question_key]);
       });
     })
@@ -230,33 +234,34 @@ export class QuestionPage {
     let i=0;
     let json;
     let formValue=[];
-    console.log(form.value[questionText]);
-     formValue.push(form.value[questionText]);
-     console.log(formValue);
-
-    if(formValue == undefined){
+    if(!this.form.controls[questionText].valid){
       console.log("not valid");
       this.Errors="it is not valid";
     }else{
       let formValue=[];
-      //console.log(formData.value);
-      console.log("valid");
-      // if(QuestionType=="checkbox"){
-      //   console.log(QuestionType);
-      //    json=JSON.stringify(form.value);
-      //    formValue.push(json);
-      // }else{
-        // console.log(form.value);
-        // console.log(questionText);
-        // formValue.push(form.value[questionText]);
-        // console.log(formValue);
-        // form.value[questionText]="";
-      //} 
+       console.log(questionText);
+    // console.log(form.value[questionText]);
+    //  formValue.push(form.value[questionText]);
+    //  console.log(formValue);
+     // console.log(formData.value);
+     console.log("valid");
+      if(QuestionType=="checkbox"){
+        console.log(QuestionType);
+         json=JSON.stringify(this.form.value);
+         formValue.push(json);
+      }else{
+        console.log(form.value);
+        console.log(questionText);
+        formValue.push(form.value[questionText]);
+        console.log(formValue);
+        form.value[questionText]="";
+      } 
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
       console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        if(result.rows.item.length < 1 ){
+        console.log(result.rows);
+        if(result.rows.length < 1 ){
 
           console.log("empty");
           this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
