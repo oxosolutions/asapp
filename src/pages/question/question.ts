@@ -230,10 +230,11 @@ export class QuestionPage {
     let i=0;
     let json;
     let formValue=[];
+    console.log(form.value[questionText]);
      formValue.push(form.value[questionText]);
      console.log(formValue);
 
-    if(formValue==undefined){
+    if(formValue == undefined){
       console.log("not valid");
       this.Errors="it is not valid";
     }else{

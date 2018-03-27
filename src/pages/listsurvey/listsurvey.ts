@@ -58,6 +58,7 @@ export class ListsurveyPage {
             localStorage.setItem("questionType", 'questions');
             this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
           }
+          console.log(surveyMetaType);
           
          }
       });
@@ -102,6 +103,7 @@ export class ListsurveyPage {
 							console.log(surveySch);
 								this.servicesProvider.SelectWhere("surveys","id",value.item(i).form_id).then((survey:any)=>{ console.log(survey);
 									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
+										console.log(responseData);
 										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
 											// console.log(surveySch);
 											let rowsData = survey.rows.item(0);
