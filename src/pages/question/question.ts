@@ -45,14 +45,7 @@ export class QuestionPage {
   
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
-    // this.sDefaultEmail = "fatherName123";
-    setTimeout(function(){
-      console.log(this.QuestionKeyText = 'test');
-    },2000);
-
-
-   
-
+    
   }
   showConfirm() {
     let prompt = this.alertCtrl.create({
@@ -96,7 +89,6 @@ export class QuestionPage {
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
 
-
       //code for converting json 
       let collection;
       let newcollection; 
@@ -139,9 +131,9 @@ export class QuestionPage {
 
      //create dynamic 
     const form: FormGroup = new FormGroup({});
-    for (const key in this.job) {
+    for (const key in newObject) {
       if (newObject.hasOwnProperty(key)) {
-        const control: FormControl = new FormControl(newObject[key], Validators.required);
+        const control: FormControl = new FormControl("" , Validators.required);
         form.addControl(key, control);
       }
     }
@@ -234,25 +226,31 @@ export class QuestionPage {
   }
 
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
-    console.log(form.value);
+    console.log(this.form.value);
     let i=0;
     let json;
-    if(!form.valid){
+    let formValue=[];
+     formValue.push(form.value[questionText]);
+     console.log(formValue);
+
+    if(formValue==undefined){
+      console.log("not valid");
       this.Errors="it is not valid";
     }else{
       let formValue=[];
       //console.log(formData.value);
-
-      if(QuestionType=="checkbox"){
-        //console.log(QuestionType);
-         json=JSON.stringify(form.value);
-         formValue.push(json);
-      }else{
-        console.log(form.value);
-        console.log(questionText);
-        formValue.push(form.value[questionText]);
-        form.value[questionText]="";
-      } 
+      console.log("valid");
+      // if(QuestionType=="checkbox"){
+      //   console.log(QuestionType);
+      //    json=JSON.stringify(form.value);
+      //    formValue.push(json);
+      // }else{
+        // console.log(form.value);
+        // console.log(questionText);
+        // formValue.push(form.value[questionText]);
+        // console.log(formValue);
+        // form.value[questionText]="";
+      //} 
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
       console.log(query);
