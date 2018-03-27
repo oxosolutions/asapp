@@ -42,7 +42,7 @@ export class QuestionPage {
   sDefaultEmail:string;
   QuestionKeyText:any;
   textAnswer:any;
-
+  
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     // this.sDefaultEmail = "fatherName123";
@@ -100,7 +100,8 @@ export class QuestionPage {
       //code for converting json 
       let collection;
       let newcollection; 
-      let replacedArray=[]
+      let replacedArray=[];
+      let newObject={};
       Content.forEach((key,value)=>{
         collection=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
@@ -108,7 +109,8 @@ export class QuestionPage {
           newcollection=[];
           let  newcolumn=[];
           collection=key[keyvalue];
-         // console.log(collection);
+          newObject[collection.question_text]="";
+          
           Object.keys(collection).forEach(function(valuekey,valuedata){
             let newData;
             let replace;
@@ -126,22 +128,27 @@ export class QuestionPage {
           for(i=0; i< newcollection.length; i++){
             replacedData[newcolumn[i]]=newcollection[i];
           }
+        
           replacedArray.push(replacedData);
         });
       });
       this.questions=replacedArray;
       console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
+      console.log(newObject);
 
-
-
-      this.form = new FormGroup({
-        fatherName: new FormControl(),
-        Country: new FormControl()
-      })
-
-
-      console.log(this.QuestionKeyText);
+     //create dynamic 
+    const form: FormGroup = new FormGroup({});
+    for (const key in this.job) {
+      if (newObject.hasOwnProperty(key)) {
+        const control: FormControl = new FormControl(newObject[key], Validators.required);
+        form.addControl(key, control);
+      }
+    }
+    this.form = form;
+    //end 
+    
+    console.log(this.QuestionKeyText);
       this.textData(this.questions, this.indexArray, this.QuestionKeyText).then(()=>{
       });
     })
@@ -276,7 +283,6 @@ export class QuestionPage {
       });
     })
   }
-
 
   updateCucumber() {
     let  cucumber:any

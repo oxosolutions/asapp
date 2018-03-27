@@ -532,6 +532,7 @@ var QuestionPage = (function () {
             var collection;
             var newcollection;
             var replacedArray = [];
+            var newObject = {};
             Content.forEach(function (key, value) {
                 collection = [];
                 Object.keys(key).forEach(function (keyvalue, keydata) {
@@ -539,7 +540,7 @@ var QuestionPage = (function () {
                     newcollection = [];
                     var newcolumn = [];
                     collection = key[keyvalue];
-                    // console.log(collection);
+                    newObject[collection.question_text] = "";
                     Object.keys(collection).forEach(function (valuekey, valuedata) {
                         var newData;
                         var replace;
@@ -564,10 +565,17 @@ var QuestionPage = (function () {
             _this.questions = replacedArray;
             console.log(_this.questions);
             _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
-            _this.form = new __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* FormGroup */]({
-                fatherName: new __WEBPACK_IMPORTED_MODULE_5__angular_forms__["b" /* FormControl */](),
-                Country: new __WEBPACK_IMPORTED_MODULE_5__angular_forms__["b" /* FormControl */]()
-            });
+            console.log(newObject);
+            //create dynamic 
+            var form = new __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* FormGroup */]({});
+            for (var key in _this.job) {
+                if (newObject.hasOwnProperty(key)) {
+                    var control = new __WEBPACK_IMPORTED_MODULE_5__angular_forms__["b" /* FormControl */](newObject[key], __WEBPACK_IMPORTED_MODULE_5__angular_forms__["h" /* Validators */].required);
+                    form.addControl(key, control);
+                }
+            }
+            _this.form = form;
+            //end 
             console.log(_this.QuestionKeyText);
             _this.textData(_this.questions, _this.indexArray, _this.QuestionKeyText).then(function () {
             });
