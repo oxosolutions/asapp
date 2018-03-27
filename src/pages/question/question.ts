@@ -16,7 +16,7 @@ import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/
   templateUrl: 'question.html',
 })
 export class QuestionPage {
-  myFormTest: FormGroup;
+  form: FormGroup;
    // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
   //message:string;
@@ -49,6 +49,10 @@ export class QuestionPage {
     setTimeout(function(){
       console.log(this.QuestionKeyText = 'test');
     },2000);
+
+
+   
+
   }
   showConfirm() {
     let prompt = this.alertCtrl.create({
@@ -128,6 +132,10 @@ export class QuestionPage {
       this.questions=replacedArray;
       console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
+       this.form = new FormGroup({
+      fatherName: new FormControl(),
+      // Country: new FormControl()
+    })
       console.log(this.QuestionKeyText);
       this.textData(this.questions, this.indexArray, this.QuestionKeyText).then(()=>{
       });
@@ -138,9 +146,10 @@ export class QuestionPage {
     // console.log(i);
     return new Promise((resolve,reject)=>{
       this.QuestionKeyText=questionKey;
-      console.log(this.QuestionKeyText);
+      //console.log(this.QuestionKeyText);
 
       this.OriginalContent=questions[i]; 
+      this.OriginalContent.prefill = '';
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
@@ -189,9 +198,7 @@ export class QuestionPage {
       this.answerGet(this.indexArray).then((answerKey:any)=>{
         this.textData(this.questions,this.indexArray, answerKey).then(()=>{
         }); 
-        
-      })
-      
+      })    
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
@@ -207,12 +214,15 @@ export class QuestionPage {
       resolve("pre data");
     });
   }
+  onSubmit2(form){
+     console.log(form.value);
+  }
 
-  onSubmit(formData,questionKey,survey_id,questionText,QuestionType){
-    
+  onSubmit(form,questionKey,survey_id,questionText,QuestionType){
+    console.log(form.value);
     let i=0;
     let json;
-    if(!formData.valid){
+    if(!form.valid){
       this.Errors="it is not valid";
     }else{
       let formValue=[];
@@ -220,18 +230,19 @@ export class QuestionPage {
 
       if(QuestionType=="checkbox"){
         //console.log(QuestionType);
-         json=JSON.stringify(formData.value);
+         json=JSON.stringify(form.value);
          formValue.push(json);
       }else{
-        //c//onsole.log(formData.value);
-        //console.log(questionText);
-        formValue.push(formData.value[questionText]);
-        formData.value[questionText]="";
+        console.log(form.value);
+        console.log(questionText);
+        formValue.push(form.value[questionText]);
+        form.value[questionText]="";
       } 
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
+      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        if(result.rows.length < 1 ){
+        if(result.rows.item.length < 1 ){
 
           console.log("empty");
           this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
@@ -239,7 +250,7 @@ export class QuestionPage {
             this.next(this.indexArray,this.tablename,questionKey,formValue);
           });
         }else{
-         // console.log("update");
+           console.log("update");
           let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(this.indexArray,this.tablename,questionKey,formValue);
@@ -247,7 +258,7 @@ export class QuestionPage {
         }
       }); 
     }
-    formData.reset();   
+    form.reset();   
   }
 
   insertSubmit(tablename,questionKey,formValue){

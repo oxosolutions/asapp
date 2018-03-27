@@ -34,6 +34,7 @@ import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-s
 //import { MyDatePickerModule } from 'mydatepicker';
 import {SectionalQuestionsPage} from '../pages/sectional-questions/sectional-questions';
 import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
+import { ReactiveFormsModule }          from '@angular/forms';
 
  
 @NgModule({
@@ -60,6 +61,7 @@ import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 
   imports: [
     BrowserModule,
+     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     //MyDatePickerModule
