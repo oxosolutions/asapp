@@ -8,6 +8,7 @@ import { TextPage }  from '../../pages/text/text';
 import { SelectPage } from '../../pages/select/select';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {ToastController } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,8 @@ import {ToastController } from 'ionic-angular';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
-   @ViewChild(TextPage) child;
+  myFormTest: FormGroup;
+   // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
   //message:string;
 
@@ -39,8 +41,14 @@ export class QuestionPage {
   answerValue:string;
   sDefaultEmail:string;
   QuestionKeyText:any;
-  constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  textAnswer:any;
+
+
+  constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     // this.sDefaultEmail = "fatherName123";
+    setTimeout(function(){
+      console.log(this.QuestionKeyText = 'test');
+    },2000);
   }
   showConfirm() {
     let prompt = this.alertCtrl.create({
@@ -84,6 +92,7 @@ export class QuestionPage {
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
 
+
       //code for converting json 
       let collection;
       let newcollection; 
@@ -91,7 +100,7 @@ export class QuestionPage {
       Content.forEach((key,value)=>{
         collection=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
-          console.log(keyvalue);
+          //console.log(keyvalue);
           newcollection=[];
           let  newcolumn=[];
           collection=key[keyvalue];
@@ -119,6 +128,7 @@ export class QuestionPage {
       this.questions=replacedArray;
       console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
+      console.log(this.QuestionKeyText);
       this.textData(this.questions, this.indexArray, this.QuestionKeyText).then(()=>{
       });
     })
@@ -129,12 +139,11 @@ export class QuestionPage {
     return new Promise((resolve,reject)=>{
       this.QuestionKeyText=questionKey;
       console.log(this.QuestionKeyText);
+
       this.OriginalContent=questions[i]; 
       if(this.questionCheck.length==0){
         this.previousButton=false;
-
       }else{
-
         this.previousButton=true; 
       }
       let questionLength=this.questions.length;
@@ -148,7 +157,7 @@ export class QuestionPage {
 
 
   next(id,tablename,questionKey,formValue){
-    console.log(id);
+   // console.log(id);
     localStorage.setItem("lastquestionIndex", id);
     this.questionIndex(id).then((id)=>{      
       this.indexArray++;
@@ -198,37 +207,13 @@ export class QuestionPage {
       resolve("pre data");
     });
   }
-  
-
-  // previous(id){
-  //   console.log(id);
-
-  //   id=id-2;
-  //   console.log(id);
-  //   let questionLength;
-  //   questionLength=this.questions.length;
-
-  //   if(id==questionLength){
-  //     console.log("there is no data");
-  //     this.navCtrl.setRoot(DashboardPage);
-  //   }else{
-  //     console.log(id);
-  //     this.textData(this.questions,id).then(()=>{
-  //     });   
-  //   }
-  // }
-  // 
-  // 
-
- 
 
   onSubmit(formData,questionKey,survey_id,questionText,QuestionType){
     
     let i=0;
     let json;
     if(!formData.valid){
-       //console.log("not valid");
-        this.Errors="it is not valid";
+      this.Errors="it is not valid";
     }else{
       let formValue=[];
       //console.log(formData.value);
@@ -242,16 +227,10 @@ export class QuestionPage {
         //console.log(questionText);
         formValue.push(formData.value[questionText]);
         formData.value[questionText]="";
-      }
-      //console.log(formValue);
-     // console.log(this.indexArray);  
+      } 
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
-      //console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        //console.log(result.rows);
-        //console.log(result.rows.length);
-       console.log(this.indexArray);
         if(result.rows.length < 1 ){
 
           console.log("empty");
@@ -262,7 +241,6 @@ export class QuestionPage {
         }else{
          // console.log("update");
           let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
-          //console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(this.indexArray,this.tablename,questionKey,formValue);
           });
