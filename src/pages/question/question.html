@@ -19,6 +19,13 @@
 			<span class="question-number">Question 1</span>of 20
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
+			<!-- <input atp-time-picker arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
+			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  /> -->
+
+
+
+
+
 			<form novalidate (ngSubmit)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" [formGroup]="form">
    <div [ngSwitch]="OriginalContent?.question_type">
 	
@@ -34,6 +41,12 @@
         [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
 
         <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->
+  </div>
+
+  <div *ngSwitchCase="'timepicker'">
+
+  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  />
+
   </div>
 
  <!--  <div *ngSwitchCase="'number'">

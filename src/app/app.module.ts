@@ -36,6 +36,9 @@ import {SectionalQuestionsPage} from '../pages/sectional-questions/sectional-que
 import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 import { ReactiveFormsModule }          from '@angular/forms';
 
+//plugin
+import { AmazingTimePickerModule } from 'amazing-time-picker'; // this line you need
+
  
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { ReactiveFormsModule }          from '@angular/forms';
      ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    AmazingTimePickerModule
     //MyDatePickerModule
   ],
   bootstrap: [IonicApp],
