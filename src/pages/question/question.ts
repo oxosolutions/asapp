@@ -9,7 +9,9 @@ import { SelectPage } from '../../pages/select/select';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {ToastController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
-
+import { DatepickerOptions } from 'ng2-datepicker';
+import * as enLocale from 'date-fns/locale/en';
+import * as frLocale from 'date-fns/locale/fr';
 @IonicPage()
 @Component({
   selector: 'page-question',
@@ -19,8 +21,15 @@ export class QuestionPage {
   form: FormGroup;
    // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
-  //message:string;
-
+  //message:string
+  date: Date;
+  options: DatepickerOptions = {
+    locale: enLocale
+  };
+  //   date: Date;
+  // options: DatepickerOptions = {
+  //   locale: frLocale,
+  // };
   answer:{};
   OriginalContent:any;
   dataUrl:any;
@@ -45,6 +54,7 @@ export class QuestionPage {
   
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+    this.date = new Date();
     
   }
   showConfirm() {
