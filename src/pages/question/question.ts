@@ -12,6 +12,7 @@ import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/
 import { DatepickerOptions } from 'ng2-datepicker';
 import * as enLocale from 'date-fns/locale/en';
 import * as frLocale from 'date-fns/locale/fr';
+
 @IonicPage()
 @Component({
   selector: 'page-question',
@@ -160,7 +161,6 @@ export class QuestionPage {
     // console.log(i);
     return new Promise((resolve,reject)=>{
       this.QuestionKeyText=questionKey;
-      //console.log(this.QuestionKeyText);
       let content=[]
       content=questions[i]; 
       content["prefill"]=questionKey;
@@ -171,12 +171,8 @@ export class QuestionPage {
       }else{
         this.previousButton=true; 
       }
-      let questionLength=this.questions.length;
-      if(this.questionCheck.length == (questionLength-1)){
-        this.NextButton=false;
-      }else{
-        this.NextButton=true;
-      }
+      this.NextButton=true;
+      
     });   
   }
 
@@ -249,23 +245,23 @@ export class QuestionPage {
       this.Errors="it is not valid";
     }else{
       let formValue=[];
-       console.log(questionText);
-    // console.log(form.value[questionText]);
-    //  formValue.push(form.value[questionText]);
-    //  console.log(formValue);
-     // console.log(formData.value);
      console.log("valid");
       if(QuestionType=="checkbox"){
-        console.log(QuestionType);
         json=JSON.stringify(this.form.value);
         formValue.push(json);
       }else{
-        console.log(form.value);
-        console.log(questionText);
         formValue.push(form.value[questionText]);
-        console.log(formValue);
+       // console.log(formValue);
         form.value[questionText]="";
       } 
+      let questionLength=this.questions.length;
+      if(this.questionCheck.length == (questionLength-1)){
+        this.NextButton=false;
+        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+        this.navCtrl.setRoot(GroupsPage);
+      }else{
+
+      
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
       console.log(query);
@@ -287,6 +283,7 @@ export class QuestionPage {
           });
         }
       }); 
+       }
     }
     form.reset();   
   }

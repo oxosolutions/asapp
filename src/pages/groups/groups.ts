@@ -29,10 +29,9 @@ export class GroupsPage {
   }
   ionViewDidLoad() {
     this.groupTitle=localStorage.getItem("ApplicationName");
-    this.ids=this.navParams.get('id');
-    this.surveyType=this.navParams.get('type');
-    console.log(this.surveyType);
-    console.log(this.ids);
+    //this.ids=this.navParams.get('id');
+    this.ids=localStorage.getItem('Groupid');
+    this.surveyType=localStorage.getItem('questionType');
     this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
       //console.log(result.rows.item);
       let rowww=[];
