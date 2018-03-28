@@ -135,9 +135,9 @@ export class QuestionPage {
         });
       });
       this.questions=replacedArray;
-      console.log(this.questions);
+     // console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      console.log(newObject);
+      //console.log(newObject);
 
      //create dynamic 
     const form: FormGroup = new FormGroup({});
@@ -187,7 +187,7 @@ export class QuestionPage {
     this.questionIndex(id).then((id)=>{      
       this.indexArray++;
        this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      this.textData(this.questions,this.indexArray,this.QuestionKeyText).then(()=>{
+      this.textData(this.questions,this.indexArray,"").then(()=>{
       }); 
     })  
   }
