@@ -178,11 +178,21 @@ export class QuestionPage {
   }
 
 
-  next(){
-   console.log(this.indexArray);
-   console.log("next clicked");
-   //if(this.formValidate == true){
+  next(surveyid,form,questionkey){
+  this.tablename="surveyResult_"+surveyid;
+   console.log(questionkey);
+  
+   console.log(this.form.controls[questionkey]);
+   // if(!this.formValidate){
+  // if(this.form.controls[questionkey].valid){
+      console.log(this.tablename);
     localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+     let questionLength=this.questions.length;
+      if(this.questionCheck.length == (questionLength-1)){
+        this.NextButton=false;
+        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+        this.navCtrl.setRoot(GroupsPage);
+      }else{
     this.questionIndex(this.indexArray).then((id)=>{  
       console.log(id);    
       this.indexArray++;
@@ -192,7 +202,8 @@ export class QuestionPage {
           }); 
        }); 
     })
-   //}
+  }
+  // }
    
 
   }
@@ -225,7 +236,9 @@ export class QuestionPage {
   answerGet(id){
     return new Promise ((resolve,reject)=>{
       console.log(id);
+      console.log(this.tablename);
       let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename;
+      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
         console.log(this.answerValue);
@@ -241,7 +254,7 @@ export class QuestionPage {
 
 
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
-    console.log(this.form.value);
+    //console.log(this.form.value);
     let i=0;
     let json;
     let formValue=[];
@@ -261,11 +274,11 @@ export class QuestionPage {
         form.value[questionText]="";
       } 
       let questionLength=this.questions.length;
-      if(this.questionCheck.length == (questionLength-1)){
-        this.NextButton=false;
-        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-        this.navCtrl.setRoot(GroupsPage);
-      }else{
+      // if(this.questionCheck.length == (questionLength-1)){
+      //   this.NextButton=false;
+      //   this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+      //   this.navCtrl.setRoot(GroupsPage);
+      // }else{
 
       
       this.tablename="surveyResult_"+survey_id;
@@ -290,7 +303,7 @@ export class QuestionPage {
         }
       }); 
        }
-    }
+    //}
     form.reset();   
   }
 
