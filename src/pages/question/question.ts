@@ -52,6 +52,7 @@ export class QuestionPage {
   sDefaultEmail:any;
   QuestionKeyText:any;
   textAnswer:any;
+  formValidate:any
   
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -177,22 +178,30 @@ export class QuestionPage {
   }
 
 
-  next(id,tablename,questionKey,formValue){
-   // console.log(id);
-    localStorage.setItem("lastquestionIndex", id);
-    this.questionIndex(id).then((id)=>{      
+  next(){
+   console.log(this.indexArray);
+   console.log("next clicked");
+   //if(this.formValidate == true){
+    localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+    this.questionIndex(this.indexArray).then((id)=>{  
+      console.log(id);    
       this.indexArray++;
-       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      this.textData(this.questions,this.indexArray,"").then(()=>{
-      }); 
-    })  
+        this.answerGet(this.indexArray).then((answerKey:any)=>{
+          console.log(answerKey);
+          this.textData(this.questions,this.indexArray,answerKey).then(()=>{
+          }); 
+       }); 
+    })
+   //}
+   
+
   }
 
   questionIndex(check){
     return new Promise ((resolve,reject)=>{
       this.questionCheck.push(check);
       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
-      resolve("index");
+      resolve(this.questionCheck);
     })
   }
 
@@ -215,6 +224,7 @@ export class QuestionPage {
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
+      console.log(id);
       let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename;
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
@@ -228,19 +238,15 @@ export class QuestionPage {
       resolve("pre data");
     });
   }
-  onSubmit2(form,questionText){
-     console.log(form.value);
-     let formValue=[];
-     formValue.push(form.value[questionText]);
-     console.log(formValue);
-  }
+
 
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
     console.log(this.form.value);
     let i=0;
     let json;
     let formValue=[];
-    if(!this.form.controls[questionText].valid){
+    this.formValidate=this.form.controls[questionText].valid;
+    if(!this.formValidate){
       console.log("not valid");
       this.Errors="it is not valid";
     }else{
@@ -264,22 +270,22 @@ export class QuestionPage {
       
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
-      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         console.log(result.rows);
+        console.log(this.indexArray);
         if(result.rows.length < 1 ){
 
           console.log("empty");
           this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
            // console.log(questionSave);
-            this.next(this.indexArray,this.tablename,questionKey,formValue);
+            //this.next(this.indexArray);
           });
         }else{
            console.log("update");
           let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             console.log(questionSave33);
-            this.next(this.indexArray,this.tablename,questionKey,formValue);
+            //this.next(this.indexArray);
           });
         }
       }); 
