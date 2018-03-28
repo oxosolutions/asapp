@@ -247,8 +247,8 @@ export class QuestionPage {
      console.log("valid");
       if(QuestionType=="checkbox"){
         console.log(QuestionType);
-         json=JSON.stringify(this.form.value);
-         formValue.push(json);
+        json=JSON.stringify(this.form.value);
+        formValue.push(json);
       }else{
         console.log(form.value);
         console.log(questionText);
@@ -272,6 +272,7 @@ export class QuestionPage {
            console.log("update");
           let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+            console.log(questionSave33);
             this.next(this.indexArray,this.tablename,questionKey,formValue);
           });
         }

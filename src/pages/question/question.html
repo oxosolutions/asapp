@@ -24,16 +24,22 @@
 	
 	<div  *ngSwitchCase="'textarea'">
       <input  [formControlName]="OriginalContent?.question_text"
-        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" required> 
-		<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
-
+        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
+	<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
+ -->
 	</div>
 
 	<div  *ngSwitchCase="'text'">
          <input  [formControlName]="OriginalContent?.question_text"
         [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
-        <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
-    </div>
+
+        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->
+  </div>
+
+ <!--  <div *ngSwitchCase="'number'">
+  		 <input  [formControlName]="OriginalContent?.question_text"
+        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
+  </div> -->
 
 
      
