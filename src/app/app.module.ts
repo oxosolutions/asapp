@@ -37,7 +37,7 @@ import { ReactiveFormsModule }          from '@angular/forms';
 
 //plugin
 import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
-import { NgDatepickerModule } from 'ng2-datepicker';
+import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/package/ng2-datepicker
  
 @NgModule({
   declarations: [
