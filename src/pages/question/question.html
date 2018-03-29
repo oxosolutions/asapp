@@ -29,7 +29,7 @@
 
 
 
-		<form novalidate (ngSubmit)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" [formGroup]="form">
+		<form novalidate  [formGroup]="form">
 		   <div [ngSwitch]="OriginalContent?.question_type">
 			
 					<div  *ngSwitchCase="'textarea'">
@@ -85,7 +85,7 @@
     		<div class="action-buttons">
 					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
 					<button (click)="showConfirm()" ion-button color="secondary" class="stop">Exit</button>
-					<button  *ngIf="NextButton" ion-button (click)="next(OriginalContent.survey_id,form,OriginalContent.question_key)" class="next"><ion-icon name="add"></ion-icon>Next</button>
+					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>
 				</div>
 </form>
 </div>

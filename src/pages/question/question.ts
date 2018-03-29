@@ -178,34 +178,23 @@ export class QuestionPage {
   }
 
 
-  next(surveyid,form,questionkey){
-  this.tablename="surveyResult_"+surveyid;
-   console.log(questionkey);
-  
-   console.log(this.form.controls[questionkey]);
-   // if(!this.formValidate){
-  // if(this.form.controls[questionkey].valid){
-      console.log(this.tablename);
-    localStorage.setItem("lastquestionIndex", this.indexArray.toString());
-     let questionLength=this.questions.length;
+  next(surveyid,questionkey){
+    this.tablename="surveyResult_"+surveyid;
+      localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+      let questionLength=this.questions.length;
       if(this.questionCheck.length == (questionLength-1)){
         this.NextButton=false;
         this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
         this.navCtrl.setRoot(GroupsPage);
       }else{
-    this.questionIndex(this.indexArray).then((id)=>{  
-      console.log(id);    
-      this.indexArray++;
-        this.answerGet(this.indexArray).then((answerKey:any)=>{
-          console.log(answerKey);
-          this.textData(this.questions,this.indexArray,answerKey).then(()=>{
-          }); 
-       }); 
-    })
-  }
-  // }
-   
-
+        this.questionIndex(this.indexArray).then((id)=>{  
+          this.indexArray++;
+          this.answerGet(this.indexArray).then((answerKey:any)=>{
+            this.textData(this.questions,this.indexArray,answerKey).then(()=>{
+            }); 
+        }); 
+      })
+    }
   }
 
   questionIndex(check){
@@ -215,8 +204,6 @@ export class QuestionPage {
       resolve(this.questionCheck);
     })
   }
-
-
   previous(){
     let storedNames:any;
     storedNames = JSON.parse(localStorage.getItem("questionIndex"));
@@ -225,32 +212,28 @@ export class QuestionPage {
     this.questionCheck=storedNames;
     localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck)); 
     localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
-      this.indexArray=this.indexArray-1;
-      this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      this.answerGet(this.indexArray).then((answerKey:any)=>{
-        console.log(answerKey);
-        this.textData(this.questions,this.indexArray, answerKey).then(()=>{
-        }); 
-      })    
+    this.indexArray=this.indexArray-1;
+    this.QuestionKeyText=this.questions[this.indexArray].question_key;
+    this.answerGet(this.indexArray).then((answerKey:any)=>{
+      console.log(answerKey);
+      this.textData(this.questions,this.indexArray, answerKey).then(()=>{
+      }); 
+    })    
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
-      console.log(id);
-      console.log(this.tablename);
       let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename;
-      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
-        console.log(this.answerValue);
         resolve(this.answerValue[this.questions[id].question_key]);
       });
     })
   }
-  previousData(){
-    return new Promise((resolve,reject)=>{
-      resolve("pre data");
-    });
-  }
+  // previousData(){
+  //   return new Promise((resolve,reject)=>{
+  //     resolve("pre data");
+  //   });
+  // }
 
 
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
@@ -270,35 +253,22 @@ export class QuestionPage {
         formValue.push(json);
       }else{
         formValue.push(form.value[questionText]);
-       // console.log(formValue);
         form.value[questionText]="";
       } 
       let questionLength=this.questions.length;
-      // if(this.questionCheck.length == (questionLength-1)){
-      //   this.NextButton=false;
-      //   this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-      //   this.navCtrl.setRoot(GroupsPage);
-      // }else{
-
-      
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename ;
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        console.log(result.rows);
-        console.log(this.indexArray);
         if(result.rows.length < 1 ){
-
           console.log("empty");
           this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
-           // console.log(questionSave);
-            //this.next(this.indexArray);
+            this.next(survey_id,questionKey);
           });
         }else{
-           console.log("update");
+          console.log("update");
           let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-            console.log(questionSave33);
-            //this.next(this.indexArray);
+            this.next(survey_id,questionKey);
           });
         }
       }); 
