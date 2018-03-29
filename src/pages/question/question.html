@@ -85,7 +85,7 @@
     		<div class="action-buttons">
 					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
 					<button (click)="showConfirm()" ion-button color="secondary" class="stop">Exit</button>
-					<button  *ngIf="NextButton" ion-button (click)="next()" class="next"><ion-icon name="add"></ion-icon>Next</button>
+					<button  *ngIf="NextButton" ion-button (click)="next(OriginalContent.survey_id,form,OriginalContent.question_key)" class="next"><ion-icon name="add"></ion-icon>Next</button>
 				</div>
 </form>
 </div>
