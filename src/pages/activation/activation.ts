@@ -33,8 +33,8 @@ export class ActivationPage {
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
       this.CreateSurvey().then(()=>{
-  		});
-  	});
+      });
+    });
   }
   presentLoading(message) {
     this.loader = this.loaderCtrl.create({
@@ -69,20 +69,20 @@ export class ActivationPage {
             this.table(Apidata,tableName, 0).then(result => {
               this.AioneService.TableBulk(tableName,this.TableCols).then(()=>{
                 this.dismissLoader();
-                this.insertUser(Apidata).then((user)=>{console.log(user)
+                this.insertUser(Apidata).then((user)=>{///console.log(user)
                   this.insertsurveys(Apidata).then((surveys  )=>{
                     this.insertgroups(Apidata).then((groups)=>{
                       this.insertquestions(Apidata).then((questions)=>{
-                        this.insertsettings(Apidata).then((setting)=>{
+                        this.insertsettings(Apidata).then((setting)=>{ 
                           this.insersurveyMeta(Apidata).then((survey_meta)=>{
-                            this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
-                              if(resultSurvey != undefined){
-                                console.log(resultSurvey);
-                                this.loader.dismiss();
-                                this.nav.setRoot(LoginPage);
-                                localStorage.setItem("activation", 'Success');
-                              }
-                            });
+                              this.resultSurvey(Apidata.questions,Apidata.surveys).then(resultSurvey=>{
+                                if(resultSurvey != undefined){
+                                  console.log(resultSurvey);
+                                  this.loader.dismiss();
+                                  this.nav.setRoot(LoginPage);
+                                  localStorage.setItem("activation", 'Success');
+                                }
+                              });
                           })
                         })
                       })
@@ -98,26 +98,33 @@ export class ActivationPage {
   }
   resultSurvey(questions,surveys){
     return new Promise((resolve,reject)=>{
-      let keyColumns = [];
+      
       let keyqColumns = [];
       let loopLength = 0;
       let surveyresult=[];
-      //console.log(surveys);
+      let listQuestion=[];
+      let listQuestion2=[];
+      console.log(surveys);
       surveys.forEach((value,key)=>{
-        keyColumns = [];
+         console.log('surveyResult_'+value.id);
         surveyresult.push('surveyResult_'+value.id);
-        keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
-        questions.forEach((qValue,qKey)=>{qValue
-          let qresult=qValue.question_key+' TEXT';
-          keyColumns.push(qresult); 
-        });
-        keyqColumns.push(keyColumns);
-        loopLength++;
+        let keyColumns = [];
+        this.AioneService.SelectWhere("questions","survey_id",value.id).then((questionData:any)=>{
+          keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
+          let qresult="";
+          for(let i=0; i < questionData.rows.length; i++ ){
+            qresult=questionData.rows[i].question_key+' TEXT';
+             keyColumns.push(qresult); 
+          }
+         keyqColumns.push(keyColumns);   
+         loopLength++;
         if(loopLength == surveys.length){
+           console.log(keyqColumns);
           this.AioneService.TableBulk(surveyresult, keyqColumns).then((keyqColumns:any)=>{
             resolve(keyColumns);
           });
         }
+        }) ;   
       });
     });
   }
@@ -190,7 +197,7 @@ export class ActivationPage {
       if("groups" in Apidata){
         this.insertExecute(Apidata.groups).then((insertExe:any)=>{
           this.AioneService.InsertBulk("groups", insertExe.dataColumns,insertExe.insertContent).then((surveys)=>{
-             resolve(surveys);
+            resolve(surveys);
           })
         });
       }
