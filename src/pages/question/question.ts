@@ -59,7 +59,7 @@ export class QuestionPage {
     this.date = new Date();
     
   }
-  showConfirm() {
+  showConfirm(questionKey,survey_id,questionText,QuestionType) {
     let prompt = this.alertCtrl.create({
       message: "Enter Incomplete Survey Name",
       inputs: [
@@ -78,10 +78,17 @@ export class QuestionPage {
           text: 'Save',
           handler: data => {
             if(data[0] == ""){
-
+              this.AioneHelp.presentToast("you must fill survey name",2000,'top');
             }else{
+              console.log(data[0]);
+            this.tablename="surveyResult_"+survey_id;
+            let formValue="incomplete_name";
+            this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
                this.navCtrl.setRoot(DashboardPage);
-                console.log(data);
+                  console.log(data);
+            });
+        
+              
             }        
           }
         }
@@ -229,13 +236,6 @@ export class QuestionPage {
       });
     })
   }
-  // previousData(){
-  //   return new Promise((resolve,reject)=>{
-  //     resolve("pre data");
-  //   });
-  // }
-
-
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
     //console.log(this.form.value);
     let i=0;

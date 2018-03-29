@@ -1,9 +1,9 @@
 <ion-header>
 
   <ion-navbar color="headerClassic">
-  <button ion-button menuToggle>
+ <!--  <button ion-button menuToggle>
   <ion-icon name="menu"></ion-icon>
-  </button>
+  </button> -->
      <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>
     <!--  	Section: Demo Survey -->
      </ion-title>
@@ -84,7 +84,7 @@
 	
     		<div class="action-buttons">
 					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
-					<button (click)="showConfirm()" ion-button color="secondary" class="stop">Exit</button>
+					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
 					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>
 				</div>
 </form>

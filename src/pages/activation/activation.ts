@@ -110,12 +110,14 @@ export class ActivationPage {
         surveyresult.push('surveyResult_'+value.id);
         let keyColumns = [];
         this.AioneService.SelectWhere("questions","survey_id",value.id).then((questionData:any)=>{
-          keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
+          //keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
+          keyColumns.push('serialNo');
           let qresult="";
           for(let i=0; i < questionData.rows.length; i++ ){
             qresult=questionData.rows[i].question_key+' TEXT';
              keyColumns.push(qresult); 
           }
+          keyColumns.push('ip_address', 'survey_startedOn','survey_completedOn','survey_submittedBy','survey_submittedFrom','mac_address','unique_id','device_detail','created_by','created_at','last_fieldId','last_group_id','completed_groups','survey_status','incomplete_name','survey_sync_status','record_type');
          keyqColumns.push(keyColumns);   
          loopLength++;
         if(loopLength == surveys.length){
