@@ -101,7 +101,7 @@ export class AioneServicesProvider {
 		
 	}
 	Insert(tableName,Cols,Values){
-		//console.log(Values);
+		console.log(Values.length);
 		return new Promise((resolve,reject)=>{
 			let questionMarks=[]
 			if(this.db!= undefined){

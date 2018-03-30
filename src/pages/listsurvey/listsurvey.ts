@@ -30,9 +30,8 @@ export class ListsurveyPage {
   constructor(public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
   groups(id,message){
-  	localStorage.setItem("Groupid", id);
+  	localStorage.setItem("Surveyid", id);
   	
-  	console.log(id);
   	let surveyMetaType;
   	if(message["scheduling"].surveyResponse == "true"){
   		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
@@ -44,6 +43,7 @@ export class ListsurveyPage {
       	}
        	let SurveyData = row;
         for(let keys in SurveyData){
+
           if(SurveyData[keys].value == "survey"){
           	surveyMetaType=SurveyData[keys].value;
             localStorage.setItem("questionType", 'save_survey');
@@ -56,6 +56,7 @@ export class ListsurveyPage {
           	surveyMetaType=SurveyData[keys].value;
             localStorage.setItem("questionType", 'questions');
             this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+
           }
          }
       });
@@ -75,9 +76,10 @@ export class ListsurveyPage {
     toast.present();
   }
 	ionViewDidLoad(){  
+		console.log("ion view load");
 		this.surveyTitle=localStorage.getItem("ApplicationName");
-		
 		this.EnabledSurvey();
+		
 	}
 	EnabledSurvey(){
 		let questionId;

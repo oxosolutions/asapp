@@ -29,7 +29,7 @@
                 List of sections
             </div>
             <div class="list-content">
-                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">
+                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
                     <ion-avatar item-start class="list-icon">
                       <ion-icon name="ios-photos-outline"></ion-icon>
                     </ion-avatar>

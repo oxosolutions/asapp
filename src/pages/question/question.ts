@@ -52,7 +52,9 @@ export class QuestionPage {
   sDefaultEmail:any;
   QuestionKeyText:any;
   textAnswer:any;
-  formValidate:any
+  formValidate:any;
+  recordId=localStorage.getItem("recordId");  
+
   
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -104,10 +106,12 @@ export class QuestionPage {
     let Content=[];
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
+
     this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
       console.log(Content);
+
       //code for converting json 
       let collection;
       let newcollection; 
@@ -189,10 +193,15 @@ export class QuestionPage {
     this.tablename="surveyResult_"+surveyid;
       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
       let questionLength=this.questions.length;
+      console.log(localStorage.getItem('Groupid'));
       if(this.questionCheck.length == (questionLength-1)){
         this.NextButton=false;
-        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-        this.navCtrl.setRoot(GroupsPage);
+         let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('Groupid') +"'"+" where serialNo = "+this.recordId ;
+          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+            this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+            this.navCtrl.setRoot(GroupsPage);
+         });
+        
       }else{
         this.questionIndex(this.indexArray).then((id)=>{  
           this.indexArray++;
@@ -238,35 +247,39 @@ export class QuestionPage {
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
     //console.log(this.form.value);
+    
+    console.log(this.recordId);
+    console.log(this.form.value[questionText]);
     let i=0;
     let json;
     let formValue=[];
     this.formValidate=this.form.controls[questionText].valid;
     if(!this.formValidate){
-      console.log("not valid");
+      //console.log("not valid");
       this.Errors="it is not valid";
     }else{
       let formValue=[];
-     console.log("valid");
+     //console.log("valid");
       if(QuestionType=="checkbox"){
         json=JSON.stringify(this.form.value);
         formValue.push(json);
       }else{
         formValue.push(form.value[questionText]);
+        formValue.push(this.recordId);
         form.value[questionText]="";
       } 
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
-      let query="Select "+ questionKey +" from " + this.tablename ;
+      let query="Select "+ questionKey +" from " + this.tablename + " where serialNo = "+this.recordId ;
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         if(result.rows.length < 1 ){
-          console.log("empty");
-          this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
+          this.servicesProvider.Insert(this.tablename,[questionKey,"serialNo"],formValue).then((questionSave)=>{
+           
             this.next(survey_id,questionKey);
           });
         }else{
-          console.log("update");
-          let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'";
+          let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue[0] +"'"+" where serialNo = "+this.recordId ;
+          console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(survey_id,questionKey);
           });
