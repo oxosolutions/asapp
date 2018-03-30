@@ -110,8 +110,8 @@ export class ActivationPage {
         surveyresult.push('surveyResult_'+value.id);
         let keyColumns = [];
         this.AioneService.SelectWhere("questions","survey_id",value.id).then((questionData:any)=>{
-          //keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
-          keyColumns.push('serialNo');
+          keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT') ;
+         // keyColumns.push('serialNo');
           let qresult="";
           for(let i=0; i < questionData.rows.length; i++ ){
             qresult=questionData.rows[i].question_key+' TEXT';

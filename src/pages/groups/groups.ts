@@ -16,7 +16,7 @@ export class GroupsPage {
 	ids:any;
 	groupsResult:any;
   surveyType:any;
-  recordId:any;
+  //recordId:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
@@ -32,11 +32,11 @@ export class GroupsPage {
   }
   ionViewDidLoad() {
     this.groupTitle=localStorage.getItem("ApplicationName");
-    this.recordId=0;
-    console.log(this.recordId)
-    this.recordId=(this.recordId) + 1;
-    localStorage.setItem("recordId", this.recordId);
-    console.log(this.recordId);
+    //this.recordId=0;
+    // console.log(this.recordId)
+    // this.recordId=(this.recordId) + 1;
+    // localStorage.setItem("recordId", this.recordId);
+    // console.log(this.recordId);
 
 
 

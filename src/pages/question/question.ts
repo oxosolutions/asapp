@@ -53,7 +53,7 @@ export class QuestionPage {
   QuestionKeyText:any;
   textAnswer:any;
   formValidate:any;
-  recordId=localStorage.getItem("recordId");  
+  recordId:any;  
 
   
 
@@ -196,7 +196,7 @@ export class QuestionPage {
       console.log(localStorage.getItem('Groupid'));
       if(this.questionCheck.length == (questionLength-1)){
         this.NextButton=false;
-         let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('Groupid') +"'"+" where serialNo = "+this.recordId ;
+         let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('Groupid') +"'"+" where serialNo = "+localStorage.getItem('record_id');
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
             this.navCtrl.setRoot(GroupsPage);
@@ -238,7 +238,7 @@ export class QuestionPage {
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
-      let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename;
+      let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename+" where serialNo = "+localStorage.getItem('record_id'); ;
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
         resolve(this.answerValue[this.questions[id].question_key]);
@@ -265,26 +265,33 @@ export class QuestionPage {
         formValue.push(json);
       }else{
         formValue.push(form.value[questionText]);
-        formValue.push(this.recordId);
+        // formValue.push(this.recordId);
         form.value[questionText]="";
       } 
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
       let query="Select "+ questionKey +" from " + this.tablename + " where serialNo = "+this.recordId ;
-      this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        if(result.rows.length < 1 ){
-          this.servicesProvider.Insert(this.tablename,[questionKey,"serialNo"],formValue).then((questionSave)=>{
-           
-            this.next(survey_id,questionKey);
-          });
-        }else{
-          let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue[0] +"'"+" where serialNo = "+this.recordId ;
+      //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
+      let record_id:any
+      record_id = localStorage.getItem('record_id');
+      console.log(record_id);
+      if(record_id != "null"){
+        console.log('update')
+        let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
           console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(survey_id,questionKey);
           });
+          
+        }else{
+          console.log('insert');
+          this.servicesProvider.Insert(this.tablename, [questionKey], formValue).then((res:any)=>{
+            console.log(res.insertId);
+            localStorage.setItem('record_id', res.insertId);
+            this.next(survey_id,questionKey);
+          });
         }
-      }); 
+    //  }); 
        }
     //}
     form.reset();   
