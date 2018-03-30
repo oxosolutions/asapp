@@ -85,10 +85,17 @@ export class QuestionPage {
               console.log(data[0]);
             this.tablename="surveyResult_"+survey_id;
             let formValue="incomplete_name";
-            this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
-               this.navCtrl.setRoot(DashboardPage);
-                  console.log(data);
-            });
+
+              let query="UPDATE "+ this.tablename + " SET " + "survey_status" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+          console.log(query);
+          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+              this.navCtrl.setRoot(DashboardPage);
+            // this.next(survey_id,questionKey);
+          });
+            // this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
+             
+            //       console.log(data);
+            // });
         
               
             }        
@@ -191,7 +198,7 @@ export class QuestionPage {
 
   next(surveyid,questionkey){
     this.tablename="surveyResult_"+surveyid;
-      localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+     
       let questionLength=this.questions.length;
       console.log(localStorage.getItem('Groupid'));
       if(this.questionCheck.length == (questionLength-1)){
@@ -270,14 +277,15 @@ export class QuestionPage {
       } 
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
+       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
       let query="Select "+ questionKey +" from " + this.tablename + " where serialNo = "+this.recordId ;
       //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
       let record_id:any
       record_id = localStorage.getItem('record_id');
-      console.log(record_id);
+      console.log(   localStorage.setItem("lastquestionIndex", this.indexArray.toString()));
       if(record_id != "null"){
         console.log('update')
-        let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+        let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+ localStorage.getItem("lastquestionIndex") +" where serialNo = "+localStorage.getItem('record_id') ;
           console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(survey_id,questionKey);
@@ -285,7 +293,8 @@ export class QuestionPage {
           
         }else{
           console.log('insert');
-          this.servicesProvider.Insert(this.tablename, [questionKey], formValue).then((res:any)=>{
+          formValue.push(localStorage.getItem("lastquestionIndex"));
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId"], formValue).then((res:any)=>{
             console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             this.next(survey_id,questionKey);
