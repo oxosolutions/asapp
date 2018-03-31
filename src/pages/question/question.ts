@@ -54,7 +54,8 @@ export class QuestionPage {
   textAnswer:any;
   formValidate:any;
   recordId:any;  
-
+  CompletedGroup=[];
+  completedGroupIndex=localStorage.getItem('Groupid');
   
 
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -194,20 +195,24 @@ export class QuestionPage {
       
     });   
   }
-
-
   next(surveyid,questionkey){
-    this.tablename="surveyResult_"+surveyid;
-     
+    this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
-      console.log(localStorage.getItem('Groupid'));
-      if(this.questionCheck.length == (questionLength-1)){
-        this.NextButton=false;
-         let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('Groupid') +"'"+" where serialNo = "+localStorage.getItem('record_id');
-          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-            this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-            this.navCtrl.setRoot(GroupsPage);
-         });
+      localStorage.getItem('Groupid');
+      // console.log(this.completedGroupIndex);
+      // this.CompletedGroup.push(this.completedGroupIndex);
+      // console.log(this.CompletedGroup);
+      if(this.questionCheck.length == (questionLength-1)){ 
+        this.updateCompleteGroup().then(()=>{
+          // localStorage.setItem("completedGroups", JSON.stringify(this.CompletedGroup));
+          this.NextButton=false;
+           console.log(this.CompletedGroup);
+           let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
+            this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+              this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+              this.navCtrl.setRoot(GroupsPage);
+           }); 
+        })  
         
       }else{
         this.questionIndex(this.indexArray).then((id)=>{  
@@ -215,11 +220,28 @@ export class QuestionPage {
           this.answerGet(this.indexArray).then((answerKey:any)=>{
             this.textData(this.questions,this.indexArray,answerKey).then(()=>{
             }); 
-        }); 
-      })
+          }); 
+        })
+      }
     }
+  updateCompleteGroup(){
+    //calculate complted groups
+    
+    let storedata:any;
+    return new Promise((resolve,reject)=>{
+      if(localStorage.getItem('completedGroups') != "undefined"){
+        this.CompletedGroup=JSON.parse(localStorage.getItem('completedGroups'));
+        this.CompletedGroup.push(localStorage.getItem('Groupid'));
+        localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
+        resolve(this.CompletedGroup);
+      }else{
+        this.CompletedGroup.push(localStorage.getItem('Groupid'));
+        console.log(this.CompletedGroup);
+        localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
+        resolve(this.CompletedGroup);
+      }
+    })  
   }
-
   questionIndex(check){
     return new Promise ((resolve,reject)=>{
       this.questionCheck.push(check);
@@ -253,10 +275,8 @@ export class QuestionPage {
     })
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
-    //console.log(this.form.value);
-    
-    console.log(this.recordId);
-    console.log(this.form.value[questionText]);
+    //console.log(this.recordId);
+    //console.log(this.form.value[questionText]);
     let i=0;
     let json;
     let formValue=[];
@@ -282,7 +302,7 @@ export class QuestionPage {
       //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
       let record_id:any
       record_id = localStorage.getItem('record_id');
-      console.log(   localStorage.setItem("lastquestionIndex", this.indexArray.toString()));
+      localStorage.setItem("lastquestionIndex", this.indexArray.toString());
       if(record_id != "null"){
         console.log('update')
         let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+"'"+ localStorage.getItem("lastquestionIndex")+"'," +"last_group_id = "+localStorage.getItem('Groupid')+" where serialNo = "+localStorage.getItem('record_id') ;

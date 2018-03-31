@@ -495,6 +495,8 @@ var QuestionPage = (function () {
         this.surveyQuestion = [];
         this.questionCheck = [];
         this.indexArray = 0;
+        this.CompletedGroup = [];
+        this.completedGroupIndex = localStorage.getItem('Groupid');
         this.date = new Date();
     }
     QuestionPage.prototype.showConfirm = function (questionKey, survey_id, questionText, QuestionType) {
@@ -627,13 +629,20 @@ var QuestionPage = (function () {
         var _this = this;
         this.tablename = "surveyResult_" + surveyid;
         var questionLength = this.questions.length;
-        console.log(localStorage.getItem('Groupid'));
+        localStorage.getItem('Groupid');
+        // console.log(this.completedGroupIndex);
+        // this.CompletedGroup.push(this.completedGroupIndex);
+        // console.log(this.CompletedGroup);
         if (this.questionCheck.length == (questionLength - 1)) {
-            this.NextButton = false;
-            var query = "UPDATE " + this.tablename + " SET completed_groups = '" + localStorage.getItem('Groupid') + "'" + " where serialNo = " + localStorage.getItem('record_id');
-            this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
-                _this.AioneHelp.presentToast("section is successfully completed", 3000, 'top');
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */]);
+            this.updateCompleteGroup().then(function () {
+                // localStorage.setItem("completedGroups", JSON.stringify(this.CompletedGroup));
+                _this.NextButton = false;
+                console.log(_this.CompletedGroup);
+                var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "'" + " where serialNo = " + localStorage.getItem('record_id');
+                _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
+                    _this.AioneHelp.presentToast("section is successfully completed", 3000, 'top');
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */]);
+                });
             });
         }
         else {
@@ -645,6 +654,25 @@ var QuestionPage = (function () {
                 });
             });
         }
+    };
+    QuestionPage.prototype.updateCompleteGroup = function () {
+        //calculate complted groups
+        var _this = this;
+        var storedata;
+        return new Promise(function (resolve, reject) {
+            if (localStorage.getItem('completedGroups') != "undefined") {
+                _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
+                _this.CompletedGroup.push(localStorage.getItem('Groupid'));
+                localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
+                resolve(_this.CompletedGroup);
+            }
+            else {
+                _this.CompletedGroup.push(localStorage.getItem('Groupid'));
+                console.log(_this.CompletedGroup);
+                localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
+                resolve(_this.CompletedGroup);
+            }
+        });
     };
     QuestionPage.prototype.questionIndex = function (check) {
         var _this = this;
@@ -683,10 +711,9 @@ var QuestionPage = (function () {
         });
     };
     QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType) {
-        //console.log(this.form.value);
         var _this = this;
-        console.log(this.recordId);
-        console.log(this.form.value[questionText]);
+        //console.log(this.recordId);
+        //console.log(this.form.value[questionText]);
         var i = 0;
         var json;
         var formValue = [];
@@ -714,7 +741,7 @@ var QuestionPage = (function () {
             //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
             var record_id = void 0;
             record_id = localStorage.getItem('record_id');
-            console.log(localStorage.setItem("lastquestionIndex", this.indexArray.toString()));
+            localStorage.setItem("lastquestionIndex", this.indexArray.toString());
             if (record_id != "null") {
                 console.log('update');
                 var query_1 = "UPDATE " + this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
@@ -2175,9 +2202,10 @@ var GroupsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/'\n\n\n\n<ion-content>\n    <!-- <ion-list class="" >\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n            <p>\n               {{groups.description}}\n            </p>\n        </ion-item>        \n                 \n    </ion-list> -->\n    \n    <div class="survey-info">\n        <button ion-button menuToggle color="transparent">\n            <ion-icon name="menu"></ion-icon>\n            \n        </button>   \n        <div class="survey-title">\n            Survey Name\n        </div>\n        <div class="survey-description">\n            this is the description of the survey\n        </div>\n        <ion-list class="section-list" >\n            <div class="list-header">\n                List of sections\n            </div>\n            <div class="list-content">\n                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">\n                    <ion-avatar item-start class="list-icon">\n                      <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    <h2>{{groups.title}}</h2>\n                    <p>\n                       {{groups.description}}\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-arrow-dropright-outline"></ion-icon>\n                </ion-item>        \n                 \n            </div>\n                        \n        </ion-list>\n    </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], GroupsPage);
     return GroupsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=groups.js.map
@@ -2410,7 +2438,6 @@ var ListsurveyPage = (function () {
     ListsurveyPage.prototype.ionViewDidLoad = function () {
         console.log("ion view load");
         this.surveyTitle = localStorage.getItem("ApplicationName");
-        localStorage.setItem('finishedGroups', undefined);
         localStorage.setItem('completedGroups', undefined);
         localStorage.setItem('ContinueKey', undefined);
         localStorage.setItem('RuningSurvey', null);
@@ -2842,9 +2869,10 @@ var ListsurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        List Of Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n \n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n  <ion-item (click)="groups(survey.id,survey)">\n  <p>{{survey["scheduling"].surveyResponse}}</p>\n  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>\n  \n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n\n    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>\n    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">0 times filled</button>\n    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>\n  </ion-item>\n</div>\n<!-- <div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div> -->\n</ion-list> \n\n<!-- <p *ngIf="today">{{today | date: \'medium\'}}</p>\n -->\n<!-- <ion-list>\n  <ion-item>\n    <ion-avatar item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-avatar>\n    <h2>Finn</h2>\n    <h3>Don\'t Know What To Do!</h3>\n    <p>I\'ve had a pretty messed up day. If we just...</p>\n  </ion-item>\n</ion-list> -->\n\n    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">\n        <ion-item (click)="groups(survey.id)">\n           \n            <img src="../../assets/imgs/survey.png">\n            <div class="list-content-wrapper">\n                <div class="item-title">{{survey.name}}</div>\n                <div class="item-description">{{survey.description}}</div>\n                <div class=""></div>\n                <div class="item-time">\n                    30 Mar 2018\n                </div>\n            </div> \n\n\n        </ion-item>\n       \n    </ion-item-group> -->\n    \n   \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _e || Object])
     ], ListsurveyPage);
     return ListsurveyPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 // questionCount(){
