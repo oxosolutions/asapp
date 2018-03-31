@@ -79,9 +79,11 @@ export class ListsurveyPage {
 		console.log("ion view load");
 		this.surveyTitle=localStorage.getItem("ApplicationName");
   		localStorage.setItem('completedGroups',undefined);
-  		localStorage.setItem('ContinueKey',undefined);
+  		// localStorage.setItem('ContinueKey',undefined);
   		localStorage.setItem('RuningSurvey',null);
   		localStorage.setItem('record_id',null);
+  		localStorage.setItem('GroupNumber',null);
+  		localStorage.setItem('totalGroup',null);
 		this.EnabledSurvey();
 		
 	}

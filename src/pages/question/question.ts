@@ -194,13 +194,16 @@ export class QuestionPage {
       localStorage.getItem('Groupid');
       if(this.questionCheck.length == (questionLength-1)){ 
         this.updateCompleteGroup().then(()=>{
-          this.NextButton=false;
-           console.log(this.CompletedGroup);
-           let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
-            this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-              this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-              this.navCtrl.setRoot(GroupsPage);
-           }); 
+          
+             this.NextButton=false;
+             console.log(this.CompletedGroup);
+             let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
+              this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+                this.surveyComplete().then(()=>{
+              
+             }); 
+          })
+         
         })  
         
       }else{
@@ -212,7 +215,25 @@ export class QuestionPage {
           }); 
         })
       }
-    }
+   }
+  surveyComplete(){
+    return new Promise((resolve,reject)=>{
+      let data=JSON.parse(localStorage.getItem('completedGroups'));
+      console.log(data.length);
+      console.log(localStorage.getItem("totalGroup"));
+      if(data.length == localStorage.getItem("totalGroup")){
+        console.log("datashborad pls go");
+        let query="UPDATE "+this.tablename + " SET  survey_status = 'completed' where serialNo = "+ localStorage.getItem('record_id');
+        this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
+           this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
+           this.navCtrl.setRoot(DashboardPage);
+        })
+      }else{
+          this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+                this.navCtrl.setRoot(GroupsPage);
+      }
+    })
+  }
   updateCompleteGroup(){
     //calculate complted groups
     

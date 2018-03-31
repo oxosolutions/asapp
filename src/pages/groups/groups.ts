@@ -20,9 +20,7 @@ export class GroupsPage {
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
-    // console.log(this.surveyType);
-    // console.log(serialNo);
-    localStorage.setItem("GroupNumber", serialNo);
+    
     localStorage.setItem("Groupid", id);
     if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
@@ -32,15 +30,7 @@ export class GroupsPage {
   }
   ionViewDidLoad() {
     this.groupTitle=localStorage.getItem("ApplicationName");
-    //this.recordId=0;
-    // console.log(this.recordId)
-    // this.recordId=(this.recordId) + 1;
-    // localStorage.setItem("recordId", this.recordId);
-    // console.log(this.recordId);
-
-
-
-
+    
     //this.ids=this.navParams.get('id');
     this.ids=localStorage.getItem('Surveyid');
     this.surveyType=localStorage.getItem('questionType');
@@ -55,7 +45,7 @@ export class GroupsPage {
       }
       let SurveyData = row;
       this.groupsResult=SurveyData;
-      // console.log( this.groupsResult);
+      console.log( this.groupsResult);
       // console.log( this.groupsResult.length);
       localStorage.setItem("totalGroup",this.groupsResult.length);
 
