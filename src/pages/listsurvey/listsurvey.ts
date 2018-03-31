@@ -115,7 +115,7 @@ export class ListsurveyPage {
 												rowsData["scheduling"]=surveySch;
 												rowsData["filledSurvey"]=surveyFilled;
 											// console.log(rowsData["details"].responenumber);
-											// 
+												
 												content.push(rowsData);	
 												console.log(content);
 											})

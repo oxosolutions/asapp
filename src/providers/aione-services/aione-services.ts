@@ -250,6 +250,16 @@ export class AioneServicesProvider {
 		 	}
 		})
 	}
+	mobileListArray(data){
+		return new Promise((resolve,reject)=>{
+				  var row = [];
+        for(var i=0; i < data.rows.length; i++) {
+            row[i] = data.rows.item(i)
+        }
+         let SurveyData = row;
+         resolve(SurveyData);
+		})
+	}
 
 
 }

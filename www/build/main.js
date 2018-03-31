@@ -1301,11 +1301,22 @@ var AioneServicesProvider = (function () {
             }
         });
     };
+    AioneServicesProvider.prototype.mobileListArray = function (data) {
+        return new Promise(function (resolve, reject) {
+            var row = [];
+            for (var i = 0; i < data.rows.length; i++) {
+                row[i] = data.rows.item(i);
+            }
+            var SurveyData = row;
+            resolve(SurveyData);
+        });
+    };
     AioneServicesProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]) === "function" && _b || Object])
     ], AioneServicesProvider);
     return AioneServicesProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=aione-services.js.map
@@ -2484,7 +2495,6 @@ var ListsurveyPage = (function () {
                                                 rowsData["scheduling"] = surveySch;
                                                 rowsData["filledSurvey"] = surveyFilled;
                                                 // console.log(rowsData["details"].responenumber);
-                                                // 
                                                 content.push(rowsData);
                                                 console.log(content);
                                             });
@@ -2961,11 +2971,66 @@ var RecordListPage = (function () {
         this.test = 'false';
     }
     RecordListPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
         this.recordTitle = localStorage.getItem("ApplicationName");
-        this.servicesProvider.SelectAll("surveys").then(function (survey) {
-            _this.listSurvey.push(survey.rows);
-            console.log(_this.listSurvey);
+        // this.servicesProvider.SelectAll("surveys").then((survey:any)=>{
+        // 		this.listSurvey.push(survey.rows);
+        // 		console.log(this.listSurvey);
+        // })
+        this.EnabledSurvey();
+    };
+    RecordListPage.prototype.EnabledSurvey = function () {
+        var _this = this;
+        var questionId;
+        var questionData;
+        var metaSurvey = [];
+        var SurveySelect = [];
+        return new Promise(function (resolve, reject) {
+            var query = 'Select * from survey_meta where key = "enable_survey" AND value = 1';
+            _this.servicesProvider.ExecuteRun(query, []).then(function (survey_meta) {
+                metaSurvey.push(survey_meta.rows);
+                if (survey_meta.rows.length > 0) {
+                    var forloop_1 = 0;
+                    metaSurvey.forEach(function (value, key) {
+                        var content = [];
+                        var _loop_1 = function (i) {
+                            _this.servicesProvider.SelectWhere("surveys", "id", value.item(i).form_id).then(function (survey) {
+                                _this.totalQuestion(value.item(i).form_id).then(function (question) {
+                                    var rowsData = survey.rows.item(0);
+                                    rowsData["questions"] = question;
+                                    content.push(rowsData);
+                                });
+                            });
+                            if (content != undefined) {
+                                SurveySelect.push(content);
+                                console.log(SurveySelect);
+                                forloop_1++;
+                                if (forloop_1 == survey_meta.rows.item.length) {
+                                    _this.listSurvey = SurveySelect;
+                                    console.log(_this.listSurvey);
+                                }
+                            }
+                        };
+                        //value.length;
+                        for (var i = 0; i < value.length; i++) {
+                            _loop_1(i);
+                        }
+                    });
+                }
+                else {
+                    _this.nullSurvey = "there is no survey";
+                    console.log(_this.nullSurvey);
+                }
+            });
+        });
+    };
+    RecordListPage.prototype.totalQuestion = function (id) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.servicesProvider.SelectWhere("questions", "survey_id", id).then(function (questions) {
+                _this.servicesProvider.mobileListArray(questions).then(function (SurveyData) {
+                    resolve(SurveyData.length);
+                });
+            });
         });
     };
     RecordListPage.prototype.presentPopover = function () {
@@ -2980,11 +3045,12 @@ var RecordListPage = (function () {
     };
     RecordListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-record-list',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/'  <!--\n  Generated template for the RecordListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n <!--  <ion-navbar color="headerClassic">\n  <button ion-button menuToggle>\n  	<ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n  </ion-navbar> -->\n\n\n    <ion-toolbar color="headerClassic">\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="search"></ion-icon>\n            </button>\n        </ion-buttons>\n\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="more"></ion-icon>\n            </button>\n        </ion-buttons>\n\n    </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n	<!-- <ion-row>\n	  <ion-col>\n      <strong>Title</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Total questions</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Complete rocords</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Imcomplete records</strong>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n 		<ion-col>\n 		{{record.name}}\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n  </ion-row>\n -->\n    <div>\n        <ion-list class="custom-border" >\n            <ion-item-sliding *ngFor="let record of listSurvey[0]" class="">\n                <ion-item >\n                \n                    <h2>{{record.name}}</h2>\n                    <p>\n                        <ion-icon name="done-all"></ion-icon>\n                        17 Completed | \n                         <ion-icon name="refresh"></ion-icon>\n                         12 Incompleted\n                    </p>\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n                    </button>\n                </ion-item>\n            \n\n                <ion-item-options side="right">\n                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>\n                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>\n                </ion-item-options>\n  \n            </ion-item-sliding>\n             \n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/,
+            selector: 'page-record-list',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/'  <!--\n  Generated template for the RecordListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n <!--  <ion-navbar color="headerClassic">\n  <button ion-button menuToggle>\n  	<ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n  </ion-navbar> -->\n\n\n    <ion-toolbar color="headerClassic">\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="search"></ion-icon>\n            </button>\n        </ion-buttons>\n\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="more"></ion-icon>\n            </button>\n        </ion-buttons>\n\n    </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n	<!-- <ion-row>\n	  <ion-col>\n      <strong>Title</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Total questions</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Complete rocords</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Imcomplete records</strong>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n 		<ion-col>\n 		{{record.name}}\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n  </ion-row>\n -->\n    <div>\n        <ion-list class="custom-border" >\n            <ion-item-sliding *ngFor="let record of listSurvey[0]" class="">\n                <ion-item >\n                \n                    <h2>{{record.name}}</h2>\n                    <p>\n                        <ion-icon name="done-all"></ion-icon>\n                        total Questions {{record.questions}} \n                        <!--  <ion-icon name="refresh"></ion-icon>\n                         12 Incompleted -->\n                    </p>\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n                    </button>\n                </ion-item>\n            \n\n                <ion-item-options side="right">\n                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>\n                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>\n                </ion-item-options>\n  \n            </ion-item-sliding>\n             \n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]) === "function" && _d || Object])
     ], RecordListPage);
     return RecordListPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=record-list.js.map
