@@ -85,20 +85,13 @@ export class QuestionPage {
             }else{
               console.log(data[0]);
             this.tablename="surveyResult_"+survey_id;
-            let formValue="incomplete_name";
+            let formValue=data[0];
 
-              let query="UPDATE "+ this.tablename + " SET " + "survey_status" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+              let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
           console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
               this.navCtrl.setRoot(DashboardPage);
-            // this.next(survey_id,questionKey);
           });
-            // this.servicesProvider.Insert(this.tablename,questionKey,formValue).then((questionSave)=>{
-             
-            //       console.log(data);
-            // });
-        
-              
             }        
           }
         }
@@ -199,12 +192,8 @@ export class QuestionPage {
     this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
-      // console.log(this.completedGroupIndex);
-      // this.CompletedGroup.push(this.completedGroupIndex);
-      // console.log(this.CompletedGroup);
       if(this.questionCheck.length == (questionLength-1)){ 
         this.updateCompleteGroup().then(()=>{
-          // localStorage.setItem("completedGroups", JSON.stringify(this.CompletedGroup));
           this.NextButton=false;
            console.log(this.CompletedGroup);
            let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
@@ -314,8 +303,9 @@ export class QuestionPage {
         }else{
           console.log('insert');
           formValue.push(localStorage.getItem("lastquestionIndex"));
-        
-          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId",], formValue).then((res:any)=>{
+          formValue.push("incomplete");
+          formValue.push(localStorage.getItem('Groupid'));
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id"], formValue).then((res:any)=>{
             console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             this.next(survey_id,questionKey);
