@@ -1,9 +1,9 @@
 <ion-header>
 
   <ion-navbar color="headerClassic">
-  <button ion-button menuToggle>
+ <!--  <button ion-button menuToggle>
   <ion-icon name="menu"></ion-icon>
-  </button>
+  </button> -->
      <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>
     <!--  	Section: Demo Survey -->
      </ion-title>
@@ -13,79 +13,88 @@
 </ion-header>
 <ion-content padding>
 
- <!-- <p>{{message}}</p>
- -->
-<!-- survey based-->
-	<!-- <ion-list style="display: none">
-		<ion-item *ngFor="let survey of surveyQuestion">
-          	<h1>{{survey?.question_text}}</h1>
-          	<p>{{survey?.question_desc}}</p>
-          	<p>{{survey.serialNo}}</p>
-           	<p>{{survey?.question_type}}</p>
-  		</ion-item>
-	</ion-list>
- -->
-
-
- <!--	<page-text [childMessage]="OriginalContent?.question_text" ></page-text>-->
-
-
-
- 
 
 	<div *ngIf="OriginalContent">
-		<div class="card" >
+	<div class="card" >
 			<span class="question-number">Question 1</span>of 20
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
-		
+
+
+	
+			<!-- <input atp-time-picker arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
+			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  /> -->
+
+
+
+
+
+		<form novalidate  [formGroup]="form">
+		   <div [ngSwitch]="OriginalContent?.question_type">
 			
-		<form #myForm='ngForm' (ngSubmit)="onSubmit(myForm,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">
-			<div [ngSwitch]="OriginalContent?.question_type">
+					<div  *ngSwitchCase="'textarea'">
+				      <input  [formControlName]="OriginalContent?.question_text"
+				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
+					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
+				 -->
+					</div>
 
-					<!--text-->
-			    <div *ngSwitchCase="'text'">
+					<div  *ngSwitchCase="'text'">
+				      <input  [formControlName]="OriginalContent?.question_text"
+				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
 
-				    <ion-item>
-					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>
-					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>
+				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->
+				  </div>
 
-					  </ion-item>
-					   <p *ngIf="Errors" style="color:red;">{{Errors}}</p>
-			    </div>
+				  <div *ngSwitchCase="'timepicker'">
+				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  />
+				  </div>
 
-			      <!--select-->
-		      	<div *ngSwitchCase="'select'">
-		        	<ion-item>
-					    <ion-label>{{OriginalContent?.question_text}}</ion-label>
-					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">
-					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
-					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
-					    	</ion-option>
-					      
-					    </ion-select>
-  					</ion-item>
-		      	</div>
+				  <div *ngSwitchCase="'datepicker'">
+				  	 <div class="datepicker-container">
+				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
+				      </div>
+				  </div>
 
-			   
-			</div>
-		
-			<div class="action-buttons">
-				<!-- <button ion-button class="previous">Previous</button>
-				<button ion-button color="secondary" class="stop">Stop</button>
-				<button ion-button class="next">Next</button> -->
-			
-				<button *ngIf="previousButton" ion-button   (click)="previous(OriginalContent.serialNo)">Previous</button>
-				<button (click)="showConfirm()" ion-button color="secondary" class="stop">Exit</button>
-				<button  ion-button class="next"><ion-icon name="add"></ion-icon>Next</button>
-	    </div> 
-		</form>
+				   <div *ngSwitchCase="'select'">
+				  	 <div class="datepicker-container">
+				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
+				      </div>
+				  </div>
+
+
+					<div *ngSwitchCase="'checkbox'">
+							
+					 
+						<!--   <ion-label>{{check?.option_text}}</ion-label>
+						  <input type="radio" [name]="OriginalContent?.question_text [(ngModel)]="OriginalContent.prefill" 
+						  [value]="check?.option_next" /> -->
+
+						 <ion-list >
+						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
+							  <ion-label>{{check?.option_text}}</ion-label>
+							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"
+							   color="red" ></ion-checkbox>
+							</ion-item>
+						</ion-list>
+
+					</div>
+
+			  </div>
+	
+    		<div class="action-buttons">
+					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
+					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
+					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>
+				</div>
+</form>
 </div>
-
 	</div>
 
 
-
+<!-- <input *ngSwitchCase="'textarea'"
+        [formControlName]="OriginalContent?.question_text"
+        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->
 
 	
 

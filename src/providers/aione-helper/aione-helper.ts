@@ -9,6 +9,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { AlertController } from 'ionic-angular';
 import { ActivationPage } from '../../pages/activation/activation';
+import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class AioneHelperProvider {
@@ -17,7 +18,7 @@ export class AioneHelperProvider {
 	Status:any;
   message : string='hello';
  
-  constructor(public alert:AlertController,private network: Network,private camera:Camera,
+  constructor(private toastCtrl: ToastController,public alert:AlertController,private network: Network,private camera:Camera,
   	private device: Device,private calender:Calendar) {
     console.log('Hello AioneHelperProvider Provider');
   }
@@ -59,4 +60,17 @@ export class AioneHelperProvider {
 			}
 	   }	 
 	}
+  presentToast(message,duration,position) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 }

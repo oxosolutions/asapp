@@ -31,10 +31,13 @@ import { TextPage }  from '../pages/text/text';
 import { SelectPage } from '../pages/select/select';
 import { CompletedSurveyPage } from '../pages/completed-survey/completed-survey';
 import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-survey';
-//import { MyDatePickerModule } from 'mydatepicker';
 import {SectionalQuestionsPage} from '../pages/sectional-questions/sectional-questions';
 import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
+import { ReactiveFormsModule }          from '@angular/forms';
 
+//plugin
+import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
+import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/package/ng2-datepicker
  
 @NgModule({
   declarations: [
@@ -60,8 +63,11 @@ import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 
   imports: [
     BrowserModule,
+     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    AmazingTimePickerModule,
+    NgDatepickerModule
     //MyDatePickerModule
   ],
   bootstrap: [IonicApp],

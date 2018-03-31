@@ -65,6 +65,7 @@ page-groups {
     					font-weight: 900
 					}
 
+
 				}
 
 				ion-item{
@@ -76,12 +77,18 @@ page-groups {
 						border: none;
 					}
 				}
-				
+				ion-item.completed{
+					border-color: green;
+    				background: #daffda;
+				}
 				$ItemColors: #f78663, #48afaa, #f7b04b, #4bc9db, #7cc17f;
 				@for $i from 1 through 5 {
 			        ion-item:nth-child(5n+#{$i}) ion-icon{
 			            color:nth($ItemColors,$i);
 			        }
+			        ion-icon.completed{
+						color: green !important
+					}
 			    }
 			}
 		}

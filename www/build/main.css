@@ -31016,24 +31016,49 @@ page-groups .survey-info .section-list .list-content ion-item .item-inner {
   border: none;
 }
 
+page-groups .survey-info .section-list .list-content ion-item.completed {
+  border-color: green;
+  background: #daffda;
+}
+
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+1) ion-icon {
   color: #f78663;
+}
+
+page-groups .survey-info .section-list .list-content ion-icon.completed {
+  color: green !important;
 }
 
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+2) ion-icon {
   color: #48afaa;
 }
 
+page-groups .survey-info .section-list .list-content ion-icon.completed {
+  color: green !important;
+}
+
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+3) ion-icon {
   color: #f7b04b;
+}
+
+page-groups .survey-info .section-list .list-content ion-icon.completed {
+  color: green !important;
 }
 
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+4) ion-icon {
   color: #4bc9db;
 }
 
+page-groups .survey-info .section-list .list-content ion-icon.completed {
+  color: green !important;
+}
+
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+5) ion-icon {
   color: #7cc17f;
+}
+
+page-groups .survey-info .section-list .list-content ion-icon.completed {
+  color: green !important;
 }
 
 page-groups .groups ion-item {

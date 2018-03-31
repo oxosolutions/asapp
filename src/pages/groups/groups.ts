@@ -16,25 +16,47 @@ export class GroupsPage {
 	ids:any;
 	groupsResult:any;
   surveyType:any;
+  //recordId:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  questionid(id){
-    console.log(this.surveyType);
+  questionid(id,serialNo){
+    
+    localStorage.setItem("Groupid", id);
     if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
     }else{
-        this.navCtrl.setRoot(QuestionPage, {'id': id});
+        this.navCtrl.setRoot(QuestionPage, {'id': id}); 
     }
-  
   }
   ionViewDidLoad() {
     this.groupTitle=localStorage.getItem("ApplicationName");
-    this.ids=this.navParams.get('id');
-    this.surveyType=this.navParams.get('type');
-    console.log(this.surveyType);
-    console.log(this.ids);
+    
+    //this.ids=this.navParams.get('id');
+    this.ids=localStorage.getItem('Surveyid');
+    this.surveyType=localStorage.getItem('questionType');
     this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
-    	this.groupsResult=result.rows;
+      //console.log(result.rows.item);
+      let rowww=[];
+      rowww = result.rows.item(i)
+      //console.log(result.rows);
+      var row = [];
+      for(var i=0; i < result.rows.length; i++) {
+            row[i] = result.rows.item(i)
+      }
+      let SurveyData = row;
+      this.groupsResult=SurveyData;
+      console.log( this.groupsResult);
+      // console.log( this.groupsResult.length);
+      localStorage.setItem("totalGroup",this.groupsResult.length);
+
+      // let elem = this;
+      
+      // setTimeout(function(){
+      //   elem.groupsResult=SurveyData;
+      //   console.log( elem.groupsResult);
+     
+      // }, 1000);
+        
     	//console.log(this.groupsResult);
       // this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
       //   for(var keys in form.rows){

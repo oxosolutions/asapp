@@ -101,7 +101,7 @@ export class AioneServicesProvider {
 		
 	}
 	Insert(tableName,Cols,Values){
-		//console.log(Values);
+		console.log(Values.length);
 		return new Promise((resolve,reject)=>{
 			let questionMarks=[]
 			if(this.db!= undefined){
@@ -172,7 +172,7 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Select * from '+tableName+' where '+ Where +' = '+Value;
-				//console.log(this.query);
+				console.log(this.query);
 				this.ExecuteRun(this.query,[]).then((SelResult:any)=>{
 					resolve(SelResult)
 				})	

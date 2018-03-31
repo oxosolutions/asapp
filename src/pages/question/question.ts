@@ -8,6 +8,10 @@ import { TextPage }  from '../../pages/text/text';
 import { SelectPage } from '../../pages/select/select';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {ToastController } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
+import { DatepickerOptions } from 'ng2-datepicker';
+import * as enLocale from 'date-fns/locale/en';
+import * as frLocale from 'date-fns/locale/fr';
 
 @IonicPage()
 @Component({
@@ -15,10 +19,18 @@ import {ToastController } from 'ionic-angular';
   templateUrl: 'question.html',
 })
 export class QuestionPage {
-   @ViewChild(TextPage) child;
+  form: FormGroup;
+   // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
-  //message:string;
-
+  //message:string
+  date: Date;
+  options: DatepickerOptions = {
+    locale: enLocale
+  };
+  //   date: Date;
+  // options: DatepickerOptions = {
+  //   locale: frLocale,
+  // };
   answer:{};
   OriginalContent:any;
   dataUrl:any;
@@ -34,10 +46,23 @@ export class QuestionPage {
   Errors:any;
   questionCheck=[];
   indexArray=0;
+  lastPopId:any;
+  tablename:any;
+  answerValue:string;
+  sDefaultEmail:any;
+  QuestionKeyText:any;
+  textAnswer:any;
+  formValidate:any;
+  recordId:any;  
+  CompletedGroup=[];
+  completedGroupIndex=localStorage.getItem('Groupid');
   
-  constructor(public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+    this.date = new Date();
+    
   }
-  showConfirm() {
+  showConfirm(questionKey,survey_id,questionText,QuestionType) {
     let prompt = this.alertCtrl.create({
       message: "Enter Incomplete Survey Name",
       inputs: [
@@ -56,10 +81,17 @@ export class QuestionPage {
           text: 'Save',
           handler: data => {
             if(data[0] == ""){
-
+              this.AioneHelp.presentToast("you must fill survey name",2000,'top');
             }else{
-               this.navCtrl.setRoot(DashboardPage);
-                console.log(data);
+              console.log(data[0]);
+            this.tablename="surveyResult_"+survey_id;
+            let formValue=data[0];
+
+              let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+          console.log(query);
+          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+              this.navCtrl.setRoot(DashboardPage);
+          });
             }        
           }
         }
@@ -75,23 +107,26 @@ export class QuestionPage {
     let Content=[];
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
-    this.id=this.navParams.get('id');
 
+    this.id=this.navParams.get('id');
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
+      console.log(Content);
 
       //code for converting json 
       let collection;
       let newcollection; 
-      let replacedArray=[]
+      let replacedArray=[];
+      let newObject={};
       Content.forEach((key,value)=>{
         collection=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
-          console.log(keyvalue);
+          //console.log(keyvalue);
           newcollection=[];
           let  newcolumn=[];
           collection=key[keyvalue];
-         // console.log(collection);
+          newObject[collection.question_text]="";
+          
           Object.keys(collection).forEach(function(valuekey,valuedata){
             let newData;
             let replace;
@@ -109,131 +144,198 @@ export class QuestionPage {
           for(i=0; i< newcollection.length; i++){
             replacedData[newcolumn[i]]=newcollection[i];
           }
+        
           replacedArray.push(replacedData);
         });
       });
       this.questions=replacedArray;
-      console.log(this.questions);
-      this.textData(this.questions, this.indexArray).then(()=>{
+     // console.log(this.questions);
+      this.QuestionKeyText=this.questions[this.indexArray].question_key;
+      //console.log(newObject);
+
+     //create dynamic 
+    const form: FormGroup = new FormGroup({});
+    for (const key in newObject) {
+      if (newObject.hasOwnProperty(key)) {
+        const control: FormControl = new FormControl("" , Validators.required);
+        form.addControl(key, control);
+      }
+    }
+    this.form = form;
+    //end 
+    
+    console.log(this.QuestionKeyText);
+      this.textData(this.questions, this.indexArray, "").then(()=>{
       });
     })
   }
 
-  textData(questions,i){
-
-    console.log(i);
+  textData(questions,i,questionKey){
+    // console.log(i);
     return new Promise((resolve,reject)=>{
-      //console.log(questions[i]);
-      this.OriginalContent=questions[i]; 
+      this.QuestionKeyText=questionKey;
+      let content=[]
+      content=questions[i]; 
+      content["prefill"]=questionKey;
+      this.OriginalContent = content ;
+      console.log(this.OriginalContent);
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
-        this.preButton();
       }
+      this.NextButton=true;
+      
     });   
   }
-
-  next(id,tablename,questionKey,formValue){
-    let local=[];
-    // console.log(this.questions);
-    //  console.log(id);
-     console.log(this.questions[id]);
-     this.questionCheck.push(this.questions[id]);
-     localStorage.setItem( "local", JSON.stringify(this.questionCheck));
-    // var storedNames = JSON.parse(localStorage.getItem("local"));
-    // console.log(storedNames); 
-     
-    // console.log(questionKey);
-    console.log(this.questions[id].question_key);
-    this.servicesProvider.SelectWhere(tablename,this.questions[id].question_key,"'"+formValue + "'").then((ans:any)=>{
-      let localArray=[];
-      localArray.push(ans.rows[0]);
-      console.log(localArray);
-      this.indexArray++;
-      this.textData(this.questions,this.indexArray).then(()=>{
-      }); 
+  next(surveyid,questionkey){
+    this.tablename="surveyResult_"+surveyid; 
+      let questionLength=this.questions.length;
+      localStorage.getItem('Groupid');
+      if(this.questionCheck.length == (questionLength-1)){ 
+        this.updateCompleteGroup().then(()=>{
+          
+             this.NextButton=false;
+             console.log(this.CompletedGroup);
+             let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
+              this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+                this.surveyComplete().then(()=>{
+              
+             }); 
+          })
+         
+        })  
         
-      
-    }) ;
+      }else{
+        this.questionIndex(this.indexArray).then((id)=>{  
+          this.indexArray++;
+          this.answerGet(this.indexArray).then((answerKey:any)=>{
+            this.textData(this.questions,this.indexArray,answerKey).then(()=>{
+            }); 
+          }); 
+        })
+      }
+   }
+  surveyComplete(){
+    return new Promise((resolve,reject)=>{
+      let data=JSON.parse(localStorage.getItem('completedGroups'));
+      console.log(data.length);
+      console.log(localStorage.getItem("totalGroup"));
+      if(data.length == localStorage.getItem("totalGroup")){
+        console.log("datashborad pls go");
+        let query="UPDATE "+this.tablename + " SET  survey_status = 'completed' where serialNo = "+ localStorage.getItem('record_id');
+        this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
+           this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
+           this.navCtrl.setRoot(DashboardPage);
+        })
+      }else{
+          this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+                this.navCtrl.setRoot(GroupsPage);
+      }
+    })
   }
-  preButton(){
-    var storedNames = JSON.parse(localStorage.getItem("local"));
-    console.log(storedNames);
-    let newss =storedNames.pop(); 
-    console.log(newss);
-  }
-
-  
-
-  // previous(id){
-  //   console.log(id);
-
-  //   id=id-2;
-  //   console.log(id);
-  //   let questionLength;
-  //   questionLength=this.questions.length;
-
-  //   if(id==questionLength){
-  //     console.log("there is no data");
-  //     this.navCtrl.setRoot(DashboardPage);
-  //   }else{
-  //     console.log(id);
-  //     this.textData(this.questions,id).then(()=>{
-  //     });   
-  //   }
-  // }
-  // 
-  // 
-
- 
-
-  onSubmit(formData,questionKey,survey_id,questionText,QuestionType){
+  updateCompleteGroup(){
+    //calculate complted groups
     
+    let storedata:any;
+    return new Promise((resolve,reject)=>{
+      if(localStorage.getItem('completedGroups') != "undefined"){
+        this.CompletedGroup=JSON.parse(localStorage.getItem('completedGroups'));
+        this.CompletedGroup.push(localStorage.getItem('Groupid'));
+        localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
+        resolve(this.CompletedGroup);
+      }else{
+        this.CompletedGroup.push(localStorage.getItem('Groupid'));
+        console.log(this.CompletedGroup);
+        localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
+        resolve(this.CompletedGroup);
+      }
+    })  
+  }
+  questionIndex(check){
+    return new Promise ((resolve,reject)=>{
+      this.questionCheck.push(check);
+      localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
+      resolve(this.questionCheck);
+    })
+  }
+  previous(){
+    let storedNames:any;
+    storedNames = JSON.parse(localStorage.getItem("questionIndex"));
+    this.lastPopId= storedNames.pop();
+    let lastindex2=this.lastPopId-1;
+    this.questionCheck=storedNames;
+    localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck)); 
+    localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
+    this.indexArray=this.indexArray-1;
+    this.QuestionKeyText=this.questions[this.indexArray].question_key;
+    this.answerGet(this.indexArray).then((answerKey:any)=>{
+      console.log(answerKey);
+      this.textData(this.questions,this.indexArray, answerKey).then(()=>{
+      }); 
+    })    
+  }
+  answerGet(id){
+    return new Promise ((resolve,reject)=>{
+      let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename+" where serialNo = "+localStorage.getItem('record_id'); ;
+      this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
+        this.answerValue=result.rows.item(0);
+        resolve(this.answerValue[this.questions[id].question_key]);
+      });
+    })
+  }
+  onSubmit(form,questionKey,survey_id,questionText,QuestionType){
+    //console.log(this.recordId);
+    //console.log(this.form.value[questionText]);
     let i=0;
     let json;
-    if(!formData.valid){
-       //console.log("not valid");
-        this.Errors="it is not valid";
+    let formValue=[];
+    this.formValidate=this.form.controls[questionText].valid;
+    if(!this.formValidate){
+      //console.log("not valid");
+      this.Errors="it is not valid";
     }else{
       let formValue=[];
-      //console.log(formData.value);
-
+     //console.log("valid");
       if(QuestionType=="checkbox"){
-        //console.log(QuestionType);
-         json=JSON.stringify(formData.value);
-         formValue.push(json);
+        json=JSON.stringify(this.form.value);
+        formValue.push(json);
       }else{
-        //c//onsole.log(formData.value);
-        //console.log(questionText);
-        formValue.push(formData.value[questionText]);
-        formData.value[questionText]="";
-      }
-      //console.log(formValue);
-     // console.log(this.indexArray);  
-      let tablename="surveyResult_"+survey_id;
-      let query="Select "+ questionKey +" from " + tablename ;
-      //console.log(query);
-      this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-        //console.log(result.rows);
-        //console.log(result.rows.length);
-        if(result.rows.length < 1 ){
-          console.log("empty");
-          this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave)=>{
-           // console.log(questionSave);
-            this.next(this.indexArray,tablename,questionKey,formValue);
-          });
-        }else{
-         // console.log("update");
-          let query="UPDATE "+ tablename + " SET " + questionKey +"= '" +formValue +"'";
-          //console.log(query);
+        formValue.push(form.value[questionText]);
+        // formValue.push(this.recordId);
+        form.value[questionText]="";
+      } 
+      let questionLength=this.questions.length;
+      this.tablename="surveyResult_"+survey_id;
+       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+      let query="Select "+ questionKey +" from " + this.tablename + " where serialNo = "+this.recordId ;
+      //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
+      let record_id:any
+      record_id = localStorage.getItem('record_id');
+      localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+      if(record_id != "null"){
+        console.log('update')
+        let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+"'"+ localStorage.getItem("lastquestionIndex")+"'," +"last_group_id = "+localStorage.getItem('Groupid')+" where serialNo = "+localStorage.getItem('record_id') ;
+          console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-            this.next(this.indexArray,tablename,questionKey,formValue);
+            this.next(survey_id,questionKey);
+          });
+          
+        }else{
+          console.log('insert');
+          formValue.push(localStorage.getItem("lastquestionIndex"));
+          formValue.push("incomplete");
+          formValue.push(localStorage.getItem('Groupid'));
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id"], formValue).then((res:any)=>{
+            console.log(res.insertId);
+            localStorage.setItem('record_id', res.insertId);
+            this.next(survey_id,questionKey);
           });
         }
-      }); 
-    }
-    formData.reset();   
+    //  }); 
+       }
+    //}
+    form.reset();   
   }
 
   insertSubmit(tablename,questionKey,formValue){
@@ -244,9 +346,8 @@ export class QuestionPage {
     })
   }
 
-
   updateCucumber() {
-   let  cucumber:any
+    let  cucumber:any
     console.log('Cucumbers new state:' + cucumber);
   }
 }
