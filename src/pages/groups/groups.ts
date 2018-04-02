@@ -41,34 +41,16 @@ export class GroupsPage {
       //console.log(result.rows);
       var row = [];
       for(var i=0; i < result.rows.length; i++) {
-            row[i] = result.rows.item(i)
+        row[i] = result.rows.item(i)
       }
       let SurveyData = row;
       this.groupsResult=SurveyData;
       console.log( this.groupsResult);
-      // console.log( this.groupsResult.length);
       localStorage.setItem("totalGroup",this.groupsResult.length);
 
-      // let elem = this;
-      
-      // setTimeout(function(){
-      //   elem.groupsResult=SurveyData;
-      //   console.log( elem.groupsResult);
-     
-      // }, 1000);
-        
-    	//console.log(this.groupsResult);
-      // this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
-      //   for(var keys in form.rows){
-      //     if(form.rows[keys].value == "survey"){
-      //       localStorage.setItem("questionType", 'save_survey');
-      //     }else if(form.rows[keys].value == "section"){
-      //       localStorage.setItem("questionType", 'save_section');
-      //     }else if(form.rows[keys].value == "question"){
-      //       localStorage.setItem("questionType", 'questions');
-      //     }
-      //     }
-      //   })
+      // var number1 = 400;
+      // var number2 = 500;
+      // console.log(Math.floor((number1 / number2) * 100)); //w00t!
       });
    
   }

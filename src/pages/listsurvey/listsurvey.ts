@@ -24,14 +24,14 @@ export class ListsurveyPage {
 	date:any;
 	currentDate:any;
 	currentTime:any;
-
 	today:any;
 	tomarrow:"14/03/2018 17:23:41 +0530";
+
   constructor(public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
-  groups(id,message){
+  groups(id,message,totalQuestions){
   	localStorage.setItem("Surveyid", id);
-  	
+  	localStorage.setItem("totalQuestion",totalQuestions);
   	let surveyMetaType;
   	if(message["scheduling"].surveyResponse == "true"){
   		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
@@ -79,13 +79,13 @@ export class ListsurveyPage {
 		console.log("ion view load");
 		this.surveyTitle=localStorage.getItem("ApplicationName");
   		localStorage.setItem('completedGroups',undefined);
-  		// localStorage.setItem('ContinueKey',undefined);
+  		localStorage.setItem('totalQuestion',null);
+  		localStorage.setItem('filledQuestion', null);
   		localStorage.setItem('RuningSurvey',null);
   		localStorage.setItem('record_id',null);
   		localStorage.setItem('GroupNumber',null);
   		localStorage.setItem('totalGroup',null);
 		this.EnabledSurvey();
-		
 	}
 	EnabledSurvey(){
 		let questionId;
@@ -107,17 +107,19 @@ export class ListsurveyPage {
 									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
 										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
 											this.surveyanswer("surveyResult_"+value.item(i).form_id).then((surveyFilled:any)=>{
-												// console.log(surveySch);
-												console.log(surveyFilled);
+												 this.totalQuestion(value.item(i).form_id).then((question:any)=>{
+               
 												let rowsData = survey.rows.item(0);
 												rowsData["details"]=responseData;
 												rowsData["timer"]=timerData;
 												rowsData["scheduling"]=surveySch;
 												rowsData["filledSurvey"]=surveyFilled;
+												rowsData["questions"]=question;
 											// console.log(rowsData["details"].responenumber);
 												
 												content.push(rowsData);	
-												console.log(content);
+												// console.log(content);
+												})
 											})
 											
 										})	
@@ -143,6 +145,14 @@ export class ListsurveyPage {
 		  });
 		})
 	}
+	totalQuestion(id){
+    return new Promise((resolve,reject)=>{
+    	let query="SELECT count(*) as count FROM questions WHERE survey_id = "+ id;
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+          resolve(questions.rows.item(0).count);
+      })
+    })
+  }
 	surveyanswer(tablename){
 		return new Promise((resolve,reject)=>{
 			console.log(tablename);

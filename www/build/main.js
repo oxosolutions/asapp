@@ -183,7 +183,7 @@ var ActivationPage = (function () {
                         qresult = questionData.rows[i].question_key + ' TEXT';
                         keyColumns.push(qresult);
                     }
-                    keyColumns.push('ip_address', 'survey_startedOn', 'survey_completedOn', 'survey_submittedBy', 'survey_submittedFrom', 'mac_address', 'unique_id', 'device_detail', 'created_by', 'created_at', 'last_fieldId', 'last_group_id', 'completed_groups', 'survey_status', 'incomplete_name', 'survey_sync_status', 'record_type');
+                    keyColumns.push('ip_address', 'survey_startedOn', 'survey_completedOn', 'survey_submittedBy', 'survey_submittedFrom', 'mac_address', 'unique_id', 'device_detail', 'totalQuestions', 'filledQuestions', 'last_fieldId', 'last_group_id', 'completed_groups', 'survey_status', 'incomplete_name', 'survey_sync_status', 'record_type');
                     keyqColumns.push(keyColumns);
                     loopLength++;
                     if (loopLength == surveys.length) {
@@ -435,9 +435,10 @@ var ActivationPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/'<ion-content padding color="headerClassic">\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n		<div class="activation-page-content">\n			<div class="app-title">IRIS</div>\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
     ], ActivationPage);
     return ActivationPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=activation.js.map
@@ -632,7 +633,11 @@ var QuestionPage = (function () {
                 console.log(_this.CompletedGroup);
                 var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "'" + " where serialNo = " + localStorage.getItem('record_id');
                 _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
-                    _this.surveyComplete().then(function () {
+                    _this.questionIndex(_this.indexArray).then(function (id) {
+                        _this.questionsFilledCheck().then(function (fillled) {
+                            _this.surveyComplete().then(function () {
+                            });
+                        });
                     });
                 });
             });
@@ -641,11 +646,29 @@ var QuestionPage = (function () {
             this.questionIndex(this.indexArray).then(function (id) {
                 _this.indexArray++;
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
-                    _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
+                    _this.questionsFilledCheck().then(function (fillled) {
+                        _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
+                        });
                     });
                 });
             });
         }
+    };
+    QuestionPage.prototype.questionsFilledCheck = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (localStorage.getItem("filledQuestion") == "null") {
+                _this.filledQuestion = JSON.parse(localStorage.getItem('questionIndex'));
+                localStorage.setItem("filledQuestion", _this.filledQuestion.length);
+                resolve(_this.filledQuestion);
+            }
+            else {
+                _this.filledQuestion = localStorage.getItem("filledQuestion");
+                _this.filledQuestion++;
+                localStorage.setItem("filledQuestion", _this.filledQuestion);
+                resolve(_this.filledQuestion);
+            }
+        });
     };
     QuestionPage.prototype.surveyComplete = function () {
         var _this = this;
@@ -691,6 +714,9 @@ var QuestionPage = (function () {
         return new Promise(function (resolve, reject) {
             _this.questionCheck.push(check);
             localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
+            var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
+            console.log(questionFilled);
+            console.log(questionFilled.length);
             resolve(_this.questionCheck);
         });
     };
@@ -704,6 +730,9 @@ var QuestionPage = (function () {
         localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
         localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
         this.indexArray = this.indexArray - 1;
+        this.filledQuestion = localStorage.getItem("filledQuestion");
+        this.filledQuestion = this.filledQuestion - 1;
+        localStorage.setItem("filledQuestion", this.filledQuestion);
         this.QuestionKeyText = this.questions[this.indexArray].question_key;
         this.answerGet(this.indexArray).then(function (answerKey) {
             console.log(answerKey);
@@ -935,7 +964,7 @@ var CompletedSurveyPage = (function () {
     };
     CompletedSurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-completed-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/completed-survey/completed-survey.html"*/'<!--\n  Generated template for the CompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>completed-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						Completed : 12-12-2017\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question Filled\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Synchronize				\n			</div>\n		</div>\n		\n    	\n	</div>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						Completed : 12-12-2017\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question Filled\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Synchronize				\n			</div>\n		</div>\n		\n    	\n	</div>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						Completed : 12-12-2017\n					</span>\n					\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question Filled\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Synchronize				\n			</div>\n		</div>\n		\n    	\n	</div>\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/completed-survey/completed-survey.html"*/,
+            selector: 'page-completed-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/completed-survey/completed-survey.html"*/'<!--\n  Generated template for the CompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>completed-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						Completed : 12-12-2017\n					</span>\n					\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question Filled\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Synchronize				\n			</div>\n		</div>\n		\n    	\n	</div>\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/completed-survey/completed-survey.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], CompletedSurveyPage);
@@ -980,7 +1009,7 @@ var IncompletedSurveyPage = (function () {
     };
     IncompletedSurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-incompleted-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/'<!--\n  Generated template for the IncompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>12%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<div class="pause-location">7th question, Section 3</div>\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						12-12-2017\n					</span>\n					<span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Resume				\n			</div>\n		</div>\n		\n    	\n	</div>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>12%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<div class="pause-location">7th question, Section 3</div>\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						12-12-2017\n					</span>\n					<span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Resume				\n			</div>\n		</div>\n		\n    	\n	</div>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>12%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<div class="pause-location">7th question, Section 3</div>\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						12-12-2017\n					</span>\n					<span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Resume				\n			</div>\n		</div>\n		\n    	\n	</div>\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/,
+            selector: 'page-incompleted-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/'<!--\n  Generated template for the IncompletedSurveyPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>12%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">Special Survey</div>\n				<div class="pause-location">7th question, Section 3</div>\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						12-12-2017\n					</span>\n					<span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span>\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				12 Question remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Resume				\n			</div>\n		</div>\n		\n    	\n	</div>\n	\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], IncompletedSurveyPage);
@@ -1359,55 +1388,55 @@ var map = {
 		0
 	],
 	"../pages/completed-survey/completed-survey.module": [
-		477,
+		465,
 		13
 	],
 	"../pages/dashboard/dashboard.module": [
-		465,
+		466,
 		12
 	],
 	"../pages/groups/groups.module": [
-		466,
+		467,
 		11
 	],
 	"../pages/help/help.module": [
-		467,
+		468,
 		10
 	],
 	"../pages/incompleted-survey/incompleted-survey.module": [
-		468,
+		469,
 		9
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		469,
+		470,
 		8
 	],
 	"../pages/login/login.module": [
-		470,
+		471,
 		7
 	],
 	"../pages/question/question.module": [
-		471,
+		472,
 		6
 	],
 	"../pages/record-list/record-list.module": [
-		472,
+		473,
 		5
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
-		473,
+		474,
 		4
 	],
 	"../pages/select/select.module": [
-		474,
+		475,
 		3
 	],
 	"../pages/survey-questions/survey-questions.module": [
-		475,
+		476,
 		2
 	],
 	"../pages/text/text.module": [
-		476,
+		477,
 		1
 	]
 };
@@ -1697,6 +1726,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/complete-survey/complete-survey.module#CompleteSurveyPageModule', name: 'CompleteSurveyPage', segment: 'complete-survey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
@@ -1708,8 +1738,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
@@ -2200,34 +2229,20 @@ var GroupsPage = (function () {
             var SurveyData = row;
             _this.groupsResult = SurveyData;
             console.log(_this.groupsResult);
-            // console.log( this.groupsResult.length);
             localStorage.setItem("totalGroup", _this.groupsResult.length);
-            // let elem = this;
-            // setTimeout(function(){
-            //   elem.groupsResult=SurveyData;
-            //   console.log( elem.groupsResult);
-            // }, 1000);
-            //console.log(this.groupsResult);
-            // this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
-            //   for(var keys in form.rows){
-            //     if(form.rows[keys].value == "survey"){
-            //       localStorage.setItem("questionType", 'save_survey');
-            //     }else if(form.rows[keys].value == "section"){
-            //       localStorage.setItem("questionType", 'save_section');
-            //     }else if(form.rows[keys].value == "question"){
-            //       localStorage.setItem("questionType", 'questions');
-            //     }
-            //     }
-            //   })
+            // var number1 = 400;
+            // var number2 = 500;
+            // console.log(Math.floor((number1 / number2) * 100)); //w00t!
         });
     };
     GroupsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/'\n\n\n\n<ion-content>\n    <!-- <ion-list class="" >\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n            <p>\n               {{groups.description}}\n            </p>\n        </ion-item>        \n                 \n    </ion-list> -->\n    \n    <div class="survey-info">\n        <button ion-button menuToggle color="transparent">\n            <ion-icon name="menu"></ion-icon>\n            \n        </button>   \n        <div class="survey-title">\n            Survey Name\n        </div>\n        <div class="survey-description">\n            this is the description of the survey\n        </div>\n        <ion-list class="section-list" >\n            <div class="list-header">\n                List of sections\n            </div>\n            <div class="list-content">\n                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">\n                    <ion-avatar item-start class="list-icon">\n                      <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    <h2>{{groups.title}}</h2>\n                    <p>\n                       {{groups.description}}\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-arrow-dropright-outline"></ion-icon>\n                </ion-item>        \n                 <ion-item>\n                    <ion-avatar item-start class="list-icon">\n                        <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    <h2>completed title</h2>\n                    <p>\n                       this is the description\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-checkmark-circle" class="completed"></ion-icon>\n                </ion-item>      \n                 \n            </div>\n                        \n        </ion-list>\n    </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], GroupsPage);
     return GroupsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=groups.js.map
@@ -2412,9 +2427,10 @@ var ListsurveyPage = (function () {
         this.listSurvey = [];
         this.questionLength = [];
     }
-    ListsurveyPage.prototype.groups = function (id, message) {
+    ListsurveyPage.prototype.groups = function (id, message, totalQuestions) {
         var _this = this;
         localStorage.setItem("Surveyid", id);
+        localStorage.setItem("totalQuestion", totalQuestions);
         var surveyMetaType;
         if (message["scheduling"].surveyResponse == "true") {
             this.servicesProvider.SelectWhere("survey_meta", "form_id", id).then(function (form) {
@@ -2461,7 +2477,8 @@ var ListsurveyPage = (function () {
         console.log("ion view load");
         this.surveyTitle = localStorage.getItem("ApplicationName");
         localStorage.setItem('completedGroups', undefined);
-        // localStorage.setItem('ContinueKey',undefined);
+        localStorage.setItem('totalQuestion', null);
+        localStorage.setItem('filledQuestion', null);
         localStorage.setItem('RuningSurvey', null);
         localStorage.setItem('record_id', null);
         localStorage.setItem('GroupNumber', null);
@@ -2489,16 +2506,17 @@ var ListsurveyPage = (function () {
                                     _this.responseLimit(value.item(i).form_id).then(function (responseData) {
                                         _this.surveytimer(value.item(i).form_id).then(function (timerData) {
                                             _this.surveyanswer("surveyResult_" + value.item(i).form_id).then(function (surveyFilled) {
-                                                // console.log(surveySch);
-                                                console.log(surveyFilled);
-                                                var rowsData = survey.rows.item(0);
-                                                rowsData["details"] = responseData;
-                                                rowsData["timer"] = timerData;
-                                                rowsData["scheduling"] = surveySch;
-                                                rowsData["filledSurvey"] = surveyFilled;
-                                                // console.log(rowsData["details"].responenumber);
-                                                content.push(rowsData);
-                                                console.log(content);
+                                                _this.totalQuestion(value.item(i).form_id).then(function (question) {
+                                                    var rowsData = survey.rows.item(0);
+                                                    rowsData["details"] = responseData;
+                                                    rowsData["timer"] = timerData;
+                                                    rowsData["scheduling"] = surveySch;
+                                                    rowsData["filledSurvey"] = surveyFilled;
+                                                    rowsData["questions"] = question;
+                                                    // console.log(rowsData["details"].responenumber);
+                                                    content.push(rowsData);
+                                                    // console.log(content);
+                                                });
                                             });
                                         });
                                     });
@@ -2523,6 +2541,15 @@ var ListsurveyPage = (function () {
                     _this.nullSurvey = "there is no survey";
                     console.log(_this.nullSurvey);
                 }
+            });
+        });
+    };
+    ListsurveyPage.prototype.totalQuestion = function (id) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var query = "SELECT count(*) as count FROM questions WHERE survey_id = " + id;
+            _this.servicesProvider.ExecuteRun(query, []).then(function (questions) {
+                resolve(questions.rows.item(0).count);
             });
         });
     };
@@ -2905,11 +2932,12 @@ var ListsurveyPage = (function () {
     };
     ListsurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        List Of Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n \n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n  <ion-item (click)="groups(survey.id,survey)">\n  <p>{{survey["scheduling"].surveyResponse}}</p>\n  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>\n  \n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n\n    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>\n    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>\n    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>\n  </ion-item>\n</div>\n<!-- <div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div> -->\n</ion-list> \n\n<!-- <p *ngIf="today">{{today | date: \'medium\'}}</p>\n -->\n<!-- <ion-list>\n  <ion-item>\n    <ion-avatar item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-avatar>\n    <h2>Finn</h2>\n    <h3>Don\'t Know What To Do!</h3>\n    <p>I\'ve had a pretty messed up day. If we just...</p>\n  </ion-item>\n</ion-list> -->\n\n    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">\n        <ion-item (click)="groups(survey.id)">\n           \n            <img src="../../assets/imgs/survey.png">\n            <div class="list-content-wrapper">\n                <div class="item-title">{{survey.name}}</div>\n                <div class="item-description">{{survey.description}}</div>\n                <div class=""></div>\n                <div class="item-time">\n                    30 Mar 2018\n                </div>\n            </div> \n\n\n        </ion-item>\n       \n    </ion-item-group> -->\n    \n   \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
+            selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        List Of Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n \n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n  <ion-item (click)="groups(survey.id,survey,survey[\'questions\'])">\n  <p>{{survey["scheduling"].surveyResponse}}</p>\n  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>\n  \n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n\n    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>\n    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>\n    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>\n  </ion-item>\n</div>\n<!-- <div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div> -->\n</ion-list> \n\n<!-- <p *ngIf="today">{{today | date: \'medium\'}}</p>\n -->\n<!-- <ion-list>\n  <ion-item>\n    <ion-avatar item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-avatar>\n    <h2>Finn</h2>\n    <h3>Don\'t Know What To Do!</h3>\n    <p>I\'ve had a pretty messed up day. If we just...</p>\n  </ion-item>\n</ion-list> -->\n\n    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">\n        <ion-item (click)="groups(survey.id)">\n           \n            <img src="../../assets/imgs/survey.png">\n            <div class="list-content-wrapper">\n                <div class="item-title">{{survey.name}}</div>\n                <div class="item-description">{{survey.description}}</div>\n                <div class=""></div>\n                <div class="item-time">\n                    30 Mar 2018\n                </div>\n            </div> \n\n\n        </ion-item>\n       \n    </ion-item-group> -->\n    \n   \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _e || Object])
     ], ListsurveyPage);
     return ListsurveyPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 // questionCount(){
@@ -3048,9 +3076,10 @@ var RecordListPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-record-list',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/'  <!--\n  Generated template for the RecordListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n <!--  <ion-navbar color="headerClassic">\n  <button ion-button menuToggle>\n  	<ion-icon name="menu"></ion-icon>\n  </button>\n    <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n  </ion-navbar> -->\n\n\n    <ion-toolbar color="headerClassic">\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n        </button>\n        <ion-title><span *ngIf="recordTitle">{{recordTitle}}</span></ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="search"></ion-icon>\n            </button>\n        </ion-buttons>\n\n        <ion-buttons end>\n            <button ion-button icon-only>\n                <ion-icon name="more"></ion-icon>\n            </button>\n        </ion-buttons>\n\n    </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n	<!-- <ion-row>\n	  <ion-col>\n      <strong>Title</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Total questions</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Complete rocords</strong>\n    </ion-col>\n    <ion-col>\n      <strong>Imcomplete records</strong>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngFor="let record of listSurvey[0]">\n 		<ion-col>\n 		{{record.name}}\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n 		<ion-col>\n 		0\n 		</ion-col>\n  </ion-row>\n -->\n    <div>\n        <ion-list class="custom-border" >\n            <ion-item-sliding *ngFor="let record of listSurvey[0]" class="">\n                <ion-item >\n                \n                    <h2>{{record.name}}</h2>\n                    <p>\n                        <ion-icon name="done-all"></ion-icon>\n                        total Questions {{record.questions}} \n                        <!--  <ion-icon name="refresh"></ion-icon>\n                         12 Incompleted -->\n                    </p>\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n                    </button>\n                </ion-item>\n            \n\n                <ion-item-options side="right">\n                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>\n                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>\n                </ion-item-options>\n  \n            </ion-item-sliding>\n             \n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/record-list/record-list.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* PopoverController */]) === "function" && _d || Object])
     ], RecordListPage);
     return RecordListPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=record-list.js.map
