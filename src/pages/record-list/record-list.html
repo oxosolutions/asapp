@@ -36,41 +36,14 @@
 
 
 <ion-content>
-	<!-- <ion-row>
-	  <ion-col>
-      <strong>Title</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Total questions</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Complete rocords</strong>
-    </ion-col>
-    <ion-col>
-      <strong>Imcomplete records</strong>
-    </ion-col>
-  </ion-row>
-
-  <ion-row *ngFor="let record of listSurvey[0]">
- 		<ion-col>
- 		{{record.name}}
- 		</ion-col>
- 		<ion-col>
- 		0
- 		</ion-col>
- 		<ion-col>
- 		0
- 		</ion-col>
- 		<ion-col>
- 		0
- 		</ion-col>
-  </ion-row>
- -->
+	
     <div>
+        
         <ion-list class="custom-border" >
-            <ion-item-sliding *ngFor="let record of listSurvey[0]" class="">
+            <ion-item-sliding *ngFor="let record of listSurvey[0]" >
+
                 <ion-item >
-                
+                    <h2>{{record.id}}</h2>
                     <h2>{{record.name}}</h2>
                     <p>
                         <ion-icon name="done-all"></ion-icon>
@@ -84,9 +57,9 @@
                 </ion-item>
             
 
-                <ion-item-options side="right">
-                    <button ion-button color="primary" (click)="completedSurveyPage()">View Completed</button>
-                    <button ion-button color="Secondary" (click)="incompletedSurveyPage()">View Incomplete</button>
+                <ion-item-options side="right"  >
+                    <button  ion-button color="primary" (click)="completedSurveyPage(record.id)">View Completed</button>
+                    <button  ion-button color="Secondary" (click)="incompletedSurveyPage(record.id)">View Incomplete</button>
                 </ion-item-options>
   
             </ion-item-sliding>

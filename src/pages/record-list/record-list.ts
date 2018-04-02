@@ -17,17 +17,13 @@ export class RecordListPage {
 	listSurvey = [];
   test = 'false';
   nullSurvey;
+  EmptySurvey:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
     this.recordTitle=localStorage.getItem("ApplicationName");
-    // this.servicesProvider.SelectAll("surveys").then((survey:any)=>{
-    // 		this.listSurvey.push(survey.rows);
-    // 		console.log(this.listSurvey);
-      
-    // })
-      this.EnabledSurvey();
+    this.EnabledSurvey();
   }
   EnabledSurvey(){
     let questionId;
@@ -48,8 +44,7 @@ export class RecordListPage {
               this.totalQuestion(value.item(i).form_id).then((question:any)=>{
                 
                  let rowsData = survey.rows.item(0); 
-                 rowsData["questions"]=question
-                        
+                 rowsData["questions"]=question      
                 content.push(rowsData);  
 
               })
@@ -57,7 +52,6 @@ export class RecordListPage {
             })       
             if(content != undefined){
               SurveySelect.push(content);
-              console.log(SurveySelect);
               forloop++;
               if(forloop == survey_meta.rows.item.length ){
                 this.listSurvey=SurveySelect;
@@ -87,11 +81,36 @@ export class RecordListPage {
     let popover = this.popoverCtrl.create(GroupsPage);
     popover.present();
   }
-  completedSurveyPage(){
-     this.navCtrl.push(CompletedSurveyPage);
+  checkSurvey(id){
+     console.log(id);
+    return new Promise((resolve,reject)=>{
+      let tablename="surveyResult_"+id;
+      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
+        this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
+          if(resultParse.length>0){
+            resolve(resultParse)
+          }else{
+            console.log("no record found");  
+            this.EmptySurvey=null;
+          }
+        });
+      });
+    })
+    
   }
-  incompletedSurveyPage(){
-    this.navCtrl.push(IncompletedSurveyPage);
+  completedSurveyPage(id){
+    this.checkSurvey(id).then((result:any)=>{
+      // result.forEach((key,value,)=>{
+        this.navCtrl.push(CompletedSurveyPage, {'result':result}); 
+      // })
+        
+    });
+   
+  }
+  incompletedSurveyPage(id){
+    this.checkSurvey(id).then((result:any)=>{
+      this.navCtrl.push(IncompletedSurveyPage, {'result' : result});
+    });
   }
   // public open(itemSlide: ItemSliding, item: Item, $event) {
 

@@ -202,8 +202,10 @@ export class QuestionPage {
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.questionIndex(this.indexArray).then((id)=>{
               this.questionsFilledCheck().then((fillled)=>{
-              this.surveyComplete().then(()=>{
-             });
+                this.questionsFilledCheckInsert().then((filledinsert)=>{
+                this.surveyComplete().then(()=>{
+                 });
+              });
             });
            }); 
           }); 
@@ -213,13 +215,24 @@ export class QuestionPage {
           this.indexArray++;
           this.answerGet(this.indexArray).then((answerKey:any)=>{
             this.questionsFilledCheck().then((fillled)=>{
-              this.textData(this.questions,this.indexArray,answerKey).then(()=>{
-              }); 
+              this.questionsFilledCheckInsert().then((filledinsert)=>{
+                this.textData(this.questions,this.indexArray,answerKey).then(()=>{
+                }); 
+              });
             })
           }); 
         })
       }
    }
+  questionsFilledCheckInsert(){
+    return new Promise((resolve,reject)=>{
+      let query="UPDATE "+ this.tablename +" SET filledQuestions='"+localStorage.getItem("filledQuestion") +"' where serialNo= "+ localStorage.getItem('record_id');
+      console.log(query);
+      this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
+        resolve(insert);
+      })
+    });
+  }
   questionsFilledCheck(){
     return new Promise((resolve,reject)=>{
       if(localStorage.getItem("filledQuestion") == "null"){
@@ -247,10 +260,8 @@ export class QuestionPage {
            this.navCtrl.setRoot(DashboardPage);
         })
       }else{
-       
-          this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-                this.navCtrl.setRoot(GroupsPage);
-       
+        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+        this.navCtrl.setRoot(GroupsPage);
       }
     })
   }
@@ -291,14 +302,16 @@ export class QuestionPage {
     localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck)); 
     localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
     this.indexArray=this.indexArray-1;
-    
+
     this.filledQuestion= localStorage.getItem("filledQuestion");
     this.filledQuestion=this.filledQuestion-1;
     localStorage.setItem("filledQuestion",this.filledQuestion);
+    this.questionsFilledCheckInsert().then((filledinsert)=>{
     this.QuestionKeyText=this.questions[this.indexArray].question_key;
     this.answerGet(this.indexArray).then((answerKey:any)=>{
       console.log(answerKey);
       this.textData(this.questions,this.indexArray, answerKey).then(()=>{
+      }); 
       }); 
     })    
   }
@@ -356,7 +369,8 @@ export class QuestionPage {
           formValue.push("incomplete");
           formValue.push(localStorage.getItem('Groupid'));
           formValue.push(time);
-          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn"], formValue).then((res:any)=>{
+          formValue.push(localStorage.getItem("totalQuestion"));
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions"], formValue).then((res:any)=>{
           console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             this.next(survey_id,questionKey);

@@ -14,12 +14,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'incompleted-survey.html',
 })
 export class IncompletedSurveyPage {
-
+	survey:any;
+	incomplete:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IncompletedSurveyPage');
+    this.survey=this.navParams.get('result');
+    let data = this.survey.filter((element, index) =>{
+    		return (element.survey_status == 'incomplete');
+    });
+    this.incomplete=data;
+    console.log(this.incomplete);
+  }
+  resume(id,group){
+  	
+  	console.log(id);
+  	console.log(group);
   }
 
 }

@@ -31377,6 +31377,10 @@ page-question.ion-page .button-outline-md {
   margin-top: 65px;
 }
 
+page-record-list [hidden] {
+  display: none !important;
+}
+
 page-record-list .icon-wrapper {
   display: inline-block;
   background-color: #0077d6;
