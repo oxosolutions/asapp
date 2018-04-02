@@ -194,12 +194,11 @@ export class QuestionPage {
       localStorage.getItem('Groupid');
       if(this.questionCheck.length == (questionLength-1)){ 
         this.updateCompleteGroup().then(()=>{
-          
              this.NextButton=false;
              console.log(this.CompletedGroup);
              let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
               this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-                this.surveyComplete().then(()=>{
+              this.surveyComplete().then(()=>{
               
              }); 
           })
@@ -218,12 +217,12 @@ export class QuestionPage {
    }
   surveyComplete(){
     return new Promise((resolve,reject)=>{
-      let data=JSON.parse(localStorage.getItem('completedGroups'));
-      console.log(data.length);
-      console.log(localStorage.getItem("totalGroup"));
+      let data=JSON.parse(localStorage.getItem('completedGroups')); 
       if(data.length == localStorage.getItem("totalGroup")){
+        let time=new Date();
         console.log("datashborad pls go");
-        let query="UPDATE "+this.tablename + " SET  survey_status = 'completed' where serialNo = "+ localStorage.getItem('record_id');
+        let query="UPDATE "+this.tablename + " SET survey_status = 'completed', "+"survey_completedOn='"+ time +"'"+" where serialNo = "+localStorage.getItem('record_id');
+        console.log(query);
         this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
            this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
            this.navCtrl.setRoot(DashboardPage);
@@ -313,6 +312,7 @@ export class QuestionPage {
       let record_id:any
       record_id = localStorage.getItem('record_id');
       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
+
       if(record_id != "null"){
         console.log('update')
         let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+"'"+ localStorage.getItem("lastquestionIndex")+"'," +"last_group_id = "+localStorage.getItem('Groupid')+" where serialNo = "+localStorage.getItem('record_id') ;
@@ -322,12 +322,14 @@ export class QuestionPage {
           });
           
         }else{
+          let time =new Date();
           console.log('insert');
           formValue.push(localStorage.getItem("lastquestionIndex"));
           formValue.push("incomplete");
           formValue.push(localStorage.getItem('Groupid'));
-          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id"], formValue).then((res:any)=>{
-            console.log(res.insertId);
+          formValue.push(time);
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn"], formValue).then((res:any)=>{
+          console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             this.next(survey_id,questionKey);
           });
