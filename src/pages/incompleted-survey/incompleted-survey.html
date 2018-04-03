@@ -17,7 +17,7 @@
 	<div class="custom-card" *ngFor="let  record of incomplete">
 		<div>
 			<div class="percentage-wrapper">
-				<div><span>{{(record.filledQuestions/record.totalQuestions)*100}}%</span></div>
+				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>
 			</div>
 			<div class="content-wrapper">
 				<div class="item-title">{{record.incomplete_name}}</div>
