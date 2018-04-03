@@ -34,9 +34,9 @@ export class QuestionPage {
   answer:{};
   OriginalContent:any;
   dataUrl:any;
-	questionTitle:any;
-	id:any;
-	questions=[];
+  questionTitle:any;
+  id:any;
+  questions=[];
   previousButton:any;
   NextButton:any;
   myData: any;
@@ -179,13 +179,14 @@ export class QuestionPage {
   textData(questions,i,questionKey){
     // console.log(i);
     return new Promise((resolve,reject)=>{
+       this.lastArrayCheck().then((result:any)=>{
       this.QuestionKeyText=questionKey;
       let content=[]
       content=questions[i]; 
       content["prefill"]=questionKey;
       this.OriginalContent = content ;
       console.log(this.OriginalContent);
-      // this.lastArrayCheck().then((result:any)=>{
+     
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
@@ -193,7 +194,7 @@ export class QuestionPage {
       }
       this.NextButton=true;
        }); 
-    //});   
+   });   
   }
   next(surveyid,questionkey){
 
@@ -275,15 +276,18 @@ export class QuestionPage {
   }
   updateCompleteGroup(){
     //calculate complted groups
+    //calculate complted groups
     
     let storedata:any;
     return new Promise((resolve,reject)=>{
-      if(localStorage.getItem('completedGroups') != "undefined"){
+      if(localStorage.getItem('completedGroups') != "null"){
+        console.log('not undefinded');
         this.CompletedGroup=JSON.parse(localStorage.getItem('completedGroups'));
         this.CompletedGroup.push(localStorage.getItem('Groupid'));
         localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
         resolve(this.CompletedGroup);
       }else{
+        console.log('defined')
         this.CompletedGroup.push(localStorage.getItem('Groupid'));
         console.log(this.CompletedGroup);
         localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
@@ -293,10 +297,11 @@ export class QuestionPage {
   }
   questionIndex(check,questionkey){
     return new Promise ((resolve,reject)=>{
+      console.log(this.questionCheck);
       this.questionCheck.push(check);
       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
       let questionFilled=JSON.parse(localStorage.getItem('questionIndex'));
-      console.log(questionFilled);
+      console.log(questionFilled);  //list of array
       let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
        console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
@@ -341,12 +346,16 @@ export class QuestionPage {
     return new Promise ((resolve,reject)=>{
       if(this.navParams.get('indexdata') != null){
         console.log("pearame");
-        let data:any;
-        data=localStorage.getItem("lastquestionIndex");
-        data=data-1;
-        localStorage.setItem("lastquestionIndex",data);
-        this.indexArray=localStorage.getItem("lastquestionIndex");
-         resolve(this.indexArray);
+        // let data:any;
+        // data=localStorage.getItem("lastquestionIndex");
+        // data=data-1;
+        // localStorage.setItem("lastquestionIndex",data);
+        // this.indexArray=localStorage.getItem("lastquestionIndex");
+        //  resolve(this.indexArray);
+        console.log(this.questionCheck);
+        this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));
+        console.log(this.questionCheck);
+        resolve(this.questionCheck);
       }else{
         resolve("data");
       }  
