@@ -205,7 +205,7 @@ export class QuestionPage {
           console.log(this.CompletedGroup);
           let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-            this.questionIndex(this.indexArray).then((id)=>{
+            this.questionIndex(this.indexArray,questionkey).then((id)=>{
               this.questionsFilledCheck().then((fillled)=>{
                 this.questionsFilledCheckInsert().then((filledinsert)=>{
                 this.surveyComplete().then(()=>{
@@ -216,7 +216,7 @@ export class QuestionPage {
           }); 
         })    
       }else{
-        this.questionIndex(this.indexArray).then((id)=>{  
+        this.questionIndex(this.indexArray,questionkey).then((id)=>{  
           this.indexArray++;
           this.answerGet(this.indexArray).then((answerKey:any)=>{
             this.questionsFilledCheck().then((fillled)=>{
@@ -288,18 +288,19 @@ export class QuestionPage {
       }
     })  
   }
-  questionIndex(check){
+  questionIndex(check,questionkey){
     return new Promise ((resolve,reject)=>{
       this.questionCheck.push(check);
       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
       let questionFilled=JSON.parse(localStorage.getItem('questionIndex'));
       console.log(questionFilled);
-      console.log(questionFilled.length);
-       let query="UPDATE "+ this.tablename +" SET questionIndex = '"+localStorage.getItem("questionIndex") +"' where serialNo= "+ localStorage.getItem('record_id');
-      console.log(query);
-      this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
-         resolve(this.questionCheck);
-      })
+      console.log(localStorage.getItem("questionIndex"));
+      resolve(this.questionFilled);
+      //  let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
+      // console.log(query);
+      // this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
+      //    resolve(this.questionCheck);
+      // })
      
     })
   }

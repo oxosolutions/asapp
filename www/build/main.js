@@ -2774,7 +2774,7 @@ var QuestionPage = (function () {
                 console.log(_this.CompletedGroup);
                 var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "'" + " where serialNo = " + localStorage.getItem('record_id');
                 _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
-                    _this.questionIndex(_this.indexArray).then(function (id) {
+                    _this.questionIndex(_this.indexArray, questionkey).then(function (id) {
                         _this.questionsFilledCheck().then(function (fillled) {
                             _this.questionsFilledCheckInsert().then(function (filledinsert) {
                                 _this.surveyComplete().then(function () {
@@ -2786,7 +2786,7 @@ var QuestionPage = (function () {
             });
         }
         else {
-            this.questionIndex(this.indexArray).then(function (id) {
+            this.questionIndex(this.indexArray, questionkey).then(function (id) {
                 _this.indexArray++;
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
                     _this.questionsFilledCheck().then(function (fillled) {
@@ -2864,19 +2864,20 @@ var QuestionPage = (function () {
             }
         });
     };
-    QuestionPage.prototype.questionIndex = function (check) {
+    QuestionPage.prototype.questionIndex = function (check, questionkey) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.questionCheck.push(check);
             localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
             var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
             console.log(questionFilled);
-            console.log(questionFilled.length);
-            var query = "UPDATE " + _this.tablename + " SET questionIndex = '" + localStorage.getItem("questionIndex") + "' where serialNo= " + localStorage.getItem('record_id');
-            console.log(query);
-            _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
-                resolve(_this.questionCheck);
-            });
+            console.log(localStorage.getItem("questionIndex"));
+            resolve(_this.questionFilled);
+            //  let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
+            // console.log(query);
+            // this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
+            //    resolve(this.questionCheck);
+            // })
         });
     };
     QuestionPage.prototype.previous = function () {
