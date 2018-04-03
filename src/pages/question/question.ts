@@ -295,7 +295,12 @@ export class QuestionPage {
       let questionFilled=JSON.parse(localStorage.getItem('questionIndex'));
       console.log(questionFilled);
       console.log(questionFilled.length);
-      resolve(this.questionCheck);
+       let query="UPDATE "+ this.tablename +" SET questionIndex = '"+localStorage.getItem("questionIndex") +"' where serialNo= "+ localStorage.getItem('record_id');
+      console.log(query);
+      this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
+         resolve(this.questionCheck);
+      })
+     
     })
   }
   previous(){
