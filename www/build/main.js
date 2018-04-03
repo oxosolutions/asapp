@@ -435,10 +435,9 @@ var ActivationPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/'<ion-content padding color="headerClassic">\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n		<div class="activation-page-content">\n			<div class="app-title">IRIS</div>\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/activation/activation.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ActivationPage);
     return ActivationPage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 }());
 
 //# sourceMappingURL=activation.js.map
@@ -624,11 +623,11 @@ var IncompletedSurveyPage = (function () {
         localStorage.setItem("completedGroups", record.completed_groups);
         localStorage.setItem("record_id", record.serialNo);
         localStorage.setItem("Groupid", record.last_group_id);
-        console.log(record.last_fieldId);
+        localStorage.setItem("questionIndex", record.questionIndex);
         record.last_fieldId++;
         console.log(record.last_fieldId);
         localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id });
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'indexdata': "ddd" });
     };
     IncompletedSurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -2755,6 +2754,7 @@ var QuestionPage = (function () {
             content["prefill"] = questionKey;
             _this.OriginalContent = content;
             console.log(_this.OriginalContent);
+            // this.lastArrayCheck().then((result:any)=>{
             if (_this.questionCheck.length == 0) {
                 _this.previousButton = false;
             }
@@ -2763,9 +2763,11 @@ var QuestionPage = (function () {
             }
             _this.NextButton = true;
         });
+        //});   
     };
     QuestionPage.prototype.next = function (surveyid, questionkey) {
         var _this = this;
+        console.log(this.indexArray);
         this.tablename = "surveyResult_" + surveyid;
         var questionLength = this.questions.length;
         localStorage.getItem('Groupid');
@@ -2872,7 +2874,6 @@ var QuestionPage = (function () {
             localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
             var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
             console.log(questionFilled);
-            console.log(localStorage.getItem("questionIndex"));
             var query = "UPDATE " + _this.tablename + " SET questionIndex = '" + localStorage.getItem('questionIndex') + "' where serialNo= " + localStorage.getItem('record_id');
             console.log(query);
             _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
@@ -2914,10 +2915,27 @@ var QuestionPage = (function () {
             });
         });
     };
-    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType) {
+    QuestionPage.prototype.lastArrayCheck = function () {
         var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.navParams.get('indexdata') != null) {
+                console.log("pearame");
+                var data = void 0;
+                data = localStorage.getItem("lastquestionIndex");
+                data = data - 1;
+                localStorage.setItem("lastquestionIndex", data);
+                _this.indexArray = localStorage.getItem("lastquestionIndex");
+                resolve(_this.indexArray);
+            }
+            else {
+                resolve("data");
+            }
+        });
+    };
+    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType) {
         //console.log(this.recordId);
         //console.log(this.form.value[questionText]);
+        var _this = this;
         var i = 0;
         var json;
         var formValue = [];
@@ -2927,6 +2945,7 @@ var QuestionPage = (function () {
             this.Errors = "it is not valid";
         }
         else {
+            //checking review record
             var formValue_1 = [];
             //console.log("valid");
             if (QuestionType == "checkbox") {
@@ -2935,6 +2954,7 @@ var QuestionPage = (function () {
             }
             else {
                 formValue_1.push(form.value[questionText]);
+                console.log(formValue_1);
                 // formValue.push(this.recordId);
                 form.value[questionText] = "";
             }
@@ -2948,6 +2968,7 @@ var QuestionPage = (function () {
             localStorage.setItem("lastquestionIndex", this.indexArray.toString());
             if (record_id != "null") {
                 console.log('update');
+                console.log(formValue_1);
                 var query_1 = "UPDATE " + this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
                 console.log(query_1);
                 this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
@@ -2968,7 +2989,6 @@ var QuestionPage = (function () {
                     _this.next(survey_id, questionKey);
                 });
             }
-            //  }); 
         }
         //}
         form.reset();

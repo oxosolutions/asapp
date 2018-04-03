@@ -185,16 +185,19 @@ export class QuestionPage {
       content["prefill"]=questionKey;
       this.OriginalContent = content ;
       console.log(this.OriginalContent);
+      // this.lastArrayCheck().then((result:any)=>{
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
       }
       this.NextButton=true;
-      
-    });   
+       }); 
+    //});   
   }
   next(surveyid,questionkey){
+
+    console.log(this.indexArray);
     this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
@@ -294,10 +297,7 @@ export class QuestionPage {
       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
       let questionFilled=JSON.parse(localStorage.getItem('questionIndex'));
       console.log(questionFilled);
-      console.log(localStorage.getItem("questionIndex"));
-      
-
-       let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
+      let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
        console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
         resolve(this.questionCheck);
@@ -337,9 +337,25 @@ export class QuestionPage {
       });
     })
   }
+  lastArrayCheck(){
+    return new Promise ((resolve,reject)=>{
+      if(this.navParams.get('indexdata') != null){
+        console.log("pearame");
+        let data:any;
+        data=localStorage.getItem("lastquestionIndex");
+        data=data-1;
+        localStorage.setItem("lastquestionIndex",data);
+        this.indexArray=localStorage.getItem("lastquestionIndex");
+         resolve(this.indexArray);
+      }else{
+        resolve("data");
+      }  
+    })
+  }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
     //console.log(this.recordId);
     //console.log(this.form.value[questionText]);
+   
     let i=0;
     let json;
     let formValue=[];
@@ -348,16 +364,27 @@ export class QuestionPage {
       //console.log("not valid");
       this.Errors="it is not valid";
     }else{
+      //checking review record
+     
+
+     
+      
+      
       let formValue=[];
+      
+      
      //console.log("valid");
       if(QuestionType=="checkbox"){
         json=JSON.stringify(this.form.value);
         formValue.push(json);
       }else{
         formValue.push(form.value[questionText]);
+         console.log(formValue);
         // formValue.push(this.recordId);
         form.value[questionText]="";
       } 
+      
+
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
        localStorage.setItem("lastquestionIndex", this.indexArray.toString());
@@ -368,7 +395,8 @@ export class QuestionPage {
       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
 
       if(record_id != "null"){
-        console.log('update')
+        console.log('update');
+        console.log(formValue);
         let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+"'"+ localStorage.getItem("lastquestionIndex")+"'," +"last_group_id = "+localStorage.getItem('Groupid')+" where serialNo = "+localStorage.getItem('record_id') ;
           console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
@@ -389,10 +417,13 @@ export class QuestionPage {
             this.next(survey_id,questionKey);
           });
         }
-    //  }); 
+       
+     
        }
+
     //}
-    form.reset();   
+    form.reset(); 
+     
   }
 
   insertSubmit(tablename,questionKey,formValue){

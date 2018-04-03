@@ -28,11 +28,13 @@ export class IncompletedSurveyPage {
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);
-   	console.log(	record.last_fieldId);
+    localStorage.setItem("questionIndex", record.questionIndex);
+
+  
    	record.last_fieldId++;
    	console.log(	record.last_fieldId);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id});
+    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'indexdata':"ddd"});
  
   }
 
