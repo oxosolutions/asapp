@@ -45,7 +45,10 @@ export class QuestionPage {
   surveyQuestion=[];
   Errors:any;
   questionCheck=[];
-  indexArray=0;
+
+ // indexArray=0;
+  
+  public indexArray:any=localStorage.getItem("lastquestionIndex");
   filledQuestion:any;
   lastPopId:any;
   tablename:any;
@@ -110,6 +113,7 @@ export class QuestionPage {
     this.questionType=localStorage.getItem("questionType");
 
     this.id=this.navParams.get('id');
+    console.log(this.id);
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
       Content.push(result.rows);
       console.log(Content);
@@ -150,7 +154,8 @@ export class QuestionPage {
         });
       });
       this.questions=replacedArray;
-     // console.log(this.questions);
+      console.log(this.indexArray);
+
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
       //console.log(newObject);
 

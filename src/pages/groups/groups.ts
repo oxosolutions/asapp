@@ -25,7 +25,10 @@ export class GroupsPage {
     if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
     }else{
+      
+      localStorage.setItem("lastquestionIndex", ""+ 0 +"");
         this.navCtrl.setRoot(QuestionPage, {'id': id}); 
+
     }
   }
   ionViewDidLoad() {

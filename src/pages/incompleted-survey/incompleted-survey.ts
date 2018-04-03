@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the IncompletedSurveyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { QuestionPage } from '../../pages/question/question';
 
 @IonicPage()
 @Component({
@@ -26,10 +20,20 @@ export class IncompletedSurveyPage {
     this.incomplete=data;
     console.log(this.incomplete);
   }
-  resume(id,group){
-  	
-  	console.log(id);
-  	console.log(group);
+  resume(record){
+  	console.log(record);
+  	console.log(record.survey_status);
+    localStorage.setItem("totalQuestion", record.totalQuestions);
+    localStorage.setItem("filledQuestion", record.filledQuestions);
+    localStorage.setItem("completedGroups", record.completed_groups);
+    localStorage.setItem("record_id", record.serialNo);
+    localStorage.setItem("Groupid", record.last_group_id);
+   	console.log(	record.last_fieldId);
+   	record.last_fieldId++;
+   	console.log(	record.last_fieldId);
+    localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
+    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id});
+ 
   }
 
 }
