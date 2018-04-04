@@ -29,10 +29,11 @@
                 List of sections
             </div>
             <div class="list-content">
-            
-            <!-- class="completed" -->
 
-                <ion-item class="" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
+            <!-- class="completed" -->
+           <!--  [ngClass]="{'completed': groups.id === groups.id }" -->
+
+                <ion-item [ngClass]="{'completed': groups.id == navdata }"  *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
                     <ion-avatar item-start class="list-icon">
                       <ion-icon name="ios-photos-outline"></ion-icon>
                     </ion-avatar>
