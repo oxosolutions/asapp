@@ -16,8 +16,10 @@ export class GroupsPage {
 	ids:any;
 	groupsResult:any;
   surveyType:any;
-  section:any;
+  completedGroup:any;
   navdata:any;
+  local:any;
+  dragContent:any;
   //recordId:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -59,18 +61,44 @@ export class GroupsPage {
     return new Promise((resolve,reject)=>{
     if(this.navParams.get('status') != null){
       this.navdata=this.navParams.get('status');
-      console.log(this.navdata);
+      // this.completeGroupCheck().then(()=>{
+         console.log(this.navdata);
       resolve(this.navdata);
+    //  })
+     
     }else{
-      if(this.section == 'section'){
-        console.log("yes match");
-      }else{
-        console.log("not match");
-      }
-      console.log("djkfhkdf");
       resolve("hh");
     }
     })
+  }
+  completeGroupCheck(someValue){
+    return new Promise((resolve,reject)=>{
+      // this.completedGroup=this.navParams.get('completedGroup');
+      this.local=localStorage.getItem('completedGroup');
+      console.log(this.local);
+      for(let i=0; i<=this.local.length; i++){
+        console.log(this.local[i]);
+        if(someValue == this.local[i])
+          return "completed"
+         // else if(someValue == 207)
+         //     return "completed";
+        else
+             return "notsame";
+      }
+
+     
+      resolve(this.completedGroup);
+    })
+  }
+  getCSSClasses(someValue){
+    if(this.navParams.get('completedGroup') != null){
+      if(localStorage.getItem('completedGroups').indexOf(someValue)== -1)
+        return "ll";
+      else  
+        return "completed"; 
+    }else{
+      return "dfdf";
+    } 
   }
 
 }

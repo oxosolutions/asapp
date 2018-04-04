@@ -1862,24 +1862,46 @@ var GroupsPage = (function () {
         return new Promise(function (resolve, reject) {
             if (_this.navParams.get('status') != null) {
                 _this.navdata = _this.navParams.get('status');
+                // this.completeGroupCheck().then(()=>{
                 console.log(_this.navdata);
                 resolve(_this.navdata);
+                //  })
             }
             else {
-                if (_this.section == 'section') {
-                    console.log("yes match");
-                }
-                else {
-                    console.log("not match");
-                }
-                console.log("djkfhkdf");
                 resolve("hh");
             }
         });
     };
+    GroupsPage.prototype.completeGroupCheck = function (someValue) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            // this.completedGroup=this.navParams.get('completedGroup');
+            _this.local = localStorage.getItem('completedGroup');
+            console.log(_this.local);
+            for (var i = 0; i <= _this.local.length; i++) {
+                console.log(_this.local[i]);
+                if (someValue == _this.local[i])
+                    return "completed";
+                else
+                    return "notsame";
+            }
+            resolve(_this.completedGroup);
+        });
+    };
+    GroupsPage.prototype.getCSSClasses = function (someValue) {
+        if (this.navParams.get('completedGroup') != null) {
+            if (localStorage.getItem('completedGroups').indexOf(someValue) == -1)
+                return "ll";
+            else
+                return "completed";
+        }
+        else {
+            return "dfdf";
+        }
+    };
     GroupsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/'\n\n\n\n<ion-content>\n    <!-- <ion-list class="" >\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n            <p>\n               {{groups.description}}\n            </p>\n        </ion-item>        \n                 \n    </ion-list> -->\n    \n    <div class="survey-info">\n        <button ion-button menuToggle color="transparent">\n            <ion-icon name="menu"></ion-icon>\n            \n        </button>   \n        <div class="survey-title">\n            Survey Name\n        </div>\n        <div class="survey-description">\n            this is the description of the survey\n        </div>\n        <ion-list class="section-list" >\n            <div class="list-header">\n                List of sections\n            </div>\n            <div class="list-content">\n\n            <!-- class="completed" -->\n           <!--  [ngClass]="{\'completed\': groups.id === groups.id }" -->\n\n                <ion-item [ngClass]="{\'completed\': groups.id == navdata }"  *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">\n                    <ion-avatar item-start class="list-icon">\n                      <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    <h2>{{groups.title}}</h2>\n                    <p>\n                       {{groups.description}}\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-arrow-dropright-outline" class="arrow"></ion-icon>\n                    <ion-icon item-end name="ios-checkmark-circle" class="check"></ion-icon>\n\n                </ion-item>        \n                      \n                 \n            </div>\n                        \n        </ion-list>\n    </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/,
+            selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/'\n\n\n\n<ion-content>\n    <!-- <ion-list class="" >\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n            <p>\n               {{groups.description}}\n            </p>\n        </ion-item>        \n                 \n    </ion-list> --> \n    <div class="survey-info">\n        <button persistent="true" ion-button menuToggle color="transparent">\n            <ion-icon name="menu" ></ion-icon>\n            \n        </button>   \n        <div class="survey-title">\n            Survey Name\n        </div>\n        <div class="survey-description">\n            this is the description of the survey\n        </div>\n        <ion-list class="section-list" >\n            <div class="list-header">\n                List of sections\n            </div>\n            <div class="list-content">\n\n             <!--    [ngClass]="{\'completed\': groups.id == navdata}"  -->\n\n                <ion-item  [ngClass]="getCSSClasses(groups.id)" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">\n                    <ion-avatar item-start class="list-icon">\n                      <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    {{groups.id}}\n                    <h2>{{groups.title}}</h2>\n                    <p>\n                       {{groups.description}}\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-arrow-dropright-outline" class="arrow"></ion-icon>\n                    <ion-icon item-end name="ios-checkmark-circle" class="check"></ion-icon>\n\n                </ion-item>        \n                      \n                 \n            </div>\n                        \n        </ion-list>\n    </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/groups/groups.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], GroupsPage);
@@ -2864,7 +2886,7 @@ var QuestionPage = (function () {
             }
             else {
                 _this.AioneHelp.presentToast("section is successfully completed", 3000, 'top');
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'status': localStorage.getItem('Groupid') });
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'completedGroup': localStorage.getItem("completedGroups") });
             }
         });
     };

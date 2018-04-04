@@ -11,11 +11,10 @@
             </p>
         </ion-item>        
                  
-    </ion-list> -->
-    
+    </ion-list> --> 
     <div class="survey-info">
-        <button ion-button menuToggle color="transparent">
-            <ion-icon name="menu"></ion-icon>
+        <button persistent="true" ion-button menuToggle color="transparent">
+            <ion-icon name="menu" ></ion-icon>
             
         </button>   
         <div class="survey-title">
@@ -30,13 +29,13 @@
             </div>
             <div class="list-content">
 
-            <!-- class="completed" -->
-           <!--  [ngClass]="{'completed': groups.id === groups.id }" -->
+             <!--    [ngClass]="{'completed': groups.id == navdata}"  -->
 
-                <ion-item [ngClass]="{'completed': groups.id == navdata }"  *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
+                <ion-item  [ngClass]="getCSSClasses(groups.id)" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
                     <ion-avatar item-start class="list-icon">
                       <ion-icon name="ios-photos-outline"></ion-icon>
                     </ion-avatar>
+                    {{groups.id}}
                     <h2>{{groups.title}}</h2>
                     <p>
                        {{groups.description}}
