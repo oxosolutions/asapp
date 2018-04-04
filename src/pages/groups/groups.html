@@ -29,7 +29,10 @@
                 List of sections
             </div>
             <div class="list-content">
-                <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
+            
+            <!-- class="completed" -->
+
+                <ion-item class="" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
                     <ion-avatar item-start class="list-icon">
                       <ion-icon name="ios-photos-outline"></ion-icon>
                     </ion-avatar>
@@ -40,21 +43,11 @@
                     </p>
                     <!-- <span>0 times filled</span> -->
 
-                    <ion-icon item-end name="ios-arrow-dropright-outline"></ion-icon>
+                    <ion-icon item-end name="ios-arrow-dropright-outline" class="arrow"></ion-icon>
+                    <ion-icon item-end name="ios-checkmark-circle" class="check"></ion-icon>
+
                 </ion-item>        
-                 <ion-item>
-                    <ion-avatar item-start class="list-icon">
-                        <ion-icon name="ios-photos-outline"></ion-icon>
-                    </ion-avatar>
-                    <h2>completed title</h2>
-                    <p>
-                       this is the description
-
-                    </p>
-                    <!-- <span>0 times filled</span> -->
-
-                    <ion-icon item-end name="ios-checkmark-circle" class="completed"></ion-icon>
-                </ion-item>      
+                      
                  
             </div>
                         
