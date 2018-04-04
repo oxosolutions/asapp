@@ -45,9 +45,11 @@ export class IncompletedSurveyPage {
       if(record.completed_groups != "null"){
         console.log(  record.last_fieldId);
         console.log("groupo null");
-        if(record.last_fieldId == 0 ){
+        if(record.last_fieldId == null ){
           console.log("go to groupss");
           this.navCtrl.setRoot(GroupsPage);
+        }else{
+          resolve("data");
         }
 
       }else{

@@ -207,7 +207,8 @@ export class QuestionPage {
         this.updateCompleteGroup().then(()=>{
           this.NextButton=false;
           console.log(this.CompletedGroup);
-          let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"'"+" where serialNo = "+localStorage.getItem('record_id');
+          let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"',last_fieldId = " +null +" where serialNo = "+localStorage.getItem('record_id');
+          console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.questionIndex(this.indexArray,questionkey).then((id)=>{
               this.questionsFilledCheck().then((fillled)=>{
@@ -270,7 +271,7 @@ export class QuestionPage {
         })
       }else{
         this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-       
+
         this.navCtrl.setRoot(GroupsPage, {'completedGroup': localStorage.getItem("completedGroups")});
       }
     })

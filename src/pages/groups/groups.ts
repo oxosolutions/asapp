@@ -56,7 +56,7 @@ export class GroupsPage {
   }
   getCSSClasses(someValue){
     if(localStorage.getItem('completedGroups') != null){
-      localStorage.setItem("lastquestionIndex", ""+0+"");
+      localStorage.setItem("lastquestionIndex", ""+null+"");
       if(localStorage.getItem('completedGroups').indexOf(someValue)== -1)
         return "ll";
       else  
