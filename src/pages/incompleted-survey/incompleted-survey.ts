@@ -32,9 +32,9 @@ export class IncompletedSurveyPage {
 
     
     this.groupCompleteCheck(record).then(()=>{
-       console.log(  record.last_fieldId);
+       // console.log(  record.last_fieldId);
      record.last_fieldId++;
-     console.log(  record.last_fieldId);
+     // console.log(  record.last_fieldId);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
     this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'indexdata':"ddd"});
     })
@@ -43,10 +43,10 @@ export class IncompletedSurveyPage {
   groupCompleteCheck(record){
     return new Promise((resolve,rejeect)=>{
       if(record.completed_groups != "null"){
-        console.log(  record.last_fieldId);
-        console.log("groupo null");
+        // console.log(  record.last_fieldId);
+        // console.log("groupo null");
         if(record.last_fieldId == null ){
-          console.log("go to groupss");
+          // console.log("go to groupss");
           this.navCtrl.setRoot(GroupsPage);
         }else{
           resolve("data");

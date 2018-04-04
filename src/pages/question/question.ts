@@ -348,12 +348,6 @@ export class QuestionPage {
     return new Promise ((resolve,reject)=>{
       if(this.navParams.get('indexdata') != null){
         console.log("pearame");
-        // let data:any;
-        // data=localStorage.getItem("lastquestionIndex");
-        // data=data-1;
-        // localStorage.setItem("lastquestionIndex",data);
-        // this.indexArray=localStorage.getItem("lastquestionIndex");
-        //  resolve(this.indexArray);
         console.log(this.questionCheck);
         this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));
         console.log(this.questionCheck);
@@ -375,15 +369,7 @@ export class QuestionPage {
       //console.log("not valid");
       this.Errors="it is not valid";
     }else{
-      //checking review record
-     
-
-     
-      
-      
       let formValue=[];
-      
-      
      //console.log("valid");
       if(QuestionType=="checkbox"){
         json=JSON.stringify(this.form.value);
@@ -394,8 +380,6 @@ export class QuestionPage {
         // formValue.push(this.recordId);
         form.value[questionText]="";
       } 
-      
-
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
        localStorage.setItem("lastquestionIndex", this.indexArray.toString());

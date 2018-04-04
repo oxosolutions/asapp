@@ -5,6 +5,8 @@ import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import {QuestionPage} from '../../pages/question/question';
 import {SectionalQuestionsPage} from '../sectional-questions/sectional-questions';
 import {SurveyQuestionsPage} from '../survey-questions/survey-questions';
+import { AlertController } from 'ionic-angular';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 
 @IonicPage()
 @Component({
@@ -21,19 +23,48 @@ export class GroupsPage {
   local:any;
   dragContent:any;
   //recordId:any;
-  constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
-    
+    this.showConfirm();
     localStorage.setItem("Groupid", id);
+
     if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
-    }else{
-      
+    }else{  
       localStorage.setItem("lastquestionIndex", ""+ 0 +"");
-        this.navCtrl.setRoot(QuestionPage, {'id': id}); 
-
+      this.navCtrl.setRoot(QuestionPage, {'id': id}); 
     }
+  }
+   showConfirm() {
+    let prompt = this.alertCtrl.create({
+      message: "Enter Incomplete Survey Name",
+      inputs: [
+        {
+          placeholder: 'survey name'
+        },
+      ],
+      buttons:[
+        {
+          text: 'Cancel',
+          handler: data => {
+            
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            if(data[0] == ""){
+              this.AioneHelp.presentToast("you must fill survey name",2000,'top');
+            }else{
+              
+         
+            }        
+          }
+        }
+      ]
+    });  
+    prompt.present();
   }
   ionViewDidLoad() {
       this.groupTitle=localStorage.getItem("ApplicationName");
