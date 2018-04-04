@@ -36,8 +36,6 @@ export class GroupsPage {
     }
   }
   ionViewDidLoad() {
-     console.log(this.navParams.get('status'));
-    this.groupCheckStatus().then(()=>{
       this.groupTitle=localStorage.getItem("ApplicationName");
       this.ids=localStorage.getItem('Surveyid');
       this.surveyType=localStorage.getItem('questionType');
@@ -55,43 +53,10 @@ export class GroupsPage {
         console.log( this.groupsResult);
         localStorage.setItem("totalGroup",this.groupsResult.length);
       });
-    }) 
-  }
-  groupCheckStatus(){
-    return new Promise((resolve,reject)=>{
-    if(this.navParams.get('status') != null){
-      this.navdata=this.navParams.get('status');
-      // this.completeGroupCheck().then(()=>{
-         console.log(this.navdata);
-      resolve(this.navdata);
-    //  })
-     
-    }else{
-      resolve("hh");
-    }
-    })
-  }
-  completeGroupCheck(someValue){
-    return new Promise((resolve,reject)=>{
-      // this.completedGroup=this.navParams.get('completedGroup');
-      this.local=localStorage.getItem('completedGroup');
-      console.log(this.local);
-      for(let i=0; i<=this.local.length; i++){
-        console.log(this.local[i]);
-        if(someValue == this.local[i])
-          return "completed"
-         // else if(someValue == 207)
-         //     return "completed";
-        else
-             return "notsame";
-      }
-
-     
-      resolve(this.completedGroup);
-    })
   }
   getCSSClasses(someValue){
-    if(this.navParams.get('completedGroup') != null){
+    if(localStorage.getItem('completedGroups') != null){
+      localStorage.setItem("lastquestionIndex", ""+0+"");
       if(localStorage.getItem('completedGroups').indexOf(someValue)== -1)
         return "ll";
       else  

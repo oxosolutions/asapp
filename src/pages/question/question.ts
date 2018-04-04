@@ -270,7 +270,7 @@ export class QuestionPage {
         })
       }else{
         this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
-
+       
         this.navCtrl.setRoot(GroupsPage, {'completedGroup': localStorage.getItem("completedGroups")});
       }
     })

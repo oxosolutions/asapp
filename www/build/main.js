@@ -590,6 +590,7 @@ var CompletedSurveyPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_question_question__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(53);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -599,6 +600,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -616,6 +618,7 @@ var IncompletedSurveyPage = (function () {
         console.log(this.incomplete);
     };
     IncompletedSurveyPage.prototype.resume = function (record) {
+        var _this = this;
         console.log(record);
         console.log(record.survey_status);
         localStorage.setItem("totalQuestion", record.totalQuestions);
@@ -624,18 +627,38 @@ var IncompletedSurveyPage = (function () {
         localStorage.setItem("record_id", record.serialNo);
         localStorage.setItem("Groupid", record.last_group_id);
         localStorage.setItem("questionIndex", record.questionIndex);
-        record.last_fieldId++;
-        console.log(record.last_fieldId);
-        localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'indexdata': "ddd" });
+        this.groupCompleteCheck(record).then(function () {
+            console.log(record.last_fieldId);
+            record.last_fieldId++;
+            console.log(record.last_fieldId);
+            localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'indexdata': "ddd" });
+        });
+    };
+    IncompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
+        var _this = this;
+        return new Promise(function (resolve, rejeect) {
+            if (record.completed_groups != "null") {
+                console.log(record.last_fieldId);
+                console.log("groupo null");
+                if (record.last_fieldId == 0) {
+                    console.log("go to groupss");
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */]);
+                }
+            }
+            else {
+                resolve("data");
+            }
+        });
     };
     IncompletedSurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-incompleted-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card" *ngFor="let  record of incomplete">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">{{record.incomplete_name}}</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						{{record.survey_startedOn | date:\'fullDate\' }}\n					</span>\n\n					<!-- <span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span> -->\n\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				{{record.totalQuestions-record.filledQuestions}} question Remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey" (click)="resume(record)">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>resume\n							\n			</div>\n		</div>\n		\n    	\n	</div>\n	\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object])
     ], IncompletedSurveyPage);
     return IncompletedSurveyPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=incompleted-survey.js.map
@@ -1836,60 +1859,27 @@ var GroupsPage = (function () {
     };
     GroupsPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        console.log(this.navParams.get('status'));
-        this.groupCheckStatus().then(function () {
-            _this.groupTitle = localStorage.getItem("ApplicationName");
-            _this.ids = localStorage.getItem('Surveyid');
-            _this.surveyType = localStorage.getItem('questionType');
-            _this.servicesProvider.SelectWhere("groups", "survey_id", _this.ids).then(function (result) {
-                //console.log(result.rows.item);
-                var rowww = [];
-                rowww = result.rows.item(i);
-                //console.log(result.rows);
-                var row = [];
-                for (var i = 0; i < result.rows.length; i++) {
-                    row[i] = result.rows.item(i);
-                }
-                var SurveyData = row;
-                _this.groupsResult = SurveyData;
-                console.log(_this.groupsResult);
-                localStorage.setItem("totalGroup", _this.groupsResult.length);
-            });
-        });
-    };
-    GroupsPage.prototype.groupCheckStatus = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            if (_this.navParams.get('status') != null) {
-                _this.navdata = _this.navParams.get('status');
-                // this.completeGroupCheck().then(()=>{
-                console.log(_this.navdata);
-                resolve(_this.navdata);
-                //  })
+        this.groupTitle = localStorage.getItem("ApplicationName");
+        this.ids = localStorage.getItem('Surveyid');
+        this.surveyType = localStorage.getItem('questionType');
+        this.servicesProvider.SelectWhere("groups", "survey_id", this.ids).then(function (result) {
+            //console.log(result.rows.item);
+            var rowww = [];
+            rowww = result.rows.item(i);
+            //console.log(result.rows);
+            var row = [];
+            for (var i = 0; i < result.rows.length; i++) {
+                row[i] = result.rows.item(i);
             }
-            else {
-                resolve("hh");
-            }
-        });
-    };
-    GroupsPage.prototype.completeGroupCheck = function (someValue) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            // this.completedGroup=this.navParams.get('completedGroup');
-            _this.local = localStorage.getItem('completedGroup');
-            console.log(_this.local);
-            for (var i = 0; i <= _this.local.length; i++) {
-                console.log(_this.local[i]);
-                if (someValue == _this.local[i])
-                    return "completed";
-                else
-                    return "notsame";
-            }
-            resolve(_this.completedGroup);
+            var SurveyData = row;
+            _this.groupsResult = SurveyData;
+            console.log(_this.groupsResult);
+            localStorage.setItem("totalGroup", _this.groupsResult.length);
         });
     };
     GroupsPage.prototype.getCSSClasses = function (someValue) {
-        if (this.navParams.get('completedGroup') != null) {
+        if (localStorage.getItem('completedGroups') != null) {
+            localStorage.setItem("lastquestionIndex", "" + 0 + "");
             if (localStorage.getItem('completedGroups').indexOf(someValue) == -1)
                 return "ll";
             else

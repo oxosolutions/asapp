@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QuestionPage } from '../../pages/question/question';
-
+import {GroupsPage} from '../../pages/groups/groups';
 @IonicPage()
 @Component({
   selector: 'page-incompleted-survey',
@@ -15,7 +15,7 @@ export class IncompletedSurveyPage {
   ionViewDidLoad() {
     this.survey=this.navParams.get('result');
     let data = this.survey.filter((element, index) =>{
-    		return (element.survey_status == 'incomplete');
+    	return (element.survey_status == 'incomplete');
     });
     this.incomplete=data;
     console.log(this.incomplete);
@@ -30,12 +30,30 @@ export class IncompletedSurveyPage {
     localStorage.setItem("Groupid", record.last_group_id);
     localStorage.setItem("questionIndex", record.questionIndex);
 
-  
-   	record.last_fieldId++;
-   	console.log(	record.last_fieldId);
+    
+    this.groupCompleteCheck(record).then(()=>{
+       console.log(  record.last_fieldId);
+     record.last_fieldId++;
+     console.log(  record.last_fieldId);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
     this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'indexdata':"ddd"});
+    })
  
+  }
+  groupCompleteCheck(record){
+    return new Promise((resolve,rejeect)=>{
+      if(record.completed_groups != "null"){
+        console.log(  record.last_fieldId);
+        console.log("groupo null");
+        if(record.last_fieldId == 0 ){
+          console.log("go to groupss");
+          this.navCtrl.setRoot(GroupsPage);
+        }
+
+      }else{
+        resolve("data");
+      }
+    })
   }
 
 }
