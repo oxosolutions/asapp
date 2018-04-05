@@ -20,6 +20,7 @@ export class DashboardPage {
     	this.dashboard=result.rows.item(0);
       console.log(this.dashboard);
       localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
+       localStorage.setItem('InCompleteSurveyName',null);
     });
   }	
   recordList(){

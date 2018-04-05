@@ -36,8 +36,7 @@ export class GroupsPage {
         localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
         this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
       }
-   })
-     
+   }) 
   }
   completedSurvey(){
     return new Promise ((resolve,reject)=>{
@@ -50,37 +49,8 @@ export class GroupsPage {
       }
     })
   }
-  showConfirm() {
-    let prompt = this.alertCtrl.create({
-      message: "Enter Incomplete Survey Name",
-      inputs: [
-        {
-          placeholder: 'survey name'
-        },
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          handler: data => {
-            
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            if(data[0] == ""){
-              this.AioneHelp.presentToast("you must fill survey name",2000,'top');
-            }else{
-              
-         
-            }        
-          }
-        }
-      ]
-    });  
-    prompt.present();
-  }
-  ionViewDidLoad() {
+  
+  ionViewDidLoad(){
       this.groupTitle=localStorage.getItem("ApplicationName");
       this.ids=localStorage.getItem('Surveyid');
       this.surveyType=localStorage.getItem('questionType');

@@ -68,12 +68,12 @@ export class QuestionPage {
   }
   showConfirm(questionKey,survey_id,questionText,QuestionType) {
     let prompt = this.alertCtrl.create({
-      message: "Enter Incomplete Survey Name",
-      inputs: [
-        {
-          placeholder: 'survey name'
-        },
-      ],
+      message: "Are u sure want to quite survey",
+      // inputs: [
+      //   {
+      //     // placeholder: 'survey name'
+      //   },
+      // ],
       buttons:[
         {
           text: 'Cancel',
@@ -82,21 +82,21 @@ export class QuestionPage {
           }
         },
         {
-          text: 'Save',
+          text: 'yes',
           handler: data => {
-            if(data[0] == ""){
-              this.AioneHelp.presentToast("you must fill survey name",2000,'top');
-            }else{
-              console.log(data[0]);
-            this.tablename="surveyResult_"+survey_id;
-            let formValue=data[0];
-
-              let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
-          console.log(query);
-          this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+            // if(data[0] == ""){
               this.navCtrl.setRoot(DashboardPage);
-          });
-            }        
+            // }else{
+          //     console.log(data[0]);
+          //   this.tablename="surveyResult_"+survey_id;
+          //   let formValue=data[0];
+
+          //     let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+          // console.log(query);
+          // this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+              // this.navCtrl.setRoot(DashboardPage);
+          //});
+            // }        
           }
         }
       ]
@@ -166,6 +166,7 @@ export class QuestionPage {
         const control: FormControl = new FormControl("" , Validators.required);
         form.addControl(key, control);
       }
+     
     }
     this.form = form;
     //end 
@@ -194,7 +195,6 @@ export class QuestionPage {
   }
   textData(questions,i,questionKey){
     return new Promise((resolve,reject)=>{
-      
       this.lastArrayCheck().then((result:any)=>{
         console.log(questions[i].survey_id)
       // this.next(questions[i].survey_id,questions[i].question_key);
@@ -378,14 +378,14 @@ export class QuestionPage {
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType){
     //console.log(this.recordId);
-    //console.log(this.form.value[questionText]);
+    console.log(this.form.value[questionText]);
    
     let i=0;
     let json;
     let formValue=[];
     this.formValidate=this.form.controls[questionText].valid;
     if(!this.formValidate){
-      //console.log("not valid");
+      console.log("not valid");
       this.Errors="it is not valid";
     }else{
       let formValue=[];
@@ -425,18 +425,20 @@ export class QuestionPage {
           formValue.push(localStorage.getItem('Groupid'));
           formValue.push(time);
           formValue.push(localStorage.getItem("totalQuestion"));
-          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions"], formValue).then((res:any)=>{
+          formValue.push(localStorage.getItem("InCompleteSurveyName"))
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name"], formValue).then((res:any)=>{
           console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
+            localStorage.setItem('InCompleteSurveyName',null);
             this.next(survey_id,questionKey);
           });
         }
        
-     
        }
-
+      form.reset(); 
+     
     //}
-    form.reset(); 
+   
      
   }
 

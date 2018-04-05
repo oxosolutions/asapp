@@ -6,7 +6,6 @@ import { PopoverController } from 'ionic-angular';
 import { CompletedSurveyPage } from '../../pages/completed-survey/completed-survey';
 import { IncompletedSurveyPage } from '../../pages/incompleted-survey/incompleted-survey';
 
-
 @IonicPage()
 @Component({
   selector: 'page-record-list',
@@ -82,7 +81,7 @@ export class RecordListPage {
     popover.present();
   }
   checkSurvey(id){
-     console.log(id);
+    console.log(id);
     return new Promise((resolve,reject)=>{
       let tablename="surveyResult_"+id;
       this.servicesProvider.SelectAll(tablename).then((result:any)=>{

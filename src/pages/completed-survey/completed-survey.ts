@@ -37,7 +37,7 @@ export class CompletedSurveyPage {
        // console.log(  record.last_fieldId);
      //record.last_fieldId++;
      // console.log(  record.last_fieldId);
-    localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
+    localStorage.setItem("lastquestionIndex", record.last_fieldId);
     this.navCtrl.setRoot(GroupsPage, {'completed': "surveyCompleted"});
     //})
  
