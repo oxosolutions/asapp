@@ -26,13 +26,13 @@ export class GroupsPage {
   constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
-    this.showConfirm();
+    // this.showConfirm();
     localStorage.setItem("Groupid", id);
 
     if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
     }else{  
-      localStorage.setItem("lastquestionIndex", ""+ 0 +"");
+      localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
       this.navCtrl.setRoot(QuestionPage, {'id': id}); 
     }
   }
