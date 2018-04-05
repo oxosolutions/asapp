@@ -171,15 +171,33 @@ export class QuestionPage {
     //end 
     
     console.log(this.QuestionKeyText);
-      this.textData(this.questions, this.indexArray, "").then(()=>{
-      });
+      this.reviewRecord().then((answer:any)=>{
+        console.log(answer);
+         this.textData(this.questions, this.indexArray, answer).then(()=>{
+        });
+      }) 
     })
   }
-
+  reviewRecord(){
+    return new Promise ((resolve,reject)=>{
+      console.log(this.navParams.get("completed"));
+      if(this.navParams.get("completed") != ""){
+        console.log('from ')
+        this.tablename="surveyResult_"+this.questions[this.indexArray].survey_id; 
+        this.answerGet(this.indexArray).then((answerKey:any)=>{
+          resolve(answerKey);
+        });
+      }else{
+        resolve("");
+      }
+    })
+  }
   textData(questions,i,questionKey){
-    // console.log(i);
     return new Promise((resolve,reject)=>{
-       this.lastArrayCheck().then((result:any)=>{
+      
+      this.lastArrayCheck().then((result:any)=>{
+        console.log(questions[i].survey_id)
+      // this.next(questions[i].survey_id,questions[i].question_key);
       this.QuestionKeyText=questionKey;
       let content=[]
       content=questions[i]; 
@@ -194,10 +212,10 @@ export class QuestionPage {
       }
       this.NextButton=true;
        }); 
+      
    });   
   }
   next(surveyid,questionkey){
-
     console.log(this.indexArray);
     this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
@@ -233,7 +251,7 @@ export class QuestionPage {
           }); 
         })
       }
-   }
+  }
   questionsFilledCheckInsert(){
     return new Promise((resolve,reject)=>{
       let query="UPDATE "+ this.tablename +" SET filledQuestions='"+localStorage.getItem("filledQuestion") +"' where serialNo= "+ localStorage.getItem('record_id');
@@ -337,7 +355,8 @@ export class QuestionPage {
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
-      let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename+" where serialNo = "+localStorage.getItem('record_id'); ;
+      let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename+" where serialNo = "+localStorage.getItem('record_id'); 
+      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
         resolve(this.answerValue[this.questions[id].question_key]);

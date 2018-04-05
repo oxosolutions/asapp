@@ -27,16 +27,30 @@ export class GroupsPage {
   }
   questionid(id,serialNo){
     // this.showConfirm();
-    localStorage.setItem("Groupid", id);
-
-    if(this.surveyType=="section"){
+   localStorage.setItem("Groupid", id);
+   this.completedSurvey().then((resutlcomplete)=>{
+     console.log(resutlcomplete);
+      if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
-    }else{  
-      localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
-      this.navCtrl.setRoot(QuestionPage, {'id': id}); 
-    }
+      }else{  
+        localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
+        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
+      }
+   })
+     
   }
-   showConfirm() {
+  completedSurvey(){
+    return new Promise ((resolve,reject)=>{
+      if(this.navParams.get("completed") !=  null){
+        console.log("review record check");
+        resolve(this.navParams.get("completed"));
+      }else{
+        console.log("emply only questions");
+        resolve("");
+      }
+    })
+  }
+  showConfirm() {
     let prompt = this.alertCtrl.create({
       message: "Enter Incomplete Survey Name",
       inputs: [

@@ -12,15 +12,15 @@ export class CompletedSurveyPage {
 	survey:any;
   complete:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
 
+  }
   ionViewDidLoad() {
     this.survey=this.navParams.get('result');
     let data = this.survey.filter((element, index) =>{
     		return (element.survey_status == 'completed');
     });
-  this.complete=data;
-  console.log(this.complete);
+    this.complete=data;
+    console.log(this.complete);
   }
   resume(record){
     console.log(record);
@@ -33,13 +33,13 @@ export class CompletedSurveyPage {
     localStorage.setItem("questionIndex", record.questionIndex);
 
     
-    this.groupCompleteCheck(record).then(()=>{
+   // this.groupCompleteCheck(record).then(()=>{
        // console.log(  record.last_fieldId);
-     record.last_fieldId++;
+     //record.last_fieldId++;
      // console.log(  record.last_fieldId);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'indexdata':"ddd"});
-    })
+    this.navCtrl.setRoot(GroupsPage, {'completed': "surveyCompleted"});
+    //})
  
   }
   groupCompleteCheck(record){
