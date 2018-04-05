@@ -157,16 +157,15 @@ export class QuestionPage {
       console.log(this.indexArray);
 
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      //console.log(newObject);
+      console.log(newObject);
 
      //create dynamic 
     const form: FormGroup = new FormGroup({});
     for (const key in newObject) {
-      if (newObject.hasOwnProperty(key)) {
-        const control: FormControl = new FormControl("" , Validators.required);
+      if (newObject.hasOwnProperty(key)){
+        const control: FormControl = new FormControl(newObject[key], Validators.required);
         form.addControl(key, control);
       }
-     
     }
     this.form = form;
     //end 
