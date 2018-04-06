@@ -1074,59 +1074,59 @@ var map = {
 		1
 	],
 	"../pages/completed-survey/completed-survey.module": [
-		465,
+		478,
 		14
 	],
 	"../pages/dashboard/dashboard.module": [
-		466,
+		465,
 		13
 	],
 	"../pages/groups/groups.module": [
-		467,
+		466,
 		12
 	],
 	"../pages/help/help.module": [
-		468,
+		467,
 		11
 	],
 	"../pages/incompleted-survey/incompleted-survey.module": [
-		469,
+		468,
 		10
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		470,
+		469,
 		9
 	],
 	"../pages/login/login.module": [
-		471,
+		470,
 		8
 	],
 	"../pages/question-practice/question-practice.module": [
-		472,
+		471,
 		0
 	],
 	"../pages/question/question.module": [
-		473,
+		472,
 		7
 	],
 	"../pages/record-list/record-list.module": [
-		474,
+		473,
 		6
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
-		475,
+		474,
 		5
 	],
 	"../pages/select/select.module": [
-		476,
+		475,
 		4
 	],
 	"../pages/survey-questions/survey-questions.module": [
-		477,
+		476,
 		3
 	],
 	"../pages/text/text.module": [
-		478,
+		477,
 		2
 	]
 };
@@ -1416,7 +1416,6 @@ var AppModule = (function () {
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/complete-survey/complete-survey.module#CompleteSurveyPageModule', name: 'CompleteSurveyPage', segment: 'complete-survey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
@@ -1429,7 +1428,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
@@ -3103,67 +3103,98 @@ var QuestionPage = (function () {
             }
         });
     };
-    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType) {
+    QuestionPage.prototype.submitConditionCheck = function (value, questionText) {
+        return new Promise(function (resolve, reject) {
+            //if different question types
+            console.log(value[questionText]);
+            if (value[questionText] != null) {
+                localStorage.setItem("lastQuestiontext", questionText);
+                if (value[questionText] == "") {
+                    resolve(null);
+                }
+                else {
+                    resolve(value[questionText]);
+                }
+            }
+            else {
+                //if same types
+                if (value[localStorage.getItem("lastQuestiontext")] != null) {
+                    var data = value[localStorage.getItem("lastQuestiontext")];
+                    resolve(data);
+                }
+                else {
+                    resolve(null);
+                }
+            }
+        });
+    };
+    QuestionPage.prototype.update = function (text) {
+        console.log(text);
+    };
+    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType, update) {
         var _this = this;
-        //console.log(this.recordId);
+        // //console.log(this.recordId);
+        console.log(this.form.value);
+        console.log(form.value);
+        console.log(update);
         console.log(this.form.value[questionText]);
-        var i = 0;
-        var json;
-        var formValue = [];
-        this.formValidate = this.form.controls[questionText].valid;
-        if (!this.formValidate) {
-            console.log("not valid");
-            this.Errors = "it is not valid";
-        }
-        else {
-            var formValue_1 = [];
-            //console.log("valid");
-            if (QuestionType == "checkbox") {
-                json = JSON.stringify(this.form.value);
-                formValue_1.push(json);
+        this.submitConditionCheck(this.form.value, questionText).then(function (formValidate) {
+            console.log(formValidate);
+            var i = 0;
+            var json;
+            var formValue = [];
+            // this.formValidate=this.form.controls[questionText].valid;
+            if (formValidate == null) {
+                console.log("not valid");
+                _this.Errors = "it is not valid";
             }
             else {
-                formValue_1.push(form.value[questionText]);
-                console.log(formValue_1);
-                // formValue.push(this.recordId);
-                form.value[questionText] = "";
+                var formValue_1 = [];
+                console.log("valid");
+                if (QuestionType == "checkbox") {
+                    json = JSON.stringify(formValidate);
+                    formValue_1.push(json);
+                }
+                else {
+                    formValue_1.push(formValidate);
+                    console.log(formValue_1);
+                }
+                var questionLength = _this.questions.length;
+                _this.tablename = "surveyResult_" + survey_id;
+                localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                var query = "Select " + questionKey + " from " + _this.tablename + " where serialNo = " + _this.recordId;
+                var record_id = void 0;
+                record_id = localStorage.getItem('record_id');
+                localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                if (record_id != "null") {
+                    //console.log('update');
+                    // console.log(formValue);
+                    var query_1 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
+                    console.log(query_1);
+                    _this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
+                        _this.next(survey_id, questionKey);
+                    });
+                }
+                else {
+                    var time = new Date();
+                    //console.log('insert');
+                    formValue_1.push(localStorage.getItem("lastquestionIndex"));
+                    formValue_1.push("incomplete");
+                    formValue_1.push(localStorage.getItem('Groupid'));
+                    formValue_1.push(time);
+                    formValue_1.push(localStorage.getItem("totalQuestion"));
+                    formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
+                    _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name"], formValue_1).then(function (res) {
+                        // console.log(res.insertId);
+                        localStorage.setItem('record_id', res.insertId);
+                        localStorage.setItem('InCompleteSurveyName', null);
+                        _this.next(survey_id, questionKey);
+                    });
+                }
             }
-            var questionLength = this.questions.length;
-            this.tablename = "surveyResult_" + survey_id;
-            localStorage.setItem("lastquestionIndex", this.indexArray.toString());
-            var query = "Select " + questionKey + " from " + this.tablename + " where serialNo = " + this.recordId;
-            //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
-            var record_id = void 0;
-            record_id = localStorage.getItem('record_id');
-            localStorage.setItem("lastquestionIndex", this.indexArray.toString());
-            if (record_id != "null") {
-                console.log('update');
-                console.log(formValue_1);
-                var query_1 = "UPDATE " + this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
-                console.log(query_1);
-                this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
-                    _this.next(survey_id, questionKey);
-                });
-            }
-            else {
-                var time = new Date();
-                console.log('insert');
-                formValue_1.push(localStorage.getItem("lastquestionIndex"));
-                formValue_1.push("incomplete");
-                formValue_1.push(localStorage.getItem('Groupid'));
-                formValue_1.push(time);
-                formValue_1.push(localStorage.getItem("totalQuestion"));
-                formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
-                this.servicesProvider.Insert(this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name"], formValue_1).then(function (res) {
-                    console.log(res.insertId);
-                    localStorage.setItem('record_id', res.insertId);
-                    localStorage.setItem('InCompleteSurveyName', null);
-                    _this.next(survey_id, questionKey);
-                });
-            }
-        }
-        form.reset();
-        //}
+            form.reset();
+        });
+        //} 
     };
     QuestionPage.prototype.insertSubmit = function (tablename, questionKey, formValue) {
         var _this = this;
@@ -3179,11 +3210,12 @@ var QuestionPage = (function () {
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/193/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar color="headerClassic">\n <!--  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button> -->\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n    <!--  	Section: Demo Survey -->\n     </ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n\n\n	<div *ngIf="OriginalContent">\n	<div class="card" >\n			<span class="question-number">Question 1</span>of 20\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n		<form novalidate  [formGroup]="form">\n		   <div [ngSwitch]="OriginalContent?.question_type">\n			\n					<div  *ngSwitchCase="\'textarea\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n				 -->\n					</div>\n\n					<div  *ngSwitchCase="\'text\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n\n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n				  </div>\n\n				  <div *ngSwitchCase="\'timepicker\'">\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n				  </div>\n\n				  <div *ngSwitchCase="\'datepicker\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n\n				 <!--   <div *ngSwitchCase="\'select\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n -->\n\n					<div *ngSwitchCase="\'checkbox\'">\n							\n					 \n						<!--   <ion-label>{{check?.option_text}}</ion-label>\n						  <input type="radio" [name]="OriginalContent?.question_text [(ngModel)]="OriginalContent.prefill" \n						  [value]="check?.option_next" /> -->\n\n						 <ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n\n					</div>\n\n			  </div>\n	\n    		<div class="action-buttons">\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n				</div>\n</form>\n</div>\n	</div>\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n        [formControlName]="OriginalContent?.question_text"\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n	\n\n	<!--question based-->\n	<!-- <div *ngIf ="OriginalContent">\n		<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!-text-->\n			   <!--  <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n -->\n			    <!--select-->\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					      \n					    </ion-select>\n  					</ion-item>\n		      	</div> -->\n\n		      <!--checkbox-->\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n		      <!--radio button-->\n		     <!--  <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n -->\n		      <!--textarea-->\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n -->\n		      <!--datepicker-->\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div> -->\n\n		      <!--message-->\n		      <!-- <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--number-->\n		     <!--  <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--location picker-->\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div> -->\n\n				\n				<!-- \n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div> -->\n	\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/193/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/193/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar color="headerClassic">\n <!--  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button> -->\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n    <!--  	Section: Demo Survey -->\n     </ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n\n\n	<div *ngIf="OriginalContent">\n	<div class="card" >\n			<span class="question-number">Question 1</span>of 20\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n		<form novalidate  [formGroup]="form">\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n		   	<!--text-->\n					<div  *ngSwitchCase="\'text\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n				 </div>\n\n\n		   		<!--textarea-->\n					<div  *ngSwitchCase="\'textarea\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n				 -->\n					</div>\n\n					\n					<!--number-->\n					<div *ngSwitchCase="\'number\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--Email-->\n					<div *ngSwitchCase="\'email\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--password-->\n					<div *ngSwitchCase="\'password\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n				  <!--datepicker-->\n				  <div *ngSwitchCase="\'datepicker\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n\n				  <!--timepicker-->\n				  <div *ngSwitchCase="\'timepicker\'">\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n				  </div>\n\n\n				  <!--select-->\n				   <div *ngSwitchCase="\'select\'">\n				   <ion-list>\n  					<ion-item>\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					    </ion-select>\n					     </ion-item>\n						</ion-list>\n				  </div>\n\n <!--checkbox-->\n		      <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" (change)="Updates($event.target.checked)"\n							   color="red"  ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div>\n					<!-- <div *ngSwitchCase="\'checkbox\'">\n						<div >\n						  <ion-label>{{check?.option_text}}</ion-label>\n						  <input type="radio" [name]="OriginalContent?.question_text [(ngModel)]="OriginalContent.prefill" \n						  [value]="check?.option_next" name="{{check.option_text}}" />\n						  </div>\n						 <ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" (change)="handleChange(element, i)"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list> -->\n\n					<!-- </div> -->\n\n\n\n\n			  </div>\n	\n    		<div class="action-buttons">\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type.Updates($event.target.checked))" class="next"><ion-icon name="add"></ion-icon>Next</button>\n				</div>\n</form>\n</div>\n	</div>\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n        [formControlName]="OriginalContent?.question_text"\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n	\n\n	<!--question based-->\n	<!-- <div *ngIf ="OriginalContent">\n		<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!-text-->\n			   <!--  <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n -->\n			    <!--select-->\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					      \n					    </ion-select>\n  					</ion-item>\n		      	</div> -->\n\n		      <!--checkbox-->\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n		      <!--radio button-->\n		     <!--  <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n -->\n		      <!--textarea-->\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n -->\n		      <!--datepicker-->\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div> -->\n\n		      <!--message-->\n		      <!-- <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--number-->\n		     <!--  <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--location picker-->\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div> -->\n\n				\n				<!-- \n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div> -->\n	\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/193/asapp/src/pages/question/question.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _g || Object])
     ], QuestionPage);
     return QuestionPage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=question.js.map

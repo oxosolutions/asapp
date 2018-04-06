@@ -375,50 +375,78 @@ export class QuestionPage {
       }  
     })
   }
-  onSubmit(form,questionKey,survey_id,questionText,QuestionType){
-    //console.log(this.recordId);
-    console.log(this.form.value[questionText]);
-   
+  submitConditionCheck(value,questionText){
+    return new Promise((resolve,reject)=>{
+      //if different question types
+      
+      console.log(value[questionText]);
+      if(value[questionText] != null){
+        localStorage.setItem("lastQuestiontext" ,questionText);
+        if(value[questionText]==""){
+          resolve(null);
+        }else{
+         resolve(value[questionText]);
+        }   
+      }else{
+        //if same types
+        if(value[localStorage.getItem("lastQuestiontext")] != null){
+          let data=value[localStorage.getItem("lastQuestiontext")];
+          resolve(data);
+        }else{
+          resolve(null);
+        }
+      }
+    });
+  }
+  update(text){
+    console.log(text);
+  }
+  onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
+    // //console.log(this.recordId);
+    console.log(this.form.value);
+     console.log(form.value);
+     console.log(update);
+  
+     console.log(this.form.value[questionText]);
+    
+   this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
+     console.log(formValidate);
     let i=0;
     let json;
     let formValue=[];
-    this.formValidate=this.form.controls[questionText].valid;
-    if(!this.formValidate){
+    // this.formValidate=this.form.controls[questionText].valid;
+    if(formValidate == null){
       console.log("not valid");
       this.Errors="it is not valid";
     }else{
       let formValue=[];
-     //console.log("valid");
+       console.log("valid");
       if(QuestionType=="checkbox"){
-        json=JSON.stringify(this.form.value);
+
+        json=JSON.stringify(formValidate);
         formValue.push(json);
       }else{
-        formValue.push(form.value[questionText]);
-         console.log(formValue);
-        // formValue.push(this.recordId);
-        form.value[questionText]="";
+        formValue.push(formValidate);
+        console.log(formValue);
       } 
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
        localStorage.setItem("lastquestionIndex", this.indexArray.toString());
       let query="Select "+ questionKey +" from " + this.tablename + " where serialNo = "+this.recordId ;
-      //this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
       let record_id:any
       record_id = localStorage.getItem('record_id');
       localStorage.setItem("lastquestionIndex", this.indexArray.toString());
-
       if(record_id != "null"){
-        console.log('update');
-        console.log(formValue);
+        //console.log('update');
+       // console.log(formValue);
         let query="UPDATE "+ this.tablename + " SET " + questionKey +"= '" +formValue +"', last_fieldId = "+"'"+ localStorage.getItem("lastquestionIndex")+"'," +"last_group_id = "+localStorage.getItem('Groupid')+" where serialNo = "+localStorage.getItem('record_id') ;
           console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
             this.next(survey_id,questionKey);
-          });
-          
-        }else{
+          });  
+      }else{
           let time =new Date();
-          console.log('insert');
+          //console.log('insert');
           formValue.push(localStorage.getItem("lastquestionIndex"));
           formValue.push("incomplete");
           formValue.push(localStorage.getItem('Groupid'));
@@ -426,21 +454,17 @@ export class QuestionPage {
           formValue.push(localStorage.getItem("totalQuestion"));
           formValue.push(localStorage.getItem("InCompleteSurveyName"))
           this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name"], formValue).then((res:any)=>{
-          console.log(res.insertId);
+         // console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             localStorage.setItem('InCompleteSurveyName',null);
             this.next(survey_id,questionKey);
           });
-        }
-       
+      }
        }
       form.reset(); 
-     
-    //}
-   
-     
+       })
+    //} 
   }
-
   insertSubmit(tablename,questionKey,formValue){
     return new Promise((resolve,rejct)=>{
       this.servicesProvider.Insert(tablename,questionKey,formValue).then((questionSave33)=>{
