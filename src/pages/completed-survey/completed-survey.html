@@ -1,103 +1,25 @@
-<!--
-  Generated template for the CompletedSurveyPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar color="headerClassic">
     <ion-title>completed-survey</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-	<div class="custom-card">
-		<div>
-			<div class="percentage-wrapper">
-				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>
-			</div>
-			<div class="content-wrapper">
-				<div class="item-title">Special Survey</div>
-				<!-- <div class="pause-location">7th question, Section 3</div> -->
-				<div class="start-end-date">
-					<span>
-						<ion-icon name="md-calendar"></ion-icon>
-						Completed : 12-12-2017
-					</span>
-				</div>
 
-			</div>
-			<div class="clear"></div>	
-		</div>
-		<div class="custom-card-footer">
-			<div class="question-incomplete">
-				<ion-icon name="alert"></ion-icon>
-				12 Question Filled
-			</div>
-			
-			<div class="trash-survey">
-				<ion-icon name="md-trash"></ion-icon>
-								
-			</div>
-			<div class="resume-survey">
-				<ion-icon name="md-arrow-dropright-circle"></ion-icon>
-				Synchronize				
-			</div>
-		</div>
-		
-    	
-	</div>
-	<div class="custom-card">
+	<div class="custom-card" *ngFor="let  record of complete">
 		<div>
 			<div class="percentage-wrapper">
 				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>
 			</div>
 			<div class="content-wrapper">
-				<div class="item-title">Special Survey</div>
+				<div class="item-title">{{record.incomplete_name}}</div>
 				<!-- <div class="pause-location">7th question, Section 3</div> -->
 				<div class="start-end-date">
 					<span>
 						<ion-icon name="md-calendar"></ion-icon>
-						Completed : 12-12-2017
-					</span>
-				</div>
-
-			</div>
-			<div class="clear"></div>	
-		</div>
-		<div class="custom-card-footer">
-			<div class="question-incomplete">
-				<ion-icon name="alert"></ion-icon>
-				12 Question Filled
-			</div>
-			
-			<div class="trash-survey">
-				<ion-icon name="md-trash"></ion-icon>
-								
-			</div>
-			<div class="resume-survey">
-				<ion-icon name="md-arrow-dropright-circle"></ion-icon>
-				Synchronize				
-			</div>
-		</div>
-		
-    	
-	</div>
-	<div class="custom-card">
-		<div>
-			<div class="percentage-wrapper">
-				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>
-			</div>
-			<div class="content-wrapper">
-				<div class="item-title">Special Survey</div>
-				<!-- <div class="pause-location">7th question, Section 3</div> -->
-				<div class="start-end-date">
-					<span>
-						<ion-icon name="md-calendar"></ion-icon>
-						Completed : 12-12-2017
+						{{record.survey_startedOn | date:'fullDate' }}
 					</span>
 					
 				</div>
@@ -108,16 +30,16 @@
 		<div class="custom-card-footer">
 			<div class="question-incomplete">
 				<ion-icon name="alert"></ion-icon>
-				12 Question Filled
+					{{record.filledQuestions}} Question Filled
 			</div>
 			
 			<div class="trash-survey">
 				<ion-icon name="md-trash"></ion-icon>
 								
 			</div>
-			<div class="resume-survey">
+			<div class="resume-survey" (click)="resume(record)">
 				<ion-icon name="md-arrow-dropright-circle"></ion-icon>
-				Synchronize				
+				Edit			
 			</div>
 		</div>
 		

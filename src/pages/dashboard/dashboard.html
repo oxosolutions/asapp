@@ -16,7 +16,10 @@
 		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>
 		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>
 	</div> -->
-
+<h1 class="title" style="display:none">
+  {{title}}
+</h1>
+<button (click)="toggleTitle()"> clickhere</button>
 	<div class="dashbaord-wrapper" *ngIf="dashboard">
 
 		<div class="dashbaord-background">

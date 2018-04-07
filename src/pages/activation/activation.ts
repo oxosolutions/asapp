@@ -117,7 +117,7 @@ export class ActivationPage {
             qresult=questionData.rows[i].question_key+' TEXT';
              keyColumns.push(qresult); 
           }
-          keyColumns.push('ip_address', 'survey_startedOn','survey_completedOn','survey_submittedBy','survey_submittedFrom','mac_address','unique_id','device_detail','created_by','created_at','last_fieldId','last_group_id','completed_groups','survey_status','incomplete_name','survey_sync_status','record_type');
+          keyColumns.push('ip_address', 'survey_startedOn','survey_completedOn','survey_submittedBy','survey_submittedFrom','mac_address','unique_id','device_detail','totalQuestions','filledQuestions','questionIndex','last_fieldId','last_group_id','completed_groups','survey_status','incomplete_name','survey_sync_status','record_type');
          keyqColumns.push(keyColumns);   
          loopLength++;
         if(loopLength == surveys.length){

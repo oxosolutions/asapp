@@ -17,7 +17,7 @@
  
 <ion-list>
 <div *ngFor="let survey of listSurvey[0]">      
-  <ion-item (click)="groups(survey.id,survey)">
+  <ion-item (click)="groups(survey.id,survey,survey['questions'])">
   <p>{{survey["scheduling"].surveyResponse}}</p>
   <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>
   

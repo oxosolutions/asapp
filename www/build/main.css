@@ -31021,11 +31021,23 @@ page-groups .survey-info .section-list .list-content ion-item.completed {
   background: #daffda;
 }
 
+page-groups .survey-info .section-list .list-content ion-item ion-icon.check {
+  display: none;
+}
+
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon.check {
+  display: block;
+}
+
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon.arrow {
+  display: none;
+}
+
 page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+1) ion-icon {
   color: #f78663;
 }
 
-page-groups .survey-info .section-list .list-content ion-icon.completed {
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon {
   color: green !important;
 }
 
@@ -31033,7 +31045,7 @@ page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+2) io
   color: #48afaa;
 }
 
-page-groups .survey-info .section-list .list-content ion-icon.completed {
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon {
   color: green !important;
 }
 
@@ -31041,7 +31053,7 @@ page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+3) io
   color: #f7b04b;
 }
 
-page-groups .survey-info .section-list .list-content ion-icon.completed {
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon {
   color: green !important;
 }
 
@@ -31049,7 +31061,7 @@ page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+4) io
   color: #4bc9db;
 }
 
-page-groups .survey-info .section-list .list-content ion-icon.completed {
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon {
   color: green !important;
 }
 
@@ -31057,7 +31069,7 @@ page-groups .survey-info .section-list .list-content ion-item:nth-child(5n+5) io
   color: #7cc17f;
 }
 
-page-groups .survey-info .section-list .list-content ion-icon.completed {
+page-groups .survey-info .section-list .list-content ion-item.completed ion-icon {
   color: green !important;
 }
 
@@ -31375,6 +31387,10 @@ page-question.ion-page .groups ion-item {
 
 page-question.ion-page .button-outline-md {
   margin-top: 65px;
+}
+
+page-record-list [hidden] {
+  display: none !important;
 }
 
 page-record-list .icon-wrapper {

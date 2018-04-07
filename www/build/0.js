@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 463:
+/***/ 471:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompleteSurveyPageModule", function() { return CompleteSurveyPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuestionPracticePageModule", function() { return QuestionPracticePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__complete_survey__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__question_practice__ = __webpack_require__(480);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,31 +18,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CompleteSurveyPageModule = (function () {
-    function CompleteSurveyPageModule() {
+var QuestionPracticePageModule = (function () {
+    function QuestionPracticePageModule() {
     }
-    CompleteSurveyPageModule = __decorate([
+    QuestionPracticePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__complete_survey__["a" /* CompleteSurveyPage */],
+                __WEBPACK_IMPORTED_MODULE_2__question_practice__["a" /* QuestionPracticePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__complete_survey__["a" /* CompleteSurveyPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__question_practice__["a" /* QuestionPracticePage */]),
             ],
         })
-    ], CompleteSurveyPageModule);
-    return CompleteSurveyPageModule;
+    ], QuestionPracticePageModule);
+    return QuestionPracticePageModule;
 }());
 
-//# sourceMappingURL=complete-survey.module.js.map
+//# sourceMappingURL=question-practice.module.js.map
 
 /***/ }),
 
-/***/ 478:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompleteSurveyPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionPracticePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -57,29 +57,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the CompleteSurveyPage page.
+ * Generated class for the QuestionPracticePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CompleteSurveyPage = (function () {
-    function CompleteSurveyPage(navCtrl, navParams) {
+var QuestionPracticePage = (function () {
+    function QuestionPracticePage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    CompleteSurveyPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad CompleteSurveyPage');
+    QuestionPracticePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad QuestionPracticePage');
     };
-    CompleteSurveyPage = __decorate([
+    QuestionPracticePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-complete-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\complete-survey\complete-survey.html"*/'<!--\n\n  Generated template for the CompleteSurveyPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>completeSurvey</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\complete-survey\complete-survey.html"*/,
+            selector: 'page-question-practice',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question-practice\question-practice.html"*/'<!--\n\n  Generated template for the QuestionPracticePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>question-practice</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question-practice\question-practice.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], CompleteSurveyPage);
-    return CompleteSurveyPage;
+    ], QuestionPracticePage);
+    return QuestionPracticePage;
 }());
 
-//# sourceMappingURL=complete-survey.js.map
+//# sourceMappingURL=question-practice.js.map
 
 /***/ })
 

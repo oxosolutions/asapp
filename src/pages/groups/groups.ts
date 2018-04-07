@@ -5,6 +5,8 @@ import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import {QuestionPage} from '../../pages/question/question';
 import {SectionalQuestionsPage} from '../sectional-questions/sectional-questions';
 import {SurveyQuestionsPage} from '../survey-questions/survey-questions';
+import { AlertController } from 'ionic-angular';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 
 @IonicPage()
 @Component({
@@ -16,61 +18,67 @@ export class GroupsPage {
 	ids:any;
 	groupsResult:any;
   surveyType:any;
+  completedGroup:any;
+  navdata:any;
+  local:any;
+  dragContent:any;
   //recordId:any;
-  constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
-    
-    localStorage.setItem("Groupid", id);
-    if(this.surveyType=="section"){
+    // this.showConfirm();
+   localStorage.setItem("Groupid", id);
+   this.completedSurvey().then((resutlcomplete)=>{
+     console.log(resutlcomplete);
+      if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
-    }else{
-        this.navCtrl.setRoot(QuestionPage, {'id': id}); 
-    }
-  }
-  ionViewDidLoad() {
-    this.groupTitle=localStorage.getItem("ApplicationName");
-    
-    //this.ids=this.navParams.get('id');
-    this.ids=localStorage.getItem('Surveyid');
-    this.surveyType=localStorage.getItem('questionType');
-    this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
-      //console.log(result.rows.item);
-      let rowww=[];
-      rowww = result.rows.item(i)
-      //console.log(result.rows);
-      var row = [];
-      for(var i=0; i < result.rows.length; i++) {
-            row[i] = result.rows.item(i)
+      }else{  
+        localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
+        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
       }
-      let SurveyData = row;
-      this.groupsResult=SurveyData;
-      console.log( this.groupsResult);
-      // console.log( this.groupsResult.length);
-      localStorage.setItem("totalGroup",this.groupsResult.length);
-
-      // let elem = this;
-      
-      // setTimeout(function(){
-      //   elem.groupsResult=SurveyData;
-      //   console.log( elem.groupsResult);
-     
-      // }, 1000);
-        
-    	//console.log(this.groupsResult);
-      // this.servicesProvider.SelectWhere("survey_meta","form_id",this.ids).then((form:any)=>{
-      //   for(var keys in form.rows){
-      //     if(form.rows[keys].value == "survey"){
-      //       localStorage.setItem("questionType", 'save_survey');
-      //     }else if(form.rows[keys].value == "section"){
-      //       localStorage.setItem("questionType", 'save_section');
-      //     }else if(form.rows[keys].value == "question"){
-      //       localStorage.setItem("questionType", 'questions');
-      //     }
-      //     }
-      //   })
+   }) 
+  }
+  completedSurvey(){
+    return new Promise ((resolve,reject)=>{
+      if(this.navParams.get("completed") !=  null){
+        console.log("review record check");
+        resolve(this.navParams.get("completed"));
+      }else{
+        console.log("emply only questions");
+        resolve("");
+      }
+    })
+  }
+  
+  ionViewDidLoad(){
+      this.groupTitle=localStorage.getItem("ApplicationName");
+      this.ids=localStorage.getItem('Surveyid');
+      this.surveyType=localStorage.getItem('questionType');
+      this.servicesProvider.SelectWhere("groups","survey_id",this.ids).then((result:any)=>{
+        //console.log(result.rows.item);
+        let rowww=[];
+        rowww = result.rows.item(i)
+        //console.log(result.rows);
+        var row = [];
+        for(var i=0; i < result.rows.length; i++) {
+          row[i] = result.rows.item(i)
+        }
+        let SurveyData = row;
+        this.groupsResult=SurveyData;
+        console.log( this.groupsResult);
+        localStorage.setItem("totalGroup",this.groupsResult.length);
       });
-   
+  }
+  getCSSClasses(someValue){
+    if(localStorage.getItem('completedGroups') != null){
+      localStorage.setItem("lastquestionIndex", ""+null+"");
+      if(localStorage.getItem('completedGroups').indexOf(someValue)== -1)
+        return "ll";
+      else  
+        return "completed"; 
+    }else{
+      return "dfdf";
+    } 
   }
 
 }

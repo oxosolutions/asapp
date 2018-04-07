@@ -81,12 +81,24 @@ page-groups {
 					border-color: green;
     				background: #daffda;
 				}
+				ion-item ion-icon.check{
+					display:none;
+				}
+				ion-item.completed ion-icon.check{
+					display:block;
+				}
+				ion-item.completed ion-icon.arrow{
+					display:none;
+				}
 				$ItemColors: #f78663, #48afaa, #f7b04b, #4bc9db, #7cc17f;
 				@for $i from 1 through 5 {
 			        ion-item:nth-child(5n+#{$i}) ion-icon{
 			            color:nth($ItemColors,$i);
 			        }
-			        ion-icon.completed{
+			  //       ion-icon.completed{
+					// 	color: green !important
+					// }
+					ion-item.completed ion-icon{
 						color: green !important
 					}
 			    }
