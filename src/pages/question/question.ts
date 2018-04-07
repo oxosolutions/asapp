@@ -157,10 +157,8 @@ export class QuestionPage {
         });
       });
       this.questions=replacedArray;
-      console.log(this.indexArray);
-
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      console.log(newObject);
+      //console.log(newObject);
 
      //create dynamic 
     const form: FormGroup = new FormGroup({});
@@ -173,9 +171,9 @@ export class QuestionPage {
     this.form = form;
     //end 
     
-    console.log(this.QuestionKeyText);
+    //console.log(this.QuestionKeyText);
       this.reviewRecord().then((answer:any)=>{
-        console.log(answer);
+       // console.log(answer);
          this.textData(this.questions, this.indexArray, answer).then(()=>{
         });
       }) 
@@ -197,9 +195,9 @@ export class QuestionPage {
   }
   textData(questions,i,questionKey){
     return new Promise((resolve,reject)=>{
+      // this.filledQuestion=localStorage.getItem("filledQuestion");
+      // console.log(this.filledQuestion);
       this.lastArrayCheck().then((result:any)=>{
-        console.log(questions[i].survey_id)
-      // this.next(questions[i].survey_id,questions[i].question_key);
       this.QuestionKeyText=questionKey;
       let content=[]
       content=questions[i]; 
@@ -272,7 +270,7 @@ export class QuestionPage {
         localStorage.setItem("filledQuestion",this.filledQuestion.length);
         resolve(this.filledQuestion);
       }else{
-        this.filledQuestion= localStorage.getItem("filledQuestion");
+        this.filledQuestion = localStorage.getItem("filledQuestion");
         this.filledQuestion++;
         localStorage.setItem("filledQuestion",this.filledQuestion);
         resolve(this.filledQuestion);
@@ -369,6 +367,7 @@ export class QuestionPage {
   }
   lastArrayCheck(){
     return new Promise ((resolve,reject)=>{
+      console.log(this.navParams.get('indexdata'));
       if(this.navParams.get('indexdata') != null){
         console.log("pearame");
         console.log(this.questionCheck);

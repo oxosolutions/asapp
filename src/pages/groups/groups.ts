@@ -45,6 +45,7 @@ export class GroupsPage {
         resolve(this.navParams.get("completed"));
       }else{
         console.log("emply only questions");
+        localStorage.setItem("filledQuestion",""+1+"");
         resolve("");
       }
     })
