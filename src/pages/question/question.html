@@ -88,27 +88,45 @@
 						</ion-list>
 				  </div>
 
+				  <!--radio button-->
+		       <div *ngSwitchCase="'radio'">
+		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">
+						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
+						    <ion-label>{{radio?.option_text}}</ion-label>
+						    <ion-radio value="{{radio?.option_text}}"></ion-radio>
+						  </ion-item>
+ 						</ion-list>
+		      </div>
+
  <!--checkbox-->
-		    <!--   <div *ngSwitchCase="'checkbox'">
+		      <div *ngSwitchCase="'checkbox'">
 		      	<ion-list >
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" 
+							  <ion-checkbox  
 							   color="red"  ></ion-checkbox>
 							</ion-item>
 						</ion-list>
-		      </div> -->
+		      </div> 
 
 
-				   <div *ngSwitchCase="'checkbox'">
-		      	<ion-list >
+				  <!--  <div *ngSwitchCase="'checkbox'">
+
+				   <input type="checkbox" name="mycheckbox" id="mycheckbox" />
+<br><br>
+<input type="button" id="test-with-checked" value="Test with checked" />
+<input type="button" id="test-with-is" value="Test with is" />
+<input type="button" id="test-with-prop" value="Test with prop" />
+
+ -->
+		      <!-- 	<ion-list >
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>
+							  <ion-checkbox id="myCheckbox" [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>
 							</ion-item>
-						</ion-list>
-		      </div>
-
+						</ion-list> -->
+		     <!--  </div>
+ -->
 
 
 

@@ -404,7 +404,7 @@ var ActivationPage = (function () {
                 headers.append('content-type', undefined);
                 var formArray = {};
                 formArray['activation_key'] = _this.loginForm.value.name;
-                _this.http.post('http://master.scolm.com/api/survey_api', formArray, { headers: headers }).subscribe(function (data) {
+                _this.http.post(localStorage.getItem("api_url"), formArray, { headers: headers }).subscribe(function (data) {
                     _this.apiresult = data.json();
                     if (_this.apiresult.status == 'error') {
                         _this.loader.dismiss();
@@ -422,6 +422,8 @@ var ActivationPage = (function () {
         });
     };
     ActivationPage.prototype.ionViewWillEnter = function () {
+        this.ApplicationName = localStorage.getItem("activation_ApiName");
+        this.ApplicationDesc = localStorage.getItem("activationDesc");
         this.loginForm = this.formBuilder.group({
             name: ['', __WEBPACK_IMPORTED_MODULE_6__angular_forms__["h" /* Validators */].compose([
                     __WEBPACK_IMPORTED_MODULE_6__angular_forms__["h" /* Validators */].required,
@@ -437,7 +439,7 @@ var ActivationPage = (function () {
     };
     ActivationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/activation/activation.html"*/'<ion-content padding color="headerClassic">\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n	<h1 class="title" style="display:none">\n  {{title}}\n</h1>\n<button (click)="toggleTitle()"> clickhere</button>\n		<div class="activation-page-content">\n			<div class="app-title">IRIS</div>\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/activation/activation.html"*/,
+            selector: 'page-activation',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/activation/activation.html"*/'<ion-content padding color="headerClassic">\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n<!-- 	<h1 class="title" style="display:none">\n  {{title}}\n</h1>\n<button (click)="toggleTitle()"> clickhere</button> -->\n		<div class="activation-page-content">\n			<div class="app-title">{{ApplicationName}}</div>\n			<div class="app-description">{{ApplicationDesc}}</div>\n		</div>\n		<div class="activation-field-wrapper">\n			<form [formGroup]="loginForm">\n			    <div class="field-wrapper">\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n			    </div>\n			    <div class="button-wrapper">\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n			    </div>\n			    <div class="clearfix">\n			    	\n			    </div>\n			</form>	\n		</div>\n	</div>\n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/activation/activation.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _m || Object])
     ], ActivationPage);
@@ -1075,63 +1077,63 @@ var map = {
 		15
 	],
 	"../pages/complete-survey/complete-survey.module": [
-		464,
+		466,
 		1
 	],
 	"../pages/completed-survey/completed-survey.module": [
-		465,
+		464,
 		14
 	],
 	"../pages/dashboard/dashboard.module": [
-		466,
+		478,
 		13
 	],
 	"../pages/groups/groups.module": [
-		467,
+		465,
 		12
 	],
 	"../pages/help/help.module": [
-		468,
+		467,
 		11
 	],
 	"../pages/incompleted-survey/incompleted-survey.module": [
-		469,
+		468,
 		10
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		470,
+		469,
 		9
 	],
 	"../pages/login/login.module": [
-		471,
+		473,
 		8
 	],
 	"../pages/question-practice/question-practice.module": [
-		472,
+		470,
 		0
 	],
 	"../pages/question/question.module": [
-		473,
+		471,
 		7
 	],
 	"../pages/record-list/record-list.module": [
-		474,
+		472,
 		6
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
-		475,
+		474,
 		5
 	],
 	"../pages/select/select.module": [
-		476,
+		475,
 		4
 	],
 	"../pages/survey-questions/survey-questions.module": [
-		477,
+		476,
 		3
 	],
 	"../pages/text/text.module": [
-		478,
+		477,
 		2
 	]
 };
@@ -1420,21 +1422,21 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/complete-survey/complete-survey.module#CompleteSurveyPageModule', name: 'CompleteSurveyPage', segment: 'complete-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/complete-survey/complete-survey.module#CompleteSurveyPageModule', name: 'CompleteSurveyPage', segment: 'complete-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/incompleted-survey/incompleted-survey.module#IncompletedSurveyPageModule', name: 'IncompletedSurveyPage', segment: 'incompleted-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question-practice/question-practice.module#QuestionPracticePageModule', name: 'QuestionPracticePage', segment: 'question-practice', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
@@ -1638,7 +1640,14 @@ var MyApp = (function () {
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
+        //############ Global variables #####//
+        this.Api_Url = 'http://master.scolm.com/api/survey_api';
+        this.ApiName = 'IRIS Application';
+        this.ApiDesc = 'Integrated Road Traffic Injuries Surveillance System - INDIA';
         this.initializeApp();
+        localStorage.setItem("api_url", this.Api_Url);
+        localStorage.setItem("activation_ApiName", this.ApiName);
+        localStorage.setItem("activationDesc", this.ApiDesc);
         this.pages = [
             { title: 'Home', icon: 'ios-home-outline', component: __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__["a" /* DashboardPage */] },
             { title: 'Enter Record', icon: 'ios-create-outline', component: __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__["a" /* ListsurveyPage */] },
@@ -1692,14 +1701,15 @@ var MyApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header class="custom-menu-header">\n    <ion-toolbar>\n        <ion-item color="transparent">\n            <ion-avatar item-start>\n                <div class="icon-wrapper">\n                    <ion-icon name="person"></ion-icon>\n                </div>    \n\n            </ion-avatar>\n            <h2>Lorem Ipsum</h2>\n            <p>loremipsum@gmail.com</p>\n        </ion-item>\n        \n     <!--   <button ion-button menuToggle>\n      <ion-icon name="close"></ion-icon>\n    </button> -->\n\n    </ion-toolbar>\n    <div class="custom-menu-title">\n        MAIN MENU\n    </div>\n  </ion-header>\n  <ion-content class="custom-menu-content">\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n         <ion-icon name="{{p.icon}}"></ion-icon>\n         <span class="menu-item-text">{{p.title}}</span>\n        \n      </button>\n      <button menuClose ion-item (click)="logout()">\n        <ion-icon name="ios-log-out-outline"></ion-icon>\n        <span class="menu-item-text">Logout</span>\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/app/app.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _h || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -1970,7 +1980,7 @@ var DashboardPage = (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/'<!-- <ion-header >\n  <ion-navbar color="headerClassic">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n  </ion-navbar>\n</ion-header> -->\n\n\n<ion-content>\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n		<p>{{dashboard.android_application_description}}</p>\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n	</div> -->\n<h1 class="title" style="display:none">\n  {{title}}\n</h1>\n<button (click)="toggleTitle()"> clickhere</button>\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n		<div class="dashbaord-background">\n			<div class="overlay">\n				<div class="dashboard-title">\n					IRIS Application\n				</div>\n				<div class="dashbaord-description">\n					{{dashboard.android_application_description}}\n				</div>\n			</div>\n			<div class="dashboard-stats">\n				<ion-grid>\n					<ion-row>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number" >\n      								12\n      							</div>\n      							<div class="stat-name">\n      								Surveys\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								104\n      							</div>\n      							<div class="stat-name">\n      								Completed\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								6\n      							</div>\n      							<div class="stat-name">\n      								In-complete\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								1\n      							</div>\n      							<div class="stat-name">\n      								Update\n      							</div>\n      						</div>\n    					</ion-col>\n  					</ion-row>\n				</ion-grid>\n			</div>\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n  				<ion-icon name="menu"></ion-icon>\n			</button>\n			\n		</div>\n		<!-- <div class="dashboard-links">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_update_app_text}}\n								</div>\n							</div>\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div> -->\n		<div class="dashboard-links-second-design">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-8 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-4 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									Update\n								</div>\n							</div>\n\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div>\n	</div>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <ion-title>Footer</ion-title>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/,
+            selector: 'page-dashboard',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/'<!-- <ion-header >\n  <ion-navbar color="headerClassic">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n  </ion-navbar>\n</ion-header> -->\n\n\n<ion-content>\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n		<p>{{dashboard.android_application_description}}</p>\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n	</div> -->\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n		<div class="dashbaord-background">\n			<div class="overlay">\n				<div class="dashboard-title">\n					IRIS Application\n				</div>\n				<div class="dashbaord-description">\n					{{dashboard.android_application_description}}\n				</div>\n			</div>\n			<!-- <div class="dashboard-stats">\n				<ion-grid>\n					<ion-row>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number" >\n      								12\n      							</div>\n      							<div class="stat-name">\n      								Surveys\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								104\n      							</div>\n      							<div class="stat-name">\n      								Completed\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								6\n      							</div>\n      							<div class="stat-name">\n      								In-complete\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								1\n      							</div>\n      							<div class="stat-name">\n      								Update\n      							</div>\n      						</div>\n    					</ion-col>\n  					</ion-row>\n				</ion-grid>\n			</div> -->\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n  				<ion-icon name="menu"></ion-icon>\n			</button>\n			\n		</div>\n		<!-- <div class="dashboard-links">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_update_app_text}}\n								</div>\n							</div>\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div> -->\n		<div class="dashboard-links-second-design">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-8 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-4 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									Update\n								</div>\n							</div>\n\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div>\n	</div>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <ion-title>Footer</ion-title>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], DashboardPage);
@@ -3140,19 +3150,37 @@ var QuestionPage = (function () {
     QuestionPage.prototype.update = function (text) {
         console.log(text);
     };
+    QuestionPage.prototype.checkbox = function (questionKey) {
+        return new Promise(function (resolve, reject) {
+            var check;
+            $("#test-with-is").on("click", function () {
+                check = $("#mycheckbox").is(":checked");
+                if (check) {
+                    console.log("cheked");
+                    alert("Checkbox is checked.");
+                }
+                else {
+                    console.log("not cheked");
+                    alert("Checkbox is unchecked.");
+                }
+            });
+            if ($('input:checked').val() != undefined) {
+                $('input').prop('disabled', true);
+                console.log("yes checked");
+            }
+            else {
+                console.log("not checked");
+            }
+        });
+    };
     QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType, update) {
         var _this = this;
-        // //console.log(this.recordId);
-        console.log(this.form.value);
-        console.log(form.value);
-        console.log(update);
-        console.log(this.form.value[questionText]);
+        // console.log(this.form.value);
         this.submitConditionCheck(this.form.value, questionText).then(function (formValidate) {
-            console.log(formValidate);
+            // console.log(formValidate);
             var i = 0;
             var json;
             var formValue = [];
-            // this.formValidate=this.form.controls[questionText].valid;
             if (formValidate == null) {
                 console.log("not valid");
                 _this.Errors = "it is not valid";
@@ -3161,44 +3189,46 @@ var QuestionPage = (function () {
                 var formValue_1 = [];
                 console.log("valid");
                 if (QuestionType == "checkbox") {
-                    json = JSON.stringify(formValidate);
-                    formValue_1.push(json);
+                    _this.checkbox(questionKey).then(function () {
+                    });
+                    // json=JSON.stringify(formValidate);
+                    // formValue.push(json);
                 }
                 else {
                     formValue_1.push(formValidate);
                     console.log(formValue_1);
-                }
-                var questionLength = _this.questions.length;
-                _this.tablename = "surveyResult_" + survey_id;
-                localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
-                var query = "Select " + questionKey + " from " + _this.tablename + " where serialNo = " + _this.recordId;
-                var record_id = void 0;
-                record_id = localStorage.getItem('record_id');
-                localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
-                if (record_id != "null") {
-                    //console.log('update');
-                    // console.log(formValue);
-                    var query_1 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
-                    console.log(query_1);
-                    _this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
-                        _this.next(survey_id, questionKey);
-                    });
-                }
-                else {
-                    var time = new Date();
-                    //console.log('insert');
-                    formValue_1.push(localStorage.getItem("lastquestionIndex"));
-                    formValue_1.push("incomplete");
-                    formValue_1.push(localStorage.getItem('Groupid'));
-                    formValue_1.push(time);
-                    formValue_1.push(localStorage.getItem("totalQuestion"));
-                    formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
-                    _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name"], formValue_1).then(function (res) {
-                        // console.log(res.insertId);
-                        localStorage.setItem('record_id', res.insertId);
-                        localStorage.setItem('InCompleteSurveyName', null);
-                        _this.next(survey_id, questionKey);
-                    });
+                    var questionLength = _this.questions.length;
+                    _this.tablename = "surveyResult_" + survey_id;
+                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                    var query = "Select " + questionKey + " from " + _this.tablename + " where serialNo = " + _this.recordId;
+                    var record_id = void 0;
+                    record_id = localStorage.getItem('record_id');
+                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                    if (record_id != "null") {
+                        //console.log('update');
+                        // console.log(formValue);
+                        var query_1 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
+                        console.log(query_1);
+                        _this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
+                            _this.next(survey_id, questionKey);
+                        });
+                    }
+                    else {
+                        var time = new Date();
+                        //console.log('insert');
+                        formValue_1.push(localStorage.getItem("lastquestionIndex"));
+                        formValue_1.push("incomplete");
+                        formValue_1.push(localStorage.getItem('Groupid'));
+                        formValue_1.push(time);
+                        formValue_1.push(localStorage.getItem("totalQuestion"));
+                        formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
+                        _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name"], formValue_1).then(function (res) {
+                            // console.log(res.insertId);
+                            localStorage.setItem('record_id', res.insertId);
+                            localStorage.setItem('InCompleteSurveyName', null);
+                            _this.next(survey_id, questionKey);
+                        });
+                    }
                 }
             }
             form.reset();
@@ -3219,11 +3249,12 @@ var QuestionPage = (function () {
     };
     QuestionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar color="headerClassic">\n <!--  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button> -->\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n    <!--  	Section: Demo Survey -->\n     </ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	\n\n	<div *ngIf="OriginalContent">\n	<div class="card" >\n			<span class="question-number">Question 1</span>of 20\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n		<form novalidate  [formGroup]="form">\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n		   	<!--text-->\n					<div  *ngSwitchCase="\'text\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n				 </div>\n\n\n		   		<!--textarea-->\n					<div  *ngSwitchCase="\'textarea\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n				 -->\n					</div>\n\n					\n					<!--number-->\n					<div *ngSwitchCase="\'number\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--Email-->\n					<div *ngSwitchCase="\'email\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--password-->\n					<div *ngSwitchCase="\'password\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n				  <!--datepicker-->\n				  <div *ngSwitchCase="\'datepicker\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n\n				  <!--timepicker-->\n				  <div *ngSwitchCase="\'timepicker\'">\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n				  </div>\n\n\n				  <!--select-->\n				   <div *ngSwitchCase="\'select\'">\n				   <ion-list>\n  					<ion-item>\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					    </ion-select>\n					     </ion-item>\n						</ion-list>\n				  </div>\n\n <!--checkbox-->\n		    <!--   <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" \n							   color="red"  ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n\n				   <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div>\n\n\n\n\n			  </div>\n	\n    		<div class="action-buttons">\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n				</div>\n</form>\n</div>\n	</div>\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n        [formControlName]="OriginalContent?.question_text"\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n	\n\n	<!--question based-->\n	<!-- <div *ngIf ="OriginalContent">\n		<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!-text-->\n			   <!--  <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n -->\n			    <!--select-->\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					      \n					    </ion-select>\n  					</ion-item>\n		      	</div> -->\n\n		      <!--checkbox-->\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n		      <!--radio button-->\n		     <!--  <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n -->\n		      <!--textarea-->\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n -->\n		      <!--datepicker-->\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div> -->\n\n		      <!--message-->\n		      <!-- <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--number-->\n		     <!--  <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--location picker-->\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div> -->\n\n				\n				<!-- \n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div> -->\n	\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/,
+            selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar color="headerClassic">\n <!--  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button> -->\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n    <!--  	Section: Demo Survey -->\n     </ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	\n\n	<div *ngIf="OriginalContent">\n	<div class="card" >\n			<span class="question-number">Question 1</span>of 20\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n		<form novalidate  [formGroup]="form">\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n		   	<!--text-->\n					<div  *ngSwitchCase="\'text\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n				 </div>\n\n\n		   		<!--textarea-->\n					<div  *ngSwitchCase="\'textarea\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n				 -->\n					</div>\n\n					\n					<!--number-->\n					<div *ngSwitchCase="\'number\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--Email-->\n					<div *ngSwitchCase="\'email\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--password-->\n					<div *ngSwitchCase="\'password\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n				  <!--datepicker-->\n				  <div *ngSwitchCase="\'datepicker\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n\n				  <!--timepicker-->\n				  <div *ngSwitchCase="\'timepicker\'">\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n				  </div>\n\n\n				  <!--select-->\n				   <div *ngSwitchCase="\'select\'">\n				   <ion-list>\n  					<ion-item>\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					    </ion-select>\n					     </ion-item>\n						</ion-list>\n				  </div>\n\n				  <!--radio button-->\n		       <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n\n <!--checkbox-->\n		      <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  \n							   color="red"  ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> \n\n\n				  <!--  <div *ngSwitchCase="\'checkbox\'">\n\n				   <input type="checkbox" name="mycheckbox" id="mycheckbox" />\n<br><br>\n<input type="button" id="test-with-checked" value="Test with checked" />\n<input type="button" id="test-with-is" value="Test with is" />\n<input type="button" id="test-with-prop" value="Test with prop" />\n\n -->\n		      <!-- 	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox id="myCheckbox" [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list> -->\n		     <!--  </div>\n -->\n\n\n\n			  </div>\n	\n    		<div class="action-buttons">\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n				</div>\n</form>\n</div>\n	</div>\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n        [formControlName]="OriginalContent?.question_text"\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n	\n\n	<!--question based-->\n	<!-- <div *ngIf ="OriginalContent">\n		<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!-text-->\n			   <!--  <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n -->\n			    <!--select-->\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					      \n					    </ion-select>\n  					</ion-item>\n		      	</div> -->\n\n		      <!--checkbox-->\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n		      <!--radio button-->\n		     <!--  <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n -->\n		      <!--textarea-->\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n -->\n		      <!--datepicker-->\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div> -->\n\n		      <!--message-->\n		      <!-- <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--number-->\n		     <!--  <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--location picker-->\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div> -->\n\n				\n				<!-- \n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div> -->\n	\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _g || Object])
     ], QuestionPage);
     return QuestionPage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=question.js.map

@@ -20,6 +20,19 @@ import { TextPage }  from '../pages/text/text';
   templateUrl: 'app.html',
 })
 export class MyApp {
+  
+  //############ Global variables #####//
+  
+  Api_Url='http://master.scolm.com/api/survey_api';
+  ApiName='IRIS Application';
+  ApiDesc='Integrated Road Traffic Injuries Surveillance System - INDIA';
+
+
+  //############ End of Global variables #####//
+
+
+
+
   @ViewChild(Nav) nav: Nav;
   rootPage: any
   pages: Array<{title: string, icon: string, component: any}>;
@@ -27,6 +40,9 @@ export class MyApp {
   db:any;  
   constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
+    localStorage.setItem("api_url",this.Api_Url);
+    localStorage.setItem("activation_ApiName", this.ApiName );
+    localStorage.setItem("activationDesc",this.ApiDesc);
         this.pages = [
           { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
           { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},

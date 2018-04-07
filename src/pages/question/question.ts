@@ -402,20 +402,35 @@ export class QuestionPage {
   update(text){
     console.log(text);
   }
+  checkbox(questionKey){
+    return new Promise((resolve,reject)=>{
+     var check;
+$("#test-with-is").on("click", function(){
+    check = $("#mycheckbox").is(":checked");
+    if(check) {
+      console.log("cheked");
+        alert("Checkbox is checked.");
+    } else {
+       console.log("not cheked");
+        alert("Checkbox is unchecked.");
+    }
+}); 
+      if($('input:checked').val() != undefined){
+        $('input').prop('disabled',true);
+        console.log("yes checked");
+      }else{
+        console.log("not checked");
+      }
+    })
+   
+  }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
-    // //console.log(this.recordId);
-    console.log(this.form.value);
-     console.log(form.value);
-     console.log(update);
-  
-     console.log(this.form.value[questionText]);
-    
+  // console.log(this.form.value);
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
-     console.log(formValidate);
+    // console.log(formValidate);
     let i=0;
     let json;
     let formValue=[];
-    // this.formValidate=this.form.controls[questionText].valid;
     if(formValidate == null){
       console.log("not valid");
       this.Errors="it is not valid";
@@ -423,13 +438,15 @@ export class QuestionPage {
       let formValue=[];
        console.log("valid");
       if(QuestionType=="checkbox"){
+        this.checkbox(questionKey).then(()=>{
 
-        json=JSON.stringify(formValidate);
-        formValue.push(json);
+        });
+        // json=JSON.stringify(formValidate);
+        // formValue.push(json);
       }else{
         formValue.push(formValidate);
         console.log(formValue);
-      } 
+      
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
        localStorage.setItem("lastquestionIndex", this.indexArray.toString());
@@ -461,6 +478,7 @@ export class QuestionPage {
             this.next(survey_id,questionKey);
           });
       }
+      } 
        }
       form.reset(); 
        })
