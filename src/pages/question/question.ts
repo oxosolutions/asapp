@@ -12,6 +12,8 @@ import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/
 import { DatepickerOptions } from 'ng2-datepicker';
 import * as enLocale from 'date-fns/locale/en';
 import * as frLocale from 'date-fns/locale/fr';
+declare var jquery:any;
+declare var $ :any;
 
 @IonicPage()
 @Component({
@@ -47,7 +49,6 @@ export class QuestionPage {
   questionCheck=[];
 
  // indexArray=0;
-  
   public indexArray:any=localStorage.getItem("lastquestionIndex");
   filledQuestion:any;
   lastPopId:any;
@@ -60,12 +61,12 @@ export class QuestionPage {
   recordId:any;  
   CompletedGroup=[];
   completedGroupIndex=localStorage.getItem('Groupid');
-  
-
+ 
+     
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
-    this.date = new Date();
-    
+    this.date = new Date(); 
   }
+ 
   showConfirm(questionKey,survey_id,questionText,QuestionType) {
     let prompt = this.alertCtrl.create({
       message: "Are u sure want to quite survey",
@@ -350,7 +351,7 @@ export class QuestionPage {
       this.textData(this.questions,this.indexArray, answerKey).then(()=>{
       }); 
       }); 
-    })    
+    }) ;   
   }
   answerGet(id){
     return new Promise ((resolve,reject)=>{
@@ -360,7 +361,7 @@ export class QuestionPage {
         this.answerValue=result.rows.item(0);
         resolve(this.answerValue[this.questions[id].question_key]);
       });
-    })
+    });
   }
   lastArrayCheck(){
     return new Promise ((resolve,reject)=>{

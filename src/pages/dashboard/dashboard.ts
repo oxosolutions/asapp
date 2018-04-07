@@ -5,6 +5,8 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import {ListsurveyPage} from '../../pages/listsurvey/listsurvey';
 import { RecordListPage }  from '../../pages/record-list/record-list';
 import { QuestionPage } from '../../pages/question/question';
+declare var jquery:any;
+declare var $ :any;
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
@@ -15,6 +17,10 @@ export class DashboardPage {
   ApplicationName:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
+   title = 'abgular 4 with jquery';
+  toggleTitle(){
+    $('.title').slideToggle(); //
+  } 
   ionViewDidLoad() {
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
     	this.dashboard=result.rows.item(0);
