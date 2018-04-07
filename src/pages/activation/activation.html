@@ -1,5 +1,9 @@
 <ion-content padding color="headerClassic">
 	<div class="activation-page-content-wrapper" *ngIf="loginForm">
+	<h1 class="title" style="display:none">
+  {{title}}
+</h1>
+<button (click)="toggleTitle()"> clickhere</button>
 		<div class="activation-page-content">
 			<div class="app-title">IRIS</div>
 			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>

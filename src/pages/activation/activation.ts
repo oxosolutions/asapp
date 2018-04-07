@@ -9,7 +9,8 @@ import {Http,Headers ,RequestOptions } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import {DashboardPage} from '../../pages/dashboard/dashboard';
 import {LoginPage} from '../../pages/login/login';
-
+declare var jquery:any;
+declare var $ :any;
 @IonicPage()
 @Component({
   selector: 'page-activation',
@@ -29,6 +30,10 @@ export class ActivationPage {
   constructor(public nav:NavController,private loaderCtrl:LoadingController,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider,private formBuilder: FormBuilder,public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private geolocation: Geolocation,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.ionViewWillEnter();
   }
+   title = 'abgular 4 with jquery';
+  toggleTitle(){
+    $('.title').slideToggle(); //
+  } 
   activation(){
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
@@ -114,7 +119,7 @@ export class ActivationPage {
          // keyColumns.push('serialNo');
           let qresult="";
           for(let i=0; i < questionData.rows.length; i++ ){
-            qresult=questionData.rows[i].question_key+' TEXT';
+            qresult=questionData.rows.item(i).question_key+' TEXT';
              keyColumns.push(qresult); 
           }
           keyColumns.push('ip_address', 'survey_startedOn','survey_completedOn','survey_submittedBy','survey_submittedFrom','mac_address','unique_id','device_detail','totalQuestions','filledQuestions','questionIndex','last_fieldId','last_group_id','completed_groups','survey_status','incomplete_name','survey_sync_status','record_type');

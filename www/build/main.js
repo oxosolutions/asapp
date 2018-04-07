@@ -94,8 +94,12 @@ var ActivationPage = (function () {
         this.navParams = navParams;
         this.submitAttempt = false;
         this.TableCols = [];
+        this.title = 'abgular 4 with jquery';
         this.ionViewWillEnter();
     }
+    ActivationPage.prototype.toggleTitle = function () {
+        $('.title').slideToggle(); //
+    };
     ActivationPage.prototype.activation = function () {
         var _this = this;
         this.AioneHelp.internet().then(function (conn) {
@@ -180,7 +184,7 @@ var ActivationPage = (function () {
                     // keyColumns.push('serialNo');
                     var qresult = "";
                     for (var i = 0; i < questionData.rows.length; i++) {
-                        qresult = questionData.rows[i].question_key + ' TEXT';
+                        qresult = questionData.rows.item(i).question_key + ' TEXT';
                         keyColumns.push(qresult);
                     }
                     keyColumns.push('ip_address', 'survey_startedOn', 'survey_completedOn', 'survey_submittedBy', 'survey_submittedFrom', 'mac_address', 'unique_id', 'device_detail', 'totalQuestions', 'filledQuestions', 'questionIndex', 'last_fieldId', 'last_group_id', 'completed_groups', 'survey_status', 'incomplete_name', 'survey_sync_status', 'record_type');
@@ -433,7 +437,7 @@ var ActivationPage = (function () {
     };
     ActivationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-activation',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/'<ion-content padding color="headerClassic">\n\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n\n		<div class="activation-page-content">\n\n			<div class="app-title">IRIS</div>\n\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n\n		</div>\n\n		<div class="activation-field-wrapper">\n\n			<form [formGroup]="loginForm">\n\n			    <div class="field-wrapper">\n\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n\n			    </div>\n\n			    <div class="button-wrapper">\n\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n\n			    </div>\n\n			    <div class="clearfix">\n\n			    	\n\n			    </div>\n\n			</form>	\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/,
+            selector: 'page-activation',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/'<ion-content padding color="headerClassic">\n\n	<div class="activation-page-content-wrapper" *ngIf="loginForm">\n\n	<h1 class="title" style="display:none">\n\n  {{title}}\n\n</h1>\n\n<button (click)="toggleTitle()"> clickhere</button>\n\n		<div class="activation-page-content">\n\n			<div class="app-title">IRIS</div>\n\n			<div class="app-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>\n\n		</div>\n\n		<div class="activation-field-wrapper">\n\n			<form [formGroup]="loginForm">\n\n			    <div class="field-wrapper">\n\n			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>\n\n			    </div>\n\n			    <div class="button-wrapper">\n\n			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>\n\n			    </div>\n\n			    <div class="clearfix">\n\n			    	\n\n			    </div>\n\n			</form>	\n\n		</div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\activation\activation.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ActivationPage);
@@ -1094,39 +1098,39 @@ var map = {
 		10
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		470,
+		471,
 		9
 	],
 	"../pages/login/login.module": [
-		478,
+		470,
 		8
 	],
 	"../pages/question-practice/question-practice.module": [
-		471,
+		472,
 		0
 	],
 	"../pages/question/question.module": [
-		472,
+		473,
 		7
 	],
 	"../pages/record-list/record-list.module": [
-		473,
+		474,
 		6
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
-		474,
+		475,
 		5
 	],
 	"../pages/select/select.module": [
-		475,
+		476,
 		4
 	],
 	"../pages/survey-questions/survey-questions.module": [
-		476,
+		477,
 		3
 	],
 	"../pages/text/text.module": [
-		477,
+		478,
 		2
 	]
 };
@@ -1421,6 +1425,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/incompleted-survey/incompleted-survey.module#IncompletedSurveyPageModule', name: 'IncompletedSurveyPage', segment: 'incompleted-survey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question-practice/question-practice.module#QuestionPracticePageModule', name: 'QuestionPracticePage', segment: 'question-practice', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
@@ -1428,8 +1433,7 @@ var AppModule = (function () {
                         { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
