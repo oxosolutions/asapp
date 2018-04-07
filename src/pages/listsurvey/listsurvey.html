@@ -28,7 +28,7 @@
     <p>{{survey.description}}</p>
 
     <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>
-    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">0 times filled</button>
+    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>
     <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
   </ion-item>
 </div>

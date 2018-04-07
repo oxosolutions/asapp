@@ -106,14 +106,20 @@ export class ListsurveyPage {
 								this.servicesProvider.SelectWhere("surveys","id",value.item(i).form_id).then((survey:any)=>{ console.log(survey);
 									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
 										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
-											// console.log(surveySch);
-											let rowsData = survey.rows.item(0);
-											rowsData["details"]=responseData;
-											rowsData["timer"]=timerData;
-											rowsData["scheduling"]=surveySch;
-										// console.log(rowsData["details"].responenumber);
-											content.push(rowsData);	
-											console.log(content);
+											this.surveyanswer("surveyResult_"+value.item(i).form_id).then((surveyFilled:any)=>{
+												// console.log(surveySch);
+												console.log(surveyFilled);
+												let rowsData = survey.rows.item(0);
+												rowsData["details"]=responseData;
+												rowsData["timer"]=timerData;
+												rowsData["scheduling"]=surveySch;
+												rowsData["filledSurvey"]=surveyFilled;
+											// console.log(rowsData["details"].responenumber);
+											// 
+												content.push(rowsData);	
+												console.log(content);
+											})
+											
 										})	
 												
 								});	
@@ -135,6 +141,15 @@ export class ListsurveyPage {
 				console.log(this.nullSurvey);
 			}
 		  });
+		})
+	}
+	surveyanswer(tablename){
+		return new Promise((resolve,reject)=>{
+			console.log(tablename);
+			this.servicesProvider.SelectAll(tablename).then((filled:any)=>{
+				console.log(filled.rows);
+				resolve(filled.rows.length);
+			});
 		})
 	}
 	customError(formId){
