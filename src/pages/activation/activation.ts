@@ -17,6 +17,7 @@ declare var $ :any;
   templateUrl: 'activation.html',
 })
 export class ActivationPage {
+
   firstnameValidator:any;
   loginForm: FormGroup;
   submitAttempt: boolean = false;
@@ -25,10 +26,13 @@ export class ActivationPage {
   public TableCols=[];
   ActivationCode:any;
   public loader:any;
-  surveyresult:any
+  surveyresult:any;
+  ApplicationName:any;
+  ApplicationDesc:any;
   
   constructor(public nav:NavController,private loaderCtrl:LoadingController,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider,private formBuilder: FormBuilder,public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private geolocation: Geolocation,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.ionViewWillEnter();
+
   }
    title = 'abgular 4 with jquery';
   toggleTitle(){
@@ -327,7 +331,7 @@ export class ActivationPage {
         headers.append('content-type', undefined);
         let formArray = {};
         formArray['activation_key'] = this.loginForm.value.name;
-        this.http.post('http://master.scolm.com/api/survey_api',formArray,{headers:headers}).subscribe((data:any)=>{
+        this.http.post(localStorage.getItem("api_url"),formArray,{headers:headers}).subscribe((data:any)=>{
           this.apiresult=data.json();
           if(this.apiresult.status=='error'){
             this.loader.dismiss();
@@ -344,6 +348,8 @@ export class ActivationPage {
     })
   }
   ionViewWillEnter(){
+    this.ApplicationName=localStorage.getItem("activation_ApiName");
+    this.ApplicationDesc=localStorage.getItem("activationDesc");
     this.loginForm=this.formBuilder.group({
     name:['', Validators.compose([
           Validators.required,     
