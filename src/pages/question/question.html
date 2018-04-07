@@ -16,7 +16,7 @@
 
 	<div *ngIf="OriginalContent">
 	<div class="card" >
-			<span class="question-number">Question 1</span>of 20
+			<span class="question-number">Question 1</span>of {{surveyTotalQuestions}}
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
 

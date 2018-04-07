@@ -61,7 +61,7 @@ export class QuestionPage {
   recordId:any;  
   CompletedGroup=[];
   completedGroupIndex=localStorage.getItem('Groupid');
- 
+  surveyTotalQuestions:any;
      
   constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
@@ -110,6 +110,7 @@ export class QuestionPage {
   ionViewDidLoad(){
     let i=0;
     let Content=[];
+    this.surveyTotalQuestions = localStorage.getItem("totalQuestion");
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
 
@@ -119,7 +120,8 @@ export class QuestionPage {
       Content.push(result.rows);
       console.log(Content);
 
-      //code for converting json 
+      //code for converting json
+       
       let collection;
       let newcollection; 
       let replacedArray=[];
@@ -265,6 +267,8 @@ export class QuestionPage {
     return new Promise((resolve,reject)=>{
       if(localStorage.getItem("filledQuestion") == "null"){
         this.filledQuestion=JSON.parse(localStorage.getItem('questionIndex'));
+        console.log(this.filledQuestion);
+        this.filledQuestion++;
         localStorage.setItem("filledQuestion",this.filledQuestion.length);
         resolve(this.filledQuestion);
       }else{

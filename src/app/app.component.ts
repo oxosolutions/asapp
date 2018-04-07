@@ -23,16 +23,15 @@ export class MyApp {
   
   //############ Global variables #####//
   
+
   Api_Url='http://master.scolm.com/api/survey_api';
   ApiName='IRIS Application';
   ApiDesc='Integrated Road Traffic Injuries Surveillance System - INDIA';
 
 
+
   //############ End of Global variables #####//
-
-
-
-
+  
   @ViewChild(Nav) nav: Nav;
   rootPage: any
   pages: Array<{title: string, icon: string, component: any}>;
@@ -64,11 +63,11 @@ export class MyApp {
   } 
   initializeApp() {
     this.servicepro.PlatformCheck('asapp').then((db)=>{
-    this.platform.ready().then(() => {
-         this.statusBar.styleDefault();
-         this.splashScreen.hide();
-    });
-  });    
+      this.platform.ready().then(() => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      });
+    });    
   }
   openPage(page) {
     this.nav.setRoot(page.component);
