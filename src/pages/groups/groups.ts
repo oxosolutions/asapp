@@ -46,8 +46,8 @@ export class GroupsPage {
         console.log("review record check");
         resolve(this.navParams.get("completed"));
       }else{
-        // console.log("emply only questions");
-        // localStorage.setItem("filledQuestion",""+1+"");
+        console.log("emply only questions");
+        localStorage.setItem("fillingQuestion",""+1+"");
         resolve("");
       }
     })
@@ -59,8 +59,8 @@ export class GroupsPage {
         console.log("data get from database"); 
         resolve("");
       }else{
-        console.log("first tym survey fill")
-        localStorage.setItem('fillingQuestion',""+1+"");
+        // console.log("first tym survey fill")
+        // localStorage.setItem('fillingQuestion',""+1+"");
         resolve("");
       }
     })
