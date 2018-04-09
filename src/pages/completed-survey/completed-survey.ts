@@ -25,6 +25,7 @@ export class CompletedSurveyPage {
   resume(record){
     console.log(record);
     console.log(record.survey_status);
+    // record.filledQuestions++;
     localStorage.setItem("totalQuestion", record.totalQuestions);
     localStorage.setItem("filledQuestion", record.filledQuestions);
     localStorage.setItem("completedGroups", record.completed_groups);

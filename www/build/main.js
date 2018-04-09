@@ -581,6 +581,7 @@ var CompletedSurveyPage = (function () {
     CompletedSurveyPage.prototype.resume = function (record) {
         console.log(record);
         console.log(record.survey_status);
+        // record.filledQuestions++;
         localStorage.setItem("totalQuestion", record.totalQuestions);
         localStorage.setItem("filledQuestion", record.filledQuestions);
         localStorage.setItem("completedGroups", record.completed_groups);
@@ -618,9 +619,10 @@ var CompletedSurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-completed-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/completed-survey/completed-survey.html"*/'\n<ion-header>\n  <ion-navbar color="headerClassic">\n    <ion-title>completed-survey</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n	<div class="custom-card" *ngFor="let  record of complete">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">{{record.incomplete_name}}</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						{{record.survey_startedOn | date:\'fullDate\' }}\n					</span>\n					\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n					{{record.filledQuestions}} Question Filled\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey" (click)="resume(record)">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n				Edit			\n			</div>\n		</div>\n		\n    	\n	</div>\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/completed-survey/completed-survey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object])
     ], CompletedSurveyPage);
     return CompletedSurveyPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=completed-survey.js.map
@@ -666,8 +668,9 @@ var IncompletedSurveyPage = (function () {
         var _this = this;
         console.log(record);
         console.log(record.survey_status);
+        record.filledQuestions++;
         localStorage.setItem("totalQuestion", record.totalQuestions);
-        localStorage.setItem("filledQuestion", record.filledQuestions);
+        localStorage.setItem("fillingQuestion", record.filledQuestions);
         localStorage.setItem("completedGroups", record.completed_groups);
         localStorage.setItem("record_id", record.serialNo);
         localStorage.setItem("Groupid", record.last_group_id);
@@ -677,7 +680,7 @@ var IncompletedSurveyPage = (function () {
             record.last_fieldId++;
             // console.log(  record.last_fieldId);
             localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'indexdata': "ddd" });
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'InCompleteStatus': "incompleteSurvey" });
         });
     };
     IncompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
@@ -703,9 +706,10 @@ var IncompletedSurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-incompleted-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card" *ngFor="let  record of incomplete">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">{{record.incomplete_name}}</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						{{record.survey_startedOn | date:\'fullDate\' }}\n					</span>\n\n					<!-- <span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span> -->\n\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				{{record.totalQuestions-record.filledQuestions}} question Remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey" (click)="resume(record)">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>resume\n							\n			</div>\n		</div>\n		\n    	\n	</div>\n	\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object])
     ], IncompletedSurveyPage);
     return IncompletedSurveyPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=incompleted-survey.js.map
@@ -1856,29 +1860,45 @@ var GroupsPage = (function () {
     }
     GroupsPage.prototype.questionid = function (id, serialNo) {
         var _this = this;
-        // this.showConfirm();
         localStorage.setItem("Groupid", id);
         this.completedSurvey().then(function (resutlcomplete) {
-            console.log(resutlcomplete);
-            if (_this.surveyType == "section") {
-                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__["a" /* SectionalQuestionsPage */], { 'id': id });
-            }
-            else {
-                localStorage.setItem("lastquestionIndex", "" + 0 + "");
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete });
-            }
+            _this.sectionCompleteCheck().then(function (sectionCheck) {
+                console.log(resutlcomplete);
+                if (_this.surveyType == "section") {
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__["a" /* SectionalQuestionsPage */], { 'id': id });
+                }
+                else {
+                    localStorage.setItem("lastquestionIndex", "" + 0 + "");
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete });
+                }
+            });
         });
     };
     GroupsPage.prototype.completedSurvey = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            // checking it is coming from completed review record or bydefault
             if (_this.navParams.get("completed") != null) {
                 console.log("review record check");
                 resolve(_this.navParams.get("completed"));
             }
             else {
-                console.log("emply only questions");
-                localStorage.setItem("filledQuestion", "" + 1 + "");
+                // console.log("emply only questions");
+                // localStorage.setItem("filledQuestion",""+1+"");
+                resolve("");
+            }
+        });
+    };
+    GroupsPage.prototype.sectionCompleteCheck = function () {
+        //checking it is coming from questions after completing section
+        return new Promise(function (resolve, reject) {
+            if (localStorage.getItem('completedGroups') != "null") {
+                console.log("data get from database");
+                resolve("");
+            }
+            else {
+                console.log("first tym survey fill");
+                localStorage.setItem('fillingQuestion', "" + 1 + "");
                 resolve("");
             }
         });
@@ -1982,9 +2002,10 @@ var DashboardPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-dashboard',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/'<!-- <ion-header >\n  <ion-navbar color="headerClassic">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title ><h1 *ngIf="dashboard">{{dashboard.android_application_title}}</h1></ion-title>\n  </ion-navbar>\n</ion-header> -->\n\n\n<ion-content>\n	<!-- <div class="Dashboard-content" *ngIf="dashboard">\n		<p>{{dashboard.android_application_description}}</p>\n		<button ion-button icon-left block (click)="listSurvey()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_start_survey_text}} </button>\n		<button ion-button icon-left block color="secondary" (click)="recordList()"><ion-icon name="home"></ion-icon>{{dashboard.link_to_manage_survey_text}}</button>\n		<button ion-button icon-left block color="dark"><ion-icon name="home"></ion-icon> {{dashboard.link_to_sync_survey_text}}</button>\n		<button ion-button icon-left block color="danger"><ion-icon name="home"></ion-icon>{{dashboard.link_to_update_app_text}}</button>\n	</div> -->\n\n	<div class="dashbaord-wrapper" *ngIf="dashboard">\n\n		<div class="dashbaord-background">\n			<div class="overlay">\n				<div class="dashboard-title">\n					IRIS Application\n				</div>\n				<div class="dashbaord-description">\n					{{dashboard.android_application_description}}\n				</div>\n			</div>\n			<!-- <div class="dashboard-stats">\n				<ion-grid>\n					<ion-row>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number" >\n      								12\n      							</div>\n      							<div class="stat-name">\n      								Surveys\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								104\n      							</div>\n      							<div class="stat-name">\n      								Completed\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								6\n      							</div>\n      							<div class="stat-name">\n      								In-complete\n      							</div>\n      						</div>\n    					</ion-col>\n    					<ion-col>\n      						<div>\n      							<div class="stat-number">\n      								1\n      							</div>\n      							<div class="stat-name">\n      								Update\n      							</div>\n      						</div>\n    					</ion-col>\n  					</ion-row>\n				</ion-grid>\n			</div> -->\n			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">\n  				<ion-icon name="menu"></ion-icon>\n			</button>\n			\n		</div>\n		<!-- <div class="dashboard-links">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-6 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_update_app_text}}\n								</div>\n							</div>\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div> -->\n		<div class="dashboard-links-second-design">\n			<ion-grid>\n				<ion-row>\n					<ion-col col-6 (click)="listSurvey()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="briefcase"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_start_survey_text}}\n								</div>\n							</div>		\n					</ion-col>\n					<ion-col col-6 (click)="recordList()">\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="easel"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_manage_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-8 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									<ion-icon name="list-box"></ion-icon>									\n								</div>\n								<div class="link-name">\n									{{dashboard.link_to_sync_survey_text}}\n								</div>\n							</div>\n					</ion-col>\n					<ion-col col-4 >\n							<div class="link-wrapper">\n								<div class="link-icons">\n									 <ion-icon name="cloud-download"></ion-icon>\n									\n								</div>\n								<div class="link-name">\n									Update\n								</div>\n							</div>\n\n					</ion-col>\n				</ion-row>\n			</ion-grid>\n		</div>\n	</div>\n</ion-content>\n\n<ion-footer>\n  <ion-toolbar>\n    <ion-title>Footer</ion-title>\n  </ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/dashboard/dashboard.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _c || Object])
     ], DashboardPage);
     return DashboardPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=dashboard.js.map
@@ -2268,7 +2289,7 @@ var ListsurveyPage = (function () {
         this.surveyTitle = localStorage.getItem("ApplicationName");
         localStorage.setItem('completedGroups', null);
         localStorage.setItem('totalQuestion', null);
-        localStorage.setItem('filledQuestion', null);
+        localStorage.setItem('fillingQuestion', null);
         localStorage.setItem('RuningSurvey', null);
         localStorage.setItem('record_id', null);
         localStorage.setItem('GroupNumber', null);
@@ -2724,9 +2745,10 @@ var ListsurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-listsurvey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/listsurvey/listsurvey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n  	<button ion-button menuToggle>\n  		<ion-icon name="menu"></ion-icon>\n  	</button>\n    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->\n        List Of Surveys\n    </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n  \n<ion-content>\n \n<ion-list>\n<div *ngFor="let survey of listSurvey[0]">      \n  <ion-item (click)="groups(survey.id,survey,survey[\'questions\'])">\n  <p>{{survey["scheduling"].surveyResponse}}</p>\n  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>\n  \n    <ion-thumbnail item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-thumbnail>\n    <h2>{{survey.name}}</h2>\n    <p>{{survey.description}}</p>\n\n    <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>\n    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>\n    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>\n  </ion-item>\n</div>\n<!-- <div *ngIf="nullSurvey">\n  <p>{{nullSurvey}}</p>\n</div> -->\n</ion-list> \n\n<!-- <p *ngIf="today">{{today | date: \'medium\'}}</p>\n -->\n<!-- <ion-list>\n  <ion-item>\n    <ion-avatar item-start>\n      <img src="../../assets/imgs/survey.png">\n    </ion-avatar>\n    <h2>Finn</h2>\n    <h3>Don\'t Know What To Do!</h3>\n    <p>I\'ve had a pretty messed up day. If we just...</p>\n  </ion-item>\n</ion-list> -->\n\n    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">\n        <ion-item (click)="groups(survey.id)">\n           \n            <img src="../../assets/imgs/survey.png">\n            <div class="list-content-wrapper">\n                <div class="item-title">{{survey.name}}</div>\n                <div class="item-description">{{survey.description}}</div>\n                <div class=""></div>\n                <div class="item-time">\n                    30 Mar 2018\n                </div>\n            </div> \n\n\n        </ion-item>\n       \n    </ion-item-group> -->\n    \n   \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/listsurvey/listsurvey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _f || Object])
     ], ListsurveyPage);
     return ListsurveyPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 // questionCount(){
@@ -2933,8 +2955,8 @@ var QuestionPage = (function () {
     QuestionPage.prototype.textData = function (questions, i, questionKey) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            // this.filledQuestion=localStorage.getItem("filledQuestion");
-            // console.log(this.filledQuestion);
+            _this.filledQuestion = localStorage.getItem("fillingQuestion");
+            console.log(_this.filledQuestion);
             _this.lastArrayCheck().then(function (result) {
                 _this.QuestionKeyText = questionKey;
                 var content = [];
@@ -2967,10 +2989,10 @@ var QuestionPage = (function () {
                 _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
                     _this.questionIndex(_this.indexArray, questionkey).then(function (id) {
                         _this.questionsFilledCheck().then(function (fillled) {
-                            _this.questionsFilledCheckInsert().then(function (filledinsert) {
-                                _this.surveyComplete().then(function () {
-                                });
+                            // this.questionsFilledCheckInsert().then((filledinsert)=>{
+                            _this.surveyComplete().then(function () {
                             });
+                            //});
                         });
                     });
                 });
@@ -2981,11 +3003,11 @@ var QuestionPage = (function () {
                 _this.indexArray++;
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
                     _this.questionsFilledCheck().then(function (fillled) {
-                        _this.questionsFilledCheckInsert().then(function (filledinsert) {
-                            _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
-                            });
+                        //this.questionsFilledCheckInsert().then((filledinsert)=>{
+                        _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
                         });
                     });
+                    //})
                 });
             });
         }
@@ -2993,7 +3015,7 @@ var QuestionPage = (function () {
     QuestionPage.prototype.questionsFilledCheckInsert = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var query = "UPDATE " + _this.tablename + " SET filledQuestions='" + localStorage.getItem("filledQuestion") + "' where serialNo= " + localStorage.getItem('record_id');
+            var query = "UPDATE " + _this.tablename + " SET filledQuestions='" + localStorage.getItem("fillingQuestion") + "' where serialNo= " + localStorage.getItem('record_id');
             console.log(query);
             _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
                 resolve(insert);
@@ -3003,19 +3025,20 @@ var QuestionPage = (function () {
     QuestionPage.prototype.questionsFilledCheck = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (localStorage.getItem("filledQuestion") == "null") {
-                _this.filledQuestion = JSON.parse(localStorage.getItem('questionIndex'));
-                console.log(_this.filledQuestion);
-                _this.filledQuestion++;
-                localStorage.setItem("filledQuestion", _this.filledQuestion.length);
-                resolve(_this.filledQuestion);
-            }
-            else {
-                _this.filledQuestion = localStorage.getItem("filledQuestion");
-                _this.filledQuestion++;
-                localStorage.setItem("filledQuestion", _this.filledQuestion);
-                resolve(_this.filledQuestion);
-            }
+            // if(localStorage.getItem("filledQuestion") == "null"){
+            //   this.filledQuestion=JSON.parse(localStorage.getItem('questionIndex'));
+            //   console.log(this.filledQuestion);
+            //   this.filledQuestion++;
+            //   localStorage.setItem("filledQuestion",this.filledQuestion.length);
+            //   resolve(this.filledQuestion);
+            // }else{
+            _this.filledQuestion = localStorage.getItem("fillingQuestion");
+            console.log(_this.filledQuestion);
+            _this.filledQuestion++;
+            console.log(_this.filledQuestion);
+            localStorage.setItem("fillingQuestion", _this.filledQuestion);
+            resolve(_this.filledQuestion);
+            // }
         });
     };
     QuestionPage.prototype.surveyComplete = function () {
@@ -3086,17 +3109,17 @@ var QuestionPage = (function () {
         localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
         localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
         this.indexArray = this.indexArray - 1;
-        this.filledQuestion = localStorage.getItem("filledQuestion");
+        this.filledQuestion = localStorage.getItem("fillingQuestion");
         this.filledQuestion = this.filledQuestion - 1;
-        localStorage.setItem("filledQuestion", this.filledQuestion);
-        this.questionsFilledCheckInsert().then(function (filledinsert) {
-            _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
-            _this.answerGet(_this.indexArray).then(function (answerKey) {
-                console.log(answerKey);
-                _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
-                });
+        localStorage.setItem("fillingQuestion", this.filledQuestion);
+        //this.questionsFilledCheckInsert().then((filledinsert)=>{
+        this.QuestionKeyText = this.questions[this.indexArray].question_key;
+        this.answerGet(this.indexArray).then(function (answerKey) {
+            console.log(answerKey);
+            _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
             });
         });
+        // }) ;   
     };
     QuestionPage.prototype.answerGet = function (id) {
         var _this = this;
@@ -3112,8 +3135,8 @@ var QuestionPage = (function () {
     QuestionPage.prototype.lastArrayCheck = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(_this.navParams.get('indexdata'));
-            if (_this.navParams.get('indexdata') != null) {
+            console.log(_this.navParams.get('InCompleteStatus'));
+            if (_this.navParams.get('InCompleteStatus') != null) {
                 console.log("pearame");
                 console.log(_this.questionCheck);
                 _this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));
@@ -3210,7 +3233,7 @@ var QuestionPage = (function () {
                     if (record_id != "null") {
                         //console.log('update');
                         // console.log(formValue);
-                        var query_1 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + " where serialNo = " + localStorage.getItem('record_id');
+                        var query_1 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + ",filledQuestions=" + localStorage.getItem("fillingQuestion") + " where serialNo = " + localStorage.getItem('record_id');
                         console.log(query_1);
                         _this.servicesProvider.ExecuteRun(query_1, []).then(function (questionSave33) {
                             _this.next(survey_id, questionKey);
@@ -3225,7 +3248,8 @@ var QuestionPage = (function () {
                         formValue_1.push(time);
                         formValue_1.push(localStorage.getItem("totalQuestion"));
                         formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
-                        _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name"], formValue_1).then(function (res) {
+                        formValue_1.push(localStorage.getItem("fillingQuestion"));
+                        _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name", "filledQuestions"], formValue_1).then(function (res) {
                             // console.log(res.insertId);
                             localStorage.setItem('record_id', res.insertId);
                             localStorage.setItem('InCompleteSurveyName', null);
