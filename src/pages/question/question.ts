@@ -79,14 +79,20 @@ export class QuestionPage {
         {
           text: 'Cancel',
           handler: data => {
-            
           }
         },
         {
           text: 'yes',
           handler: data => {
             // if(data[0] == ""){
+            if(localStorage.getItem("record_id") =="null"){
               this.navCtrl.setRoot(DashboardPage);
+            }else{
+              this.totalfilledQuestion().then((length:any)=>{
+              this.navCtrl.setRoot(DashboardPage);
+            });
+            }
+            
             // }else{
           //     console.log(data[0]);
           //   this.tablename="surveyResult_"+survey_id;
@@ -287,17 +293,66 @@ export class QuestionPage {
       if(data.length == localStorage.getItem("totalGroup")){
         let time=new Date();
         console.log("datashborad pls go");
-        let query="UPDATE "+this.tablename + " SET survey_status = 'completed', "+"survey_completedOn='"+ time +"'"+" where serialNo = "+localStorage.getItem('record_id');
-        console.log(query);
-        this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
-           this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
-           this.navCtrl.setRoot(DashboardPage);
-        })
+        this.totalfilledQuestion().then((length:any)=>{
+          let query="UPDATE "+this.tablename + " SET survey_status = 'completed', "+"survey_completedOn='"+ time +"'"+" where serialNo = "+localStorage.getItem('record_id');
+          console.log(query);
+          this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
+            this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
+            this.navCtrl.setRoot(DashboardPage);
+          });
+          });
       }else{
+        this.totalfilledQuestion().then((length:any)=>{
         this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
         this.navCtrl.setRoot(GroupsPage, {'completedGroup': localStorage.getItem("completedGroups")});
+        });
       }
     })
+  }
+  totalfilledQuestion(){
+    return new Promise((resolve,reject)=>{
+      let Totallength:any;
+     let Questioncal:any=[];
+     //get qeustionkey from question table
+      let query='Select question_key from questions where survey_id = ' +localStorage.getItem('Surveyid');
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+        this.servicesProvider.mobileListArray(questions).then((SurveyData:any)=>{
+          Totallength=SurveyData.length;
+          SurveyData.forEach((index,key)=>{
+            Questioncal.push(index["question_key"]);
+
+          });
+         Questioncal=Questioncal.join(",");
+          let filled:any=[];
+          let loop=0;
+          //get question length from surveyResutl table
+         let query1 ='Select '+ Questioncal + ' from '+ this.tablename  +" where serialNo = "+localStorage.getItem('record_id') ;
+          this.servicesProvider.ExecuteRun(query1, []).then((questions1:any)=>{
+            this.servicesProvider.mobileListArray(questions1).then((SurveyData1:any)=>{
+               SurveyData1.forEach((key,value)=>{
+                Object.keys(key).forEach((keyinnner,valueinner)=>{
+                   console.log(key[keyinnner]);
+                  if(key[keyinnner] != null){
+                    filled.push(key[keyinnner]);
+                  }
+                  loop++;
+                  if(Totallength==loop){
+                    console.log(filled.length)
+                    let query="UPDATE "+this.tablename + " SET filledQuestions="+ filled.length +" where serialNo = "+localStorage.getItem('record_id');
+                    console.log(query);
+                    this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
+                       resolve(complete);
+                    });
+                  }
+                });
+               });
+              
+            });
+          });
+         
+        })  
+      });
+     });
   }
   updateCompleteGroup(){
     //calculate complted groups

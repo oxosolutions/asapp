@@ -14,6 +14,7 @@ export class IncompletedSurveyPage {
   }
   ionViewDidLoad() {
     this.survey=this.navParams.get('result');
+    // let id =this.navParams.g
     let data = this.survey.filter((element, index) =>{
     	return (element.survey_status == 'incomplete');
     });
