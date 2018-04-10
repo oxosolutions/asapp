@@ -375,8 +375,7 @@ export class QuestionPage {
         }
       }else{
         console.log('defined')
-       
-             this.CompletedGroup.push(localStorage.getItem('Groupid'));
+        this.CompletedGroup.push(localStorage.getItem('Groupid'));
         console.log(this.CompletedGroup);
         localStorage.setItem('completedGroups',JSON.stringify(this.CompletedGroup));
         resolve(this.CompletedGroup);
@@ -408,21 +407,20 @@ export class QuestionPage {
     this.lastPopId= storedNames.pop();
     let lastindex2=this.lastPopId-1;
     this.questionCheck=storedNames;
-    localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck)); 
+    localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck)); 
     localStorage.setItem("lastquestionIndex", ""+lastindex2+"");
     this.indexArray=this.indexArray-1;
-
     this.filledQuestion= localStorage.getItem("fillingQuestion");
     this.filledQuestion=this.filledQuestion-1;
     localStorage.setItem("fillingQuestion",this.filledQuestion);
     this.questionsFilledCheckInsert().then((filledinsert)=>{
-    this.QuestionKeyText=this.questions[this.indexArray].question_key;
-    this.answerGet(this.indexArray).then((answerKey:any)=>{
-      console.log(answerKey);
-      this.textData(this.questions,this.indexArray, answerKey).then(()=>{
+      this.QuestionKeyText=this.questions[this.indexArray].question_key;
+      this.answerGet(this.indexArray).then((answerKey:any)=>{
+        console.log(answerKey);
+        this.textData(this.questions,this.indexArray, answerKey).then(()=>{
+        }); 
       }); 
-      }); 
-    }) ;   
+    });   
   }
   answerGet(id){
     console.log(id);
@@ -454,7 +452,6 @@ export class QuestionPage {
   submitConditionCheck(value,questionText){
     return new Promise((resolve,reject)=>{
       //if different question types
-      
      // console.log(value[questionText]);
       if(value[questionText] != null){
         localStorage.setItem("lastQuestiontext" ,questionText);
@@ -480,16 +477,16 @@ export class QuestionPage {
   checkbox(questionKey){
     return new Promise((resolve,reject)=>{
      var check;
-$("#test-with-is").on("click", function(){
-    check = $("#mycheckbox").is(":checked");
-    if(check) {
-      console.log("cheked");
-        alert("Checkbox is checked.");
-    } else {
-       console.log("not cheked");
-        alert("Checkbox is unchecked.");
-    }
-}); 
+      $("#test-with-is").on("click", function(){
+          check = $("#mycheckbox").is(":checked");
+          if(check) {
+            console.log("checked");
+              alert("Checkbox is checked.");
+          } else {
+             console.log("not checked");
+              alert("Checkbox is unchecked.");
+          }
+      }); 
       if($('input:checked').val() != undefined){
         $('input').prop('disabled',true);
         console.log("yes checked");
