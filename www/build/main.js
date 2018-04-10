@@ -705,9 +705,10 @@ var IncompletedSurveyPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-incompleted-survey',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/'\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n    <ion-title>incompleted-survey</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n	<div class="custom-card" *ngFor="let  record of incomplete">\n		<div>\n			<div class="percentage-wrapper">\n				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>\n			</div>\n			<div class="content-wrapper">\n				<div class="item-title">{{record.incomplete_name}}</div>\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n				<div class="start-end-date">\n					<span>\n						<ion-icon name="md-calendar"></ion-icon>\n						{{record.survey_startedOn | date:\'fullDate\' }}\n					</span>\n\n					<!-- <span>\n						<ion-icon name="md-time"></ion-icon>\n						2 min ago\n					</span> -->\n\n				</div>\n\n			</div>\n			<div class="clear"></div>	\n		</div>\n		<div class="custom-card-footer">\n			<div class="question-incomplete">\n				<ion-icon name="alert"></ion-icon>\n				{{record.totalQuestions-record.filledQuestions}} question Remaining\n			</div>\n			\n			<div class="trash-survey">\n				<ion-icon name="md-trash"></ion-icon>\n								\n			</div>\n			<div class="resume-survey" (click)="resume(record)">\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>resume\n							\n			</div>\n		</div>\n		\n    	\n	</div>\n	\n	 \n</ion-content>\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/incompleted-survey/incompleted-survey.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object])
     ], IncompletedSurveyPage);
     return IncompletedSurveyPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=incompleted-survey.js.map
@@ -1867,7 +1868,7 @@ var GroupsPage = (function () {
             }
             else {
                 localStorage.setItem("lastquestionIndex", "" + 0 + "");
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete });
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete, 'InCompleteStatus': _this.navParams.get("InCompleteStatus") });
             }
             //})
         });
@@ -1938,9 +1939,10 @@ var GroupsPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-groups',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/groups/groups.html"*/'\n\n\n\n<ion-content>\n    <!-- <ion-list class="" >\n        <ion-item *ngFor="let groups of groupsResult" (click)="questionid(groups.id)">\n            <h2>{{groups.survey_id}} | {{groups.title}}</h2>\n            <p>\n               {{groups.description}}\n            </p>\n        </ion-item>        \n                 \n    </ion-list> --> \n    <div class="survey-info">\n        <button persistent="true" ion-button menuToggle color="transparent">\n            <ion-icon name="menu" ></ion-icon>\n            \n        </button>   \n        <div class="survey-title">\n            Survey Name\n        </div>\n        <div class="survey-description">\n            this is the description of the survey\n        </div>\n        <ion-list class="section-list" >\n            <div class="list-header">\n                List of sections\n            </div>\n            <div class="list-content">\n\n             <!--    [ngClass]="{\'completed\': groups.id == navdata}"  -->\n\n                <ion-item  [ngClass]="getCSSClasses(groups.id)" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">\n                    <ion-avatar item-start class="list-icon">\n                      <ion-icon name="ios-photos-outline"></ion-icon>\n                    </ion-avatar>\n                    {{groups.id}}\n                    <h2>{{groups.title}}</h2>\n                    <p>\n                       {{groups.description}}\n\n                    </p>\n                    <!-- <span>0 times filled</span> -->\n\n                    <ion-icon item-end name="ios-arrow-dropright-outline" class="arrow"></ion-icon>\n                    <ion-icon item-end name="ios-checkmark-circle" class="check"></ion-icon>\n\n                </ion-item>        \n                      \n                 \n            </div>\n                        \n        </ion-list>\n    </div>\n    \n</ion-content>\n\n\n'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/groups/groups.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _e || Object])
     ], GroupsPage);
     return GroupsPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=groups.js.map
@@ -3002,6 +3004,7 @@ var QuestionPage = (function () {
         else {
             this.questionIndex(this.indexArray, questionkey).then(function (id) {
                 _this.indexArray++;
+                console.log(_this.indexArray);
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
                     _this.questionsFilledCheck().then(function (fillled) {
                         //this.questionsFilledCheckInsert().then((filledinsert)=>{
@@ -3069,15 +3072,12 @@ var QuestionPage = (function () {
                 console.log(localStorage.getItem('completedGroups'));
                 console.log(localStorage.getItem('Groupid'));
                 if (localStorage.getItem('completedGroups').indexOf("" + localStorage.getItem('Groupid') + "") == -1) {
-                    console.log("insert");
-                    console.log('not undefinded');
                     _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
                     _this.CompletedGroup.push(localStorage.getItem('Groupid'));
                     localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
                     resolve(_this.CompletedGroup);
                 }
                 else {
-                    console.log("not insert");
                     _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
                     resolve(_this.CompletedGroup);
                 }
@@ -3094,6 +3094,8 @@ var QuestionPage = (function () {
     QuestionPage.prototype.questionIndex = function (check, questionkey) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            console.log(_this.questionCheck);
+            console.log(check);
             _this.questionCheck.push(check);
             localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
             var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
@@ -3116,9 +3118,9 @@ var QuestionPage = (function () {
         localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
         localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
         this.indexArray = this.indexArray - 1;
-        this.filledQuestion = localStorage.getItem("filledQuestion");
+        this.filledQuestion = localStorage.getItem("fillingQuestion");
         this.filledQuestion = this.filledQuestion - 1;
-        localStorage.setItem("filledQuestion", this.filledQuestion);
+        localStorage.setItem("fillingQuestion", this.filledQuestion);
         this.questionsFilledCheckInsert().then(function (filledinsert) {
             _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
             _this.answerGet(_this.indexArray).then(function (answerKey) {
@@ -3130,7 +3132,9 @@ var QuestionPage = (function () {
     };
     QuestionPage.prototype.answerGet = function (id) {
         var _this = this;
+        console.log(id);
         return new Promise(function (resolve, reject) {
+            console.log(_this.questions[id].question_key);
             var query = 'SELECT ' + _this.questions[id].question_key + " FROM " + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
             console.log(query);
             _this.servicesProvider.ExecuteRun(query, []).then(function (result) {
@@ -3142,7 +3146,9 @@ var QuestionPage = (function () {
     QuestionPage.prototype.lastArrayCheck = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.navParams.get('indexdata') != null) {
+            console.log(_this.navParams.get('indexdata'));
+            //  
+            if (_this.navParams.get('indexdata') != null || _this.navParams.get('InCompleteStatus') != null) {
                 console.log("pearame");
                 console.log(_this.questionCheck);
                 _this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));

@@ -34,7 +34,7 @@ export class GroupsPage {
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
       }else{  
         localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
-        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
+        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete,'InCompleteStatus':this.navParams.get("InCompleteStatus") }); 
       }
     //})
    }) 
