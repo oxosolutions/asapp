@@ -23,9 +23,9 @@ export class IncompletedSurveyPage {
   resume(record){
   	console.log(record);
   	console.log(record.survey_status);
-    record.filledQuestions++;
+    //record.filledQuestions++;
     localStorage.setItem("totalQuestion", record.totalQuestions);
-    localStorage.setItem("fillingQuestion", record.filledQuestions);
+    //localStorage.setItem("fillingQuestion", record.filledQuestions);
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);

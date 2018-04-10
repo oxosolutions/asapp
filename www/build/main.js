@@ -579,11 +579,11 @@ var CompletedSurveyPage = (function () {
         console.log(this.complete);
     };
     CompletedSurveyPage.prototype.resume = function (record) {
-        console.log(record);
-        console.log(record.survey_status);
+        // console.log(record);
+        // console.log(record.survey_status);
         // record.filledQuestions++;
         localStorage.setItem("totalQuestion", record.totalQuestions);
-        localStorage.setItem("filledQuestion", record.filledQuestions);
+        // localStorage.setItem("fillingQuestion", record.filledQuestions);
         localStorage.setItem("completedGroups", record.completed_groups);
         localStorage.setItem("record_id", record.serialNo);
         localStorage.setItem("Groupid", record.last_group_id);
@@ -667,9 +667,9 @@ var IncompletedSurveyPage = (function () {
         var _this = this;
         console.log(record);
         console.log(record.survey_status);
-        record.filledQuestions++;
+        //record.filledQuestions++;
         localStorage.setItem("totalQuestion", record.totalQuestions);
-        localStorage.setItem("fillingQuestion", record.filledQuestions);
+        //localStorage.setItem("fillingQuestion", record.filledQuestions);
         localStorage.setItem("completedGroups", record.completed_groups);
         localStorage.setItem("record_id", record.serialNo);
         localStorage.setItem("Groupid", record.last_group_id);
@@ -1860,16 +1860,16 @@ var GroupsPage = (function () {
         var _this = this;
         localStorage.setItem("Groupid", id);
         this.completedSurvey().then(function (resutlcomplete) {
-            _this.sectionCompleteCheck().then(function (sectionCheck) {
-                console.log(resutlcomplete);
-                if (_this.surveyType == "section") {
-                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__["a" /* SectionalQuestionsPage */], { 'id': id });
-                }
-                else {
-                    localStorage.setItem("lastquestionIndex", "" + 0 + "");
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete });
-                }
-            });
+            //this.sectionCompleteCheck().then((sectionCheck:any)=>{
+            console.log(resutlcomplete);
+            if (_this.surveyType == "section") {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__["a" /* SectionalQuestionsPage */], { 'id': id });
+            }
+            else {
+                localStorage.setItem("lastquestionIndex", "" + 0 + "");
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_question_question__["a" /* QuestionPage */], { 'id': id, 'completed': resutlcomplete });
+            }
+            //})
         });
     };
     GroupsPage.prototype.completedSurvey = function () {
@@ -1878,6 +1878,7 @@ var GroupsPage = (function () {
             // checking it is coming from completed review record or bydefault
             if (_this.navParams.get("completed") != null) {
                 console.log("review record check");
+                localStorage.setItem("fillingQuestion", "" + 1 + "");
                 resolve(_this.navParams.get("completed"));
             }
             else {
@@ -2924,10 +2925,10 @@ var QuestionPage = (function () {
             }
             _this.form = form;
             //end 
-            console.log(_this.QuestionKeyText);
+            //console.log(this.QuestionKeyText);
+            localStorage.setItem("totalSectionQuestion", "" + Content[0].length + "");
+            _this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
             _this.reviewRecord().then(function (answer) {
-                localStorage.setItem("totalSectionQuestion", "" + Content[0].length + "");
-                _this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
                 console.log(answer);
                 _this.textData(_this.questions, _this.indexArray, answer).then(function () {
                 });
@@ -2938,7 +2939,8 @@ var QuestionPage = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             console.log(_this.navParams.get("completed"));
-            if (_this.navParams.get("completed") != "") {
+            localStorage.getItem('record_id');
+            if (localStorage.getItem('record_id') != "null") {
                 console.log('from ');
                 _this.tablename = "surveyResult_" + _this.questions[_this.indexArray].survey_id;
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
@@ -2954,13 +2956,14 @@ var QuestionPage = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             _this.lastArrayCheck().then(function (result) {
-                console.log(questions[i].survey_id);
+                //console.log(questions[i].survey_id)
                 _this.filledQuestion = localStorage.getItem("fillingQuestion");
                 // this.next(questions[i].survey_id,questions[i].question_key);
                 _this.QuestionKeyText = questionKey;
+                console.log(_this.QuestionKeyText);
                 var content = [];
                 content = questions[i];
-                content["prefill"] = questionKey;
+                content["prefill"] = _this.QuestionKeyText;
                 _this.OriginalContent = content;
                 console.log(_this.OriginalContent);
                 if (_this.questionCheck.length == 0) {
@@ -2982,7 +2985,6 @@ var QuestionPage = (function () {
         if (this.questionCheck.length == (questionLength - 1)) {
             this.updateCompleteGroup().then(function () {
                 _this.NextButton = false;
-                console.log(_this.CompletedGroup);
                 var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "',last_fieldId = " + null + " where serialNo = " + localStorage.getItem('record_id');
                 console.log(query);
                 _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
@@ -3060,16 +3062,25 @@ var QuestionPage = (function () {
     };
     QuestionPage.prototype.updateCompleteGroup = function () {
         //calculate complted groups
-        //calculate complted groups
         var _this = this;
         var storedata;
         return new Promise(function (resolve, reject) {
             if (localStorage.getItem('completedGroups') != "null") {
-                console.log('not undefinded');
-                _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
-                _this.CompletedGroup.push(localStorage.getItem('Groupid'));
-                localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
-                resolve(_this.CompletedGroup);
+                console.log(localStorage.getItem('completedGroups'));
+                console.log(localStorage.getItem('Groupid'));
+                if (localStorage.getItem('completedGroups').indexOf("" + localStorage.getItem('Groupid') + "") == -1) {
+                    console.log("insert");
+                    console.log('not undefinded');
+                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
+                    _this.CompletedGroup.push(localStorage.getItem('Groupid'));
+                    localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
+                    resolve(_this.CompletedGroup);
+                }
+                else {
+                    console.log("not insert");
+                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
+                    resolve(_this.CompletedGroup);
+                }
             }
             else {
                 console.log('defined');
@@ -3083,7 +3094,6 @@ var QuestionPage = (function () {
     QuestionPage.prototype.questionIndex = function (check, questionkey) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(_this.questionCheck);
             _this.questionCheck.push(check);
             localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
             var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
@@ -3147,7 +3157,7 @@ var QuestionPage = (function () {
     QuestionPage.prototype.submitConditionCheck = function (value, questionText) {
         return new Promise(function (resolve, reject) {
             //if different question types
-            console.log(value[questionText]);
+            // console.log(value[questionText]);
             if (value[questionText] != null) {
                 localStorage.setItem("lastQuestiontext", questionText);
                 if (value[questionText] == "") {
@@ -3209,7 +3219,7 @@ var QuestionPage = (function () {
             }
             else {
                 var formValue_1 = [];
-                console.log("valid");
+                //console.log("valid");
                 if (QuestionType == "checkbox") {
                     _this.checkbox(questionKey).then(function () {
                     });
@@ -3218,7 +3228,7 @@ var QuestionPage = (function () {
                 }
                 else {
                     formValue_1.push(formValidate);
-                    console.log(formValue_1);
+                    //console.log(formValue);
                     var questionLength = _this.questions.length;
                     _this.tablename = "surveyResult_" + survey_id;
                     localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
@@ -3274,9 +3284,10 @@ var QuestionPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-question',template:/*ion-inline-start:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/'<ion-header>\n\n  <ion-navbar color="headerClassic">\n <!--  <button ion-button menuToggle>\n  <ion-icon name="menu"></ion-icon>\n  </button> -->\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n    <!--  	Section: Demo Survey -->\n     </ion-title>\n    \n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n	\n\n	<div *ngIf="OriginalContent">\n	<div class="card" >\n			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n		<form novalidate  [formGroup]="form">\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n		   	<!--text-->\n					<div  *ngSwitchCase="\'text\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n				 </div>\n\n\n		   		<!--textarea-->\n					<div  *ngSwitchCase="\'textarea\'">\n				      <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n				 -->\n					</div>\n\n					\n					<!--number-->\n					<div *ngSwitchCase="\'number\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--Email-->\n					<div *ngSwitchCase="\'email\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n					<!--password-->\n					<div *ngSwitchCase="\'password\'">\n						 <input  [formControlName]="OriginalContent?.question_text"\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n					</div>\n\n				  <!--datepicker-->\n				  <div *ngSwitchCase="\'datepicker\'">\n				  	 <div class="datepicker-container">\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n				      </div>\n				  </div>\n\n				  <!--timepicker-->\n				  <div *ngSwitchCase="\'timepicker\'">\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n				  </div>\n\n\n				  <!--select-->\n				   <div *ngSwitchCase="\'select\'">\n				   <ion-list>\n  					<ion-item>\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					    </ion-select>\n					     </ion-item>\n						</ion-list>\n				  </div>\n\n				  <!--radio button-->\n		       <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n\n <!--checkbox-->\n		      <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  \n							   color="red"  ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> \n\n\n				  <!--  <div *ngSwitchCase="\'checkbox\'">\n\n				   <input type="checkbox" name="mycheckbox" id="mycheckbox" />\n<br><br>\n<input type="button" id="test-with-checked" value="Test with checked" />\n<input type="button" id="test-with-is" value="Test with is" />\n<input type="button" id="test-with-prop" value="Test with prop" />\n\n -->\n		      <!-- 	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox id="myCheckbox" [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list> -->\n		     <!--  </div>\n -->\n\n\n\n			  </div>\n	\n    		<div class="action-buttons">\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n				</div>\n</form>\n</div>\n	</div>\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n        [formControlName]="OriginalContent?.question_text"\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n	\n\n	<!--question based-->\n	<!-- <div *ngIf ="OriginalContent">\n		<h1>{{OriginalContent?.question_text}}</h1>\n			<p>{{OriginalContent?.idss}}</p>\n			<p>{{OriginalContent?.question_desc}}</p>\n			\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n					<!-text-->\n			   <!--  <div *ngSwitchCase="\'text\'">\n				    <ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n			    </div>\n -->\n			    <!--select-->\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n		        	<ion-item>\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n					    	</ion-option>\n					      \n					    </ion-select>\n  					</ion-item>\n		      	</div> -->\n\n		      <!--checkbox-->\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n		      	<ion-list >\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n							  <ion-label>{{check?.option_text}}</ion-label>\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n							   color="red" ></ion-checkbox>\n							</ion-item>\n						</ion-list>\n		      </div> -->\n\n		      <!--radio button-->\n		     <!--  <div *ngSwitchCase="\'radio\'">\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n						    <ion-label>{{radio?.option_text}}</ion-label>\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n						  </ion-item>\n 						</ion-list>\n		      </div>\n -->\n		      <!--textarea-->\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n		      	<ion-item>\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n					  </ion-item>\n		      </div>\n -->\n		      <!--datepicker-->\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n		      	\n		      </div> -->\n\n		      <!--message-->\n		      <!-- <div *ngSwitchCase="\'message\'">\n			      <ion-item>\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--number-->\n		     <!--  <div *ngSwitchCase="\'number\'">\n		      	<ion-item>\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n			      </ion-item>\n		      </div> -->\n\n		      <!--location picker-->\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n				</div>\n			</div> -->\n\n				\n				<!-- \n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n				<button  ion-button color="dark" outline>\n	          <ion-icon name="add"></ion-icon>Next</button>\n			</form> \n			\n\n	</div> -->\n	\n</ion-content>'/*ion-inline-end:"/home/oxosolutions/Desktop/Apps/asaapp_new/asapp/src/pages/question/question.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _g || Object])
     ], QuestionPage);
     return QuestionPage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=question.js.map

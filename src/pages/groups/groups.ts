@@ -28,7 +28,7 @@ export class GroupsPage {
   questionid(id,serialNo){
    localStorage.setItem("Groupid", id);
    this.completedSurvey().then((resutlcomplete)=>{
-    this.sectionCompleteCheck().then((sectionCheck:any)=>{
+    //this.sectionCompleteCheck().then((sectionCheck:any)=>{
      console.log(resutlcomplete);
       if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
@@ -36,7 +36,7 @@ export class GroupsPage {
         localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
         this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
       }
-    })
+    //})
    }) 
   }
   completedSurvey(){
@@ -44,6 +44,7 @@ export class GroupsPage {
       // checking it is coming from completed review record or bydefault
       if(this.navParams.get("completed") !=  null){
         console.log("review record check");
+         localStorage.setItem("fillingQuestion",""+1+"");
         resolve(this.navParams.get("completed"));
       }else{
         console.log("emply only questions");
