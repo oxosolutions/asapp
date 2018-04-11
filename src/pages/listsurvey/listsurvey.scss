@@ -19,6 +19,17 @@ page-listsurvey {
             background-color:nth($ItemColors,$i);
         }
     }
+    .item-md ion-thumbnail ion-img, .item-md ion-thumbnail img{
+    	width: 40px;
+    	height: auto;
+    }
+    .item-md ion-thumbnail{
+    	min-height: auto;
+    	min-width: auto
+    }
+    .item-md p.read-more{
+    	text-align: right;
+    }
 	.list-content-wrapper{
 		width: 100%;
 		display: inline-block;

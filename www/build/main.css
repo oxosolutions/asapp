@@ -31235,6 +31235,20 @@ page-listsurvey ion-item-group:nth-child(5n+5) .icon-wrapper {
   background-color: #7cc17f;
 }
 
+page-listsurvey .item-md ion-thumbnail ion-img, page-listsurvey .item-md ion-thumbnail img {
+  width: 40px;
+  height: auto;
+}
+
+page-listsurvey .item-md ion-thumbnail {
+  min-height: auto;
+  min-width: auto;
+}
+
+page-listsurvey .item-md p.read-more {
+  text-align: right;
+}
+
 page-listsurvey .list-content-wrapper {
   width: 100%;
   display: inline-block;
