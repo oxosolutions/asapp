@@ -31,6 +31,10 @@ export class ListsurveyPage {
 
   constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
+  toggleClass(){
+    // $(event.target).toggleClass('active');
+    $(".survey-desc").toggleClass('active');
+  }
   surveyDetails(){
   	this.navCtrl.setRoot(SurveyDetailPage);
   }
