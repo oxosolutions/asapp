@@ -476,28 +476,28 @@ export class QuestionPage {
   }
   checkbox(questionKey){
     return new Promise((resolve,reject)=>{
-     var check;
-      $("#test-with-is").on("click", function(){
-          check = $("#mycheckbox").is(":checked");
-          if(check) {
-            console.log("checked");
-              alert("Checkbox is checked.");
-          } else {
-             console.log("not checked");
-              alert("Checkbox is unchecked.");
-          }
-      }); 
-      if($('input:checked').val() != undefined){
-        $('input').prop('disabled',true);
-        console.log("yes checked");
-      }else{
-        console.log("not checked");
-      }
+     // var check;
+     //  $("#test-with-is").on("click", function(){
+     //      check = $("#mycheckbox").is(":checked");
+     //      if(check) {
+     //        console.log("checked");
+     //          alert("Checkbox is checked.");
+     //      } else {
+     //         console.log("not checked");
+     //          alert("Checkbox is unchecked.");
+     //      }
+     //  }); 
+     //  if($('input:checked').val() != undefined){
+     //    $('input').prop('disabled',true);
+     //    console.log("yes checked");
+     //  }else{
+     //    console.log("not checked");
+     //  }
     })
    
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
-  // console.log(this.form.value);
+  console.log(this.form.value[questionText]);
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
     // console.log(formValidate);
     let i=0;
@@ -510,7 +510,8 @@ export class QuestionPage {
       let formValue=[];
        //console.log("valid");
       if(QuestionType=="checkbox"){
-        this.checkbox(questionKey).then(()=>{
+         console.log(this.form.get("questionKey").value);
+        this.checkbox(questionText).then(()=>{
 
         });
         // json=JSON.stringify(formValidate);
