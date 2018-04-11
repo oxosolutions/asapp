@@ -23,10 +23,11 @@ export class CompletedSurveyPage {
     console.log(this.complete);
   }
   resume(record){
-    console.log(record);
-    console.log(record.survey_status);
+    // console.log(record);
+    // console.log(record.survey_status);
+    // record.filledQuestions++;
     localStorage.setItem("totalQuestion", record.totalQuestions);
-    localStorage.setItem("filledQuestion", record.filledQuestions);
+    // localStorage.setItem("fillingQuestion", record.filledQuestions);
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);

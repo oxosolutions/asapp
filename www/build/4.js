@@ -5,10 +5,10 @@ webpackJsonp([4],{
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectPageModule", function() { return SelectPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SurveyQuestionsPageModule", function() { return SurveyQuestionsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__survey_questions__ = __webpack_require__(281);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SelectPageModule = (function () {
-    function SelectPageModule() {
+var SurveyQuestionsPageModule = (function () {
+    function SurveyQuestionsPageModule() {
     }
-    SelectPageModule = __decorate([
+    SurveyQuestionsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */],
+                __WEBPACK_IMPORTED_MODULE_2__survey_questions__["a" /* SurveyQuestionsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select__["a" /* SelectPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__survey_questions__["a" /* SurveyQuestionsPage */]),
             ],
         })
-    ], SelectPageModule);
-    return SelectPageModule;
+    ], SurveyQuestionsPageModule);
+    return SurveyQuestionsPageModule;
 }());
 
-//# sourceMappingURL=select.module.js.map
+//# sourceMappingURL=survey-questions.module.js.map
 
 /***/ })
 

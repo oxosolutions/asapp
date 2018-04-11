@@ -14,6 +14,7 @@ export class IncompletedSurveyPage {
   }
   ionViewDidLoad() {
     this.survey=this.navParams.get('result');
+    // let id =this.navParams.g
     let data = this.survey.filter((element, index) =>{
     	return (element.survey_status == 'incomplete');
     });
@@ -23,20 +24,21 @@ export class IncompletedSurveyPage {
   resume(record){
   	console.log(record);
   	console.log(record.survey_status);
+    //record.filledQuestions++;
     localStorage.setItem("totalQuestion", record.totalQuestions);
-    localStorage.setItem("filledQuestion", record.filledQuestions);
+    //localStorage.setItem("fillingQuestion", record.filledQuestions);
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);
     localStorage.setItem("questionIndex", record.questionIndex);
 
-    
     this.groupCompleteCheck(record).then(()=>{
        // console.log(  record.last_fieldId);
      record.last_fieldId++;
+
      // console.log(  record.last_fieldId);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'indexdata':"ddd"});
+    this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'InCompleteStatus':"incompleteSurvey"});
     })
  
   }

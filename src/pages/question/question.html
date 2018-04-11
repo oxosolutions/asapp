@@ -16,7 +16,7 @@
 
 	<div *ngIf="OriginalContent">
 	<div class="card" >
-			<span class="question-number">Question 1</span>of 20
+			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
 			<p>{{OriginalContent?.question_desc}}</p>
 
@@ -98,43 +98,28 @@
  						</ion-list>
 		      </div>
 
- <!--checkbox-->
+ 				<!--checkbox-->
 		      <div *ngSwitchCase="'checkbox'">
 		      	<ion-list >
 						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
 							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox  
-							   color="red"  ></ion-checkbox>
+							  <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox>
 							</ion-item>
 						</ion-list>
-		      </div> 
+		      </div>
 
+		   	 <!--new types-->
+			    <div *ngSwitchCase="'code'">
 
-				  <!--  <div *ngSwitchCase="'checkbox'">
-
-				   <input type="checkbox" name="mycheckbox" id="mycheckbox" />
-<br><br>
-<input type="button" id="test-with-checked" value="Test with checked" />
-<input type="button" id="test-with-is" value="Test with is" />
-<input type="button" id="test-with-prop" value="Test with prop" />
-
- -->
-		      <!-- 	<ion-list >
-						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
-							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox id="myCheckbox" [formControlName]="OriginalContent?.question_text"  color="red" ></ion-checkbox>
-							</ion-item>
-						</ion-list> -->
-		     <!--  </div>
- -->
-
-
+			    </div>
 
 			  </div>
 	
     		<div class="action-buttons">
 					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
+
 					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
+
 					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>
 				</div>
 </form>

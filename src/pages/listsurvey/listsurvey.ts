@@ -124,7 +124,7 @@ export class ListsurveyPage {
 		this.surveyTitle=localStorage.getItem("ApplicationName");
   		localStorage.setItem('completedGroups',null);
   		localStorage.setItem('totalQuestion',null);
-  		localStorage.setItem('filledQuestion', null);
+  		localStorage.setItem('fillingQuestion', null);
   		localStorage.setItem('RuningSurvey',null);
   		localStorage.setItem('record_id',null);
   		localStorage.setItem('GroupNumber',null);

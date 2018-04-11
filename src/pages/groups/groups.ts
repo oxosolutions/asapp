@@ -26,25 +26,42 @@ export class GroupsPage {
   constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   questionid(id,serialNo){
-    // this.showConfirm();
    localStorage.setItem("Groupid", id);
    this.completedSurvey().then((resutlcomplete)=>{
+    //this.sectionCompleteCheck().then((sectionCheck:any)=>{
      console.log(resutlcomplete);
       if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
       }else{  
         localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
-        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete }); 
+        this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete,'InCompleteStatus':this.navParams.get("InCompleteStatus") }); 
       }
+    //})
    }) 
   }
   completedSurvey(){
     return new Promise ((resolve,reject)=>{
+      // checking it is coming from completed review record or bydefault
       if(this.navParams.get("completed") !=  null){
         console.log("review record check");
+         localStorage.setItem("fillingQuestion",""+1+"");
         resolve(this.navParams.get("completed"));
       }else{
         console.log("emply only questions");
+        localStorage.setItem("fillingQuestion",""+1+"");
+        resolve("");
+      }
+    })
+  }
+  sectionCompleteCheck(){
+    //checking it is coming from questions after completing section
+    return new Promise((resolve,reject)=>{
+      if(localStorage.getItem('completedGroups') != "null" ){
+        console.log("data get from database"); 
+        resolve("");
+      }else{
+        // console.log("first tym survey fill")
+        // localStorage.setItem('fillingQuestion',""+1+"");
         resolve("");
       }
     })
