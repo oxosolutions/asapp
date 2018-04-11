@@ -1,14 +1,14 @@
 webpackJsonp([11],{
 
-/***/ 468:
+/***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HelpPageModule", function() { return HelpPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncompletedSurveyPageModule", function() { return IncompletedSurveyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__help__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__incompleted_survey__ = __webpack_require__(138);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var HelpPageModule = (function () {
-    function HelpPageModule() {
+var IncompletedSurveyPageModule = (function () {
+    function IncompletedSurveyPageModule() {
     }
-    HelpPageModule = __decorate([
+    IncompletedSurveyPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__help__["a" /* HelpPage */],
+                __WEBPACK_IMPORTED_MODULE_2__incompleted_survey__["a" /* IncompletedSurveyPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__help__["a" /* HelpPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__incompleted_survey__["a" /* IncompletedSurveyPage */]),
             ],
         })
-    ], HelpPageModule);
-    return HelpPageModule;
+    ], IncompletedSurveyPageModule);
+    return IncompletedSurveyPageModule;
 }());
 
-//# sourceMappingURL=help.module.js.map
+//# sourceMappingURL=incompleted-survey.module.js.map
 
 /***/ })
 
