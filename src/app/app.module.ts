@@ -36,6 +36,7 @@ import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 import { ReactiveFormsModule }          from '@angular/forms';
 import {SynchronizeRecordPage} from '../pages/synchronize-record/synchronize-record';
 
+
 //plugin
 import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
 import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/package/ng2-datepicker

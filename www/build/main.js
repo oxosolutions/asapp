@@ -749,7 +749,7 @@ var SynchronizeRecordPage = (function () {
     };
     SynchronizeRecordPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-synchronize-record',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/'<ion-header>\n\n  <ion-toolbar color="headerClassic">\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title><span>Syncronize records</span></ion-title>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="search"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="more"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n\n    <div>\n\n        <ion-list class="custom-border">\n\n            <ion-item-sliding>\n\n                <ion-item>\n\n                    <h2>id</h2>\n\n                    <h2>record name</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        Completed 123 | Incompleted 24 \n\n                        <!--  <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted -->\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n                <ion-item-options side="right"  >\n\n                    <button  ion-button color="primary" (click)="completedSurveyPage(record.id)">Sync Completed</button>\n\n                    <button  ion-button color="Secondary" (click)="incompletedSurveyPage(record.id)">Sync Incomplete</button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/,
+            selector: 'page-synchronize-record',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/'<ion-header>\n\n  <ion-toolbar color="headerClassic">\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title><span>Syncronize records</span></ion-title>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="search"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="more"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n\n    <div>\n\n        <ion-list class="custom-border">\n\n                <ion-item>\n\n                    <h2>Name of the completed survey</h2>\n\n                    \n\n                    <p>\n\n                        <ion-icon name="clock"></ion-icon>\n\n                        26 Dec 2017 | 12:45pm \n\n                        <!--  <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted -->\n\n                    </p>\n\n                    \n\n                </ion-item>\n\n                 <ion-item>\n\n                    <h2>Name of the completed survey</h2>\n\n                    \n\n                    <p>\n\n                        <ion-icon name="clock"></ion-icon>\n\n                        26 Dec 2017 | 12:45pm \n\n                        <!--  <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted -->\n\n                    </p>\n\n                    \n\n                </ion-item>\n\n                 <ion-item>\n\n                    <h2>Name of the completed survey</h2>\n\n                    \n\n                    <p>\n\n                        <ion-icon name="clock"></ion-icon>\n\n                        26 Dec 2017 | 12:45pm \n\n                        <!--  <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted -->\n\n                    </p>\n\n                    \n\n                </ion-item>\n\n        </ion-list>\n\n    </div>\n\n    <div>\n\n    	\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], SynchronizeRecordPage);
@@ -1117,75 +1117,79 @@ webpackEmptyAsyncContext.id = 153;
 var map = {
 	"../pages/about/about.module": [
 		463,
-		17
+		38
 	],
 	"../pages/activation/activation.module": [
 		464,
-		16
+		37
 	],
 	"../pages/complete-survey/complete-survey.module": [
 		465,
-		1
+		22
 	],
 	"../pages/completed-survey/completed-survey.module": [
 		466,
-		15
+		36
 	],
 	"../pages/dashboard/dashboard.module": [
 		467,
-		14
+		35
 	],
 	"../pages/groups/groups.module": [
 		468,
-		13
+		34
 	],
 	"../pages/help/help.module": [
 		469,
-		12
+		33
 	],
 	"../pages/incompleted-survey/incompleted-survey.module": [
 		470,
-		11
+		32
 	],
 	"../pages/listsurvey/listsurvey.module": [
 		471,
-		10
+		31
 	],
 	"../pages/login/login.module": [
 		472,
-		9
+		30
 	],
 	"../pages/question-practice/question-practice.module": [
 		473,
-		0
+		21
 	],
 	"../pages/question/question.module": [
 		474,
-		8
+		29
 	],
 	"../pages/record-list/record-list.module": [
 		475,
-		7
+		28
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
 		476,
-		6
+		27
 	],
 	"../pages/select/select.module": [
 		477,
-		5
+		26
+	],
+	"../pages/survey-details/survey-details.module": [
+		483,
+		20
 	],
 	"../pages/survey-questions/survey-questions.module": [
 		478,
-		4
+		25
 	],
 	"../pages/synchronize-record/synchronize-record.module": [
 		479,
-		3
+		24
 	],
 	"../pages/text/text.module": [
 		480,
-		2
+		23
 	]
 };
 function webpackAsyncContext(req) {
@@ -1491,7 +1495,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/synchronize-record/synchronize-record.module#SynchronizeRecordPageModule', name: 'SynchronizeRecordPage', segment: 'synchronize-record', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/survey-details/survey-details.module#SurveyDetailsPageModule', name: 'SurveyDetailsPage', segment: 'survey-details', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__angular_http__["c" /* HttpModule */],
