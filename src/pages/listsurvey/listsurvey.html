@@ -17,7 +17,7 @@
  
 <ion-list>
 <div *ngFor="let survey of listSurvey[0]">      
-  <ion-item (click)="groups(survey.id,survey,survey['questions'])">
+  <ion-item >
   <p>{{survey["scheduling"].surveyResponse}}</p>
   <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>
   
@@ -26,10 +26,9 @@
     </ion-thumbnail>
     <h2>{{survey.name}}</h2>
     <p>{{survey.description}}</p>
-
     <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p>
-    <button ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>
-    <button ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
+    <button (click)="groups(survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button>
+    <button (click)="surveyDetails()" ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
   </ion-item>
 </div>
 <!-- <div *ngIf="nullSurvey">

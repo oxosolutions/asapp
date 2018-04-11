@@ -35,6 +35,8 @@ import {SectionalQuestionsPage} from '../pages/sectional-questions/sectional-que
 import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 import { ReactiveFormsModule }          from '@angular/forms';
 import {SynchronizeRecordPage} from '../pages/synchronize-record/synchronize-record';
+import {SurveyDetailPage} from '../pages/survey-detail/survey-detail';
+
 
 //plugin
 import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
@@ -60,7 +62,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     IncompletedSurveyPage,
     SectionalQuestionsPage,
     SurveyQuestionsPage,
-    SynchronizeRecordPage
+    SynchronizeRecordPage,
+    SurveyDetailPage
   ],
 
   imports: [
@@ -92,7 +95,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     IncompletedSurveyPage,
     SectionalQuestionsPage,
     SurveyQuestionsPage,
-    SynchronizeRecordPage
+    SynchronizeRecordPage,
+    SurveyDetailPage
   ],
   providers: [
     StatusBar,

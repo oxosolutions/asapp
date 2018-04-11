@@ -5,6 +5,8 @@ import {GroupsPage} from '../../pages/groups/groups';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
+
 @IonicPage()
 @Component({
   selector: 'page-listsurvey',
@@ -28,6 +30,9 @@ export class ListsurveyPage {
 	tomarrow:"14/03/2018 17:23:41 +0530";
 
   constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  }
+  surveyDetails(){
+  	this.navCtrl.setRoot(SurveyDetailPage);
   }
   groups(id,message,totalQuestions){
   	localStorage.setItem("Surveyid", id);
