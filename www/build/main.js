@@ -49,371 +49,16 @@ var AboutPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompletedSurveyPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__ = __webpack_require__(37);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var CompletedSurveyPage = (function () {
-    function CompletedSurveyPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    CompletedSurveyPage.prototype.ionViewDidLoad = function () {
-        this.survey = this.navParams.get('result');
-        var data = this.survey.filter(function (element, index) {
-            return (element.survey_status == 'completed');
-        });
-        this.complete = data;
-        console.log(this.complete);
-    };
-    CompletedSurveyPage.prototype.resume = function (record) {
-        // console.log(record);
-        // console.log(record.survey_status);
-        // record.filledQuestions++;
-        localStorage.setItem("totalQuestion", record.totalQuestions);
-        // localStorage.setItem("fillingQuestion", record.filledQuestions);
-        localStorage.setItem("completedGroups", record.completed_groups);
-        localStorage.setItem("record_id", record.serialNo);
-        localStorage.setItem("Groupid", record.last_group_id);
-        localStorage.setItem("questionIndex", record.questionIndex);
-        // this.groupCompleteCheck(record).then(()=>{
-        // console.log(  record.last_fieldId);
-        //record.last_fieldId++;
-        // console.log(  record.last_fieldId);
-        localStorage.setItem("lastquestionIndex", record.last_fieldId);
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'completed': "surveyCompleted" });
-        //})
-    };
-    CompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
-        var _this = this;
-        return new Promise(function (resolve, rejeect) {
-            if (record.completed_groups != "null") {
-                // console.log(  record.last_fieldId);
-                // console.log("groupo null");
-                if (record.last_fieldId == null) {
-                    // console.log("go to groupss");
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */]);
-                }
-                else {
-                    resolve("data");
-                }
-            }
-            else {
-                resolve("data");
-            }
-        });
-    };
-    CompletedSurveyPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-completed-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/'\n\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n\n    <ion-title>completed-survey</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<div class="custom-card" *ngFor="let  record of complete">\n\n		<div>\n\n			<div class="percentage-wrapper">\n\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n\n			</div>\n\n			<div class="content-wrapper">\n\n				<div class="item-title">{{record.incomplete_name}}</div>\n\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n\n				<div class="start-end-date">\n\n					<span>\n\n						<ion-icon name="md-calendar"></ion-icon>\n\n						{{record.survey_startedOn | date:\'fullDate\' }}\n\n					</span>\n\n					\n\n				</div>\n\n\n\n			</div>\n\n			<div class="clear"></div>	\n\n		</div>\n\n		<div class="custom-card-footer">\n\n			<div class="question-incomplete">\n\n				<ion-icon name="alert"></ion-icon>\n\n					{{record.filledQuestions}} Question Filled\n\n			</div>\n\n			\n\n			<div class="trash-survey">\n\n				<ion-icon name="md-trash"></ion-icon>\n\n								\n\n			</div>\n\n			<div class="resume-survey" (click)="resume(record)">\n\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n\n				Edit			\n\n			</div>\n\n		</div>\n\n		\n\n    	\n\n	</div>\n\n	 \n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], CompletedSurveyPage);
-    return CompletedSurveyPage;
-}());
-
-//# sourceMappingURL=completed-survey.js.map
-
-/***/ }),
-
-/***/ 136:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IncompletedSurveyPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_question_question__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(37);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var IncompletedSurveyPage = (function () {
-    function IncompletedSurveyPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    IncompletedSurveyPage.prototype.ionViewDidLoad = function () {
-        this.survey = this.navParams.get('result');
-        // let id =this.navParams.g
-        var data = this.survey.filter(function (element, index) {
-            return (element.survey_status == 'incomplete');
-        });
-        this.incomplete = data;
-        console.log(this.incomplete);
-    };
-    IncompletedSurveyPage.prototype.resume = function (record) {
-        var _this = this;
-        console.log(record);
-        console.log(record.survey_status);
-        //record.filledQuestions++;
-        localStorage.setItem("totalQuestion", record.totalQuestions);
-        //localStorage.setItem("fillingQuestion", record.filledQuestions);
-        localStorage.setItem("completedGroups", record.completed_groups);
-        localStorage.setItem("record_id", record.serialNo);
-        localStorage.setItem("Groupid", record.last_group_id);
-        localStorage.setItem("questionIndex", record.questionIndex);
-        this.groupCompleteCheck(record).then(function () {
-            // console.log(  record.last_fieldId);
-            record.last_fieldId++;
-            // console.log(  record.last_fieldId);
-            localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
-            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'InCompleteStatus': "incompleteSurvey" });
-        });
-    };
-    IncompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
-        var _this = this;
-        return new Promise(function (resolve, rejeect) {
-            if (record.completed_groups != "null") {
-                // console.log(  record.last_fieldId);
-                // console.log("groupo null");
-                if (record.last_fieldId == null) {
-                    // console.log("go to groupss");
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */]);
-                }
-                else {
-                    resolve("data");
-                }
-            }
-            else {
-                resolve("data");
-            }
-        });
-    };
-    IncompletedSurveyPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-incompleted-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n    <ion-title>incompleted-survey</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div class="custom-card" *ngFor="let  record of incomplete">\n\n		<div>\n\n			<div class="percentage-wrapper">\n\n				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>\n\n			</div>\n\n			<div class="content-wrapper">\n\n				<div class="item-title">{{record.incomplete_name}}</div>\n\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n\n				<div class="start-end-date">\n\n					<span>\n\n						<ion-icon name="md-calendar"></ion-icon>\n\n						{{record.survey_startedOn | date:\'fullDate\' }}\n\n					</span>\n\n\n\n					<!-- <span>\n\n						<ion-icon name="md-time"></ion-icon>\n\n						2 min ago\n\n					</span> -->\n\n\n\n				</div>\n\n\n\n			</div>\n\n			<div class="clear"></div>	\n\n		</div>\n\n		<div class="custom-card-footer">\n\n			<div class="question-incomplete">\n\n				<ion-icon name="alert"></ion-icon>\n\n				{{record.totalQuestions-record.filledQuestions}} question remaining\n\n			</div>\n\n			\n\n			<div class="trash-survey">\n\n				<ion-icon name="md-trash"></ion-icon>\n\n								\n\n			</div>\n\n			<div class="resume-survey" (click)="resume(record)">\n\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>resume\n\n							\n\n			</div>\n\n		</div>\n\n		\n\n    	\n\n	</div>\n\n	\n\n	 \n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], IncompletedSurveyPage);
-    return IncompletedSurveyPage;
-}());
-
-//# sourceMappingURL=incompleted-survey.js.map
-
-/***/ }),
-
-/***/ 137:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynchronizeRecordPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the SynchronizeRecordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var SynchronizeRecordPage = (function () {
-    function SynchronizeRecordPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    SynchronizeRecordPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SynchronizeRecordPage');
-    };
-    SynchronizeRecordPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-synchronize-record',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/'<!--\n\n  Generated template for the SynchronizeRecordPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>synchronizeRecord</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], SynchronizeRecordPage);
-    return SynchronizeRecordPage;
-}());
-
-//# sourceMappingURL=synchronize-record.js.map
-
-/***/ }),
-
-/***/ 138:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SectionalQuestionsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(15);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var SectionalQuestionsPage = (function () {
-    function SectionalQuestionsPage(servicesProvider, navCtrl, navParams) {
-        this.servicesProvider = servicesProvider;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    SectionalQuestionsPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        console.log('ionViewDidLoad SectionalQuestionsPage');
-        var i = 0;
-        var Content = [];
-        this.questionTitle = localStorage.getItem("ApplicationName");
-        // this.questionType=localStorage.getItem("questionType");
-        this.id = this.navParams.get('id');
-        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
-            Content.push(result.rows);
-            //code for converting json 
-            var collection;
-            var newcollection;
-            var replacedArray = [];
-            Content.forEach(function (key, value) {
-                collection = [];
-                Object.keys(key).forEach(function (keyvalue, keydata) {
-                    newcollection = [];
-                    var newcolumn = [];
-                    collection = key[keyvalue];
-                    Object.keys(collection).forEach(function (valuekey, valuedata) {
-                        var newData;
-                        var replace;
-                        try {
-                            replace = collection[valuekey].replace(/'/g, '"');
-                            newData = JSON.parse(replace);
-                        }
-                        catch (e) {
-                            newData = collection[valuekey];
-                        }
-                        newcollection.push(newData);
-                        newcolumn.push(valuekey);
-                    });
-                    var replacedData = {};
-                    i;
-                    for (i = 0; i < newcollection.length; i++) {
-                        replacedData[newcolumn[i]] = newcollection[i];
-                    }
-                    replacedArray.push(replacedData);
-                });
-            });
-            _this.questions = replacedArray;
-            console.log(_this.questions);
-            // if(this.questions != undefined){
-            //   if(this.questionType == "save_survey"){
-            //     this.surveyQuestion=this.questions;
-            //     console.log(this.surveyQuestion);    
-            //   }else if(this.questionType == "save_section"){
-            //   }else if(this.questionType == "questions"){
-            //     let i=0;
-            //     this.textData(this.questions, i).then(()=>{
-            //     });
-            //   }    
-            // }
-        });
-    };
-    SectionalQuestionsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sectional-questions',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\sectional-questions\sectional-questions.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>{{questionTitle}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div *ngFor="let question of questions let i = index;" >\n\n		<div class="card">\n\n		<span class="question-number">\n\n			Question {{i+1}}\n\n		</span>\n\n		of 20\n\n		<div class="question-text">\n\n			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?\n\n		</div>\n\n		<div class="question-options">\n\n			\n\n		</div>\n\n		\n\n	</div>\n\n	<!-- <div class="action-buttons">\n\n		<button ion-button class="previous">Previous</button>\n\n		<button ion-button color="secondary" class="stop">Stop</button>\n\n		<button ion-button class="next">Next</button>\n\n	</div> -->\n\n	\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\sectional-questions\sectional-questions.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], SectionalQuestionsPage);
-    return SectionalQuestionsPage;
-}());
-
-//# sourceMappingURL=sectional-questions.js.map
-
-/***/ }),
-
-/***/ 139:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the HelpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HelpPage = (function () {
-    function HelpPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    HelpPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HelpPage');
-    };
-    HelpPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-help',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\help\help.html"*/'<!--\n\n  Generated template for the HelpPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Help</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\help\help.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], HelpPage);
-    return HelpPage;
-}());
-
-//# sourceMappingURL=help.js.map
-
-/***/ }),
-
-/***/ 140:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActivationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_survey_survey__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(69);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,6 +450,361 @@ var ActivationPage = (function () {
 
 /***/ }),
 
+/***/ 136:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SectionalQuestionsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(15);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SectionalQuestionsPage = (function () {
+    function SectionalQuestionsPage(servicesProvider, navCtrl, navParams) {
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    SectionalQuestionsPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        console.log('ionViewDidLoad SectionalQuestionsPage');
+        var i = 0;
+        var Content = [];
+        this.questionTitle = localStorage.getItem("ApplicationName");
+        // this.questionType=localStorage.getItem("questionType");
+        this.id = this.navParams.get('id');
+        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
+            Content.push(result.rows);
+            //code for converting json 
+            var collection;
+            var newcollection;
+            var replacedArray = [];
+            Content.forEach(function (key, value) {
+                collection = [];
+                Object.keys(key).forEach(function (keyvalue, keydata) {
+                    newcollection = [];
+                    var newcolumn = [];
+                    collection = key[keyvalue];
+                    Object.keys(collection).forEach(function (valuekey, valuedata) {
+                        var newData;
+                        var replace;
+                        try {
+                            replace = collection[valuekey].replace(/'/g, '"');
+                            newData = JSON.parse(replace);
+                        }
+                        catch (e) {
+                            newData = collection[valuekey];
+                        }
+                        newcollection.push(newData);
+                        newcolumn.push(valuekey);
+                    });
+                    var replacedData = {};
+                    i;
+                    for (i = 0; i < newcollection.length; i++) {
+                        replacedData[newcolumn[i]] = newcollection[i];
+                    }
+                    replacedArray.push(replacedData);
+                });
+            });
+            _this.questions = replacedArray;
+            console.log(_this.questions);
+            // if(this.questions != undefined){
+            //   if(this.questionType == "save_survey"){
+            //     this.surveyQuestion=this.questions;
+            //     console.log(this.surveyQuestion);    
+            //   }else if(this.questionType == "save_section"){
+            //   }else if(this.questionType == "questions"){
+            //     let i=0;
+            //     this.textData(this.questions, i).then(()=>{
+            //     });
+            //   }    
+            // }
+        });
+    };
+    SectionalQuestionsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-sectional-questions',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\sectional-questions\sectional-questions.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>{{questionTitle}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div *ngFor="let question of questions let i = index;" >\n\n		<div class="card">\n\n		<span class="question-number">\n\n			Question {{i+1}}\n\n		</span>\n\n		of 20\n\n		<div class="question-text">\n\n			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eros magna ?\n\n		</div>\n\n		<div class="question-options">\n\n			\n\n		</div>\n\n		\n\n	</div>\n\n	<!-- <div class="action-buttons">\n\n		<button ion-button class="previous">Previous</button>\n\n		<button ion-button color="secondary" class="stop">Stop</button>\n\n		<button ion-button class="next">Next</button>\n\n	</div> -->\n\n	\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\sectional-questions\sectional-questions.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], SectionalQuestionsPage);
+    return SectionalQuestionsPage;
+}());
+
+//# sourceMappingURL=sectional-questions.js.map
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CompletedSurveyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__ = __webpack_require__(37);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CompletedSurveyPage = (function () {
+    function CompletedSurveyPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    CompletedSurveyPage.prototype.ionViewDidLoad = function () {
+        this.survey = this.navParams.get('result');
+        var data = this.survey.filter(function (element, index) {
+            return (element.survey_status == 'completed');
+        });
+        this.complete = data;
+        console.log(this.complete);
+    };
+    CompletedSurveyPage.prototype.resume = function (record) {
+        // console.log(record);
+        // console.log(record.survey_status);
+        // record.filledQuestions++;
+        localStorage.setItem("totalQuestion", record.totalQuestions);
+        // localStorage.setItem("fillingQuestion", record.filledQuestions);
+        localStorage.setItem("completedGroups", record.completed_groups);
+        localStorage.setItem("record_id", record.serialNo);
+        localStorage.setItem("Groupid", record.last_group_id);
+        localStorage.setItem("questionIndex", record.questionIndex);
+        // this.groupCompleteCheck(record).then(()=>{
+        // console.log(  record.last_fieldId);
+        //record.last_fieldId++;
+        // console.log(  record.last_fieldId);
+        localStorage.setItem("lastquestionIndex", record.last_fieldId);
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'completed': "surveyCompleted" });
+        //})
+    };
+    CompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
+        var _this = this;
+        return new Promise(function (resolve, rejeect) {
+            if (record.completed_groups != "null") {
+                // console.log(  record.last_fieldId);
+                // console.log("groupo null");
+                if (record.last_fieldId == null) {
+                    // console.log("go to groupss");
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */]);
+                }
+                else {
+                    resolve("data");
+                }
+            }
+            else {
+                resolve("data");
+            }
+        });
+    };
+    CompletedSurveyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-completed-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/'\n\n<ion-header>\n\n  <ion-navbar color="headerClassic">\n\n    <ion-title>completed-survey</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n	<div class="custom-card" *ngFor="let  record of complete">\n\n		<div>\n\n			<div class="percentage-wrapper">\n\n				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>\n\n			</div>\n\n			<div class="content-wrapper">\n\n				<div class="item-title">{{record.incomplete_name}}</div>\n\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n\n				<div class="start-end-date">\n\n					<span>\n\n						<ion-icon name="md-calendar"></ion-icon>\n\n						{{record.survey_startedOn | date:\'fullDate\' }}\n\n					</span>\n\n					\n\n				</div>\n\n\n\n			</div>\n\n			<div class="clear"></div>	\n\n		</div>\n\n		<div class="custom-card-footer">\n\n			<div class="question-incomplete">\n\n				<ion-icon name="alert"></ion-icon>\n\n					{{record.filledQuestions}} Question Filled\n\n			</div>\n\n			\n\n			<div class="trash-survey">\n\n				<ion-icon name="md-trash"></ion-icon>\n\n								\n\n			</div>\n\n			<div class="resume-survey" (click)="resume(record)">\n\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>\n\n				Edit			\n\n			</div>\n\n		</div>\n\n		\n\n    	\n\n	</div>\n\n	 \n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\completed-survey\completed-survey.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], CompletedSurveyPage);
+    return CompletedSurveyPage;
+}());
+
+//# sourceMappingURL=completed-survey.js.map
+
+/***/ }),
+
+/***/ 138:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IncompletedSurveyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_question_question__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(37);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var IncompletedSurveyPage = (function () {
+    function IncompletedSurveyPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    IncompletedSurveyPage.prototype.ionViewDidLoad = function () {
+        this.survey = this.navParams.get('result');
+        // let id =this.navParams.g
+        var data = this.survey.filter(function (element, index) {
+            return (element.survey_status == 'incomplete');
+        });
+        this.incomplete = data;
+        console.log(this.incomplete);
+    };
+    IncompletedSurveyPage.prototype.resume = function (record) {
+        var _this = this;
+        console.log(record);
+        console.log(record.survey_status);
+        //record.filledQuestions++;
+        localStorage.setItem("totalQuestion", record.totalQuestions);
+        //localStorage.setItem("fillingQuestion", record.filledQuestions);
+        localStorage.setItem("completedGroups", record.completed_groups);
+        localStorage.setItem("record_id", record.serialNo);
+        localStorage.setItem("Groupid", record.last_group_id);
+        localStorage.setItem("questionIndex", record.questionIndex);
+        this.groupCompleteCheck(record).then(function () {
+            // console.log(  record.last_fieldId);
+            record.last_fieldId++;
+            // console.log(  record.last_fieldId);
+            localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_question_question__["a" /* QuestionPage */], { 'id': record.last_group_id, 'InCompleteStatus': "incompleteSurvey" });
+        });
+    };
+    IncompletedSurveyPage.prototype.groupCompleteCheck = function (record) {
+        var _this = this;
+        return new Promise(function (resolve, rejeect) {
+            if (record.completed_groups != "null") {
+                // console.log(  record.last_fieldId);
+                // console.log("groupo null");
+                if (record.last_fieldId == null) {
+                    // console.log("go to groupss");
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__["a" /* GroupsPage */]);
+                }
+                else {
+                    resolve("data");
+                }
+            }
+            else {
+                resolve("data");
+            }
+        });
+    };
+    IncompletedSurveyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-incompleted-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n    <ion-title>incompleted-survey</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n	<div class="custom-card" *ngFor="let  record of incomplete">\n\n		<div>\n\n			<div class="percentage-wrapper">\n\n				<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span></div>\n\n			</div>\n\n			<div class="content-wrapper">\n\n				<div class="item-title">{{record.incomplete_name}}</div>\n\n				<!-- <div class="pause-location">7th question, Section 3</div> -->\n\n				<div class="start-end-date">\n\n					<span>\n\n						<ion-icon name="md-calendar"></ion-icon>\n\n						{{record.survey_startedOn | date:\'fullDate\' }}\n\n					</span>\n\n\n\n					<!-- <span>\n\n						<ion-icon name="md-time"></ion-icon>\n\n						2 min ago\n\n					</span> -->\n\n\n\n				</div>\n\n\n\n			</div>\n\n			<div class="clear"></div>	\n\n		</div>\n\n		<div class="custom-card-footer">\n\n			<div class="question-incomplete">\n\n				<ion-icon name="alert"></ion-icon>\n\n				{{record.totalQuestions-record.filledQuestions}} question remaining\n\n			</div>\n\n			\n\n			<div class="trash-survey">\n\n				<ion-icon name="md-trash"></ion-icon>\n\n								\n\n			</div>\n\n			<div class="resume-survey" (click)="resume(record)">\n\n				<ion-icon name="md-arrow-dropright-circle"></ion-icon>resume\n\n							\n\n			</div>\n\n		</div>\n\n		\n\n    	\n\n	</div>\n\n	\n\n	 \n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\incompleted-survey\incompleted-survey.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], IncompletedSurveyPage);
+    return IncompletedSurveyPage;
+}());
+
+//# sourceMappingURL=incompleted-survey.js.map
+
+/***/ }),
+
+/***/ 139:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SynchronizeRecordPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the SynchronizeRecordPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SynchronizeRecordPage = (function () {
+    function SynchronizeRecordPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    SynchronizeRecordPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SynchronizeRecordPage');
+    };
+    SynchronizeRecordPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-synchronize-record',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/'<ion-header>\n\n  <ion-toolbar color="headerClassic">\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title><span>Syncronize records</span></ion-title>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="search"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n      <ion-buttons end>\n\n          <button ion-button icon-only>\n\n              <ion-icon name="more"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n\n    <div>\n\n        <ion-list class="custom-border">\n\n            <ion-item-sliding>\n\n                <ion-item>\n\n                    <h2>id</h2>\n\n                    <h2>record name</h2>\n\n                    <p>\n\n                        <ion-icon name="done-all"></ion-icon>\n\n                        Completed 123 | Incompleted 24 \n\n                        <!--  <ion-icon name="refresh"></ion-icon>\n\n                         12 Incompleted -->\n\n                    </p>\n\n                    <button ion-button icon-only color="transparent" class="btn-rotate">\n\n                       <ion-icon name="ios-arrow-dropleft-outline"></ion-icon>\n\n                    </button>\n\n                </ion-item>\n\n                <ion-item-options side="right"  >\n\n                    <button  ion-button color="primary" (click)="completedSurveyPage(record.id)">Sync Completed</button>\n\n                    <button  ion-button color="Secondary" (click)="incompletedSurveyPage(record.id)">Sync Incomplete</button>\n\n                </ion-item-options>\n\n            </ion-item-sliding>\n\n        </ion-list>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\synchronize-record\synchronize-record.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], SynchronizeRecordPage);
+    return SynchronizeRecordPage;
+}());
+
+//# sourceMappingURL=synchronize-record.js.map
+
+/***/ }),
+
+/***/ 140:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelpPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the HelpPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HelpPage = (function () {
+    function HelpPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    HelpPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HelpPage');
+    };
+    HelpPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-help',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\help\help.html"*/'<!--\n\n  Generated template for the HelpPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n  	<button ion-button menuToggle>\n\n  		<ion-icon name="menu"></ion-icon>\n\n  	</button>\n\n    <ion-title>Help</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\help\help.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], HelpPage);
+    return HelpPage;
+}());
+
+//# sourceMappingURL=help.js.map
+
+/***/ }),
+
 /***/ 15:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -812,7 +812,7 @@ var ActivationPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AioneServicesProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1120,35 +1120,35 @@ var map = {
 		17
 	],
 	"../pages/activation/activation.module": [
-		473,
+		464,
 		16
 	],
 	"../pages/complete-survey/complete-survey.module": [
-		464,
+		465,
 		1
 	],
 	"../pages/completed-survey/completed-survey.module": [
-		465,
+		466,
 		15
 	],
 	"../pages/dashboard/dashboard.module": [
-		466,
+		467,
 		14
 	],
 	"../pages/groups/groups.module": [
-		467,
+		468,
 		13
 	],
 	"../pages/help/help.module": [
-		468,
+		469,
 		12
 	],
 	"../pages/incompleted-survey/incompleted-survey.module": [
-		469,
+		470,
 		11
 	],
 	"../pages/listsurvey/listsurvey.module": [
-		477,
+		471,
 		10
 	],
 	"../pages/login/login.module": [
@@ -1156,31 +1156,31 @@ var map = {
 		9
 	],
 	"../pages/question-practice/question-practice.module": [
-		470,
+		473,
 		0
 	],
 	"../pages/question/question.module": [
-		471,
+		474,
 		8
 	],
 	"../pages/record-list/record-list.module": [
-		478,
+		475,
 		7
 	],
 	"../pages/sectional-questions/sectional-questions.module": [
-		479,
+		476,
 		6
 	],
 	"../pages/select/select.module": [
-		474,
+		477,
 		5
 	],
 	"../pages/survey-questions/survey-questions.module": [
-		475,
+		478,
 		4
 	],
 	"../pages/synchronize-record/synchronize-record.module": [
-		476,
+		479,
 		3
 	],
 	"../pages/text/text.module": [
@@ -1294,7 +1294,7 @@ var SurveyQuestionsPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TextPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_survey_survey__ = __webpack_require__(59);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1372,31 +1372,31 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_aione_services_aione_services__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_aione_helper_aione_helper__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_sqlite__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_calendar__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_device__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_survey_survey__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_geolocation__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_login_login__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_sqlite__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_calendar__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_device__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_camera__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_network__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_survey_survey__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_activation_activation__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_geolocation__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_login_login__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_dashboard_dashboard__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_help_help__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_help_help__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_about_about__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_listsurvey_listsurvey__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_groups_groups__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_question_question__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_question_question__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_record_list_record_list__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_text_text__ = __webpack_require__(282);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_select_select__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_completed_survey_completed_survey__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_sectional_questions_sectional_questions__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_completed_survey_completed_survey__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_sectional_questions_sectional_questions__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__pages_survey_questions_survey_questions__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_synchronize_record_synchronize_record__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_synchronize_record_synchronize_record__ = __webpack_require__(139);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35_amazing_time_picker__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_ng2_datepicker__ = __webpack_require__(361);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1475,22 +1475,22 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/about/about.module#AboutPageModule', name: 'AboutPage', segment: 'about', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/complete-survey/complete-survey.module#CompleteSurveyPageModule', name: 'CompleteSurveyPage', segment: 'complete-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/completed-survey/completed-survey.module#CompletedSurveyPageModule', name: 'CompletedSurveyPage', segment: 'completed-survey', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/groups/groups.module#GroupsPageModule', name: 'GroupsPage', segment: 'groups', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/help/help.module#HelpPageModule', name: 'HelpPage', segment: 'help', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/incompleted-survey/incompleted-survey.module#IncompletedSurveyPageModule', name: 'IncompletedSurveyPage', segment: 'incompleted-survey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question-practice/question-practice.module#QuestionPracticePageModule', name: 'QuestionPracticePage', segment: 'question-practice', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/question/question.module#QuestionPageModule', name: 'QuestionPage', segment: 'question', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/activation/activation.module#ActivationPageModule', name: 'ActivationPage', segment: 'activation', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select/select.module#SelectPageModule', name: 'SelectPage', segment: 'select', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/survey-questions/survey-questions.module#SurveyQuestionsPageModule', name: 'SurveyQuestionsPage', segment: 'survey-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/synchronize-record/synchronize-record.module#SynchronizeRecordPageModule', name: 'SynchronizeRecordPage', segment: 'synchronize-record', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/listsurvey/listsurvey.module#ListsurveyPageModule', name: 'ListsurveyPage', segment: 'listsurvey', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/record-list/record-list.module#RecordListPageModule', name: 'RecordListPage', segment: 'record-list', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sectional-questions/sectional-questions.module#SectionalQuestionsPageModule', name: 'SectionalQuestionsPage', segment: 'sectional-questions', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/text/text.module#TextPageModule', name: 'TextPage', segment: 'text', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1549,10 +1549,10 @@ var AppModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AioneHelperProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_calendar__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_calendar__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_network__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1658,12 +1658,12 @@ var AioneHelperProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(243);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_services_aione_services__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_activation_activation__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_dashboard_dashboard__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_help_help__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_record_list_record_list__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_listsurvey_listsurvey__ = __webpack_require__(70);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1817,7 +1817,7 @@ var HomePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_helper_aione_helper__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1883,8 +1883,8 @@ var ListPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_question_question__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sectional_questions_sectional_questions__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2011,8 +2011,8 @@ var GroupsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_listsurvey_listsurvey__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_record_list_record_list__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_synchronize_record_synchronize_record__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_record_list_record_list__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_synchronize_record_synchronize_record__ = __webpack_require__(139);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2069,15 +2069,15 @@ var DashboardPage = (function () {
 
 /***/ }),
 
-/***/ 60:
+/***/ 59:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SurveyProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_aione_services_aione_services__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2124,16 +2124,14 @@ var SurveyProvider = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_survey_survey__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard__ = __webpack_require__(53);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2151,546 +2149,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-var QuestionPage = (function () {
-    function QuestionPage(fb, toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
-        this.fb = fb;
-        this.toastctrl = toastctrl;
+var LoginPage = (function () {
+    function LoginPage(loaderCtrl, nav, AioneService, formBuilder, AioneHelp, survey, navCtrl, navParams) {
+        this.loaderCtrl = loaderCtrl;
+        this.nav = nav;
+        this.AioneService = AioneService;
+        this.formBuilder = formBuilder;
         this.AioneHelp = AioneHelp;
-        this.alertCtrl = alertCtrl;
-        this.servicesProvider = servicesProvider;
+        this.survey = survey;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        // @ViewChild('myForm') myForm;
-        this.parentMessage = "message from parent";
-        this.options = {
-            locale: __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__
-        };
-        this.questions = [];
-        this.surveyQuestion = [];
-        this.questionCheck = [];
-        // indexArray=0;
-        this.indexArray = localStorage.getItem("lastquestionIndex");
-        this.CompletedGroup = [];
-        this.completedGroupIndex = localStorage.getItem('Groupid');
-        this.date = new Date();
     }
-    QuestionPage.prototype.showConfirm = function (questionKey, survey_id, questionText, QuestionType) {
+    LoginPage.prototype.Login = function () {
         var _this = this;
-        var prompt = this.alertCtrl.create({
-            message: "Are u sure want to quite survey",
-            // inputs: [
-            //   {
-            //     // placeholder: 'survey name'
-            //   },
-            // ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: 'yes',
-                    handler: function (data) {
-                        // if(data[0] == ""){
-                        if (localStorage.getItem("record_id") == "null") {
-                            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-                        }
-                        else {
-                            _this.totalfilledQuestion().then(function (length) {
-                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-                            });
-                        }
-                        // }else{
-                        //     console.log(data[0]);
-                        //   this.tablename="surveyResult_"+survey_id;
-                        //   let formValue=data[0];
-                        //     let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
-                        // console.log(query);
-                        // this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
-                        // this.navCtrl.setRoot(DashboardPage);
-                        //});
-                        // }        
-                    }
-                }
-            ]
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Verifying Your Details' + "</div>\n      </div>",
         });
-        prompt.present();
-    };
-    QuestionPage.prototype.ngAfterViewInit = function () {
-        // this.message = this.child.message
-    };
-    QuestionPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        var i = 0;
-        var Content = [];
-        this.surveyTotalQuestions = localStorage.getItem("totalQuestion");
-        this.questionTitle = localStorage.getItem("ApplicationName");
-        this.questionType = localStorage.getItem("questionType");
-        this.id = this.navParams.get('id');
-        console.log(this.id);
-        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
-            Content.push(result.rows);
-            console.log(Content);
-            //code for converting json
-            var collection;
-            var newcollection;
-            var replacedArray = [];
-            var newObject = {};
-            Content.forEach(function (key, value) {
-                collection = [];
-                Object.keys(key).forEach(function (keyvalue, keydata) {
-                    //console.log(keyvalue);
-                    newcollection = [];
-                    var newcolumn = [];
-                    collection = key[keyvalue];
-                    newObject[collection.question_text] = "";
-                    Object.keys(collection).forEach(function (valuekey, valuedata) {
-                        var newData;
-                        var replace;
-                        try {
-                            replace = collection[valuekey].replace(/'/g, '"');
-                            newData = JSON.parse(replace);
-                        }
-                        catch (e) {
-                            newData = collection[valuekey];
-                        }
-                        newcollection.push(newData);
-                        newcolumn.push(valuekey);
-                    });
-                    var replacedData = {};
-                    i;
-                    for (i = 0; i < newcollection.length; i++) {
-                        replacedData[newcolumn[i]] = newcollection[i];
-                    }
-                    replacedArray.push(replacedData);
-                });
-            });
-            _this.questions = replacedArray;
-            console.log(_this.indexArray);
-            _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
-            console.log(newObject);
-            //create dynamic 
-            var form = new __WEBPACK_IMPORTED_MODULE_6__angular_forms__["c" /* FormGroup */]({});
-            for (var key in newObject) {
-                if (newObject.hasOwnProperty(key)) {
-                    var control = new __WEBPACK_IMPORTED_MODULE_6__angular_forms__["b" /* FormControl */](newObject[key], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["h" /* Validators */].required);
-                    form.addControl(key, control);
-                }
-            }
-            _this.form = form;
-            //end 
-            //console.log(this.QuestionKeyText);
-            localStorage.setItem("totalSectionQuestion", "" + Content[0].length + "");
-            _this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
-            _this.reviewRecord().then(function (answer) {
-                console.log(answer);
-                _this.textData(_this.questions, _this.indexArray, answer).then(function () {
-                });
-            });
-        });
-    };
-    QuestionPage.prototype.reviewRecord = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            console.log(_this.navParams.get("completed"));
-            localStorage.getItem('record_id');
-            if (localStorage.getItem('record_id') != "null") {
-                console.log('from ');
-                _this.tablename = "surveyResult_" + _this.questions[_this.indexArray].survey_id;
-                _this.answerGet(_this.indexArray).then(function (answerKey) {
-                    resolve(answerKey);
-                });
-            }
-            else {
-                resolve("");
-            }
-        });
-    };
-    QuestionPage.prototype.textData = function (questions, i, questionKey) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.lastArrayCheck().then(function (result) {
-                //console.log(questions[i].survey_id)
-                _this.filledQuestion = localStorage.getItem("fillingQuestion");
-                // this.next(questions[i].survey_id,questions[i].question_key);
-                _this.QuestionKeyText = questionKey;
-                //console.log(this.QuestionKeyText);
-                var content = [];
-                content = questions[i];
-                content["prefill"] = _this.QuestionKeyText;
-                _this.OriginalContent = content;
-                //console.log(this.OriginalContent);
-                if (_this.questionCheck.length == 0) {
-                    _this.previousButton = false;
-                }
-                else {
-                    _this.previousButton = true;
-                }
-                _this.NextButton = true;
-            });
-        });
-    };
-    QuestionPage.prototype.next = function (surveyid, questionkey) {
-        var _this = this;
-        //console.log(this.indexArray);
-        this.tablename = "surveyResult_" + surveyid;
-        var questionLength = this.questions.length;
-        localStorage.getItem('Groupid');
-        if (this.questionCheck.length == (questionLength - 1)) {
-            this.updateCompleteGroup().then(function () {
-                _this.NextButton = false;
-                var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "',last_fieldId = " + null + " where serialNo = " + localStorage.getItem('record_id');
-                //console.log(query);
-                _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
-                    _this.questionIndex(_this.indexArray, questionkey).then(function (id) {
-                        _this.questionsFilledCheck().then(function (fillled) {
-                            _this.questionsFilledCheckInsert().then(function (filledinsert) {
-                                _this.surveyComplete().then(function () {
-                                });
-                            });
-                        });
-                    });
-                });
-            });
+        this.loader.present();
+        if (this.loginUser.invalid) {
+            this.loginUser;
+            this.loader.dismiss();
         }
         else {
-            this.questionIndex(this.indexArray, questionkey).then(function (id) {
-                _this.indexArray++;
-                // console.log(this.indexArray);
-                _this.answerGet(_this.indexArray).then(function (answerKey) {
-                    _this.questionsFilledCheck().then(function (fillled) {
-                        //this.questionsFilledCheckInsert().then((filledinsert)=>{
-                        _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
-                        });
-                    });
-                    //})
-                });
+            var name_1;
+            this.username = this.loginUser.value.username;
+            this.password = this.loginUser.value.password;
+            this.user = "'" + this.username + "'";
+            this.pass = "'" + this.password + "'";
+            this.AioneService.MultipleSelectWhere("users", "email", this.user, "app_password", this.pass).then(function (userDetail) {
+                _this.loginUser.reset();
+                _this.loader.dismiss();
+                if (userDetail.rows.item.length >= 1) {
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+                    localStorage.setItem("username", _this.user);
+                }
+                else {
+                    _this.AioneHelp.showAlert("Error", "Wrong Credentials");
+                }
             });
         }
     };
-    QuestionPage.prototype.questionsFilledCheckInsert = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var query = "UPDATE " + _this.tablename + " SET filledQuestions='" + localStorage.getItem("fillingQuestion") + "' where serialNo= " + localStorage.getItem('record_id');
-            //console.log(query);
-            _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
-                resolve(insert);
-            });
+    LoginPage.prototype.ionViewWillEnter = function () {
+        this.loginUser = this.formBuilder.group({
+            username: ["", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].compose([
+                    __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required,
+                ])],
+            password: ["", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].compose([
+                    __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required,
+                ])],
         });
     };
-    QuestionPage.prototype.questionsFilledCheck = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            // if(localStorage.getItem("fillingQuestion") == "null"){
-            //   this.filledQuestion=JSON.parse(localStorage.getItem('questionIndex'));
-            //   console.log(this.filledQuestion);
-            //   this.filledQuestion++;
-            //   localStorage.setItem("fillingQuestion",this.filledQuestion.length);
-            //   resolve(this.filledQuestion);
-            // }else{
-            _this.filledQuestion = localStorage.getItem("fillingQuestion");
-            _this.filledQuestion++;
-            localStorage.setItem("fillingQuestion", _this.filledQuestion);
-            resolve(_this.filledQuestion);
-            //}
-        });
-    };
-    QuestionPage.prototype.surveyComplete = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var data = JSON.parse(localStorage.getItem('completedGroups'));
-            if (data.length == localStorage.getItem("totalGroup")) {
-                var time_1 = new Date();
-                console.log("datashborad pls go");
-                _this.totalfilledQuestion().then(function (length) {
-                    var query = "UPDATE " + _this.tablename + " SET survey_status = 'completed', " + "survey_completedOn='" + time_1 + "'" + " where serialNo = " + localStorage.getItem('record_id');
-                    //console.log(query);
-                    _this.servicesProvider.ExecuteRun(query, []).then(function (complete) {
-                        _this.AioneHelp.presentToast("survey is successfully completed", 3000, 'top');
-                        _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-                    });
-                });
-            }
-            else {
-                _this.totalfilledQuestion().then(function (length) {
-                    _this.AioneHelp.presentToast("section is successfully completed", 3000, 'top');
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'completedGroup': localStorage.getItem("completedGroups") });
-                });
-            }
-        });
-    };
-    QuestionPage.prototype.totalfilledQuestion = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var Totallength;
-            var Questioncal = [];
-            //get qeustionkey from question table
-            var query = 'Select question_key from questions where survey_id = ' + localStorage.getItem('Surveyid');
-            _this.servicesProvider.ExecuteRun(query, []).then(function (questions) {
-                _this.servicesProvider.mobileListArray(questions).then(function (SurveyData) {
-                    Totallength = SurveyData.length;
-                    SurveyData.forEach(function (index, key) {
-                        Questioncal.push(index["question_key"]);
-                    });
-                    Questioncal = Questioncal.join(",");
-                    var filled = [];
-                    var loop = 0;
-                    //get question length from surveyResutl table
-                    var query1 = 'Select ' + Questioncal + ' from ' + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
-                    _this.servicesProvider.ExecuteRun(query1, []).then(function (questions1) {
-                        _this.servicesProvider.mobileListArray(questions1).then(function (SurveyData1) {
-                            SurveyData1.forEach(function (key, value) {
-                                Object.keys(key).forEach(function (keyinnner, valueinner) {
-                                    console.log(key[keyinnner]);
-                                    if (key[keyinnner] != null) {
-                                        filled.push(key[keyinnner]);
-                                    }
-                                    loop++;
-                                    if (Totallength == loop) {
-                                        var query_1 = "UPDATE " + _this.tablename + " SET filledQuestions=" + filled.length + " where serialNo = " + localStorage.getItem('record_id');
-                                        console.log(query_1);
-                                        _this.servicesProvider.ExecuteRun(query_1, []).then(function (complete) {
-                                            resolve(complete);
-                                        });
-                                    }
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    };
-    QuestionPage.prototype.updateCompleteGroup = function () {
-        //calculate complted groups
-        var _this = this;
-        var storedata;
-        return new Promise(function (resolve, reject) {
-            if (localStorage.getItem('completedGroups') != "null") {
-                console.log(localStorage.getItem('completedGroups'));
-                console.log(localStorage.getItem('Groupid'));
-                if (localStorage.getItem('completedGroups').indexOf("" + localStorage.getItem('Groupid') + "") == -1) {
-                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
-                    _this.CompletedGroup.push(localStorage.getItem('Groupid'));
-                    localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
-                    resolve(_this.CompletedGroup);
-                }
-                else {
-                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
-                    resolve(_this.CompletedGroup);
-                }
-            }
-            else {
-                console.log('defined');
-                _this.CompletedGroup.push(localStorage.getItem('Groupid'));
-                console.log(_this.CompletedGroup);
-                localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
-                resolve(_this.CompletedGroup);
-            }
-        });
-    };
-    QuestionPage.prototype.questionIndex = function (check, questionkey) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.questionCheck.push(check);
-            localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
-            var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
-            console.log(questionFilled); //list of array
-            var query = "UPDATE " + _this.tablename + " SET questionIndex = '" + localStorage.getItem('questionIndex') + "' where serialNo= " + localStorage.getItem('record_id');
-            console.log(query);
-            _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
-                resolve(_this.questionCheck);
-                // resolve(query);
-            });
-        });
-    };
-    QuestionPage.prototype.previous = function () {
-        var _this = this;
-        var storedNames;
-        storedNames = JSON.parse(localStorage.getItem("questionIndex"));
-        this.lastPopId = storedNames.pop();
-        var lastindex2 = this.lastPopId - 1;
-        this.questionCheck = storedNames;
-        localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
-        localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
-        this.indexArray = this.indexArray - 1;
-        this.filledQuestion = localStorage.getItem("fillingQuestion");
-        this.filledQuestion = this.filledQuestion - 1;
-        localStorage.setItem("fillingQuestion", this.filledQuestion);
-        this.questionsFilledCheckInsert().then(function (filledinsert) {
-            _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
-            _this.answerGet(_this.indexArray).then(function (answerKey) {
-                // console.log(answerKey);
-                _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
-                });
-            });
-        });
-    };
-    QuestionPage.prototype.answerGet = function (id) {
-        var _this = this;
-        // console.log(id);
-        return new Promise(function (resolve, reject) {
-            // console.log(this.questions[id].question_key);
-            var query = 'SELECT ' + _this.questions[id].question_key + " FROM " + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
-            console.log(query);
-            _this.servicesProvider.ExecuteRun(query, []).then(function (result) {
-                _this.answerValue = result.rows.item(0);
-                resolve(_this.answerValue[_this.questions[id].question_key]);
-            });
-        });
-    };
-    QuestionPage.prototype.lastArrayCheck = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            console.log(_this.navParams.get('indexdata'));
-            //  
-            if (_this.navParams.get('indexdata') != null || _this.navParams.get('InCompleteStatus') != null) {
-                // console.log("pearame");
-                console.log(_this.questionCheck);
-                _this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));
-                console.log(_this.questionCheck);
-                resolve(_this.questionCheck);
-            }
-            else {
-                resolve("data");
-            }
-        });
-    };
-    QuestionPage.prototype.submitConditionCheck = function (value, questionText) {
-        return new Promise(function (resolve, reject) {
-            //if different question types
-            // console.log(value[questionText]);
-            if (value[questionText] != null) {
-                localStorage.setItem("lastQuestiontext", questionText);
-                if (value[questionText] == "") {
-                    resolve(null);
-                }
-                else {
-                    resolve(value[questionText]);
-                }
-            }
-            else {
-                //if same types
-                if (value[localStorage.getItem("lastQuestiontext")] != null) {
-                    var data = value[localStorage.getItem("lastQuestiontext")];
-                    resolve(data);
-                }
-                else {
-                    resolve(null);
-                }
-            }
-        });
-    };
-    QuestionPage.prototype.update = function (text) {
-        console.log(text);
-    };
-    QuestionPage.prototype.checkbox = function (questionKey) {
-        return new Promise(function (resolve, reject) {
-            // if($("#mycheckbox").is(":checked")) {
-            //   console.log("checked");
-            // } else {
-            //   console.log("not checked");
-            // }
-            // if($('input:checked').val() != undefined){
-            //   $('input').prop('disabled',true);
-            //   console.log("yes checked");
-            // }else{
-            //   console.log("not checked");
-            // }
-        });
-    };
-    QuestionPage.prototype.datachanged = function (e) {
-        console.log(e);
-        console.log(e.checked);
-    };
-    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType, update) {
-        var _this = this;
-        // console.log(this.form.value);
-        this.submitConditionCheck(this.form.value, questionText).then(function (formValidate) {
-            console.log(formValidate);
-            var i = 0;
-            var json;
-            var formValue = [];
-            if (formValidate == null) {
-                console.log("not valid");
-                _this.Errors = "it is not valid";
-            }
-            else {
-                var formValue_1 = [];
-                //console.log("valid");
-                if (QuestionType == "checkbox") {
-                    _this.checkbox(questionKey).then(function () {
-                    });
-                    // json=JSON.stringify(formValidate);
-                    // formValue.push(json);
-                }
-                else {
-                    formValue_1.push(formValidate);
-                    //console.log(formValue);
-                    var questionLength = _this.questions.length;
-                    _this.tablename = "surveyResult_" + survey_id;
-                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
-                    var query = "Select " + questionKey + " from " + _this.tablename + " where serialNo = " + _this.recordId;
-                    var record_id = void 0;
-                    record_id = localStorage.getItem('record_id');
-                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
-                    if (record_id != "null") {
-                        //console.log('update');
-                        // console.log(formValue);
-                        var query_2 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + ",filledQuestions=" + localStorage.getItem("fillingQuestion") + " where serialNo = " + localStorage.getItem('record_id');
-                        console.log(query_2);
-                        _this.servicesProvider.ExecuteRun(query_2, []).then(function (questionSave33) {
-                            _this.next(survey_id, questionKey);
-                        });
-                    }
-                    else {
-                        var time = new Date();
-                        //console.log('insert');
-                        formValue_1.push(localStorage.getItem("lastquestionIndex"));
-                        formValue_1.push("incomplete");
-                        formValue_1.push(localStorage.getItem('Groupid'));
-                        formValue_1.push(time);
-                        formValue_1.push(localStorage.getItem("totalQuestion"));
-                        formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
-                        formValue_1.push(localStorage.getItem("fillingQuestion"));
-                        _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name", "filledQuestions"], formValue_1).then(function (res) {
-                            // console.log(res.insertId);
-                            localStorage.setItem('record_id', res.insertId);
-                            localStorage.setItem('InCompleteSurveyName', null);
-                            _this.next(survey_id, questionKey);
-                        });
-                    }
-                }
-            }
-            form.reset();
-        });
-        //} 
-    };
-    QuestionPage.prototype.insertSubmit = function (tablename, questionKey, formValue) {
-        var _this = this;
-        return new Promise(function (resolve, rejct) {
-            _this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave33) {
-                resolve(questionSave33);
-            });
-        });
-    };
-    QuestionPage.prototype.updateCucumber = function () {
-        var cucumber;
-        console.log('Cucumbers new state:' + cucumber);
-    };
-    QuestionPage = __decorate([
+    LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-question',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question\question.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n <!--  <button ion-button menuToggle>\n\n  <ion-icon name="menu"></ion-icon>\n\n  </button> -->\n\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n\n    <!--  	Section: Demo Survey -->\n\n     </ion-title>\n\n    \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding>\n\n	\n\n\n\n	<div *ngIf="OriginalContent">\n\n	<div class="card" >\n\n			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}\n\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n\n\n		<form novalidate  [formGroup]="form">\n\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n		   	<!--text-->\n\n					<div  *ngSwitchCase="\'text\'">\n\n				      <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n\n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n\n				 </div>\n\n\n\n\n\n		   		<!--textarea-->\n\n					<div  *ngSwitchCase="\'textarea\'">\n\n				      <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n\n				 -->\n\n					</div>\n\n\n\n					\n\n					<!--number-->\n\n					<div *ngSwitchCase="\'number\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n					<!--Email-->\n\n					<div *ngSwitchCase="\'email\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n					<!--password-->\n\n					<div *ngSwitchCase="\'password\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n				  <!--datepicker-->\n\n				  <div *ngSwitchCase="\'datepicker\'">\n\n				  	 <div class="datepicker-container">\n\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n\n				      </div>\n\n				  </div>\n\n\n\n				  <!--timepicker-->\n\n				  <div *ngSwitchCase="\'timepicker\'">\n\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n\n				  </div>\n\n\n\n\n\n				  <!--select-->\n\n				   <div *ngSwitchCase="\'select\'">\n\n				   <ion-list>\n\n  					<ion-item>\n\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					    </ion-select>\n\n					     </ion-item>\n\n						</ion-list>\n\n				  </div>\n\n\n\n				  <!--radio button-->\n\n		       <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n\n\n 				<!--checkbox-->\n\n		      <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div>\n\n\n\n		   	 <!--new types-->\n\n			    <div *ngSwitchCase="\'code\'">\n\n\n\n			    </div>\n\n\n\n			  </div>\n\n	\n\n    		<div class="action-buttons">\n\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n\n\n\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n\n\n\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n\n				</div>\n\n</form>\n\n</div>\n\n	</div>\n\n\n\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n\n        [formControlName]="OriginalContent?.question_text"\n\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n\n\n	\n\n\n\n	<!--question based-->\n\n	<!-- <div *ngIf ="OriginalContent">\n\n		<h1>{{OriginalContent?.question_text}}</h1>\n\n			<p>{{OriginalContent?.idss}}</p>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			\n\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n					<!-text-->\n\n			   <!--  <div *ngSwitchCase="\'text\'">\n\n				    <ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n			    </div>\n\n -->\n\n			    <!--select-->\n\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n\n		        	<ion-item>\n\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					      \n\n					    </ion-select>\n\n  					</ion-item>\n\n		      	</div> -->\n\n\n\n		      <!--checkbox-->\n\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n\n							   color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div> -->\n\n\n\n		      <!--radio button-->\n\n		     <!--  <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n -->\n\n		      <!--textarea-->\n\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n\n		      	<ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n		      </div>\n\n -->\n\n		      <!--datepicker-->\n\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n\n		      	\n\n		      </div> -->\n\n\n\n		      <!--message-->\n\n		      <!-- <div *ngSwitchCase="\'message\'">\n\n			      <ion-item>\n\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div> -->\n\n\n\n		      <!--number-->\n\n		     <!--  <div *ngSwitchCase="\'number\'">\n\n		      	<ion-item>\n\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div> -->\n\n\n\n		      <!--location picker-->\n\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n\n\n				</div>\n\n			</div> -->\n\n\n\n				\n\n				<!-- \n\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n\n				<button  ion-button color="dark" outline>\n\n	          <ion-icon name="add"></ion-icon>Next</button>\n\n			</form> \n\n			\n\n\n\n	</div> -->\n\n	\n\n</ion-content>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question\question.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\login\login.html"*/'\n\n<!-- <ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>login</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header> -->\n\n\n\n\n\n<ion-content padding>\n\n  <!-- <div *ngIf="loginUser">\n\n    <form [formGroup]="loginUser">\n\n    	<ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Username</ion-label>\n\n        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n        <p>Username is required</p>\n\n      </div>\n\n\n\n      <ion-item>\n\n        <ion-label floating>Password</ion-label>\n\n        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.password.invalid && loginUser.controls.password.touched && loginUser.controls.password.dirty" class="alert alert-danger">\n\n        <p>Password is required</p>\n\n      </div>\n\n\n\n      <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>\n\n    	</ion-list>	\n\n    </form>\n\n  </div> -->\n\n	\n\n\n\n\n\n    <div *ngIf="loginUser">\n\n        <form [formGroup]="loginUser">\n\n            <div class="app-logo">\n\n                logo area\n\n            </div>\n\n            <div class="page-title">\n\n                Login\n\n            </div>\n\n            <div>\n\n                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>\n\n                <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n                    <p>Username is required</p>\n\n                </div>\n\n            </div>\n\n            <div>\n\n                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n            </div>\n\n            <ion-item class="checkbox-wrapper">\n\n                <ion-label>Remember me</ion-label>\n\n                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>\n\n            </ion-item>\n\n            <div class="btn-wrapper">\n\n                <button ion-button  full (click)="Login()">Submit</button>\n\n                \n\n            </div>\n\n            <div class="btn-wrapper">\n\n                <button ion-button color="secondary"  full>Cancel</button>\n\n                \n\n            </div>\n\n            <ion-grid class="extra-options">\n\n                <ion-row>\n\n                    <ion-col col-sm-6 >\n\n                        Forgot password\n\n                    </ion-col>\n\n                    <ion-col col-sm-6 >\n\n                        New User?   \n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </form>\n\n      \n\n    </div>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\login\login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], QuestionPage);
-    return QuestionPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], LoginPage);
+    return LoginPage;
 }());
 
-//# sourceMappingURL=question.js.map
+//# sourceMappingURL=login.js.map
 
 /***/ }),
 
@@ -3315,13 +2834,587 @@ var ListsurveyPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QuestionPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+var QuestionPage = (function () {
+    function QuestionPage(fb, toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
+        this.fb = fb;
+        this.toastctrl = toastctrl;
+        this.AioneHelp = AioneHelp;
+        this.alertCtrl = alertCtrl;
+        this.servicesProvider = servicesProvider;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        // @ViewChild('myForm') myForm;
+        this.parentMessage = "message from parent";
+        this.options = {
+            locale: __WEBPACK_IMPORTED_MODULE_7_date_fns_locale_en__
+        };
+        this.questions = [];
+        this.surveyQuestion = [];
+        this.questionCheck = [];
+        // indexArray=0;
+        this.indexArray = localStorage.getItem("lastquestionIndex");
+        this.CompletedGroup = [];
+        this.completedGroupIndex = localStorage.getItem('Groupid');
+        this.date = new Date();
+    }
+    QuestionPage.prototype.showConfirm = function (questionKey, survey_id, questionText, QuestionType) {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            message: "Are u sure want to quite survey",
+            // inputs: [
+            //   {
+            //     // placeholder: 'survey name'
+            //   },
+            // ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'yes',
+                    handler: function (data) {
+                        // if(data[0] == ""){
+                        if (localStorage.getItem("record_id") == "null") {
+                            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+                        }
+                        else {
+                            _this.totalfilledQuestion().then(function (length) {
+                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+                            });
+                        }
+                        // }else{
+                        //     console.log(data[0]);
+                        //   this.tablename="surveyResult_"+survey_id;
+                        //   let formValue=data[0];
+                        //     let query="UPDATE "+ this.tablename + " SET " + "incomplete_name" +"= '" +formValue +"'"+" where serialNo = "+localStorage.getItem('record_id') ;
+                        // console.log(query);
+                        // this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
+                        // this.navCtrl.setRoot(DashboardPage);
+                        //});
+                        // }        
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    QuestionPage.prototype.ngAfterViewInit = function () {
+        // this.message = this.child.message
+    };
+    QuestionPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        var i = 0;
+        var Content = [];
+        this.surveyTotalQuestions = localStorage.getItem("totalQuestion");
+        this.questionTitle = localStorage.getItem("ApplicationName");
+        this.questionType = localStorage.getItem("questionType");
+        this.id = this.navParams.get('id');
+        console.log(this.id);
+        this.servicesProvider.SelectWhere("questions", "group_id", this.id).then(function (result) {
+            Content.push(result.rows);
+            console.log(Content);
+            //code for converting json
+            var collection;
+            var newcollection;
+            var replacedArray = [];
+            var newObject = {};
+            Content.forEach(function (key, value) {
+                collection = [];
+                Object.keys(key).forEach(function (keyvalue, keydata) {
+                    //console.log(keyvalue);
+                    newcollection = [];
+                    var newcolumn = [];
+                    collection = key[keyvalue];
+                    newObject[collection.question_text] = "";
+                    Object.keys(collection).forEach(function (valuekey, valuedata) {
+                        var newData;
+                        var replace;
+                        try {
+                            replace = collection[valuekey].replace(/'/g, '"');
+                            newData = JSON.parse(replace);
+                        }
+                        catch (e) {
+                            newData = collection[valuekey];
+                        }
+                        newcollection.push(newData);
+                        newcolumn.push(valuekey);
+                    });
+                    var replacedData = {};
+                    i;
+                    for (i = 0; i < newcollection.length; i++) {
+                        replacedData[newcolumn[i]] = newcollection[i];
+                    }
+                    replacedArray.push(replacedData);
+                });
+            });
+            _this.questions = replacedArray;
+            console.log(_this.indexArray);
+            _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
+            console.log(newObject);
+            //create dynamic 
+            var form = new __WEBPACK_IMPORTED_MODULE_6__angular_forms__["c" /* FormGroup */]({});
+            for (var key in newObject) {
+                if (newObject.hasOwnProperty(key)) {
+                    var control = new __WEBPACK_IMPORTED_MODULE_6__angular_forms__["b" /* FormControl */](newObject[key], __WEBPACK_IMPORTED_MODULE_6__angular_forms__["h" /* Validators */].required);
+                    form.addControl(key, control);
+                }
+            }
+            _this.form = form;
+            //end 
+            //console.log(this.QuestionKeyText);
+            localStorage.setItem("totalSectionQuestion", "" + Content[0].length + "");
+            _this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
+            _this.reviewRecord().then(function (answer) {
+                console.log(answer);
+                _this.textData(_this.questions, _this.indexArray, answer).then(function () {
+                });
+            });
+        });
+    };
+    QuestionPage.prototype.reviewRecord = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(_this.navParams.get("completed"));
+            localStorage.getItem('record_id');
+            if (localStorage.getItem('record_id') != "null") {
+                console.log('from ');
+                _this.tablename = "surveyResult_" + _this.questions[_this.indexArray].survey_id;
+                _this.answerGet(_this.indexArray).then(function (answerKey) {
+                    resolve(answerKey);
+                });
+            }
+            else {
+                resolve("");
+            }
+        });
+    };
+    QuestionPage.prototype.textData = function (questions, i, questionKey) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.lastArrayCheck().then(function (result) {
+                //console.log(questions[i].survey_id)
+                _this.filledQuestion = localStorage.getItem("fillingQuestion");
+                // this.next(questions[i].survey_id,questions[i].question_key);
+                _this.QuestionKeyText = questionKey;
+                //console.log(this.QuestionKeyText);
+                var content = [];
+                content = questions[i];
+                content["prefill"] = _this.QuestionKeyText;
+                _this.OriginalContent = content;
+                //console.log(this.OriginalContent);
+                if (_this.questionCheck.length == 0) {
+                    _this.previousButton = false;
+                }
+                else {
+                    _this.previousButton = true;
+                }
+                _this.NextButton = true;
+            });
+        });
+    };
+    QuestionPage.prototype.next = function (surveyid, questionkey) {
+        var _this = this;
+        //console.log(this.indexArray);
+        this.tablename = "surveyResult_" + surveyid;
+        var questionLength = this.questions.length;
+        localStorage.getItem('Groupid');
+        if (this.questionCheck.length == (questionLength - 1)) {
+            this.updateCompleteGroup().then(function () {
+                _this.NextButton = false;
+                var query = "UPDATE " + _this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') + "',last_fieldId = " + null + " where serialNo = " + localStorage.getItem('record_id');
+                //console.log(query);
+                _this.servicesProvider.ExecuteRun(query, []).then(function (questionSave33) {
+                    _this.questionIndex(_this.indexArray, questionkey).then(function (id) {
+                        _this.questionsFilledCheck().then(function (fillled) {
+                            _this.questionsFilledCheckInsert().then(function (filledinsert) {
+                                _this.surveyComplete().then(function () {
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
+        else {
+            this.questionIndex(this.indexArray, questionkey).then(function (id) {
+                _this.indexArray++;
+                // console.log(this.indexArray);
+                _this.answerGet(_this.indexArray).then(function (answerKey) {
+                    _this.questionsFilledCheck().then(function (fillled) {
+                        //this.questionsFilledCheckInsert().then((filledinsert)=>{
+                        _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
+                        });
+                    });
+                    //})
+                });
+            });
+        }
+    };
+    QuestionPage.prototype.questionsFilledCheckInsert = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var query = "UPDATE " + _this.tablename + " SET filledQuestions='" + localStorage.getItem("fillingQuestion") + "' where serialNo= " + localStorage.getItem('record_id');
+            //console.log(query);
+            _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
+                resolve(insert);
+            });
+        });
+    };
+    QuestionPage.prototype.questionsFilledCheck = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            // if(localStorage.getItem("fillingQuestion") == "null"){
+            //   this.filledQuestion=JSON.parse(localStorage.getItem('questionIndex'));
+            //   console.log(this.filledQuestion);
+            //   this.filledQuestion++;
+            //   localStorage.setItem("fillingQuestion",this.filledQuestion.length);
+            //   resolve(this.filledQuestion);
+            // }else{
+            _this.filledQuestion = localStorage.getItem("fillingQuestion");
+            _this.filledQuestion++;
+            localStorage.setItem("fillingQuestion", _this.filledQuestion);
+            resolve(_this.filledQuestion);
+            //}
+        });
+    };
+    QuestionPage.prototype.surveyComplete = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var data = JSON.parse(localStorage.getItem('completedGroups'));
+            if (data.length == localStorage.getItem("totalGroup")) {
+                var time_1 = new Date();
+                console.log("datashborad pls go");
+                _this.totalfilledQuestion().then(function (length) {
+                    var query = "UPDATE " + _this.tablename + " SET survey_status = 'completed', " + "survey_completedOn='" + time_1 + "'" + " where serialNo = " + localStorage.getItem('record_id');
+                    //console.log(query);
+                    _this.servicesProvider.ExecuteRun(query, []).then(function (complete) {
+                        _this.AioneHelp.presentToast("survey is successfully completed", 3000, 'top');
+                        _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__pages_dashboard_dashboard__["a" /* DashboardPage */]);
+                    });
+                });
+            }
+            else {
+                _this.totalfilledQuestion().then(function (length) {
+                    _this.AioneHelp.presentToast("section is successfully completed", 3000, 'top');
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_groups_groups__["a" /* GroupsPage */], { 'completedGroup': localStorage.getItem("completedGroups") });
+                });
+            }
+        });
+    };
+    QuestionPage.prototype.totalfilledQuestion = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var Totallength;
+            var Questioncal = [];
+            //get qeustionkey from question table
+            var query = 'Select question_key from questions where survey_id = ' + localStorage.getItem('Surveyid');
+            _this.servicesProvider.ExecuteRun(query, []).then(function (questions) {
+                _this.servicesProvider.mobileListArray(questions).then(function (SurveyData) {
+                    Totallength = SurveyData.length;
+                    SurveyData.forEach(function (index, key) {
+                        Questioncal.push(index["question_key"]);
+                    });
+                    Questioncal = Questioncal.join(",");
+                    var filled = [];
+                    var loop = 0;
+                    //get question length from surveyResutl table
+                    var query1 = 'Select ' + Questioncal + ' from ' + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
+                    _this.servicesProvider.ExecuteRun(query1, []).then(function (questions1) {
+                        _this.servicesProvider.mobileListArray(questions1).then(function (SurveyData1) {
+                            SurveyData1.forEach(function (key, value) {
+                                Object.keys(key).forEach(function (keyinnner, valueinner) {
+                                    console.log(key[keyinnner]);
+                                    if (key[keyinnner] != null) {
+                                        filled.push(key[keyinnner]);
+                                    }
+                                    loop++;
+                                    if (Totallength == loop) {
+                                        var query_1 = "UPDATE " + _this.tablename + " SET filledQuestions=" + filled.length + " where serialNo = " + localStorage.getItem('record_id');
+                                        console.log(query_1);
+                                        _this.servicesProvider.ExecuteRun(query_1, []).then(function (complete) {
+                                            resolve(complete);
+                                        });
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    };
+    QuestionPage.prototype.updateCompleteGroup = function () {
+        //calculate complted groups
+        var _this = this;
+        var storedata;
+        return new Promise(function (resolve, reject) {
+            if (localStorage.getItem('completedGroups') != "null") {
+                console.log(localStorage.getItem('completedGroups'));
+                console.log(localStorage.getItem('Groupid'));
+                if (localStorage.getItem('completedGroups').indexOf("" + localStorage.getItem('Groupid') + "") == -1) {
+                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
+                    _this.CompletedGroup.push(localStorage.getItem('Groupid'));
+                    localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
+                    resolve(_this.CompletedGroup);
+                }
+                else {
+                    _this.CompletedGroup = JSON.parse(localStorage.getItem('completedGroups'));
+                    resolve(_this.CompletedGroup);
+                }
+            }
+            else {
+                console.log('defined');
+                _this.CompletedGroup.push(localStorage.getItem('Groupid'));
+                console.log(_this.CompletedGroup);
+                localStorage.setItem('completedGroups', JSON.stringify(_this.CompletedGroup));
+                resolve(_this.CompletedGroup);
+            }
+        });
+    };
+    QuestionPage.prototype.questionIndex = function (check, questionkey) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.questionCheck.push(check);
+            localStorage.setItem("questionIndex", JSON.stringify(_this.questionCheck));
+            var questionFilled = JSON.parse(localStorage.getItem('questionIndex'));
+            console.log(questionFilled); //list of array
+            var query = "UPDATE " + _this.tablename + " SET questionIndex = '" + localStorage.getItem('questionIndex') + "' where serialNo= " + localStorage.getItem('record_id');
+            console.log(query);
+            _this.servicesProvider.ExecuteRun(query, []).then(function (insert) {
+                resolve(_this.questionCheck);
+                // resolve(query);
+            });
+        });
+    };
+    QuestionPage.prototype.previous = function () {
+        var _this = this;
+        var storedNames;
+        storedNames = JSON.parse(localStorage.getItem("questionIndex"));
+        this.lastPopId = storedNames.pop();
+        var lastindex2 = this.lastPopId - 1;
+        this.questionCheck = storedNames;
+        localStorage.setItem("questionIndex", JSON.stringify(this.questionCheck));
+        localStorage.setItem("lastquestionIndex", "" + lastindex2 + "");
+        this.indexArray = this.indexArray - 1;
+        this.filledQuestion = localStorage.getItem("fillingQuestion");
+        this.filledQuestion = this.filledQuestion - 1;
+        localStorage.setItem("fillingQuestion", this.filledQuestion);
+        this.questionsFilledCheckInsert().then(function (filledinsert) {
+            _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
+            _this.answerGet(_this.indexArray).then(function (answerKey) {
+                // console.log(answerKey);
+                _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
+                });
+            });
+        });
+    };
+    QuestionPage.prototype.answerGet = function (id) {
+        var _this = this;
+        // console.log(id);
+        return new Promise(function (resolve, reject) {
+            // console.log(this.questions[id].question_key);
+            var query = 'SELECT ' + _this.questions[id].question_key + " FROM " + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
+            console.log(query);
+            _this.servicesProvider.ExecuteRun(query, []).then(function (result) {
+                _this.answerValue = result.rows.item(0);
+                resolve(_this.answerValue[_this.questions[id].question_key]);
+            });
+        });
+    };
+    QuestionPage.prototype.lastArrayCheck = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log(_this.navParams.get('indexdata'));
+            //  
+            if (_this.navParams.get('indexdata') != null || _this.navParams.get('InCompleteStatus') != null) {
+                // console.log("pearame");
+                console.log(_this.questionCheck);
+                _this.questionCheck = JSON.parse(localStorage.getItem('questionIndex'));
+                console.log(_this.questionCheck);
+                resolve(_this.questionCheck);
+            }
+            else {
+                resolve("data");
+            }
+        });
+    };
+    QuestionPage.prototype.submitConditionCheck = function (value, questionText) {
+        return new Promise(function (resolve, reject) {
+            //if different question types
+            // console.log(value[questionText]);
+            if (value[questionText] != null) {
+                localStorage.setItem("lastQuestiontext", questionText);
+                if (value[questionText] == "") {
+                    resolve(null);
+                }
+                else {
+                    resolve(value[questionText]);
+                }
+            }
+            else {
+                //if same types
+                if (value[localStorage.getItem("lastQuestiontext")] != null) {
+                    var data = value[localStorage.getItem("lastQuestiontext")];
+                    resolve(data);
+                }
+                else {
+                    resolve(null);
+                }
+            }
+        });
+    };
+    QuestionPage.prototype.update = function (text) {
+        console.log(text);
+    };
+    QuestionPage.prototype.checkbox = function (questionKey) {
+        return new Promise(function (resolve, reject) {
+            // if($("#mycheckbox").is(":checked")) {
+            //   console.log("checked");
+            // } else {
+            //   console.log("not checked");
+            // }
+            // if($('input:checked').val() != undefined){
+            //   $('input').prop('disabled',true);
+            //   console.log("yes checked");
+            // }else{
+            //   console.log("not checked");
+            // }
+        });
+    };
+    QuestionPage.prototype.datachanged = function (e) {
+        console.log(e);
+        console.log(e.checked);
+    };
+    QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType, update) {
+        var _this = this;
+        // console.log(this.form.value);
+        this.submitConditionCheck(this.form.value, questionText).then(function (formValidate) {
+            console.log(formValidate);
+            var i = 0;
+            var json;
+            var formValue = [];
+            if (formValidate == null) {
+                console.log("not valid");
+                _this.Errors = "it is not valid";
+            }
+            else {
+                var formValue_1 = [];
+                //console.log("valid");
+                if (QuestionType == "checkbox") {
+                    _this.checkbox(questionKey).then(function () {
+                    });
+                    // json=JSON.stringify(formValidate);
+                    // formValue.push(json);
+                }
+                else {
+                    formValue_1.push(formValidate);
+                    //console.log(formValue);
+                    var questionLength = _this.questions.length;
+                    _this.tablename = "surveyResult_" + survey_id;
+                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                    var query = "Select " + questionKey + " from " + _this.tablename + " where serialNo = " + _this.recordId;
+                    var record_id = void 0;
+                    record_id = localStorage.getItem('record_id');
+                    localStorage.setItem("lastquestionIndex", _this.indexArray.toString());
+                    if (record_id != "null") {
+                        //console.log('update');
+                        // console.log(formValue);
+                        var query_2 = "UPDATE " + _this.tablename + " SET " + questionKey + "= '" + formValue_1 + "', last_fieldId = " + "'" + localStorage.getItem("lastquestionIndex") + "'," + "last_group_id = " + localStorage.getItem('Groupid') + ",filledQuestions=" + localStorage.getItem("fillingQuestion") + " where serialNo = " + localStorage.getItem('record_id');
+                        console.log(query_2);
+                        _this.servicesProvider.ExecuteRun(query_2, []).then(function (questionSave33) {
+                            _this.next(survey_id, questionKey);
+                        });
+                    }
+                    else {
+                        var time = new Date();
+                        //console.log('insert');
+                        formValue_1.push(localStorage.getItem("lastquestionIndex"));
+                        formValue_1.push("incomplete");
+                        formValue_1.push(localStorage.getItem('Groupid'));
+                        formValue_1.push(time);
+                        formValue_1.push(localStorage.getItem("totalQuestion"));
+                        formValue_1.push(localStorage.getItem("InCompleteSurveyName"));
+                        formValue_1.push(localStorage.getItem("fillingQuestion"));
+                        _this.servicesProvider.Insert(_this.tablename, [questionKey, "last_fieldId", "survey_status", "last_group_id", "survey_startedOn", "totalQuestions", "incomplete_name", "filledQuestions"], formValue_1).then(function (res) {
+                            // console.log(res.insertId);
+                            localStorage.setItem('record_id', res.insertId);
+                            localStorage.setItem('InCompleteSurveyName', null);
+                            _this.next(survey_id, questionKey);
+                        });
+                    }
+                }
+            }
+            form.reset();
+        });
+        //} 
+    };
+    QuestionPage.prototype.insertSubmit = function (tablename, questionKey, formValue) {
+        var _this = this;
+        return new Promise(function (resolve, rejct) {
+            _this.servicesProvider.Insert(tablename, questionKey, formValue).then(function (questionSave33) {
+                resolve(questionSave33);
+            });
+        });
+    };
+    QuestionPage.prototype.updateCucumber = function () {
+        var cucumber;
+        console.log('Cucumbers new state:' + cucumber);
+    };
+    QuestionPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-question',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\question\question.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="headerClassic">\n\n <!--  <button ion-button menuToggle>\n\n  <ion-icon name="menu"></ion-icon>\n\n  </button> -->\n\n     <ion-title><span *ngIf="questionTitle">{{questionTitle}}</span>\n\n    <!--  	Section: Demo Survey -->\n\n     </ion-title>\n\n    \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n<ion-content padding>\n\n	\n\n\n\n	<div *ngIf="OriginalContent">\n\n	<div class="card" >\n\n			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}\n\n	    <div class="question-text">{{OriginalContent?.question_text}}</div>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n\n\n			<!-- <input atp-time-picker arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"/> -->\n\n			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  /> -->\n\n\n\n		<form novalidate  [formGroup]="form">\n\n		   <div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n		   	<!--text-->\n\n					<div  *ngSwitchCase="\'text\'">\n\n				      <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  \n\n				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->\n\n				 </div>\n\n\n\n\n\n		   		<!--textarea-->\n\n					<div  *ngSwitchCase="\'textarea\'">\n\n				      <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>\n\n				 -->\n\n					</div>\n\n\n\n					\n\n					<!--number-->\n\n					<div *ngSwitchCase="\'number\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n					<!--Email-->\n\n					<div *ngSwitchCase="\'email\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n					<!--password-->\n\n					<div *ngSwitchCase="\'password\'">\n\n						 <input  [formControlName]="OriginalContent?.question_text"\n\n				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> \n\n					</div>\n\n\n\n				  <!--datepicker-->\n\n				  <div *ngSwitchCase="\'datepicker\'">\n\n				  	 <div class="datepicker-container">\n\n				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>\n\n				      </div>\n\n				  </div>\n\n\n\n				  <!--timepicker-->\n\n				  <div *ngSwitchCase="\'timepicker\'">\n\n				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{\'background\': \'red\', \'color\': \'white\'}"  />\n\n				  </div>\n\n\n\n\n\n				  <!--select-->\n\n				   <div *ngSwitchCase="\'select\'">\n\n				   <ion-list>\n\n  					<ion-item>\n\n				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					    </ion-select>\n\n					     </ion-item>\n\n						</ion-list>\n\n				  </div>\n\n\n\n				  <!--radio button-->\n\n		       <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n\n\n 				<!--checkbox-->\n\n		      <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div>\n\n\n\n		   	 <!--new types-->\n\n			    <div *ngSwitchCase="\'code\'">\n\n\n\n			    </div>\n\n\n\n			  </div>\n\n	\n\n    		<div class="action-buttons">\n\n					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>\n\n\n\n					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>\n\n\n\n					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>\n\n				</div>\n\n</form>\n\n</div>\n\n	</div>\n\n\n\n\n\n<!-- <input *ngSwitchCase="\'textarea\'"\n\n        [formControlName]="OriginalContent?.question_text"\n\n        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->\n\n\n\n	\n\n\n\n	<!--question based-->\n\n	<!-- <div *ngIf ="OriginalContent">\n\n		<h1>{{OriginalContent?.question_text}}</h1>\n\n			<p>{{OriginalContent?.idss}}</p>\n\n			<p>{{OriginalContent?.question_desc}}</p>\n\n			\n\n      	<form #myForm=\'ngForm\' (ngSubmit)="onSubmit(myForm,OriginalContent.serialNo,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)">\n\n			<div [ngSwitch]="OriginalContent?.question_type">\n\n\n\n					<!-text-->\n\n			   <!--  <div *ngSwitchCase="\'text\'">\n\n				    <ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n			    </div>\n\n -->\n\n			    <!--select-->\n\n		      <!-- 	<div *ngSwitchCase="\'select\'">\n\n		        	<ion-item>\n\n					    <ion-label>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-select [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">\n\n					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>\n\n					    	</ion-option>\n\n					      \n\n					    </ion-select>\n\n  					</ion-item>\n\n		      	</div> -->\n\n\n\n		      <!--checkbox-->\n\n		     <!--  <div *ngSwitchCase="\'checkbox\'">\n\n		      	<ion-list >\n\n						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">\n\n							  <ion-label>{{check?.option_text}}</ion-label>\n\n							  <ion-checkbox  [(ngModel)]="check.selected" name="{{check.option_text}}"\n\n							   color="red" ></ion-checkbox>\n\n							</ion-item>\n\n						</ion-list>\n\n		      </div> -->\n\n\n\n		      <!--radio button-->\n\n		     <!--  <div *ngSwitchCase="\'radio\'">\n\n		      	<ion-list radio-group [(ngModel)]="name" name="{{OriginalContent?.question_text}}">\n\n						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">\n\n						    <ion-label>{{radio?.option_text}}</ion-label>\n\n						    <ion-radio value="{{radio?.option_text}}"></ion-radio>\n\n						  </ion-item>\n\n 						</ion-list>\n\n		      </div>\n\n -->\n\n		      <!--textarea-->\n\n		     <!--  <div *ngSwitchCase="\'textarea\'">\n\n		      	<ion-item>\n\n					    <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n					    <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n					  </ion-item>\n\n		      </div>\n\n -->\n\n		      <!--datepicker-->\n\n		      <!-- <div *ngSwitchCase="\'datepicker\'">\n\n		      	\n\n		      </div> -->\n\n\n\n		      <!--message-->\n\n		      <!-- <div *ngSwitchCase="\'message\'">\n\n			      <ion-item>\n\n				      <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="text" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div> -->\n\n\n\n		      <!--number-->\n\n		     <!--  <div *ngSwitchCase="\'number\'">\n\n		      	<ion-item>\n\n		      		 <ion-label floating>{{OriginalContent?.question_text}}</ion-label>\n\n				      <ion-input type="number" [(ngModel)]="name" name="{{OriginalContent?.question_text}}" required></ion-input>\n\n			      </ion-item>\n\n		      </div> -->\n\n\n\n		      <!--location picker-->\n\n				<!-- <div *ngSwitchCase="\'location_picker\'">\n\n\n\n				</div>\n\n			</div> -->\n\n\n\n				\n\n				<!-- \n\n				<button *ngIf="previousButton" ion-button color="secondary" outline (click)="previous(OriginalContent.serialNo)">Previous</button>\n\n				<button (click)="showConfirm()" ion-button color="danger" outline>Exit</button>\n\n				<button  ion-button color="dark" outline>\n\n	          <ion-icon name="add"></ion-icon>Next</button>\n\n			</form> \n\n			\n\n\n\n	</div> -->\n\n	\n\n</ion-content>'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\question\question.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], QuestionPage);
+    return QuestionPage;
+}());
+
+//# sourceMappingURL=question.js.map
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecordListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_aione_services_aione_services__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_groups_groups__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_completed_survey_completed_survey__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_completed_survey_completed_survey__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_incompleted_survey_incompleted_survey__ = __webpack_require__(138);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3451,99 +3544,6 @@ var RecordListPage = (function () {
 }());
 
 //# sourceMappingURL=record-list.js.map
-
-/***/ }),
-
-/***/ 72:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_survey_survey__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard__ = __webpack_require__(53);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var LoginPage = (function () {
-    function LoginPage(loaderCtrl, nav, AioneService, formBuilder, AioneHelp, survey, navCtrl, navParams) {
-        this.loaderCtrl = loaderCtrl;
-        this.nav = nav;
-        this.AioneService = AioneService;
-        this.formBuilder = formBuilder;
-        this.AioneHelp = AioneHelp;
-        this.survey = survey;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    LoginPage.prototype.Login = function () {
-        var _this = this;
-        this.loader = this.loaderCtrl.create({
-            spinner: 'crescent',
-            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Verifying Your Details' + "</div>\n      </div>",
-        });
-        this.loader.present();
-        if (this.loginUser.invalid) {
-            this.loginUser;
-            this.loader.dismiss();
-        }
-        else {
-            var name_1;
-            this.username = this.loginUser.value.username;
-            this.password = this.loginUser.value.password;
-            this.user = "'" + this.username + "'";
-            this.pass = "'" + this.password + "'";
-            this.AioneService.MultipleSelectWhere("users", "email", this.user, "app_password", this.pass).then(function (userDetail) {
-                _this.loginUser.reset();
-                _this.loader.dismiss();
-                if (userDetail.rows.item.length >= 1) {
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_dashboard_dashboard__["a" /* DashboardPage */]);
-                    localStorage.setItem("username", _this.user);
-                }
-                else {
-                    _this.AioneHelp.showAlert("Error", "Wrong Credentials");
-                }
-            });
-        }
-    };
-    LoginPage.prototype.ionViewWillEnter = function () {
-        this.loginUser = this.formBuilder.group({
-            username: ["", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].compose([
-                    __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required,
-                ])],
-            password: ["", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].compose([
-                    __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required,
-                ])],
-        });
-    };
-    LoginPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\login\login.html"*/'\n\n<!-- <ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>login</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header> -->\n\n\n\n\n\n<ion-content padding>\n\n  <!-- <div *ngIf="loginUser">\n\n    <form [formGroup]="loginUser">\n\n    	<ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Username</ion-label>\n\n        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n        <p>Username is required</p>\n\n      </div>\n\n\n\n      <ion-item>\n\n        <ion-label floating>Password</ion-label>\n\n        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n      </ion-item>\n\n      <div *ngIf="loginUser.controls.password.invalid && loginUser.controls.password.touched && loginUser.controls.password.dirty" class="alert alert-danger">\n\n        <p>Password is required</p>\n\n      </div>\n\n\n\n      <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>\n\n    	</ion-list>	\n\n    </form>\n\n  </div> -->\n\n	\n\n\n\n\n\n    <div *ngIf="loginUser">\n\n        <form [formGroup]="loginUser">\n\n            <div class="app-logo">\n\n                logo area\n\n            </div>\n\n            <div class="page-title">\n\n                Login\n\n            </div>\n\n            <div>\n\n                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>\n\n                <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">\n\n                    <p>Username is required</p>\n\n                </div>\n\n            </div>\n\n            <div>\n\n                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>\n\n            </div>\n\n            <ion-item class="checkbox-wrapper">\n\n                <ion-label>Remember me</ion-label>\n\n                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>\n\n            </ion-item>\n\n            <div class="btn-wrapper">\n\n                <button ion-button  full (click)="Login()">Submit</button>\n\n                \n\n            </div>\n\n            <div class="btn-wrapper">\n\n                <button ion-button color="secondary"  full>Cancel</button>\n\n                \n\n            </div>\n\n            <ion-grid class="extra-options">\n\n                <ion-row>\n\n                    <ion-col col-sm-6 >\n\n                        Forgot password\n\n                    </ion-col>\n\n                    <ion-col col-sm-6 >\n\n                        New User?   \n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </form>\n\n      \n\n    </div>\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\login\login.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_aione_services_aione_services__["a" /* AioneServicesProvider */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__providers_aione_helper_aione_helper__["a" /* AioneHelperProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_survey_survey__["a" /* SurveyProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
-    ], LoginPage);
-    return LoginPage;
-}());
-
-//# sourceMappingURL=login.js.map
 
 /***/ })
 
