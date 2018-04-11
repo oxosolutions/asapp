@@ -471,14 +471,11 @@ export class QuestionPage {
   }
   checkbox(questionKey){
     return new Promise((resolve,reject)=>{
-     var check;
-    
-         
-          if($("#mycheckbox").is(":checked")) {
-            console.log("checked");
-          } else {
-            console.log("not checked");
-          }
+      // if($("#mycheckbox").is(":checked")) {
+      //   console.log("checked");
+      // } else {
+      //   console.log("not checked");
+      // }
       
       // if($('input:checked').val() != undefined){
       //   $('input').prop('disabled',true);
@@ -488,6 +485,10 @@ export class QuestionPage {
       // }
     })
    
+  }
+  datachanged(e:any){
+    console.log(e);
+    console.log(e.checked);
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
   // console.log(this.form.value);
