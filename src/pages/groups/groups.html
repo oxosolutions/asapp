@@ -28,9 +28,14 @@
                 List of sections
             </div>
             <div class="list-content">
-
+            <!-- [class.my-class]="step=='step1'"
+            [ngClass]="{'my-class': step=='step1'}"
+            [ngClass]="{1:'my-class1',2:'my-class2',3:'my-class4'}[step]"
+            [ngClass]="(step=='step1')?'my-class1':'my-class2'" -->
              <!--    [ngClass]="{'completed': groups.id == navdata}"  -->
 
+
+                <button class="btn" (click)="toggleClass($event)">button two</button>
                 <ion-item  [ngClass]="getCSSClasses(groups.id)" *ngFor="let groups of groupsResult" (click)="questionid(groups.id,groups.serialNo)">
                     <ion-avatar item-start class="list-icon">
                       <ion-icon name="ios-photos-outline"></ion-icon>

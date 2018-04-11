@@ -530,7 +530,9 @@ export class QuestionPage {
           });  
       }else{
           let time =new Date();
-          //console.log('insert');
+          var uniqueKey=localStorage.getItem("Surveyid")+''+time.getFullYear()+''+time.getMonth()+1+''+time.getDay()+''+time.getHours()+''+time.getMinutes()+time.getSeconds()+''+time.getMilliseconds()+''+Math.floor(Math.random()*10000000);
+           // console.log();
+          
           formValue.push(localStorage.getItem("lastquestionIndex"));
           formValue.push("incomplete");
           formValue.push(localStorage.getItem('Groupid'));
@@ -540,7 +542,8 @@ export class QuestionPage {
           formValue.push(localStorage.getItem("fillingQuestion"));
           formValue.push(localStorage.getItem("username"));
           formValue.push("App");
-          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name","filledQuestions","survey_submittedBy","survey_submittedFrom"], formValue).then((res:any)=>{
+          formValue.push(uniqueKey);
+          this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name","filledQuestions","survey_submittedBy","survey_submittedFrom","unique_id"], formValue).then((res:any)=>{
          // console.log(res.insertId);
             localStorage.setItem('record_id', res.insertId);
             localStorage.setItem('InCompleteSurveyName',null);
