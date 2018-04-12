@@ -36,6 +36,7 @@ export class LoginPage {
   		this.loader.dismiss();
   	}else{
   	let name:string;
+    console.log(this.loginUser);
   	this.username=this.loginUser.value.username;
   	this.password=this.loginUser.value.password;
  		this.user="'"+this.username+"'";
