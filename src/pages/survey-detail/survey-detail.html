@@ -1,9 +1,85 @@
 
 <ion-header>
-	<ion-navbar>
-    	<ion-title>surveyDetail</ion-title>
+	<ion-navbar color="headerClassic">
+    	<ion-title >surveyDetail</ion-title>
   	</ion-navbar>
 </ion-header>
-<ion-content padding>
-	
+<ion-content>
+	<div class="details-wrapper">
+		<ion-list>
+  			<ion-item>
+    			<ion-avatar item-start>
+      				<img src="../../assets/imgs/surveyicon.png">
+    			</ion-avatar>
+    			<h2>RTI Survey</h2>
+    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis odio dignissim, iaculis nulla id, porta tellus. Proin faucibus sem id nunc tristique eleifend. Donec tempor aliquam.</p>
+  			</ion-item>
+		</ion-list>
+		<div class="stats">
+			<div>
+				<div class="count">
+					36
+				</div>
+				<div class="key">
+					completed
+				</div>
+			</div>
+			<div>
+				<div class="count">
+					6
+				</div>
+				<div class="key">
+					In-completed
+				</div>
+			</div>
+			<div>
+				<div class="count">
+					36
+				</div>
+				<div class="key">
+					Syncronized
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="actions-wrapper">
+		<div class="title">
+			Actions 
+		</div>
+		<div class="content">
+			<div>
+				<div>
+					<ion-icon name="ios-play-outline"></ion-icon>					
+				</div>
+				<div>
+					Start This Survey	
+				</div>
+				 
+			</div>
+			<div>
+				<div>
+					<ion-icon name="ios-checkmark-circle-outline"></ion-icon>					
+				</div>
+				<div>
+					Completed Surveys	
+				</div>
+			</div>
+			<div>
+				<div>
+					<ion-icon name="ios-analytics-outline"></ion-icon>					
+				</div>
+				<div>
+					Incompleted Survey	
+				</div>
+			</div>
+			<div>
+				<div>
+					<ion-icon name="ios-cloud-upload-outline"></ion-icon>					
+				</div>
+				<div>
+					Sync Survey	
+				</div>
+			</div>
+		</div>
+	</div>
 </ion-content>
