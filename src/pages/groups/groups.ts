@@ -7,6 +7,9 @@ import {SectionalQuestionsPage} from '../sectional-questions/sectional-questions
 import {SurveyQuestionsPage} from '../survey-questions/survey-questions';
 import { AlertController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+declare var jquery:any;
+declare var $ :any;
+
 
 @IonicPage()
 @Component({
@@ -26,9 +29,6 @@ export class GroupsPage {
   constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   
-  toggleClass(event){
-    $(event.target).toggleClass('active');
-  }
   questionid(id,serialNo){
    localStorage.setItem("Groupid", id);
    this.completedSurvey().then((resutlcomplete)=>{
