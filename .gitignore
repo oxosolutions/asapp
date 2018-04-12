@@ -39,7 +39,6 @@ platforms/
 node_modules/
 jspm_packages/
 www/
-resources/
 plugins/
 .sourcemaps
 
