@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SynchronizeSinglePage} from '../../pages/synchronize-single/synchronize-single';
+import { CompletedSurveyPage } from '../../pages/completed-survey/completed-survey';
+import { IncompletedSurveyPage } from '../../pages/incompleted-survey/incompleted-survey';
+
 @IonicPage()
 @Component({
   selector: 'page-survey-detail',
@@ -16,6 +19,9 @@ export class SurveyDetailPage {
   }
   syncronizePage(){
   	this.navCtrl.setRoot(SynchronizeSinglePage);
+  }
+  incompletePage(){
+  	this.navCtrl.push(CompletedSurveyPage); 
   }
 
 }

@@ -22,7 +22,8 @@ export class LoginPage {
   constructor(private loaderCtrl:LoadingController,public nav:NavController, public AioneService:AioneServicesProvider, private formBuilder: FormBuilder,public AioneHelp:AioneHelperProvider,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
 
   }
-  Login() {
+  Login(loginUser,username,password) {
+
   	this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -35,18 +36,26 @@ export class LoginPage {
   		this.loginUser;
   		this.loader.dismiss();
   	}else{
+         console.log(this.loginUser.value);
+
+   
   	let name:string;
-    console.log(this.loginUser);
+ 
   	this.username=this.loginUser.value.username;
   	this.password=this.loginUser.value.password;
+    console.log(this.username);
  		this.user="'"+this.username+"'";
+    console.log(this.user);
  		this.pass="'"+this.password+"'";
     	this.AioneService.MultipleSelectWhere("users","email", this.user, "app_password" ,this.pass).then((userDetail:any)=>{
+        console.log(userDetail);
+        /// etho tak sahi h  
+         console.log(this.user);
   			this.loginUser.reset();
   			this.loader.dismiss();
     		if(userDetail.rows.item.length >= 1){
     			this.navCtrl.setRoot(DashboardPage);
-          console.log(this.username);
+          console.log(this.user);
     			localStorage.setItem("username", this.username);
     		}else{
     			this.AioneHelp.showAlert("Error","Wrong Credentials");

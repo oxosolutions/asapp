@@ -62,22 +62,22 @@ export class ListsurveyPage {
       	}
        	let SurveyData = row;
         for(let keys in SurveyData){
-        	
-	          if(SurveyData[keys].value == "survey"){
-	          	surveyMetaType=SurveyData[keys].value;
-	            localStorage.setItem("questionType", 'save_survey');  
-	          }else if(SurveyData[keys].value == "section"){
-	          	surveyMetaType=SurveyData[keys].value;
-	            localStorage.setItem("questionType", 'save_section');
-	            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
-	          }else if(SurveyData[keys].value == "question"){
+	          // if(SurveyData[keys].value == "survey"){
+	          // 	surveyMetaType=SurveyData[keys].value;
+	          //   localStorage.setItem("questionType", 'save_survey');  
+	          // }else if(SurveyData[keys].value == "section"){
+	          // 	surveyMetaType=SurveyData[keys].value;
+	          //   localStorage.setItem("questionType", 'save_section');
+	          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+	          // }else if(SurveyData[keys].value == "question"){
 	          	surveyMetaType=SurveyData[keys].value;
 	            localStorage.setItem("questionType", 'questions');
+	            localStorage.setItem("GroupdDesc")
 	            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 
-	          }
+	          //}
        	
-         }
+        }
       });
       });
   	}else{
@@ -96,8 +96,6 @@ export class ListsurveyPage {
   }
   showConfirm() {
   	return new Promise((resolve,reject)=>{
-
-
     let prompt = this.alertCtrl.create({
       message: "Enter Your record name",
       inputs: [
