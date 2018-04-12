@@ -38,6 +38,10 @@ platforms/
 # Dependency directories
 node_modules/
 jspm_packages/
+www/
+resources/
+plugins/
+.sourcemaps
 
 # Typescript v1 declaration files
 typings/
