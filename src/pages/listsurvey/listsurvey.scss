@@ -30,6 +30,9 @@ page-listsurvey {
     .item-md p.read-more{
     	text-align: right;
     }
+    .item-md .survey-desc.active{
+    	white-space: normal
+    }
 	.list-content-wrapper{
 		width: 100%;
 		display: inline-block;
