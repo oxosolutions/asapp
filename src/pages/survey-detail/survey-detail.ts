@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {SynchronizeSinglePage} from '../../pages/synchronize-single/synchronize-single';
 @IonicPage()
 @Component({
   selector: 'page-survey-detail',
@@ -13,6 +13,9 @@ export class SurveyDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SurveyDetailPage');
+  }
+  syncronizePage(){
+  	this.navCtrl.setRoot(SynchronizeSinglePage);
   }
 
 }

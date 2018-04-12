@@ -1,5 +1,9 @@
 
 <ion-header>
+		<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">
+  				<ion-icon name="menu"></ion-icon>
+			</button>
+			
 	<ion-navbar color="headerClassic">
     	<ion-title >surveyDetail</ion-title>
   	</ion-navbar>
@@ -75,7 +79,7 @@
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light">Syncronize</button>
+						<button ion-button color="light" (click)="syncronizePage()">Syncronize</button>
 					</div>
 			    </ion-col>
 			  </ion-row>

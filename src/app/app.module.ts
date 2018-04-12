@@ -36,6 +36,9 @@ import {SurveyQuestionsPage} from '../pages/survey-questions/survey-questions';
 import { ReactiveFormsModule }          from '@angular/forms';
 import {SynchronizeRecordPage} from '../pages/synchronize-record/synchronize-record';
 import {SurveyDetailPage} from '../pages/survey-detail/survey-detail';
+import {SynchronizeSinglePage} from '../pages/synchronize-single/synchronize-single';
+import {ProfilePage} from '../pages/profile/profile';
+
 
 
 //plugin
@@ -63,7 +66,9 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SectionalQuestionsPage,
     SurveyQuestionsPage,
     SynchronizeRecordPage,
-    SurveyDetailPage
+    SurveyDetailPage,
+    SynchronizeSinglePage,
+    ProfilePage
   ],
 
   imports: [
@@ -96,7 +101,9 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SectionalQuestionsPage,
     SurveyQuestionsPage,
     SynchronizeRecordPage,
-    SurveyDetailPage
+    SurveyDetailPage,
+    SynchronizeSinglePage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
