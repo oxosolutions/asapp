@@ -39,6 +39,9 @@ page-survey-detail {
 		}
 		.actions-wrapper{
 			padding:10px; 
+			.action-button{
+				float: right
+			}
 			.stats{
 
 				margin-bottom: 5px;
@@ -46,6 +49,9 @@ page-survey-detail {
 				border: 1px solid rgb(0, 165, 228);
 				padding: 10px;
 				margin-bottom: 10px;
+				font-size: 15px;
+				color: white;
+				font-weight: 900
 				
 			}
 			.title{
