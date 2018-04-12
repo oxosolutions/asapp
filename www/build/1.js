@@ -72,7 +72,11 @@ var CompleteSurveyPage = (function () {
     };
     CompleteSurveyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'page-complete-survey',template:/*ion-inline-start:"E:\my-apps\Oxo\asapp\src\pages\complete-survey\complete-survey.html"*/'<!--\n\n  Generated template for the CompleteSurveyPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>completeSurvey</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\my-apps\Oxo\asapp\src\pages\complete-survey\complete-survey.html"*/,
+=======
+            selector: 'page-complete-survey',template:/*ion-inline-start:"E:\ionic projects\asapp\src\pages\complete-survey\complete-survey.html"*/'<!--\n\n  Generated template for the CompleteSurveyPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>completeSurvey</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"E:\ionic projects\asapp\src\pages\complete-survey\complete-survey.html"*/,
+>>>>>>> 0ab792e98c98ca23e68b686ec6a298d3f8d1bbfa
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], CompleteSurveyPage);
