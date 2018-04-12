@@ -72,7 +72,7 @@ export class ListsurveyPage {
 	          // }else if(SurveyData[keys].value == "question"){
 	          	surveyMetaType=SurveyData[keys].value;
 	            localStorage.setItem("questionType", 'questions');
-	            localStorage.setItem("GroupdDesc")
+	            // localStorage.setItem("GroupdDesc")
 	            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 
 	          //}

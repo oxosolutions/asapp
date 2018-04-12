@@ -36,29 +36,31 @@ export class LoginPage {
   		this.loginUser;
   		this.loader.dismiss();
   	}else{
-         console.log(this.loginUser.value);
-
-   
+     
   	let name:string;
  
   	this.username=this.loginUser.value.username;
   	this.password=this.loginUser.value.password;
     console.log(this.username);
- 		this.user="'"+this.username+"'";
-    console.log(this.user);
- 		this.pass="'"+this.password+"'";
-    	this.AioneService.MultipleSelectWhere("users","email", this.user, "app_password" ,this.pass).then((userDetail:any)=>{
+ 		// this.user="'"+this.username+"'";
+   //  console.log(this.user);
+ 		// this.pass="'"+this.password+"'";
+    	this.AioneService.MultipleSelectWhere("users","email","'"+this.username+"'", "app_password" ,"'"+this.password+"'").then((userDetail:any)=>{
         console.log(userDetail);
         /// etho tak sahi h  
-         console.log(this.user);
-  			this.loginUser.reset();
+         console.log(this.username);
+  			
   			this.loader.dismiss();
     		if(userDetail.rows.item.length >= 1){
+          console.log("user valid");
     			this.navCtrl.setRoot(DashboardPage);
-          console.log(this.user);
+         console.log(this.username);
     			localStorage.setItem("username", this.username);
     		}else{
-    			this.AioneHelp.showAlert("Error","Wrong Credentials");
+          console.log("not valid");
+              localStorage.setItem("username", undefined);
+          this.loginUser.reset();
+    			this.AioneHelp.presentToast("Wrong Credentials",10000,top);
     		}
     	});
     }
