@@ -31,13 +31,18 @@ export class ListsurveyPage {
 	tomarrow:"14/03/2018 17:23:41 +0530";
 
   constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
-  	// $('.my_button').click(function(){
-  	// 	$('.survey-desc').addClass('active');
-  	// });
-  	// $(".survey-desc").addClass('active').siblings().removeClass('active');
   }
-  toggleClass(){
-     $(".survey-desc").addClass('active');
+  toggleClass(evnt){
+  	console.log(evnt);
+  	// $(".survey-desc").removeClass('active');
+  	/*$('.survey-desc').each(function(){
+  		$(this).removeClass('active');
+  	});*/
+  	// $(".my_button").parents()
+    $(evnt.target).parents(".read-more").siblings(".survey-desc").toggleClass('active');
+    
+    return false;
+
   }
   surveyDetails(){
   	this.navCtrl.setRoot(SurveyDetailPage);

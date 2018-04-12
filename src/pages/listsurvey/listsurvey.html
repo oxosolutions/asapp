@@ -29,7 +29,7 @@
 
 
 
-<div class="survey-desc" *ngFor="let survey of listSurvey[0]">      
+<div class="" *ngFor="let survey of listSurvey[0]">      
   <ion-item >
   <!-- <p>{{survey["scheduling"].surveyResponse}}</p>
   <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>-->
@@ -40,8 +40,8 @@
 
     <div >
       <h2>{{survey.name}}</h2>
-      <p class="" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
-      <p class="read-more"> <button class="btn my_button" (click)="toggleClass()">button two</button></p>
+      <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
+      <p class="read-more"> <button class="btn my_button" (click)="toggleClass($event)">button two</button></p>
    </div>
 
    <!--  <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p> -->
