@@ -50,9 +50,11 @@ export class MyApp {
           { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
 
     ]; 
-    if(localStorage.getItem("activation") != undefined){
+    if(localStorage.getItem("activation") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
+      console.log(localStorage.getItem("activation"));
       this.rootPage=LoginPage;  
-      if(localStorage.getItem("username") != undefined){
+      if(localStorage.getItem("username") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
+        console.log(localStorage.getItem("username"));
         this.rootPage=DashboardPage;   
       }else{
         this.rootPage=LoginPage;   

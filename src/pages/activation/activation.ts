@@ -34,10 +34,7 @@ export class ActivationPage {
     this.ionViewWillEnter();
 
   }
-   title = 'abgular 4 with jquery';
-  toggleTitle(){
-    $('.title').slideToggle(); //
-  } 
+  
   activation(){
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
