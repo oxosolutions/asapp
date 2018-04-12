@@ -31,5 +31,5 @@ test:
   pre:
     - npm install
   override:
-    - ionic cordova build android -Y
-    - cp -r platforms/android/build/outputs/apk $CIRCLE_ARTIFACTS
+    #- ionic cordova build android -Y
+    - cp -r platforms/android/app/build/outputs/apk $CIRCLE_ARTIFACTS

@@ -53,7 +53,7 @@ export class MyApp {
     if(localStorage.getItem("activation") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
       console.log(localStorage.getItem("activation"));
       this.rootPage=LoginPage;  
-      if(localStorage.getItem("username") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
+      if(localStorage.getItem("username") != undefined && localStorage.getItem("username") != null && localStorage.getItem('username') != ""){
         console.log(localStorage.getItem("username"));
         this.rootPage=DashboardPage;   
       }else{
