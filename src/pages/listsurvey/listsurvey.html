@@ -12,7 +12,24 @@
 <ion-content>
  
 <ion-list>
-<div *ngFor="let survey of listSurvey[0]">      
+
+
+ <!--  <dl class="accordion">
+
+<dt><a (click)="dataclick()">Panel 1</a></dt>
+<dd>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</dd>
+
+<dt><a  (click)="dataclick()">Panel 2</a></dt>
+<dd>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</dd>
+
+<dt><a  (click)="dataclick()">Panel 3</a></dt>
+<dd>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.</dd>
+
+</dl> -->
+
+
+
+<div class="survey-desc" *ngFor="let survey of listSurvey[0]">      
   <ion-item >
   <!-- <p>{{survey["scheduling"].surveyResponse}}</p>
   <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>-->
@@ -21,9 +38,12 @@
       <img src="../../assets/imgs/survey.png">
     </ion-thumbnail>
 
-    <h2>{{survey.name}}</h2>
-    <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
-    <p class="read-more"> <button class="btn" (click)="toggleClass()">button two</button></p>
+    <div >
+      <h2>{{survey.name}}</h2>
+      <p class="" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
+      <p class="read-more"> <button class="btn my_button" (click)="toggleClass()">button two</button></p>
+   </div>
+
    <!--  <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p> -->
   <!--   <button (click)="groups(survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button> -->
     <button (click)="surveyDetails()" ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>

@@ -6,7 +6,8 @@ import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
-
+declare var jquery:any;
+declare var $ :any;
 @IonicPage()
 @Component({
   selector: 'page-listsurvey',
@@ -30,10 +31,13 @@ export class ListsurveyPage {
 	tomarrow:"14/03/2018 17:23:41 +0530";
 
   constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  	// $('.my_button').click(function(){
+  	// 	$('.survey-desc').addClass('active');
+  	// });
+  	// $(".survey-desc").addClass('active').siblings().removeClass('active');
   }
   toggleClass(){
-    // $(event.target).toggleClass('active');
-    $(".survey-desc").toggleClass('active');
+     $(".survey-desc").addClass('active');
   }
   surveyDetails(){
   	this.navCtrl.setRoot(SurveyDetailPage);
