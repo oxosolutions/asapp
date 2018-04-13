@@ -39,6 +39,9 @@ export class MyApp {
   db:any;  
   constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
+    platform.registerBackButtonAction(() => {
+          platform.exitApp(); 
+    });
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
