@@ -31,9 +31,54 @@
 	  		</ion-row>
 	  	</ion-grid>
 	  	<div>
-	  		<button ion-button  outline>Edit Profile</button>
+	  		<button ion-button  outline (click)="profileModal()">Edit Profile</button>
 	  		<button ion-button  outline>Change Password</button>
 	  	</div>
-		
+		<div style="border: 1px solid #e8e8e8">
+			<ion-list>
+			   	<ion-item>
+	    			<ion-label color="primary" floating>Enter Your Name</ion-label>
+	    			<ion-input></ion-input>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			  	<ion-item>
+	    			<ion-label color="primary" floating>Select Designation</ion-label>
+	    			<ion-select>
+	    				<ion-option>Manager</ion-option>
+	    				<ion-option>Designation two</ion-option>
+	    			</ion-select>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			  	<ion-item>
+	    			<ion-label color="primary" floating>About Me</ion-label>
+	    			<ion-textarea rows="4"></ion-textarea>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			   	<ion-item>
+	    			<ion-label color="primary" floating>Enter Old Password</ion-label>
+	    			<ion-input type="password"></ion-input>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			   	<ion-item>
+	    			<ion-label color="primary" floating>Enter New Password</ion-label>
+	    			<ion-input type="password"></ion-input>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			   	<ion-item>
+	    			<ion-label color="primary" floating>Confirm Password</ion-label>
+	    			<ion-input type="password"></ion-input>
+	  			</ion-item>
+			</ion-list>
+			<ion-list>
+			   	<button ion-button>Save</button>
+			</ion-list>
+
+		</div>
+		  	
 	</div>
 </ion-content>
