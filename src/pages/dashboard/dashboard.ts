@@ -9,6 +9,7 @@ import {SynchronizeRecordPage} from '../../pages/synchronize-record/synchronize-
 import {ProfilePage} from '../../pages/profile/profile';
 declare var jquery:any;
 declare var $ :any;
+
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
