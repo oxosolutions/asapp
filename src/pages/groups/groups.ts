@@ -58,6 +58,7 @@ export class GroupsPage {
     })
   }
   sectionCompleteCheck(){
+    
     //checking it is coming from questions after completing section
     return new Promise((resolve,reject)=>{
       if(localStorage.getItem('completedGroups') != "null" ){
