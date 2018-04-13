@@ -45,7 +45,7 @@ export class ListsurveyPage {
   	if(message["scheduling"].surveyResponse == "true"){
   		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
   		console.log(form);
-  		this.surveyIncompleteName().then(()=>{
+  		
   			//console.log(form.rows.item);
   			var row = {};
       	for(var i=0; i < form.rows.length; i++){
@@ -72,7 +72,7 @@ export class ListsurveyPage {
 	          //}
        	
         }
-      });
+     
       });
   	}else{
   		this.presentToast();
@@ -85,7 +85,7 @@ export class ListsurveyPage {
   	if(message["scheduling"].surveyResponse == "true"){
   		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
   		console.log(form);
-  		this.surveyIncompleteName().then(()=>{
+  		//this.surveyIncompleteName().then(()=>{
   			//console.log(form.rows.item);
   			var row = {};
       	for(var i=0; i < form.rows.length; i++) {
@@ -112,52 +112,13 @@ export class ListsurveyPage {
        	
         }
       });
-      });
+     // });
   	}else{
   		this.presentToast();
   	}
   	//this.showConfirm();	 
   }
-  surveyIncompleteName(){
-  	console.log("incomplete name");
-  	return new Promise ((resolve,reject)=>{
-  		this.showConfirm().then((dd)=>{
-  			resolve(dd);
-  		});
-  	})
-  }
-  showConfirm() {
-  	return new Promise((resolve,reject)=>{
-    let prompt = this.alertCtrl.create({
-      message: "Enter Your record name",
-      inputs: [
-        {
-          placeholder: 'Record name'
-        },
-      ],
-      buttons:[
-        {
-          text: 'Cancel',
-          handler: data => {   
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            if(data[0] == ""){
-              this.AioneHelp.presentToast("Pls fill record name", 2000 ,'top');
-            }else{
-            	console.log(data[0]);
-              localStorage.setItem("InCompleteSurveyName",data[0]);
-              resolve(data[0]);
-            }        
-          }
-        }
-      ]
-    });  
-    prompt.present();
-    })
-  }
+  
   presentToast(){
     let toast = this.toastCtrl.create({
       message: 'Survey is not available',

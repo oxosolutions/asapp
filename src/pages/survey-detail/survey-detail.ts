@@ -67,8 +67,11 @@ export class SurveyDetailPage {
     toast.present();
   }
   groups(id,message,totalQuestions){
+    this.surveyIncompleteName().then(()=>{
     this.navCtrl.setRoot(GroupsPage,{'id': id});  
+     });
   }
+  
   checkSurvey(id){
     return new Promise((resolve,reject)=>{
       let tablename="surveyResult_"+id;
@@ -79,19 +82,19 @@ export class SurveyDetailPage {
           }else{
             console.log("no record found");  
             this.EmptySurvey=null;
-            //popup-->
-                let prompt = this.alertCtrl.create({
-                  message: "there is no record",
-                  buttons:[
-                    {
-                      text: 'ok',
-                      handler: data => {    
-                      }
+              //popup-->
+              let prompt = this.alertCtrl.create({
+                message: "there is no record",
+                buttons:[
+                  {
+                    text: 'ok',
+                    handler: data => {    
                     }
-                  ]
-                });  
-                prompt.present();
-            //
+                  }
+                ]
+              });  
+              prompt.present();
+              //
           }
         });
       });
