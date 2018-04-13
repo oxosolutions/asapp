@@ -199,18 +199,23 @@ export class ListsurveyPage {
 									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
 										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
 											this.surveyanswer("surveyResult_"+value.item(i).form_id).then((surveyFilled:any)=>{
-												 this.totalQuestion(value.item(i).form_id).then((question:any)=>{
-               
-												let rowsData = survey.rows.item(0);
-												rowsData["details"]=responseData;
-												rowsData["timer"]=timerData;
-												rowsData["scheduling"]=surveySch;
-												rowsData["filledSurvey"]=surveyFilled;
-												rowsData["questions"]=question;
+												this.totalQuestion(value.item(i).form_id).then((question:any)=>{
+               						this.completedSurvey(value.item(i).form_id).then((completed:any)=>{	
+               						this.incompletedSurvey(value.item(i).form_id).then((incompleted:any)=>{	
+													let rowsData = survey.rows.item(0);
+													rowsData["details"]=responseData;
+													rowsData["timer"]=timerData;
+													rowsData["scheduling"]=surveySch;
+													rowsData["filledSurvey"]=surveyFilled;
+													rowsData["questions"]=question;
+													rowsData["completed"]=completed;
+													rowsData["incompleted"]=incompleted;
 											// console.log(rowsData["details"].responenumber);
 												
 												content.push(rowsData);	
 												// console.log(content);
+												})
+												})
 												})
 											})
 											
@@ -237,7 +242,24 @@ export class ListsurveyPage {
 		  });
 		})
 	}
-	
+	completedSurvey(id){
+		return new Promise((resolve,reject)=>{
+     	let query="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_status = 'completed' ";
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+      	console.log(questions.rows.item(0).count)
+         resolve(questions.rows.item(0).count);
+      }) 
+    })
+	}
+	incompletedSurvey(id){
+		return new Promise((resolve,reject)=>{
+     	let query="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_status = 'incomplete' ";
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+      	console.log(questions.rows.item(0).count)
+         resolve(questions.rows.item(0).count);
+      }) 
+    })
+	}
 	totalQuestion(id){
     return new Promise((resolve,reject)=>{
     	let query="SELECT count(*) as count FROM questions WHERE survey_id = "+ id;
