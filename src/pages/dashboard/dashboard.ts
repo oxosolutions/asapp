@@ -9,6 +9,7 @@ import {SynchronizeRecordPage} from '../../pages/synchronize-record/synchronize-
 import {ProfilePage} from '../../pages/profile/profile';
 declare var jquery:any;
 declare var $ :any;
+
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
@@ -24,6 +25,7 @@ export class DashboardPage {
   //   $('.title').slideToggle(); //
   // } 
   ionViewDidLoad() {
+    console.log('you r on dashboard page');
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
     	this.dashboard=result.rows.item(0);
       console.log(this.dashboard);

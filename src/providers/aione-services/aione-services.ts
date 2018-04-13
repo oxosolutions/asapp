@@ -5,7 +5,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../../pages/home/home';
 import { ListPage } from '../../pages/list/list';
 import { LoginPage } from '../../pages/login/login';
-
+import {DashboardPage } from '../pages/dashboard/dashboard';
 
 @Injectable()
 export class AioneServicesProvider {
@@ -33,7 +33,7 @@ export class AioneServicesProvider {
 			if(this.platform.is('cordova')){
 			this.sqlite.create({name: databaseName, location:'default'}).then(( data: SQLiteObject) => { 
 			  this.db=data;
-			  //console.log(this.db);
+			  console.log(this.db);
 			  resolve(this.db);
 			});
 			}else{
