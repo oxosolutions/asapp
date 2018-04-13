@@ -120,8 +120,12 @@ export class QuestionPage {
     this.questionType=localStorage.getItem("questionType");
     this.id=this.navParams.get('id');
     console.log(this.id);
-    this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result:any)=>{
-      Content.push(result.rows);
+    this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result3:any)=>{
+      this.servicesProvider.mobileListArray(result3).then((result:any)=>{
+
+
+      console.log(result);
+      Content.push(result);
       console.log(Content);
 
       //code for converting json
@@ -156,7 +160,7 @@ export class QuestionPage {
           for(i=0; i< newcollection.length; i++){
             replacedData[newcolumn[i]]=newcollection[i];
           }
-        
+          console.log(replacedData);
           replacedArray.push(replacedData);
         });
       });
@@ -184,6 +188,7 @@ export class QuestionPage {
          this.textData(this.questions, this.indexArray, answer).then(()=>{
         });
       }) 
+        })
     })
   }
   reviewRecord(){

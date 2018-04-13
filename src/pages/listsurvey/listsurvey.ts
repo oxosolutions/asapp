@@ -38,7 +38,6 @@ export class ListsurveyPage {
     return false;
   }
   surveyDetails(survey,id,message,totalQuestions){
-  	
   	localStorage.setItem("Surveyid", id);
   	localStorage.setItem("totalQuestion",totalQuestions);
   	let surveyMetaType;
