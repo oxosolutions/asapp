@@ -83,8 +83,7 @@ export class SurveyDetailPage {
           }
         });
       });
-    })
-    
+    }); 
   }
   completedSurveyPage(id){
     this.checkSurvey(id).then((result:any)=>{

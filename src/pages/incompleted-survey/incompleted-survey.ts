@@ -24,9 +24,9 @@ export class IncompletedSurveyPage {
   resume(record){
   	console.log(record);
   	console.log(record.survey_status);
-    //record.filledQuestions++;
+    
     localStorage.setItem("totalQuestion", record.totalQuestions);
-    //localStorage.setItem("fillingQuestion", record.filledQuestions);
+    
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);
@@ -35,8 +35,9 @@ export class IncompletedSurveyPage {
     this.groupCompleteCheck(record).then(()=>{
        // console.log(  record.last_fieldId);
      record.last_fieldId++;
-
+     record.filledQuestions++;
      // console.log(  record.last_fieldId);
+     localStorage.setItem("fillingQuestion", record.filledQuestions);
     localStorage.setItem("lastquestionIndex", record.last_fieldId.toString());
     this.navCtrl.setRoot(QuestionPage, {'id': record.last_group_id,'InCompleteStatus':"incompleteSurvey"});
     })
