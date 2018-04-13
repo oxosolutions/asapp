@@ -42,6 +42,7 @@ export class MyApp {
     platform.registerBackButtonAction(() => {
           platform.exitApp(); 
     });
+     this.servicepro.PlatformCheck('asapp').then((db)=>{
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
@@ -65,14 +66,15 @@ export class MyApp {
     }else{
       this.rootPage=ActivationPage;     
     }
+        });   
   } 
   initializeApp() {
-    this.servicepro.PlatformCheck('asapp').then((db)=>{
+   
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
       });
-    });    
+ 
   }
   openPage(page) {
     this.nav.setRoot(page.component);

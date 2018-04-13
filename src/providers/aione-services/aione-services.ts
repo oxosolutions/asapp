@@ -47,6 +47,7 @@ export class AioneServicesProvider {
 			if(this.query!= undefined && this.db!= undefined){
 				if(this.platform.is('cordova')){
 					this.db.executeSql(query,DataValue,(executeResult:any)=>{
+						console.log(executeResult);
 						resolve(executeResult);
 					},(error:any)=>{ console.log(error);
 					})
@@ -77,6 +78,7 @@ export class AioneServicesProvider {
 			console.log("table");
 			this.query="SELECT name FROM sqlite_master WHERE type = 'table' ";
 			this.ExecuteRun(this.query , []).then((res:any)=>{
+				console.log(res);
 					resolve(res.rows);
 				})
 		})

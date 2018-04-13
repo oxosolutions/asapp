@@ -20,10 +20,7 @@ export class DashboardPage {
   ApplicationName:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  // title = 'abgular 4 with jquery';
-  // toggleTitle(){
-  //   $('.title').slideToggle(); //
-  // } 
+   
   ionViewDidLoad() {
     console.log('you r on dashboard page');
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
