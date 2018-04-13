@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-
+import {ProfileEditPage} from '../../pages/profile-edit/profile-edit';
+import {ChangePasswordPage} from '../../pages/change-password/change-password';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -21,15 +22,21 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
-  profileModal() {
-	   let profileModal = this.modalCtrl.create(Profile, { userId: 8675309 });
+  EditModal() {
+	   let profileModal = this.modalCtrl.create(ProfileEditPage, { userId: 8675309 });
 	   profileModal.present();
-	 }
+	}
+  ResetPassword(){
+    let model=this.modalCtrl.create(ChangePasswordPage, {'reset':"hii"});
+    model.present();
+  }
+
 
 }
-class Profile {
+// class Profile {
 
- constructor(params: NavParams) {
-   console.log('UserId', params.get('userId'));
- }
+//  constructor(params: NavParams) {
+//    console.log('UserId', params.get('userId'));
+//  }
+// }
 
