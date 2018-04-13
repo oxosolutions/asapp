@@ -38,6 +38,10 @@ import {SynchronizeRecordPage} from '../pages/synchronize-record/synchronize-rec
 import {SurveyDetailPage} from '../pages/survey-detail/survey-detail';
 import {SynchronizeSinglePage} from '../pages/synchronize-single/synchronize-single';
 import {ProfilePage} from '../pages/profile/profile';
+import {ProfileEditPage} from '../pages/profile-edit/profile-edit';
+import {ChangePasswordPage} from '../pages/change-password/change-password';
+
+
 
 
 
@@ -68,7 +72,9 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SynchronizeRecordPage,
     SurveyDetailPage,
     SynchronizeSinglePage,
-    ProfilePage
+    ProfilePage,
+    ProfileEditPage,
+    ChangePasswordPage
   ],
 
   imports: [
@@ -103,7 +109,9 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SynchronizeRecordPage,
     SurveyDetailPage,
     SynchronizeSinglePage,
-    ProfilePage
+    ProfilePage,
+    ProfileEditPage,
+    ChangePasswordPage
   ],
   providers: [
     StatusBar,
