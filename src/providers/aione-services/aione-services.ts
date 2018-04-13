@@ -5,7 +5,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { HomePage } from '../../pages/home/home';
 import { ListPage } from '../../pages/list/list';
 import { LoginPage } from '../../pages/login/login';
-import {DashboardPage } from '../pages/dashboard/dashboard';
+import {DashboardPage } from '../../pages/dashboard/dashboard';
 
 @Injectable()
 export class AioneServicesProvider {
@@ -27,7 +27,6 @@ export class AioneServicesProvider {
 			resolve(this.db);
 		})
 	}
-
 	PlatformCheck(databaseName){
 		return new Promise ((resolve,reject)=>{
 			if(this.platform.is('cordova')){
