@@ -34,18 +34,49 @@ export class ListsurveyPage {
   }
   toggleClass(evnt){
   	console.log(evnt);
-  	// $(".survey-desc").removeClass('active');
-  	/*$('.survey-desc').each(function(){
-  		$(this).removeClass('active');
-  	});*/
-  	// $(".my_button").parents()
     $(evnt.target).parents(".read-more").siblings(".survey-desc").toggleClass('active');
-    
     return false;
-
   }
-  surveyDetails(){
-  	this.navCtrl.setRoot(SurveyDetailPage);
+  surveyDetails(survey,id,message,totalQuestions){
+  	
+  	localStorage.setItem("Surveyid", id);
+  	localStorage.setItem("totalQuestion",totalQuestions);
+  	let surveyMetaType;
+  	if(message["scheduling"].surveyResponse == "true"){
+  		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
+  		console.log(form);
+  		this.surveyIncompleteName().then(()=>{
+  			//console.log(form.rows.item);
+  			var row = {};
+      	for(var i=0; i < form.rows.length; i++){
+          	row[i] = form.rows.item(i)
+      	}
+       	let SurveyData = row;
+       	 localStorage.setItem("questionType", 'questions');
+       	 this.navCtrl.setRoot(SurveyDetailPage,{"survey":survey});
+        for(let keys in SurveyData){
+	          // if(SurveyData[keys].value == "survey"){
+	          // 	surveyMetaType=SurveyData[keys].value;
+	          //   localStorage.setItem("questionType", 'save_survey');  
+	          // }else if(SurveyData[keys].value == "section"){
+	          // 	surveyMetaType=SurveyData[keys].value;
+	          //   localStorage.setItem("questionType", 'save_section');
+	          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+	          // }else if(SurveyData[keys].value == "question"){
+	          	surveyMetaType=SurveyData[keys].value;
+	           
+	            // localStorage.setItem("GroupdDesc")
+	            
+	            //this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+
+	          //}
+       	
+        }
+      });
+      });
+  	}else{
+  		this.presentToast();
+  	}
   }
   groups(id,message,totalQuestions){
   	localStorage.setItem("Surveyid", id);
@@ -73,6 +104,8 @@ export class ListsurveyPage {
 	          	surveyMetaType=SurveyData[keys].value;
 	            localStorage.setItem("questionType", 'questions');
 	            // localStorage.setItem("GroupdDesc")
+	            
+	            console.log(id);
 	            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 
 	          //}
@@ -83,8 +116,7 @@ export class ListsurveyPage {
   	}else{
   		this.presentToast();
   	}
-  	//this.showConfirm();
-  	 
+  	//this.showConfirm();	 
   }
   surveyIncompleteName(){
   	console.log("incomplete name");
@@ -205,6 +237,7 @@ export class ListsurveyPage {
 		  });
 		})
 	}
+	
 	totalQuestion(id){
     return new Promise((resolve,reject)=>{
     	let query="SELECT count(*) as count FROM questions WHERE survey_id = "+ id;

@@ -22,7 +22,6 @@ export class DashboardPage {
   }
    
   ionViewDidLoad() {
-    console.log('you r on dashboard page');
     this.servicesProvider.SelectAll("settings").then((result:any)=>{
     	this.dashboard=result.rows.item(0);
       console.log(this.dashboard);

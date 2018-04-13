@@ -78,12 +78,9 @@ export class AioneServicesProvider {
 			console.log("table");
 			this.query="SELECT name FROM sqlite_master WHERE type = 'table' ";
 			this.ExecuteRun(this.query , []).then((res:any)=>{
-				console.log(res);
 					resolve(res.rows);
 				})
-		})
-		
-		
+		})	
 	}
 	TableBulk(TableName,Col){
 		return new Promise ((resolve,reject)=>{

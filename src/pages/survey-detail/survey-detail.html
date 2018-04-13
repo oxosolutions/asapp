@@ -1,25 +1,26 @@
 
 <ion-header>
-		<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">
-  				<ion-icon name="menu"></ion-icon>
-			</button>
+		
 			
 	<ion-navbar color="headerClassic">
-    	<ion-title >surveyDetail</ion-title>
+    	<ion-title><button ion-button menuToggle class="dashboard-menu-toggle" >
+  				<ion-icon name="menu"></ion-icon>
+			</button>surveyDetail</ion-title>
   	</ion-navbar>
 </ion-header>
 <ion-content>
+<div  *ngIf="surveyDetail">
 	<div class="details-wrapper">
 		<ion-list>
   			<ion-item>
 				<ion-avatar item-start>
   					<img src="../../assets/imgs/surveyicon.png">
     			</ion-avatar>
-    			<h2>RTI survey</h2>	
-    			
+    			<h2>{{surveyDetail?.name}}</h2>	
+    			<h3>{{surveyDetail?.filledSurvey}} times filled</h3>
   			</ion-item>
   			<p class="survey-description">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed ipsum at libero tempor maximus eget a ipsum. In lobortis porta gravida. Duis mi elit, dapibus at fringilla ac, interdum non nunc. Aliquam erat volutpat. Duis et sapien sed leo commodo convallis in ac quam. Nam faucibus, enim viverra venenatis volutpat, sem neque mattis velit, quis suscipit lorem dolor nec ex. Quisque euismod semper ante, ut volutpat velit suscipit at. 
+				{{surveyDetail.description}}
 			</p>
 		</ion-list>
 		
@@ -29,12 +30,12 @@
 			<ion-grid>
 			  <ion-row>
 			    <ion-col col-9>
-			    	<div style="margin-bottom: 10px;">!2 Sections</div>
-			    	<div>29 Questions</div>
+			    	<!-- <div style="margin-bottom: 10px;">!2 Sections</div> -->
+			    	<div>{{surveyDetail['questions']}} Questions</div>
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light">Start Survey</button>
+						<button ion-button color="light" (click)="groups(surveyDetail.id,surveyDetail,surveyDetail['questions'])">Start Survey</button>
 					</div>
 			    </ion-col>
 			  </ion-row>
@@ -49,7 +50,7 @@
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light">View Records</button>
+						<button ion-button color="light" (click)="completedSurveyPage(surveyDetail.id)">View Records</button>
 					</div>
 			    </ion-col>
 			  </ion-row>
@@ -64,7 +65,7 @@
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light" (click)="incompletePage()">View Records</button>
+						<button ion-button color="light" (click)="incompletedSurveyPage(surveyDetail.id)">View Records</button>
 					</div>
 			    </ion-col>
 			  </ion-row>
@@ -86,5 +87,6 @@
 			</ion-grid>
 		</div>
 	</div>
-	
+</div>
 </ion-content>
+	

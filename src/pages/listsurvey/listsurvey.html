@@ -26,12 +26,12 @@
     <div >
       <h2>{{survey.name}}</h2>
       <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
-      <p class="read-more"> <button class="btn my_button" (click)="toggleClass($event)">button two</button></p>
+      <p class="read-more"> <button class="btn my_button" (click)="toggleClass($event)">Read More >></button></p>
    </div>
 
    <!--  <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p> -->
   <!--   <button (click)="groups(survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button> -->
-    <button (click)="surveyDetails()" ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
+    <button (click)="surveyDetails(survey,survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
   </ion-item>
 </div>
 <!-- <div *ngIf="nullSurvey">
