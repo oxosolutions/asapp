@@ -70,7 +70,6 @@ export class SurveyDetailPage {
     this.navCtrl.setRoot(GroupsPage,{'id': id});  
   }
   checkSurvey(id){
-    console.log(id);
     return new Promise((resolve,reject)=>{
       let tablename="surveyResult_"+id;
       this.servicesProvider.SelectAll(tablename).then((result:any)=>{
@@ -80,6 +79,19 @@ export class SurveyDetailPage {
           }else{
             console.log("no record found");  
             this.EmptySurvey=null;
+            //popup-->
+                let prompt = this.alertCtrl.create({
+                  message: "there is no record",
+                  buttons:[
+                    {
+                      text: 'ok',
+                      handler: data => {    
+                      }
+                    }
+                  ]
+                });  
+                prompt.present();
+            //
           }
         });
       });
@@ -87,8 +99,7 @@ export class SurveyDetailPage {
   }
   completedSurveyPage(id){
     this.checkSurvey(id).then((result:any)=>{
-        this.navCtrl.push(CompletedSurveyPage, {'result':result});
-        
+        this.navCtrl.push(CompletedSurveyPage, {'result':result});  
     });
    
   }
