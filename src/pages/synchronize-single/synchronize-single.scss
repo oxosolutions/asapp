@@ -15,11 +15,31 @@ page-synchronize-single {
 		}
 		.list-records{
 			ion-item{
+				font-size: 15px;
+				line-height: 1.5;
+				position: relative;
 				.date-time{
-					float:right;
-					font-size: 14px;
+					position: absolute;
+					top: 15px;
+					right: 5px;
+					font-size: 13px;
 					color: #ccc;
+
 				}	
+				.item-inner{
+					border:none; 
+				}
+				.description{
+					color: #aaa;
+					display: none;
+
+				}
+			}
+			ion-item.item-checkbox-checked{
+				.item-cover{
+					border: 1px solid #2196F3;
+    				background: rgba(33, 150, 243, 0.4);
+				}
 			}
 			
 		}
@@ -45,3 +65,9 @@ page-synchronize-single {
  	}
 
 }
+
+
+
+
+
+
