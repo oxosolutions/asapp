@@ -1,13 +1,48 @@
 
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title><span (click)="dismiss()">Close </span>   profileEdit</ion-title>
   </ion-navbar>
 
+</ion-header> -->
+<ion-header>
+  <ion-toolbar color="headerClassic">
+      <button ion-button color="transparent" (click)="dismiss()" style="box-shadow: none">
+          <ion-icon  name="ios-arrow-round-back-outline"></ion-icon>
+      </button>
+      <ion-title style="display: inline-block;">Edit profile details</ion-title>
+      
+  </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content >
+	<div class="field-wrapper">
+		<ion-list>
+		   	<ion-item>
+				<ion-label color="primary" floating>Enter Your Name</ion-label>
+				<ion-input></ion-input>
+				</ion-item>
+		</ion-list>
+		<ion-list>
+		  	<ion-item>
+				<ion-label color="primary" floating>Select Designation</ion-label>
+				<ion-select>
+					<ion-option>Manager</ion-option>
+					<ion-option>Designation two</ion-option>
+				</ion-select>
+				</ion-item>
+		</ion-list>
+		<ion-list>
+		  	<ion-item>
+				<ion-label color="primary" floating>About Me</ion-label>
+				<ion-textarea rows="4"></ion-textarea>
+				</ion-item>
+		</ion-list>
+		<ion-list>
+		   	<button ion-button style="float: right">Save</button>
+		</ion-list>
+	</div>
+		
 </ion-content>
