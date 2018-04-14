@@ -128,7 +128,7 @@ page-dashboard {
 			text-align: center;
 		}
 		ion-col:nth-child(6) > .link-wrapper{
-			background-color: #f58634;
+			background-color: #f58634;      
 			padding: 20px 0;
 			text-align: center;
 		}
@@ -141,14 +141,16 @@ page-dashboard {
 
 		.link-icons{
 			ion-icon{
-				font-size:50px;
+				font-size:40px;
 				color: white;
+				margin-bottom: 10px;
+				font-weight: 900;
 			}
 		}
 		.link-wrapper{
 			.link-name{
-				font-size: 18px;
-				font-weight: 300;
+				font-size: 16px;
+				
 				color: white;
 			}
 		}
