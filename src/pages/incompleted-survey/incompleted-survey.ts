@@ -5,6 +5,7 @@ import {GroupsPage} from '../../pages/groups/groups';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { LoadingController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
 @IonicPage()
 @Component({
   selector: 'page-incompleted-survey',
@@ -25,6 +26,9 @@ export class IncompletedSurveyPage {
     // });
    this.checkSurvey(); 
     
+  }
+  backToDetails(){
+    this.navCtrl.setRoot(SurveyDetailPage);
   }
    checkSurvey(){
     console.log(this.navParams.get('id'));
@@ -49,7 +53,7 @@ export class IncompletedSurveyPage {
             }else{
               this.incomplete=resultParse;
               console.log("no record found"); 
-              this.viewCtrl.dismiss(); 
+               this.navCtrl.setRoot(SurveyDetailPage);
                this.loader.dismiss(); 
                this.AioneHelp.presentToast("Sorry, there is no incompleted survey found",10000,'top')
               this.EmptySurvey=null;
