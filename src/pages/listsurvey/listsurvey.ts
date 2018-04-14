@@ -42,16 +42,18 @@ export class ListsurveyPage {
   	localStorage.setItem("totalQuestion",totalQuestions);
   	let surveyMetaType;
   	if(message["scheduling"].surveyResponse == "true"){
-  		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
+  		this.servicesProvider.SelectWhere("survey_meta", "form_id", id).then((form:any)=>{
   		console.log(form);
   		
   			//console.log(form.rows.item);
   			var row = {};
       	for(var i=0; i < form.rows.length; i++){
-          	row[i] = form.rows.item(i)
+          row[i] = form.rows.item(i)
       	}
        	let SurveyData = row;
        	 localStorage.setItem("questionType", 'questions');
+       	 console.log(survey);
+       	 localStorage.setItem("currentSurvey",JSON.stringify(survey));
        	 this.navCtrl.setRoot(SurveyDetailPage,{"survey":survey});
         for(let keys in SurveyData){
 	          // if(SurveyData[keys].value == "survey"){
@@ -62,7 +64,7 @@ export class ListsurveyPage {
 	          //   localStorage.setItem("questionType", 'save_section');
 	          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 	          // }else if(SurveyData[keys].value == "question"){
-	          	surveyMetaType=SurveyData[keys].value;
+	          surveyMetaType=SurveyData[keys].value;
 	           
 	            // localStorage.setItem("GroupdDesc")
 	            
@@ -77,46 +79,46 @@ export class ListsurveyPage {
   		this.presentToast();
   	}
   }
-  groups(id,message,totalQuestions){
-  	localStorage.setItem("Surveyid", id);
-  	localStorage.setItem("totalQuestion",totalQuestions);
-  	let surveyMetaType;
-  	if(message["scheduling"].surveyResponse == "true"){
-  		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
-  		console.log(form);
-  		//this.surveyIncompleteName().then(()=>{
-  			//console.log(form.rows.item);
-  			var row = {};
-      	for(var i=0; i < form.rows.length; i++) {
-          	row[i] = form.rows.item(i)
-      	}
-       	let SurveyData = row;
-        for(let keys in SurveyData){
-	          // if(SurveyData[keys].value == "survey"){
-	          // 	surveyMetaType=SurveyData[keys].value;
-	          //   localStorage.setItem("questionType", 'save_survey');  
-	          // }else if(SurveyData[keys].value == "section"){
-	          // 	surveyMetaType=SurveyData[keys].value;
-	          //   localStorage.setItem("questionType", 'save_section');
-	          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
-	          // }else if(SurveyData[keys].value == "question"){
-	          	surveyMetaType=SurveyData[keys].value;
-	            localStorage.setItem("questionType", 'questions');
-	            // localStorage.setItem("GroupdDesc")
+  // groups(id,message,totalQuestions){
+  // 	localStorage.setItem("Surveyid", id);
+  // 	localStorage.setItem("totalQuestion",totalQuestions);
+  // 	let surveyMetaType;
+  // 	if(message["scheduling"].surveyResponse == "true"){
+  // 		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
+  // 		console.log(form);
+  // 		//this.surveyIncompleteName().then(()=>{
+  // 			//console.log(form.rows.item);
+  // 			var row = {};
+  //     	for(var i=0; i < form.rows.length; i++) {
+  //         	row[i] = form.rows.item(i)
+  //     	}
+  //      	let SurveyData = row;
+  //       for(let keys in SurveyData){
+	 //          // if(SurveyData[keys].value == "survey"){
+	 //          // 	surveyMetaType=SurveyData[keys].value;
+	 //          //   localStorage.setItem("questionType", 'save_survey');  
+	 //          // }else if(SurveyData[keys].value == "section"){
+	 //          // 	surveyMetaType=SurveyData[keys].value;
+	 //          //   localStorage.setItem("questionType", 'save_section');
+	 //          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+	 //          // }else if(SurveyData[keys].value == "question"){
+	 //          	surveyMetaType=SurveyData[keys].value;
+	 //            localStorage.setItem("questionType", 'questions');
+	 //            // localStorage.setItem("GroupdDesc")
 	            
-	            console.log(id);
-	            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
+	 //            console.log(id);
+	 //            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 
-	          //}
+	 //          //}
        	
-        }
-      });
-     // });
-  	}else{
-  		this.presentToast();
-  	}
-  	//this.showConfirm();	 
-  }
+  //       }
+  //     });
+  //    // });
+  // 	}else{
+  // 		this.presentToast();
+  // 	}
+  // 	//this.showConfirm();	 
+  // }
   
   presentToast(){
     let toast = this.toastCtrl.create({
@@ -206,7 +208,7 @@ export class ListsurveyPage {
 		return new Promise((resolve,reject)=>{
      	let query="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_status = 'completed' ";
       this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
-      	console.log(questions.rows.item(0).count)
+      	//console.log(questions.rows.item(0).count)
          resolve(questions.rows.item(0).count);
       }) 
     })
@@ -215,7 +217,7 @@ export class ListsurveyPage {
 		return new Promise((resolve,reject)=>{
      	let query="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_status = 'incomplete' ";
       this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
-      	console.log(questions.rows.item(0).count)
+      //	console.log(questions.rows.item(0).count)
          resolve(questions.rows.item(0).count);
       }) 
     })
@@ -230,9 +232,9 @@ export class ListsurveyPage {
   }
 	surveyanswer(tablename){
 		return new Promise((resolve,reject)=>{
-			console.log(tablename);
+			//console.log(tablename);
 			this.servicesProvider.SelectAll(tablename).then((filled:any)=>{
-				console.log(filled.rows);
+				//console.log(filled.rows);
 				resolve(filled.rows.length);
 			});
 		})
