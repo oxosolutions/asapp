@@ -46,7 +46,7 @@ import {ChangePasswordPage} from '../pages/change-password/change-password';
 
 
 //plugin
-import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
+// import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
 import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/package/ng2-datepicker
  
 @NgModule({
@@ -82,7 +82,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
      ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    AmazingTimePickerModule,
+    // AmazingTimePickerModule,
     NgDatepickerModule
     //MyDatePickerModule
   ],

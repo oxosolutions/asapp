@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , ViewController} from 'ionic-angular';
 import { QuestionPage } from '../../pages/question/question';
 import {GroupsPage} from '../../pages/groups/groups';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
+import { LoadingController } from 'ionic-angular';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 @IonicPage()
 @Component({
   selector: 'page-incompleted-survey',
@@ -10,23 +13,55 @@ import {GroupsPage} from '../../pages/groups/groups';
 export class IncompletedSurveyPage {
 	survey:any;
 	incomplete:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  EmptySurvey:any;
+    loader:any;
+  constructor(public viewCtrl: ViewController,public AioneHelp:AioneHelperProvider,private loaderCtrl:LoadingController,public navCtrl: NavController, public servicesProvider:AioneServicesProvider,public navParams: NavParams) {
   }
   ionViewDidLoad() {
-    this.survey=this.navParams.get('result');
-    // let id =this.navParams.g
-    let data = this.survey.filter((element, index) =>{
-    	return (element.survey_status == 'incomplete');
+     console.log(this.navParams.get('id'));
+    //this.survey=this.navParams.get('result');
+    // let data = this.survey.filter((element, index) =>{
+    // 	return (element.survey_status == 'incomplete');
+    // });
+   this.checkSurvey(); 
+    
+  }
+   checkSurvey(){
+    console.log(this.navParams.get('id'));
+    return new Promise((resolve,reject)=>{
+       this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
     });
-    this.incomplete=data;
-    console.log(this.incomplete);
+    this.loader.present(); 
+      let tablename="surveyResult_"+this.navParams.get('id');
+      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
+        this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
+          console.log(resultParse);
+          if(resultParse.length>0){
+           this.incomplete=resultParse;
+           this.loader.dismiss(); 
+            console.log(this.incomplete);
+          }else{
+            this.incomplete=resultParse;
+            console.log("no record found"); 
+            this.viewCtrl.dismiss(); 
+             this.loader.dismiss(); 
+             this.AioneHelp.presentToast("Sorry, there is no incompleted survey found",15000,'top')
+            this.EmptySurvey=null;
+          }
+        });
+      });
+    })
+    
   }
   resume(record){
   	console.log(record);
-  	console.log(record.survey_status);
-    
-    localStorage.setItem("totalQuestion", record.totalQuestions);
-    
+  	console.log(record.survey_status);  
+    localStorage.setItem("totalQuestion", record.totalQuestions);  
     localStorage.setItem("completedGroups", record.completed_groups);
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);
@@ -59,6 +94,15 @@ export class IncompletedSurveyPage {
         resolve("data");
       }
     })
+  }
+  deleteDetails(id){
+    console.log(id);
+    let query='Delete  from surveyResult_'+localStorage.getItem("Surveyid") + " where serialNo="+id;
+    console.log(query);
+    this.servicesProvider.ExecuteRun(query,[]).then((del:any)=>{
+      this.checkSurvey();
+     
+    });
   }
 
 }
