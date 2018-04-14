@@ -4,14 +4,18 @@ page-login {
 	}
 
 	.content-md{
-		background: linear-gradient(45deg, #1d466e 0%,#1695ec 100%);
-
+		// background: linear-gradient(45deg, #1d466e 0%,#1695ec 100%);
+		background: #2d97d1;
 		.app-logo{
 			font-size: 24px;
-				font-weight:200;
-				margin-bottom: 16px;
-				text-align: center;
-				line-height: 20vh;
+			font-weight:200;
+			margin-bottom: 0px;
+			text-align: center;
+			line-height: 20vh;
+			ion-icon{
+				color: white;
+					font-size: 60px;
+			}
 		}
 
 		.page-title{
@@ -21,28 +25,64 @@ page-login {
 				color: white;
 				text-align: center;
 				line-height: 50px;
+				p{
+					font-size: 17px;
+					line-height: 1.4;
+					padding: 5px; 
+				}
 			}
+		.username,.password{
+			position: relative;
+			    
+		}
+		.username:before{
+			position: absolute;
+			font-weight: 900;
+			color: #2e96e1;
+			right: 10px;
+			top: 10px;
+		    content: "\f47d";
+		    font-size: 30px;
+		    font-family: "Ionicons";
+		}
+		.password:before{
+			position: absolute;
+			font-weight: 900;
+			color: #2e96e1;
+			right: 10px;
+			top: 10px;
+
+		        content: "\f1af";
+		    font-size: 30px;
+		    font-family: "Ionicons";
+		}
 
 	}
 	ion-input{
 		background: white;
-		height: 4.6rem;
+		height: 5.6rem;
 		margin: 4px 0px;
 		margin-bottom: 16px;
 
 		.text-input-md{
-			margin: 15px 8px;
+			margin: 18px 8px;
+			font-size: 17px;
+
 		}
 	}
 	.item.item-md.checkbox-wrapper{
 		background: transparent;
-		width: 50%;
+		width: 100%;
 		padding: 0;
 		margin-bottom: 16px;
 
 		.checkbox-md{
 			margin: 0px;
     		margin-right: 16px;
+    		.checkbox-icon{
+    			border-color: white;
+    			background: transparent;
+    		}
 		}
 
 		.item-inner{
@@ -54,7 +94,9 @@ page-login {
 		margin-bottom: 16px;
 
 		.button-full-md{
-			height: 4.6rem
+			height: 5.6rem;
+			font-size: 17px;
+			background: #01c853;
 		}
 	}
 

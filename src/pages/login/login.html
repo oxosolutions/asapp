@@ -1,59 +1,26 @@
 
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
-</ion-header> -->
-
 
 <ion-content padding>
-  <!-- <div *ngIf="loginUser">
-    <form [formGroup]="loginUser">
-    	<ion-list>
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" formControlName="username" [(ngModel)]="username"></ion-input>
-      </ion-item>
-      <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">
-        <p>Username is required</p>
-      </div>
-
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" formControlName="password" [(ngModel)]="password"></ion-input>
-      </ion-item>
-      <div *ngIf="loginUser.controls.password.invalid && loginUser.controls.password.touched && loginUser.controls.password.dirty" class="alert alert-danger">
-        <p>Password is required</p>
-      </div>
-
-      <button ion-button *ngIf="loginUser.valid" (click)="Login()">Login</button>
-    	</ion-list>	
-    </form>
-  </div> -->
-	
-
-
     <div *ngIf="loginUser">
         <form [formGroup]="loginUser">
             <div class="app-logo">
-                logo area
+                 <ion-icon name="finger-print"></ion-icon>
             </div>
             <div class="page-title">
-                Login
+                <h2>Hello!</h2>
+                <p>Lorem ipsum dolor sit amet. Donec sodales ex sed leo pellentesque sollicitudin.</p>
             </div>
             <div>
-                <ion-input type="text" placeholder="Username" formControlName="username" [(ngModel)]="username"></ion-input>
+                <ion-input class="username" type="text" placeholder="E-Mail Address" formControlName="username" [(ngModel)]="username"></ion-input>
                 <div *ngIf="loginUser.controls.username.invalid && loginUser.controls.username.touched && loginUser.controls.username.dirty " class="alert alert-danger">
                     <p>Username is required</p>
                 </div>
             </div>
             <div>
-                <ion-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>
+                <ion-input class="password" type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>
             </div>
             <ion-item class="checkbox-wrapper">
-                <ion-label>Remember me</ion-label>
+                <ion-label>Keep Me logged in</ion-label>
                 <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>
             </ion-item>
             <div class="btn-wrapper">
@@ -61,8 +28,8 @@
                 
             </div>
             <div class="btn-wrapper">
-                <button ion-button color="secondary"  full>Cancel</button>
-                
+               <!--  <button ion-button color="secondary"  full>Cancel</button>
+                 -->
             </div>
             <ion-grid class="extra-options">
                 <ion-row>

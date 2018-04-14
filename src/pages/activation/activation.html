@@ -1,9 +1,13 @@
 <ion-content padding color="headerClassic">
+	 <div class="app-logo">
+         <ion-icon name="finger-print"></ion-icon>
+    </div>
 	<div class="activation-page-content-wrapper" *ngIf="loginForm">
 
 		<div class="activation-page-content">
-			<div class="app-title">{{ApplicationName}}</div>
+			<h2 class="app-title">{{ApplicationName}}</h2>
 			<div class="app-description">{{ApplicationDesc}}</div>
+			<p class="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in malesuada eros. Sed condimentum dolor in malesuada rutrum.</p>
 		</div>
 		<div class="activation-field-wrapper">
 			<form [formGroup]="loginForm">
@@ -11,7 +15,7 @@
 			    	<ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Activation Code"></ion-input>
 			    </div>
 			    <div class="button-wrapper">
-			    	<button ion-button class="verify-button"  (click)="activation()">Verify</button>
+			    	<button ion-button class="verify-button"  (click)="activation()">Activate App</button>
 			    </div>
 			    <div class="clearfix">
 			    	
