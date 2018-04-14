@@ -1,11 +1,16 @@
 
 <ion-header>
-
-  <ion-navbar color="headerClassic">
-    <ion-title><ion-icon name="md-calendar" (click)="backToDetails()"></ion-icon>incompleted-survey</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar color="headerClassic">
+      <ion-buttons style="float: left" (click)="backToDetails()">
+          <button ion-button icon-only>
+          	  <ion-icon name="md-arrow-round-back" ></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title><span>Syncronize records</span></ion-title>
+  </ion-toolbar>
 </ion-header>
+
+
 
 
 <ion-content padding>
