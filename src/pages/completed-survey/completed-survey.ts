@@ -5,6 +5,8 @@ import {GroupsPage} from '../../pages/groups/groups';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { LoadingController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
+
 @IonicPage()
 @Component({
   selector: 'page-completed-survey',
@@ -27,6 +29,9 @@ export class CompletedSurveyPage {
     // console.log(this.complete);
      this.checkSurvey(); 
   }
+   backToDetails(){
+    this.navCtrl.setRoot(SurveyDetailPage);
+  }
    checkSurvey(){
     console.log(this.navParams.get('id'));
     return new Promise((resolve,reject)=>{
@@ -39,8 +44,9 @@ export class CompletedSurveyPage {
     });
     this.loader.present(); 
       let tablename="surveyResult_"+this.navParams.get('id');
-      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
+      this.servicesProvider.SelectWhere(tablename,"survey_status","'completed'").then((result:any)=>{
         this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
+          this.checkSurveyDetail(resultParse.length).then((sur:any)=>{
           console.log(resultParse);
           if(resultParse.length>0){
            this.complete=resultParse;
@@ -49,11 +55,12 @@ export class CompletedSurveyPage {
           }else{
             this.complete=resultParse;
             console.log("no record found"); 
-            this.viewCtrl.dismiss(); 
+            this.navCtrl.setRoot(SurveyDetailPage);
              this.loader.dismiss(); 
              this.AioneHelp.presentToast("Sorry, there is no completed survey found",15000,'top')
             this.EmptySurvey=null;
           }
+        });
         });
       });
     })
@@ -104,6 +111,16 @@ export class CompletedSurveyPage {
       }else{
         resolve("data");
       }
+    })
+  }
+  checkSurveyDetail(totalNo){
+    return new Promise((resolve,reject)=>{
+      let data=JSON.parse(localStorage.getItem("currentSurvey"));
+      data["completed"]=totalNo;
+      console.log(data);
+      localStorage.setItem("currentSurvey",JSON.stringify(data));
+      resolve("data");
+
     })
   }
 

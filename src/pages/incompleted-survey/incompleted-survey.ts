@@ -6,6 +6,7 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { LoadingController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
+
 @IonicPage()
 @Component({
   selector: 'page-incompleted-survey',
@@ -42,7 +43,7 @@ export class IncompletedSurveyPage {
     });
     this.loader.present(); 
       let tablename="surveyResult_"+this.navParams.get('id');
-      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
+      this.servicesProvider.SelectWhere(tablename,"survey_status","'incomplete'").then((result:any)=>{
         this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
           this.checkSurveyDetail(resultParse.length).then((sur:any)=>{
             console.log(resultParse.length);
