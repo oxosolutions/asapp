@@ -148,6 +148,7 @@ export class QuestionPage {
         collection=[];
         Object.keys(key).forEach(function(keyvalue,keydata){
           //console.log(keyvalue);
+          ////here
           newcollection=[];
           let  newcolumn=[];
           collection=key[keyvalue];
