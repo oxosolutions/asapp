@@ -101,15 +101,15 @@ export class SurveyDetailPage {
     }); 
   }
   completedSurveyPage(id){
-    this.checkSurvey(id).then((result:any)=>{
-        this.navCtrl.push(CompletedSurveyPage, {'result':result});  
-    });
+    // this.checkSurvey(id).then((result:any)=>{
+        this.navCtrl.push(CompletedSurveyPage, {'id':id});  
+    // });
    
   }
   incompletedSurveyPage(id){
-    this.checkSurvey(id).then((result:any)=>{
-      this.navCtrl.push(IncompletedSurveyPage, {'result' : result});
-    });
+    // this.checkSurvey(id).then((result:any)=>{
+      this.navCtrl.push(IncompletedSurveyPage, {'id' : id});
+    // });
   }
   surveyIncompleteName(){
     console.log("incomplete name");
