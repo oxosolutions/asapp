@@ -12,6 +12,7 @@ import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/
 import { DatepickerOptions } from 'ng2-datepicker';
 import * as enLocale from 'date-fns/locale/en';
 import * as frLocale from 'date-fns/locale/fr';
+import { LoadingController } from 'ionic-angular';
 declare var jquery:any;
 declare var $ :any;
 
@@ -62,8 +63,9 @@ export class QuestionPage {
   CompletedGroup=[];
   completedGroupIndex=localStorage.getItem('Groupid');
   surveyTotalQuestions:any;
+      loader:any;
      
-  constructor(public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
   }
  
@@ -112,7 +114,15 @@ export class QuestionPage {
   ngAfterViewInit() {
     // this.message = this.child.message
   }
-  ionViewDidLoad(){
+  ionViewWillEnter(){
+    this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Verifying Your Details'+`</div>
+      </div>`,
+    });
+    this.loader.present(); 
     let i=0;
     let Content=[];
     this.surveyTotalQuestions = localStorage.getItem("totalQuestion");
@@ -185,6 +195,7 @@ export class QuestionPage {
       this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
       this.reviewRecord().then((answer:any)=>{ 
          console.log(answer);
+         this.loader.dismiss();
          this.textData(this.questions, this.indexArray, answer).then(()=>{
         });
       }) 
@@ -207,11 +218,15 @@ export class QuestionPage {
     })
   }
   textData(questions,i,questionKey){
+
+    
     return new Promise((resolve,reject)=>{
       this.lastArrayCheck().then((result:any)=>{
+
         //console.log(questions[i].survey_id)
         this.filledQuestion= localStorage.getItem("fillingQuestion");
       // this.next(questions[i].survey_id,questions[i].question_key);
+     
       this.QuestionKeyText=questionKey;
       //console.log(this.QuestionKeyText);
       let content=[]
@@ -231,6 +246,14 @@ export class QuestionPage {
   }
   next(surveyid,questionkey){
     //console.log(this.indexArray);
+     this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+    this.loader.present(); 
     this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
@@ -243,7 +266,9 @@ export class QuestionPage {
               this.questionIndex(this.indexArray,questionkey).then((id)=>{
                 this.questionsFilledCheck().then((fillled)=>{
                   this.questionsFilledCheckInsert().then((filledinsert)=>{
+                     this.loader.dismiss();
                     this.surveyComplete().then(()=>{
+                      
                     });
                });
              });
@@ -257,7 +282,9 @@ export class QuestionPage {
           this.answerGet(this.indexArray).then((answerKey:any)=>{
            this.questionsFilledCheck().then((fillled)=>{
               //this.questionsFilledCheckInsert().then((filledinsert)=>{
+               this.loader.dismiss(); 
                 this.textData(this.questions,this.indexArray,answerKey).then(()=>{
+                 
                 }); 
               });
             //})
@@ -407,6 +434,14 @@ export class QuestionPage {
     })
   }
   previous(){
+    this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+    this.loader.present(); 
     let storedNames:any;
     storedNames = JSON.parse(localStorage.getItem("questionIndex"));
     this.lastPopId= storedNames.pop();
@@ -422,6 +457,7 @@ export class QuestionPage {
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
       this.answerGet(this.indexArray).then((answerKey:any)=>{
         // console.log(answerKey);
+         this.loader.dismiss(); 
         this.textData(this.questions,this.indexArray, answerKey).then(()=>{
         }); 
       }); 
@@ -430,18 +466,20 @@ export class QuestionPage {
   answerGet(id){
     // console.log(id);
     return new Promise ((resolve,reject)=>{
-      // console.log(this.questions[id].question_key);
+      console.log(this.questions[id].question_key);
       let query='SELECT '+this.questions[id].question_key +" FROM "+ this.tablename+" where serialNo = "+localStorage.getItem('record_id'); 
       console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((result:any)=>{
         this.answerValue=result.rows.item(0);
+        console.log(this.answerValue);
+        console.log(this.answerValue[this.questions[id].question_key]);
         resolve(this.answerValue[this.questions[id].question_key]);
       });
     });
   }
   lastArrayCheck(){
     return new Promise ((resolve,reject)=>{
-      console.log(this.navParams.get('indexdata'));
+      // console.log(this.navParams.get('indexdata'));
       //  
       if(this.navParams.get('indexdata') != null || this.navParams.get('InCompleteStatus') != null){
         // console.log("pearame");
@@ -502,6 +540,7 @@ export class QuestionPage {
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
   // console.log(this.form.value);
+ 
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
      console.log(formValidate);
     let i=0;

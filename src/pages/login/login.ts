@@ -66,6 +66,7 @@ export class LoginPage {
     }
   }
   ionViewWillEnter(){
+    
   	this.loginUser=this.formBuilder.group({
   		username:["",Validators.compose([  
   						Validators.required,	
