@@ -1,7 +1,4 @@
-
-
 <ion-content>
-
 	<div class="dashbaord-wrapper" *ngIf="dashboard">
 		<div class="dashbaord-background">
 			<div class="overlay">
@@ -9,7 +6,7 @@
 					IRIS Application
 				</div>
 				<div class="dashbaord-description">
-					{{dashboard.android_application_description}}abcd
+					{{dashboard.android_application_description}}
 				</div>
 			</div>
 			<button ion-button menuToggle class="dashboard-menu-toggle" color="transparent">
@@ -19,45 +16,42 @@
 		<div class="dashboard-links-second-design">
 			<ion-grid>
 				<ion-row>
-					<ion-col col-6 (click)="listSurvey()">
-							<div class="link-wrapper">
-								<div class="link-icons">
-									<ion-icon name="briefcase"></ion-icon>									
-								</div>
-								<div class="link-name">
-									<!-- {{dashboard.link_to_start_survey_text}} -->
-									List of Surveys
-								</div>
-							</div>		
-					</ion-col>
-					<!-- <ion-col col-6 (click)="recordList()">
-							<div class="link-wrapper">
-								<div class="link-icons">
-									<ion-icon name="person"></ion-icon>									
-								</div>
-								<div class="link-name">
-									 {{dashboard.link_to_manage_survey_text}} 
-									User Profile
-								</div>
+					<ion-col col-8 (click)="listSurvey()">
+						<div class="link-wrapper">
+							<div class="link-icons">
+								<ion-icon name="ios-briefcase-outline"></ion-icon>	
 							</div>
-					</ion-col> -->
-
-					<ion-col col-6 (click)="userProfile()">
-							<div class="link-wrapper">
-								<div class="link-icons">
-									<ion-icon name="person"></ion-icon>									
-								</div>
-								<div class="link-name">
-									<!-- {{dashboard.link_to_manage_survey_text}} -->
-									User Profile
-								</div>
+							<div class="link-name">
+								<!-- {{dashboard.link_to_start_survey_text}} -->
+								List of Surveys
 							</div>
+						</div>		
 					</ion-col>
-
+					<ion-col col-4 (click)="userProfile()">
+						<div class="link-wrapper">
+							<div class="link-icons">
+								<ion-icon name="ios-person-outline"></ion-icon>									
+							</div>
+							<div class="link-name">
+								<!-- {{dashboard.link_to_manage_survey_text}} -->
+								User Profile
+							</div>
+						</div>
+					</ion-col>
+					<ion-col col-4 >
+						<div class="link-wrapper">
+							<div class="link-icons">
+								 <ion-icon name="ios-download-outline"></ion-icon>	
+							</div>
+							<div class="link-name">
+								Update
+							</div>
+						</div>
+					</ion-col>
 					<ion-col col-8 (click)="synchronizeRecord()">
 							<div class="link-wrapper">
 								<div class="link-icons">
-									<ion-icon name="list-box"></ion-icon>									
+									<ion-icon name="ios-apps-outline"></ion-icon>									
 								</div>
 								<div class="link-name">
 									<!-- {{dashboard.link_to_sync_survey_text}} -->
@@ -68,11 +62,35 @@
 					<ion-col col-4 >
 							<div class="link-wrapper">
 								<div class="link-icons">
-									 <ion-icon name="cloud-download"></ion-icon>
+									 <ion-icon name="ios-information-circle-outline"></ion-icon>
 									
 								</div>
 								<div class="link-name">
-									Update
+									About
+								</div>
+							</div>
+
+					</ion-col>
+					<ion-col col-4 >
+							<div class="link-wrapper">
+								<div class="link-icons">
+									 <ion-icon name="ios-help-buoy-outline"></ion-icon>
+									
+								</div>
+								<div class="link-name">
+									Help
+								</div>
+							</div>
+
+					</ion-col>
+					<ion-col col-4 >
+							<div class="link-wrapper">
+								<div class="link-icons">
+									 <ion-icon name="md-settings"></ion-icon>
+									
+								</div>
+								<div class="link-name">
+									Settings
 								</div>
 							</div>
 
