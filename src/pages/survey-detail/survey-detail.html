@@ -50,7 +50,7 @@
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light" (click)="completedSurveyPage(surveyDetail.id)">View Records</button>
+						<button ion-button color="light" (click)="completedSurveyPage(surveyDetail.id, surveyDetail.completed)">View Records</button>
 					</div>
 			    </ion-col>
 			  </ion-row>
@@ -65,7 +65,7 @@
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light" (click)="incompletedSurveyPage(surveyDetail.id)">View Records</button>
+						<button ion-button color="light" (click)="incompletedSurveyPage(surveyDetail.id, surveyDetail.incompleted)">View Records</button>
 					</div>
 			    </ion-col>
 			  </ion-row>

@@ -50,7 +50,7 @@ export class IncompletedSurveyPage {
             console.log("no record found"); 
             this.viewCtrl.dismiss(); 
              this.loader.dismiss(); 
-             this.AioneHelp.presentToast("Sorry, there is no incompleted survey found",15000,'top')
+             this.AioneHelp.presentToast("Sorry, there is no incompleted survey found",10000,'top')
             this.EmptySurvey=null;
           }
         });
