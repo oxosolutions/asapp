@@ -12,6 +12,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { ListsurveyPage } from '../../pages/listsurvey/listsurvey';
 import { RecordListPage } from '../../pages/record-list/record-list';
+import { SynchronizeRecordPage } from '../../pages/synchronize-record/synchronize-record';
+import { ProfilePage } from '../../pages/profile/profile';
 var DashboardPage = /** @class */ (function () {
     function DashboardPage(servicesProvider, navCtrl, navParams) {
         this.servicesProvider = servicesProvider;
@@ -21,16 +23,23 @@ var DashboardPage = /** @class */ (function () {
     DashboardPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.servicesProvider.SelectAll("settings").then(function (result) {
-            _this.dashboard = result.rows[0];
+            _this.dashboard = result.rows.item(0);
             console.log(_this.dashboard);
             localStorage.setItem("ApplicationName", _this.dashboard.android_application_title);
+            localStorage.setItem('InCompleteSurveyName', null);
         });
+    };
+    DashboardPage.prototype.userProfile = function () {
+        this.navCtrl.push(ProfilePage);
     };
     DashboardPage.prototype.recordList = function () {
         this.navCtrl.setRoot(RecordListPage);
     };
     DashboardPage.prototype.listSurvey = function () {
         this.navCtrl.setRoot(ListsurveyPage);
+    };
+    DashboardPage.prototype.synchronizeRecord = function () {
+        this.navCtrl.setRoot(SynchronizeRecordPage);
     };
     DashboardPage = __decorate([
         IonicPage(),

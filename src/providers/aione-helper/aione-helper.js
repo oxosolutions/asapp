@@ -14,8 +14,10 @@ import { Device } from '@ionic-native/device';
 import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 var AioneHelperProvider = /** @class */ (function () {
-    function AioneHelperProvider(alert, network, camera, device, calender) {
+    function AioneHelperProvider(toastCtrl, alert, network, camera, device, calender) {
+        this.toastCtrl = toastCtrl;
         this.alert = alert;
         this.network = network;
         this.camera = camera;
@@ -67,9 +69,20 @@ var AioneHelperProvider = /** @class */ (function () {
             }
         }
     };
+    AioneHelperProvider.prototype.presentToast = function (message, duration, position) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: duration,
+            position: position
+        });
+        toast.onDidDismiss(function () {
+            console.log('Dismissed toast');
+        });
+        toast.present();
+    };
     AioneHelperProvider = __decorate([
         Injectable(),
-        __metadata("design:paramtypes", [AlertController, Network, Camera,
+        __metadata("design:paramtypes", [ToastController, AlertController, Network, Camera,
             Device, Calendar])
     ], AioneHelperProvider);
     return AioneHelperProvider;

@@ -32,7 +32,7 @@ var AioneServicesProvider = /** @class */ (function () {
             if (_this.platform.is('cordova')) {
                 _this.sqlite.create({ name: databaseName, location: 'default' }).then(function (data) {
                     _this.db = data;
-                    //console.log(this.db);
+                    console.log(_this.db);
                     resolve(_this.db);
                 });
             }
@@ -49,6 +49,7 @@ var AioneServicesProvider = /** @class */ (function () {
             if (_this.query != undefined && _this.db != undefined) {
                 if (_this.platform.is('cordova')) {
                     _this.db.executeSql(query, DataValue, function (executeResult) {
+                        console.log(executeResult);
                         resolve(executeResult);
                     }, function (error) {
                         console.log(error);
@@ -103,7 +104,7 @@ var AioneServicesProvider = /** @class */ (function () {
     };
     AioneServicesProvider.prototype.Insert = function (tableName, Cols, Values) {
         var _this = this;
-        //console.log(Values);
+        console.log(Values.length);
         return new Promise(function (resolve, reject) {
             var questionMarks = [];
             if (_this.db != undefined) {
@@ -178,7 +179,7 @@ var AioneServicesProvider = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             if (_this.db != undefined) {
                 _this.query = 'Select * from ' + tableName + ' where ' + Where + ' = ' + Value;
-                //console.log(this.query);
+                console.log(_this.query);
                 _this.ExecuteRun(_this.query, []).then(function (SelResult) {
                     resolve(SelResult);
                 });
@@ -256,6 +257,16 @@ var AioneServicesProvider = /** @class */ (function () {
                     replace.push(result[i][key]);
                 } //console.log(replace);
             }
+        });
+    };
+    AioneServicesProvider.prototype.mobileListArray = function (data) {
+        return new Promise(function (resolve, reject) {
+            var row = [];
+            for (var i = 0; i < data.rows.length; i++) {
+                row[i] = data.rows.item(i);
+            }
+            var SurveyData = row;
+            resolve(SurveyData);
         });
     };
     AioneServicesProvider = __decorate([

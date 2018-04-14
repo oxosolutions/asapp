@@ -26,7 +26,7 @@ var LoginPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    LoginPage.prototype.Login = function () {
+    LoginPage.prototype.Login = function (loginUser, username, password) {
         var _this = this;
         this.loader = this.loaderCtrl.create({
             spinner: 'crescent',
@@ -41,17 +41,26 @@ var LoginPage = /** @class */ (function () {
             var name_1;
             this.username = this.loginUser.value.username;
             this.password = this.loginUser.value.password;
-            this.user = "'" + this.username + "'";
-            this.pass = "'" + this.password + "'";
-            this.AioneService.MultipleSelectWhere("users", "email", this.user, "app_password", this.pass).then(function (userDetail) {
-                _this.loginUser.reset();
+            console.log(this.username);
+            // this.user="'"+this.username+"'";
+            //  console.log(this.user);
+            // this.pass="'"+this.password+"'";
+            this.AioneService.MultipleSelectWhere("users", "email", "'" + this.username + "'", "app_password", "'" + this.password + "'").then(function (userDetail) {
+                console.log(userDetail);
+                /// etho tak sahi h  
+                console.log(_this.username);
                 _this.loader.dismiss();
-                if (userDetail.rows.length >= 1) {
+                if (userDetail.rows.item.length >= 1) {
+                    console.log("user valid");
                     _this.navCtrl.setRoot(DashboardPage);
-                    localStorage.setItem("username", _this.user);
+                    console.log(_this.username);
+                    localStorage.setItem("username", _this.username);
                 }
                 else {
-                    _this.AioneHelp.showAlert("Error", "Wrong Credentials");
+                    console.log("not valid");
+                    localStorage.setItem("username", undefined);
+                    _this.loginUser.reset();
+                    _this.AioneHelp.presentToast("Wrong Credentials", 10000, top);
                 }
             });
         }

@@ -234,7 +234,6 @@ export class QuestionPage {
     this.tablename="surveyResult_"+surveyid; 
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
-    
       if(this.questionCheck.length == (questionLength-1)){ 
         this.updateCompleteGroup().then(()=>{
           this.NextButton=false;
@@ -244,13 +243,12 @@ export class QuestionPage {
               this.questionIndex(this.indexArray,questionkey).then((id)=>{
                 this.questionsFilledCheck().then((fillled)=>{
                   this.questionsFilledCheckInsert().then((filledinsert)=>{
-                  this.surveyComplete().then(()=>{
-                   });
+                    this.surveyComplete().then(()=>{
+                    });
                });
              });
             }); 
-          }); 
-          
+          });    
         })    
       }else{
         this.questionIndex(this.indexArray,questionkey).then((id)=>{  
@@ -302,8 +300,15 @@ export class QuestionPage {
           let query="UPDATE "+this.tablename + " SET survey_status = 'completed', "+"survey_completedOn='"+ time +"'"+" where serialNo = "+localStorage.getItem('record_id');
           //console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
-            this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
-            this.navCtrl.setRoot(DashboardPage);
+              this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
+              console.log(this.navParams.get("completed"));
+             if(this.navParams.get("completed") ==  ""){
+                this.navCtrl.setRoot(DashboardPage);
+              }else{
+                this.navCtrl.setRoot(GroupsPage);
+              }
+          
+           
           });
           });
       }else{

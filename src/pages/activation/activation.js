@@ -48,7 +48,7 @@ var ActivationPage = /** @class */ (function () {
             spinner: 'crescent',
             content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + message + "</div>\n      </div>",
         });
-        //this.loader.present(); 
+        this.loader.present();
     };
     ActivationPage.prototype.dismissLoader = function () {
         this.loader.dismiss();
@@ -75,7 +75,6 @@ var ActivationPage = /** @class */ (function () {
                             _this.AioneService.TableBulk(tableName, _this.TableCols).then(function () {
                                 _this.dismissLoader();
                                 _this.insertUser(Apidata).then(function (user) {
-                                    console.log(user);
                                     _this.insertsurveys(Apidata).then(function (surveys) {
                                         _this.insertgroups(Apidata).then(function (groups) {
                                             _this.insertquestions(Apidata).then(function (questions) {
@@ -105,27 +104,34 @@ var ActivationPage = /** @class */ (function () {
     ActivationPage.prototype.resultSurvey = function (questions, surveys) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var keyColumns = [];
             var keyqColumns = [];
             var loopLength = 0;
             var surveyresult = [];
-            //console.log(surveys);
+            var listQuestion = [];
+            var listQuestion2 = [];
+            console.log(surveys);
             surveys.forEach(function (value, key) {
-                keyColumns = [];
+                console.log('surveyResult_' + value.id);
                 surveyresult.push('surveyResult_' + value.id);
-                keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
-                questions.forEach(function (qValue, qKey) {
-                    qValue;
-                    var qresult = qValue.question_key + ' TEXT';
-                    keyColumns.push(qresult);
+                var keyColumns = [];
+                _this.AioneService.SelectWhere("questions", "survey_id", value.id).then(function (questionData) {
+                    keyColumns.push('serialNo INTEGER PRIMARY KEY AUTOINCREMENT');
+                    // keyColumns.push('serialNo');
+                    var qresult = "";
+                    for (var i = 0; i < questionData.rows.length; i++) {
+                        qresult = questionData.rows.item(i).question_key + ' TEXT';
+                        keyColumns.push(qresult);
+                    }
+                    keyColumns.push('ip_address', 'survey_startedOn', 'survey_completedOn', 'survey_submittedBy', 'survey_submittedFrom', 'mac_address', 'unique_id', 'device_detail', 'totalQuestions', 'filledQuestions', 'questionIndex', 'last_fieldId', 'last_group_id', 'completed_groups', 'survey_status', 'incomplete_name', 'survey_sync_status', 'record_type');
+                    keyqColumns.push(keyColumns);
+                    loopLength++;
+                    if (loopLength == surveys.length) {
+                        console.log(keyqColumns);
+                        _this.AioneService.TableBulk(surveyresult, keyqColumns).then(function (keyqColumns) {
+                            resolve(keyColumns);
+                        });
+                    }
                 });
-                keyqColumns.push(keyColumns);
-                loopLength++;
-                if (loopLength == surveys.length) {
-                    _this.AioneService.TableBulk(surveyresult, keyqColumns).then(function (keyqColumns) {
-                        resolve(keyColumns);
-                    });
-                }
             });
         });
     };
@@ -333,7 +339,7 @@ var ActivationPage = /** @class */ (function () {
                 headers.append('content-type', undefined);
                 var formArray = {};
                 formArray['activation_key'] = _this.loginForm.value.name;
-                _this.http.post('http://master.scolm.com/api/survey_api', formArray, { headers: headers }).subscribe(function (data) {
+                _this.http.post(localStorage.getItem("api_url"), formArray, { headers: headers }).subscribe(function (data) {
                     _this.apiresult = data.json();
                     if (_this.apiresult.status == 'error') {
                         _this.loader.dismiss();
@@ -351,6 +357,8 @@ var ActivationPage = /** @class */ (function () {
         });
     };
     ActivationPage.prototype.ionViewWillEnter = function () {
+        this.ApplicationName = localStorage.getItem("activation_ApiName");
+        this.ApplicationDesc = localStorage.getItem("activationDesc");
         this.loginForm = this.formBuilder.group({
             name: ['', Validators.compose([
                     Validators.required,

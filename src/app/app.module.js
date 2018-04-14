@@ -35,9 +35,18 @@ import { TextPage } from '../pages/text/text';
 import { SelectPage } from '../pages/select/select';
 import { CompletedSurveyPage } from '../pages/completed-survey/completed-survey';
 import { IncompletedSurveyPage } from '../pages/incompleted-survey/incompleted-survey';
-//import { MyDatePickerModule } from 'mydatepicker';
 import { SectionalQuestionsPage } from '../pages/sectional-questions/sectional-questions';
 import { SurveyQuestionsPage } from '../pages/survey-questions/survey-questions';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SynchronizeRecordPage } from '../pages/synchronize-record/synchronize-record';
+import { SurveyDetailPage } from '../pages/survey-detail/survey-detail';
+import { SynchronizeSinglePage } from '../pages/synchronize-single/synchronize-single';
+import { ProfilePage } from '../pages/profile/profile';
+import { ProfileEditPage } from '../pages/profile-edit/profile-edit';
+import { ChangePasswordPage } from '../pages/change-password/change-password';
+//plugin
+// import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
+import { NgDatepickerModule } from 'ng2-datepicker'; //https://www.npmjs.com/package/ng2-datepicker
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -61,12 +70,22 @@ var AppModule = /** @class */ (function () {
                 CompletedSurveyPage,
                 IncompletedSurveyPage,
                 SectionalQuestionsPage,
-                SurveyQuestionsPage
+                SurveyQuestionsPage,
+                SynchronizeRecordPage,
+                SurveyDetailPage,
+                SynchronizeSinglePage,
+                ProfilePage,
+                ProfileEditPage,
+                ChangePasswordPage
             ],
             imports: [
                 BrowserModule,
+                ReactiveFormsModule,
                 IonicModule.forRoot(MyApp),
                 HttpModule,
+                // AmazingTimePickerModule,
+                NgDatepickerModule
+                //MyDatePickerModule
             ],
             bootstrap: [IonicApp],
             entryComponents: [
@@ -87,7 +106,13 @@ var AppModule = /** @class */ (function () {
                 CompletedSurveyPage,
                 IncompletedSurveyPage,
                 SectionalQuestionsPage,
-                SurveyQuestionsPage
+                SurveyQuestionsPage,
+                SynchronizeRecordPage,
+                SurveyDetailPage,
+                SynchronizeSinglePage,
+                ProfilePage,
+                ProfileEditPage,
+                ChangePasswordPage
             ],
             providers: [
                 StatusBar,
