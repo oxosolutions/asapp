@@ -100,16 +100,20 @@ export class SurveyDetailPage {
       });
     }); 
   }
-  completedSurveyPage(id){
-    // this.checkSurvey(id).then((result:any)=>{
+  completedSurveyPage(id,incompleteRecord){
+    if(incompleteRecord > 0){
         this.navCtrl.push(CompletedSurveyPage, {'id':id});  
-    // });
-   
+    }else{
+        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+    }
   }
-  incompletedSurveyPage(id){
-    // this.checkSurvey(id).then((result:any)=>{
+  incompletedSurveyPage(id,incompleteRecord){
+    console.log(incompleteRecord);
+    if(incompleteRecord > 0){
       this.navCtrl.push(IncompletedSurveyPage, {'id' : id});
-    // });
+    }else{
+        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+    }
   }
   surveyIncompleteName(){
     console.log("incomplete name");
