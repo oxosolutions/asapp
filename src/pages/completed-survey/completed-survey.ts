@@ -44,7 +44,7 @@ export class CompletedSurveyPage {
     });
     this.loader.present(); 
       let tablename="surveyResult_"+this.navParams.get('id');
-      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
+      this.servicesProvider.SelectWhere(tablename,"survey_status","'completed'").then((result:any)=>{
         this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
           this.checkSurveyDetail(resultParse.length).then((sur:any)=>{
           console.log(resultParse);

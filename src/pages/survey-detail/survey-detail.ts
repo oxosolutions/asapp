@@ -83,7 +83,7 @@ export class SurveyDetailPage {
   
   completedSurveyPage(id,incompleteRecord){
     if(incompleteRecord > 0){
-        this.navCtrl.push(CompletedSurveyPage, {'id':id});  
+        this.navCtrl.setRoot(CompletedSurveyPage, {'id':id});  
     }else{
         this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
     }
