@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar color="headerClassic">
   	<button ion-button menuToggle>
@@ -10,65 +9,20 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
- 
 <ion-list>
-
-
 <div class="" *ngFor="let survey of listSurvey[0]">      
   <ion-item >
-  <!-- <p>{{survey["scheduling"].surveyResponse}}</p>
-  <p>{{survey["details"].responenumber}} {{survey["details"].responsetype}}</p>-->
-
     <ion-thumbnail item-start>
-      <img src="../../assets/imgs/survey.png">
+      <img src="../assets/imgs/survey.png">
     </ion-thumbnail>
 
     <div >
       <h2>{{survey.name}}</h2>
       <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
-      <p class="read-more"> <button class="btn my_button" (click)="toggleClass($event)">Read More >></button></p>
+      <p class="read-more"> <button ion-button class="btn my_button" clear (click)="toggleClass($event)">Read More >></button></p>
    </div>
-
-   <!--  <p style="color:#32b93d;">Duration is {{survey["timer"].timerDuration}}</p> -->
-  <!--   <button (click)="groups(survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #f7805; font-weight: bold;">{{survey?.filledSurvey}} times filled</button> -->
-    <button (click)="surveyDetails(survey,survey.id,survey,survey['questions'])" ion-button clear item-end style="color: #fcb549; font-weight: bold;">View</button>
+    <button (click)="surveyDetails(survey,survey.id,survey,survey['questions'])" ion-button item-end >View</button>
   </ion-item>
 </div>
-<!-- <div *ngIf="nullSurvey">
-  <p>{{nullSurvey}}</p>
-</div> -->
 </ion-list> 
-
-<!-- <p *ngIf="today">{{today | date: 'medium'}}</p>
- -->
-<!-- <ion-list>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="../../assets/imgs/survey.png">
-    </ion-avatar>
-    <h2>Finn</h2>
-    <h3>Don't Know What To Do!</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
-</ion-list> -->
-
-    <!-- <ion-item-group *ngFor="let survey of listSurvey[0]">
-        <ion-item (click)="groups(survey.id)">
-           
-            <img src="../../assets/imgs/survey.png">
-            <div class="list-content-wrapper">
-                <div class="item-title">{{survey.name}}</div>
-                <div class="item-description">{{survey.description}}</div>
-                <div class=""></div>
-                <div class="item-time">
-                    30 Mar 2018
-                </div>
-            </div> 
-
-
-        </ion-item>
-       
-    </ion-item-group> -->
-    
-   
 </ion-content>
