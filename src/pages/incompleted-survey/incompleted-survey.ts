@@ -6,6 +6,7 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { LoadingController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
+
 @IonicPage()
 @Component({
   selector: 'page-incompleted-survey',

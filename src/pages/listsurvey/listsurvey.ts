@@ -139,6 +139,7 @@ export class ListsurveyPage {
   		localStorage.setItem('record_id',null);
   		localStorage.setItem('GroupNumber',null);
   		localStorage.setItem('totalGroup',null);
+  		localStorage.setItem('currentSurvey',null);
 		this.EnabledSurvey();
 	}
 	EnabledSurvey(){
