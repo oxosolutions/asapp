@@ -12,18 +12,20 @@ page-dashboard {
 		position: relative;
 
 		.overlay{
-			background-color: rgba(0, 119, 214, 0.7);
+			background-color: rgba(128, 128, 128, 0.8);
+
 			text-align: center;
 			padding: 100px 30px;
 
 			.dashboard-title{
 				color: white;
 				font-size: 26px;
-				font-weight: 300;
+				// font-weight: 300;
 				margin-bottom: 20px
 			}
 			.dashbaord-description{
-				color: #ccc
+				color: white;
+				font-size: 17px;
 			}
 		}
 		.dashboard-stats{
@@ -92,26 +94,46 @@ page-dashboard {
 
 
 	.dashboard-links-second-design{
-		margin-top: 52px;
-
+		// margin-top: 52px;
+		.grid{
+			padding: 0;
+			ion-col{
+				padding: 0;
+			}
+		}
 		ion-col:nth-child(1) > .link-wrapper{
-			background-color: #b9e66a;
+			background-color: #00aff0;
 			padding: 20px 0;
 			text-align: center;
 
 		}
 		ion-col:nth-child(2) > .link-wrapper{
-			background-color: #8ed3f9;
+			background-color: #547473;
 			padding: 20px 0;
 			text-align: center;
 		}
 		ion-col:nth-child(3) > .link-wrapper{
-			background-color: #fcb549;
+			background-color: #eedd3c;
 			padding: 20px 0;
 			text-align: center;
 		}
 		ion-col:nth-child(4) > .link-wrapper{
-			background-color: #f7805d;
+			background-color: #ec3237;
+			padding: 20px 0;
+			text-align: center;
+		}
+		ion-col:nth-child(5) > .link-wrapper{
+			background-color: #8a9e93;
+			padding: 20px 0;
+			text-align: center;
+		}
+		ion-col:nth-child(6) > .link-wrapper{
+			background-color: #f58634;
+			padding: 20px 0;
+			text-align: center;
+		}
+		ion-col:nth-child(7) > .link-wrapper{
+			background-color: #f7acb0;
 			padding: 20px 0;
 			text-align: center;
 		}
