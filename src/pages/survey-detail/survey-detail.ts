@@ -8,7 +8,7 @@ import { ToastController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import {GroupsPage} from '../../pages/groups/groups';
-
+import { LoadingController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-survey-detail',
@@ -18,11 +18,20 @@ export class SurveyDetailPage {
   surveyDetail:any;
    nullSurvey;
   EmptySurvey:any;
-  constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+      loader:any;
+  constructor(private loaderCtrl:LoadingController,public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    this.surveyDetail = this.navParams.get("survey");
+    this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+    this.surveyDetail = JSON.parse(localStorage.getItem("currentSurvey"));
+    this.loader.dismiss();
     console.log(this.surveyDetail);
   }
   showConfirm() {
@@ -44,7 +53,7 @@ export class SurveyDetailPage {
           text: 'Save',
           handler: data => {
             if(data[0] == ""){
-              this.AioneHelp.presentToast("Pls fill record name", 2000 ,'top');
+              this.AioneHelp.presentToast("Pls fill record name", 1000 ,'top');
             }else{
               console.log(data[0]);
               localStorage.setItem("InCompleteSurveyName",data[0]);
@@ -72,34 +81,6 @@ export class SurveyDetailPage {
      });
   }
   
-  checkSurvey(id){
-    return new Promise((resolve,reject)=>{
-      let tablename="surveyResult_"+id;
-      this.servicesProvider.SelectAll(tablename).then((result:any)=>{
-        this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
-          if(resultParse.length>0){
-            resolve(resultParse)
-          }else{
-            console.log("no record found");  
-            this.EmptySurvey=null;
-              //popup-->
-              let prompt = this.alertCtrl.create({
-                message: "there is no record",
-                buttons:[
-                  {
-                    text: 'ok',
-                    handler: data => {    
-                    }
-                  }
-                ]
-              });  
-              prompt.present();
-              //
-          }
-        });
-      });
-    }); 
-  }
   completedSurveyPage(id,incompleteRecord){
     if(incompleteRecord > 0){
         this.navCtrl.push(CompletedSurveyPage, {'id':id});  
@@ -112,7 +93,7 @@ export class SurveyDetailPage {
     if(incompleteRecord > 0){
       this.navCtrl.push(IncompletedSurveyPage, {'id' : id});
     }else{
-        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+      this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
     }
   }
   surveyIncompleteName(){
