@@ -11,12 +11,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProfileEditPage } from '../../pages/profile-edit/profile-edit';
 import { ChangePasswordPage } from '../../pages/change-password/change-password';
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 var ProfilePage = /** @class */ (function () {
     function ProfilePage(navCtrl, navParams, modalCtrl) {
         this.navCtrl = navCtrl;
@@ -45,9 +39,4 @@ var ProfilePage = /** @class */ (function () {
     return ProfilePage;
 }());
 export { ProfilePage };
-// class Profile {
-//  constructor(params: NavParams) {
-//    console.log('UserId', params.get('userId'));
-//  }
-// }
 //# sourceMappingURL=profile.js.map

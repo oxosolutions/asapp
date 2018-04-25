@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import {ProfileEditPage} from '../../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../../pages/change-password/change-password';
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,12 +9,13 @@ import {ChangePasswordPage} from '../../pages/change-password/change-password';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
+  name:any;
+  Email:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    this.name=localStorage.getItem("name");
+    this.Email=localStorage.getItem("username");
   }
   EditModal() {
 	   let profileModal = this.modalCtrl.create(ProfileEditPage, { userId: 8675309 });
@@ -33,10 +28,3 @@ export class ProfilePage {
 
 
 }
-// class Profile {
-
-//  constructor(params: NavParams) {
-//    console.log('UserId', params.get('userId'));
-//  }
-// }
-

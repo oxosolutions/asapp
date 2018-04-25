@@ -42,11 +42,10 @@ var LoginPage = /** @class */ (function () {
             this.username = this.loginUser.value.username;
             this.password = this.loginUser.value.password;
             console.log(this.username);
-            // this.user="'"+this.username+"'";
-            //  console.log(this.user);
-            // this.pass="'"+this.password+"'";
             this.AioneService.MultipleSelectWhere("users", "email", "'" + this.username + "'", "app_password", "'" + this.password + "'").then(function (userDetail) {
                 console.log(userDetail);
+                console.log(userDetail.rows.item(0).name);
+                localStorage.setItem("name", userDetail.rows.item(0).name);
                 /// etho tak sahi h  
                 console.log(_this.username);
                 _this.loader.dismiss();

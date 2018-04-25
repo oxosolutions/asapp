@@ -17,8 +17,10 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import * as enLocale from 'date-fns/locale/en';
+import { LoadingController } from 'ionic-angular';
 var QuestionPage = /** @class */ (function () {
-    function QuestionPage(fb, toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
+    function QuestionPage(loaderCtrl, fb, toastctrl, AioneHelp, alertCtrl, servicesProvider, navCtrl, navParams) {
+        this.loaderCtrl = loaderCtrl;
         this.fb = fb;
         this.toastctrl = toastctrl;
         this.AioneHelp = AioneHelp;
@@ -86,8 +88,13 @@ var QuestionPage = /** @class */ (function () {
     QuestionPage.prototype.ngAfterViewInit = function () {
         // this.message = this.child.message
     };
-    QuestionPage.prototype.ionViewDidLoad = function () {
+    QuestionPage.prototype.ionViewWillEnter = function () {
         var _this = this;
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Verifying Your Details' + "</div>\n      </div>",
+        });
+        this.loader.present();
         var i = 0;
         var Content = [];
         this.surveyTotalQuestions = localStorage.getItem("totalQuestion");
@@ -109,6 +116,7 @@ var QuestionPage = /** @class */ (function () {
                     collection = [];
                     Object.keys(key).forEach(function (keyvalue, keydata) {
                         //console.log(keyvalue);
+                        ////here
                         newcollection = [];
                         var newcolumn = [];
                         collection = key[keyvalue];
@@ -154,6 +162,7 @@ var QuestionPage = /** @class */ (function () {
                 _this.surveyTotalQuestions = localStorage.getItem("totalSectionQuestion");
                 _this.reviewRecord().then(function (answer) {
                     console.log(answer);
+                    _this.loader.dismiss();
                     _this.textData(_this.questions, _this.indexArray, answer).then(function () {
                     });
                 });
@@ -204,6 +213,11 @@ var QuestionPage = /** @class */ (function () {
     QuestionPage.prototype.next = function (surveyid, questionkey) {
         var _this = this;
         //console.log(this.indexArray);
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Refreshing data' + "</div>\n      </div>",
+        });
+        this.loader.present();
         this.tablename = "surveyResult_" + surveyid;
         var questionLength = this.questions.length;
         localStorage.getItem('Groupid');
@@ -216,6 +230,7 @@ var QuestionPage = /** @class */ (function () {
                     _this.questionIndex(_this.indexArray, questionkey).then(function (id) {
                         _this.questionsFilledCheck().then(function (fillled) {
                             _this.questionsFilledCheckInsert().then(function (filledinsert) {
+                                _this.loader.dismiss();
                                 _this.surveyComplete().then(function () {
                                 });
                             });
@@ -231,6 +246,7 @@ var QuestionPage = /** @class */ (function () {
                 _this.answerGet(_this.indexArray).then(function (answerKey) {
                     _this.questionsFilledCheck().then(function (fillled) {
                         //this.questionsFilledCheckInsert().then((filledinsert)=>{
+                        _this.loader.dismiss();
                         _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
                         });
                     });
@@ -277,9 +293,14 @@ var QuestionPage = /** @class */ (function () {
                     var query = "UPDATE " + _this.tablename + " SET survey_status = 'completed', " + "survey_completedOn='" + time_1 + "'" + " where serialNo = " + localStorage.getItem('record_id');
                     //console.log(query);
                     _this.servicesProvider.ExecuteRun(query, []).then(function (complete) {
-                        if (_this.navParams.get)
-                            _this.AioneHelp.presentToast("survey is successfully completed", 3000, 'top');
-                        _this.navCtrl.setRoot(DashboardPage);
+                        _this.AioneHelp.presentToast("survey is successfully completed", 3000, 'top');
+                        console.log(_this.navParams.get("completed"));
+                        if (_this.navParams.get("completed") == "") {
+                            _this.navCtrl.setRoot(DashboardPage);
+                        }
+                        else {
+                            _this.navCtrl.setRoot(GroupsPage);
+                        }
                     });
                 });
             }
@@ -378,6 +399,11 @@ var QuestionPage = /** @class */ (function () {
     };
     QuestionPage.prototype.previous = function () {
         var _this = this;
+        this.loader = this.loaderCtrl.create({
+            spinner: 'crescent',
+            content: "\n      <div class=\"custom-spinner-container\">\n        <div class=\"custom-spinner-box\">" + 'Refreshing data' + "</div>\n      </div>",
+        });
+        this.loader.present();
         var storedNames;
         storedNames = JSON.parse(localStorage.getItem("questionIndex"));
         this.lastPopId = storedNames.pop();
@@ -393,6 +419,7 @@ var QuestionPage = /** @class */ (function () {
             _this.QuestionKeyText = _this.questions[_this.indexArray].question_key;
             _this.answerGet(_this.indexArray).then(function (answerKey) {
                 // console.log(answerKey);
+                _this.loader.dismiss();
                 _this.textData(_this.questions, _this.indexArray, answerKey).then(function () {
                 });
             });
@@ -402,11 +429,13 @@ var QuestionPage = /** @class */ (function () {
         var _this = this;
         // console.log(id);
         return new Promise(function (resolve, reject) {
-            // console.log(this.questions[id].question_key);
+            console.log(_this.questions[id].question_key);
             var query = 'SELECT ' + _this.questions[id].question_key + " FROM " + _this.tablename + " where serialNo = " + localStorage.getItem('record_id');
             console.log(query);
             _this.servicesProvider.ExecuteRun(query, []).then(function (result) {
                 _this.answerValue = result.rows.item(0);
+                console.log(_this.answerValue);
+                console.log(_this.answerValue[_this.questions[id].question_key]);
                 resolve(_this.answerValue[_this.questions[id].question_key]);
             });
         });
@@ -414,7 +443,7 @@ var QuestionPage = /** @class */ (function () {
     QuestionPage.prototype.lastArrayCheck = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            console.log(_this.navParams.get('indexdata'));
+            // console.log(this.navParams.get('indexdata'));
             //  
             if (_this.navParams.get('indexdata') != null || _this.navParams.get('InCompleteStatus') != null) {
                 // console.log("pearame");
@@ -476,8 +505,8 @@ var QuestionPage = /** @class */ (function () {
         console.log(e.checked);
     };
     QuestionPage.prototype.onSubmit = function (form, questionKey, survey_id, questionText, QuestionType, update) {
-        var _this = this;
         // console.log(this.form.value);
+        var _this = this;
         this.submitConditionCheck(this.form.value, questionText).then(function (formValidate) {
             console.log(formValidate);
             var i = 0;
@@ -560,7 +589,7 @@ var QuestionPage = /** @class */ (function () {
             selector: 'page-question',
             templateUrl: 'question.html',
         }),
-        __metadata("design:paramtypes", [FormBuilder, ToastController, AioneHelperProvider, AlertController, AioneServicesProvider, NavController, NavParams])
+        __metadata("design:paramtypes", [LoadingController, FormBuilder, ToastController, AioneHelperProvider, AlertController, AioneServicesProvider, NavController, NavParams])
     ], QuestionPage);
     return QuestionPage;
 }());

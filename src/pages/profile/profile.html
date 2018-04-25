@@ -22,14 +22,25 @@
 			<img src="../assets/imgs/dummy-user-img.png" style="">
 		</div>
 		<ion-grid class="user-info">
-	  		<ion-row>
+	  	<!-- 	<ion-row>
 	    		<ion-col col-6 class="pull-right">Name of User&nbsp;&nbsp;&nbsp;|</ion-col>
-	    		<ion-col col-6 class="pull-left">Designation</ion-col>
-	  		</ion-row>
+	    		<ion-col col-6 class="pull-left">{{name}}</ion-col>
+	  		</ion-row> -->
 	  		<ion-row>
-	    		<ion-col col-12 class="about-me-text"><strong>About me:</strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed ipsum at libero tempor maximus eget a ipsum. In lobortis porta gravida.  </ion-col>
+	    		<ion-col col-12 class="about-me-text">
+		    		<strong>About me:</strong>	
+		    		<ion-row>
+			    		<ion-col col-6 class="pull-right">Name &nbsp;&nbsp;&nbsp;|</ion-col>
+			    		<ion-col col-6 class="pull-left">{{name}}</ion-col>
+		  		  </ion-row>  
+			  		<ion-row>
+			    		<ion-col col-6 class="pull-right">Email&nbsp;&nbsp;&nbsp;|</ion-col>
+			    		<ion-col col-6 class="pull-left">{{Email}}</ion-col>
+			  		</ion-row> 
+					</ion-col>
 	  		</ion-row>
 	  	</ion-grid>
+	  
 	  	<div>
 	  		<button ion-button  outline (click)="EditModal()">Edit Profile</button>
 	  		<button ion-button  outline (click)="ResetPassword()">Change Password</button>
