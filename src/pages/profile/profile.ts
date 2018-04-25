@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import {ProfileEditPage} from '../../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../../pages/change-password/change-password';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -12,11 +13,17 @@ export class ProfilePage {
   name:any;
   Email:any;
   public base64Image:string
-  constructor(private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  userDetail:any;
+  constructor(public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
   ionViewDidLoad() {
     this.name=localStorage.getItem("name");
     this.Email=localStorage.getItem("username");
+    this.servicesProvider.SelectWhere("users","email",'"'+localStorage.getItem("username")+'"').then((result:any)=>{
+      this.userDetail=result.rows.item(0);
+      console.log(this.userDetail);
+    })
+
   }
   camera1(){
     console.log("camera clicked");
@@ -34,12 +41,12 @@ export class ProfilePage {
   }
 
   EditModal() {
-	   let profileModal = this.modalCtrl.create(ProfileEditPage, { userId: 8675309 });
+	   let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
 	   profileModal.present();
 	}
 
   ResetPassword(){
-    let model=this.modalCtrl.create(ChangePasswordPage, {'reset':"hii"});
+    let model=this.modalCtrl.create(ChangePasswordPage, {'reset':this.userDetail});
     model.present();
   }
 

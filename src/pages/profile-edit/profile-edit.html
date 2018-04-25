@@ -18,16 +18,42 @@
 
 
 <ion-content >
-	<div class="field-wrapper">
-		<ion-list>
-		   	<ion-item>
-				<ion-label color="primary" floating>Enter Your Name</ion-label>
-				<ion-input></ion-input>
-				</ion-item>
-		</ion-list>
-		<ion-list>
+	<div class="field-wrapper" *ngIf="result">
+	 <div *ngIf="loginUser">
+        <form [formGroup]="loginUser">
+
+        	<!--name-->
+        	<ion-list>
+					 	<ion-label for="name" color="primary">Enter your name</ion-label><br>
+					 	<ion-item> 
+	            <ion-input  color="primary" formControlName="name" id="name" type="text"   [(ngModel)]="result.name" required></ion-input>
+	          </ion-item> 
+	          <div *ngIf="loginUser.controls.name.invalid && loginUser.controls.name.touched && loginUser.controls.name.dirty " class="alert alert-danger">
+	                <p color="primary">name is required</p>
+	          </div>
+          </ion-list>
+
+          <!--Email-->
+        	<ion-list>
+					 	<ion-label for="name" color="primary">Enter your Email</ion-label><br>
+					 	<ion-item> 
+	            <ion-input  color="primary" formControlName="email" id="email" type="text"   [(ngModel)]="result.email" required></ion-input>
+	          </ion-item> 
+	          <div *ngIf="loginUser.controls.email.invalid && loginUser.controls.email.touched && loginUser.controls.email.dirty " class="alert alert-danger">
+	                <div *ngIf="loginUser.controls.email.errors.required">
+					           <p>Email is required</p>
+					        </div>
+					        <div *ngIf="loginUser.controls.email.errors.pattern">
+					            <p>Please Enter a valid email </p>
+					        </div>
+	          </div>
+          </ion-list>
+
+
+
+		<!-- <ion-list>
 		  	<ion-item>
-				<ion-label color="primary" floating>Select Designation</ion-label>
+				<ion-label color="primary" >Select Designation</ion-label>
 				<ion-select>
 					<ion-option>Manager</ion-option>
 					<ion-option>Designation two</ion-option>
@@ -36,13 +62,16 @@
 		</ion-list>
 		<ion-list>
 		  	<ion-item>
-				<ion-label color="primary" floating>About Me</ion-label>
+				<ion-label color="primary" >About Me</ion-label>
 				<ion-textarea rows="4"></ion-textarea>
 				</ion-item>
-		</ion-list>
+		</ion-list> -->
 		<ion-list>
-		   	<button ion-button style="float: right">Save</button>
+		   	<button ion-button style="float: right" 	(click)="Login(loginUser.value)">Save</button>
+
 		</ion-list>
+		</form>
+		</div>
 	</div>
 		
 </ion-content>

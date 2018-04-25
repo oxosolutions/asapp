@@ -12,8 +12,6 @@
 
 </ion-header>
 <ion-content padding>
-	
-
 	<div *ngIf="OriginalContent">
 	<div class="card" >
 			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}
@@ -36,7 +34,7 @@
 
 		   		<!--textarea-->
 					<div  *ngSwitchCase="'textarea'">
-				      <input  [formControlName]="OriginalContent?.question_text"
+				      <input [formControlName]="OriginalContent?.question_text"
 				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
 					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
 				 -->
