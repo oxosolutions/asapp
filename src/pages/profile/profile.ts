@@ -5,6 +5,7 @@ import {ChangePasswordPage} from '../../pages/change-password/change-password';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -15,7 +16,8 @@ export class ProfilePage {
   Email:any;
   public base64Image:string
   userDetail:any;
-  constructor(public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+    loader:any;
+  constructor(private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
   ionViewDidLoad() {
     this.name=localStorage.getItem("name");
@@ -44,16 +46,12 @@ export class ProfilePage {
           console.log('Cancel clicked');
           this.takePhoto(1); 
         }
+      },
+      {
+        text: 'Cancel',
+        handler: data => {   
+        }
       }
-      // {
-      //   text: 'Cam',
-      //   handler: data => {
-      //     console.log('Cancel clicked');
-      //     this.takePhoto(0); 
-      //   }
-      // }
-       
-     
       ],
 
     });
@@ -61,7 +59,15 @@ export class ProfilePage {
    
   }
   takePhoto(sourceType:number) {
-   console.log("camera clicked");
+     this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Verifying Your Details'+`</div>
+      </div>`,
+    });
+    this.loader.present();
+    console.log("camera clicked");
     const options: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -73,7 +79,10 @@ export class ProfilePage {
     }
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      localStorage.setItem("imgData", this.base64Image);
+       this.loader.dismiss();
     }, (err) => {
+        this.loader.dismiss();
     });
   }    
 
