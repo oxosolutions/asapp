@@ -32,14 +32,14 @@ export class ProfilePage {
       subTitle: "Select any option to upload image",
       buttons: [
       {
-        text: 'Camera',
+        text: 'Gallery',
         handler: data => {
           console.log('Cancel clicked');
           this.takePhoto(0); 
         }
       },
       {
-        text: 'Gallery',
+        text: 'Camera',
         handler: data => {
           console.log('Cancel clicked');
           this.takePhoto(1); 
