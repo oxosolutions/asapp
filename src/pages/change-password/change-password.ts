@@ -65,7 +65,7 @@ export class ChangePasswordPage {
   }
   internet(){
     return new Promise((resolve,reject)=>{
-      this.AioneHelp.wifi().then((connectionCheck:any)=>{
+      this.AioneHelp.internet().then((connectionCheck:any)=>{
         if(connectionCheck=="connection connected"){
           resolve("connected");
         }else{
