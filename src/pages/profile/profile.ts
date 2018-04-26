@@ -4,6 +4,7 @@ import {ProfileEditPage} from '../../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../../pages/change-password/change-password';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
+import { AlertController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -14,7 +15,7 @@ export class ProfilePage {
   Email:any;
   public base64Image:string
   userDetail:any;
-  constructor(public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  constructor(public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
   ionViewDidLoad() {
     this.name=localStorage.getItem("name");
@@ -26,8 +27,38 @@ export class ProfilePage {
 
   }
   camera1(){
-    this.takePhoto(0);
-    
+    let alert=this.alert.create({
+     
+      subTitle: "Select any option to upload image",
+      buttons: [
+      {
+        text: 'Camera',
+        handler: data => {
+          console.log('Cancel clicked');
+          this.takePhoto(0); 
+        }
+      },
+      {
+        text: 'Gallery',
+        handler: data => {
+          console.log('Cancel clicked');
+          this.takePhoto(1); 
+        }
+      }
+      // {
+      //   text: 'Cam',
+      //   handler: data => {
+      //     console.log('Cancel clicked');
+      //     this.takePhoto(0); 
+      //   }
+      // }
+       
+     
+      ],
+
+    });
+    alert.present();
+   
   }
   takePhoto(sourceType:number) {
    console.log("camera clicked");
@@ -37,12 +68,14 @@ export class ProfilePage {
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     allowEdit: true,
+    correctOrientation: true,
+    sourceType:sourceType,
     }
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
     });
-  }
+  }    
 
 
   EditModal() {
