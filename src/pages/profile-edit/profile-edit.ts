@@ -4,6 +4,8 @@ import {ProfilePage} from '../../pages/profile/profile';
 import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
 import {ToastController , LoadingController} from 'ionic-angular';
 import { Http, Headers, RequestOptions} from '@angular/http';
+import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 /**
  * Generated class for the ProfileEditPage page.
  *
@@ -20,7 +22,7 @@ export class ProfileEditPage {
   loginUser : FormGroup;
   result:any;
    submitAttempt: boolean = false;
-  constructor(public toastctrl:ToastController, public loaderctrl:LoadingController,public http: Http,public fb: FormBuilder,public viewCtrl: ViewController
+  constructor(public AioneHelp:AioneHelperProvider,public servicesProvider : AioneServicesProvider, public toastctrl:ToastController, public loaderctrl:LoadingController,public http: Http,public fb: FormBuilder,public viewCtrl: ViewController
 , public navCtrl: NavController, public navParams: NavParams) {
   	
   }
@@ -28,9 +30,8 @@ export class ProfileEditPage {
   ionViewDidLoad() {
     this.result=this.navParams.get("userId");
     console.log(this.result);
-  
   }
-   ionViewWillEnter(){
+  ionViewWillEnter(){
     this.loginUser=this.fb.group({
       name:[ null, Validators.compose([  
               Validators.required ,
@@ -51,9 +52,23 @@ export class ProfileEditPage {
         console.log('not valid');
         this.loginUser;
     }else{
-      console.log(this.loginUser.value);
-      //this.submit(this.loginUser.value.name,this.loginUser.value.email);    
+      this.internet().then((wifi:any)=>{
+       console.log(this.loginUser.value);
+        this.submit(this.loginUser.value.name,this.loginUser.value.email); 
+      }); 
     }
+  }
+
+  internet(){
+    return new Promise((resolve,reject)=>{
+      this.AioneHelp.internet().then((connectionCheck:any)=>{
+        if(connectionCheck=="connection connected"){
+            resolve("condition checked");
+          //resolve("connected");
+        }
+      });
+    })
+   
   }
 
   submit(name,Email){
@@ -67,20 +82,22 @@ export class ProfileEditPage {
         position:'top',
       });
       let form = new FormData();
-      // form.append('org_id','175');
       form.append('name',name);
-      form.append('mobile',Email);
-      this.http.post("http://admin.scolm.com/api/send_complaint", form)
-      .subscribe(data => {
-        console.log(data);
-        this.loginUser.reset()
-         loader.dismiss();
-        toast.present();
-        console.log('submitted successfully');
+      form.append('Email',Email);
+      console.log(form);
+      loader.dismiss();
+      // this.http.post("http://admin.scolm.com/api/send_complaint", form)
+      // .subscribe(data => {
+      //   console.log(data);
+      //   this.loginUser.reset()
+      //    loader.dismiss();
+      //   toast.present();
+      //   console.log('submitted successfully');
         
-      },error=>{
-        console.log(error);
-      });
+      // },error=>{
+      //   console.log(error);
+      // });
+      // 
       // showalert(data);
       return false;
 

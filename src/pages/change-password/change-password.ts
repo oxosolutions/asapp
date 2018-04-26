@@ -48,7 +48,6 @@ export class ChangePasswordPage {
   }
   resetPassword(username){
     this.submitAttempt = true;
-    // console.log(username);
     if(!this.newPassword.valid){
         console.log('not valid');
         this.newPassword;
@@ -59,7 +58,7 @@ export class ChangePasswordPage {
       }); 
     }
   }
-  internet(Oldpassword,newpass,confirmpassword,){
+  internet(Oldpassword,newpass,confirmpassword){
     return new Promise((resolve,reject)=>{
       this.AioneHelp.internet().then((connectionCheck:any)=>{
         if(connectionCheck=="connection connected"){
