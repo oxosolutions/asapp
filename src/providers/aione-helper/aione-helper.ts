@@ -34,12 +34,15 @@ export class AioneHelperProvider {
   internet(){
   	return new Promise ((resolve,reject)=>{
   		if(this.network.onConnect().subscribe()){
+        console.log(this.network.type);
 		  	if (this.network.type === 'none') {
 		  		this.showAlert('Disconnected !!','No Internet Connection');
-          resolve('not connecton')
+              resolve('connection connected')
 				}else{
 					//this.showAlert('Connected !!','You have an internet connection');	
-				}resolve('yes connected');
+       
+           resolve('yes connected');   
+				}
 	  	}
   	}) 
   }
@@ -52,13 +55,19 @@ export class AioneHelperProvider {
 	  alert.present();
   }
   wifi(){
-	  if(this.network.onConnect().subscribe()){
-	  	if (this.network.type === 'wifi') {
-				this.showAlert('Wifi connected','you got a Wifi Connection');	
-			}else{
-				this.showAlert('Disconnected ','Wifi Connection has been lost');	
-			}
-	   }	 
+    return new Promise((resolve,reject)=>{
+      if(this.network.onConnect().subscribe()){
+         console.log(this.network.type);
+      if (this.network.type === 'wifi') {
+        this.showAlert('Wifi connected','you got a Wifi Connection');  
+        resolve("connection connected");
+      }else{
+        this.showAlert('Disconnected ','Wifi Connection has been lost'); 
+        resolve("connection lost"); 
+      }
+     }  
+    })
+	   
 	}
   presentToast(message,duration,position) {
     let toast = this.toastCtrl.create({
