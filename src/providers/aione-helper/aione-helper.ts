@@ -39,7 +39,7 @@ export class AioneHelperProvider {
 		  		this.showAlert('Disconnected !!','No Internet Connection');
             
 				}else{
-					this.showAlert('Connected !!','You have an internet connection');	
+					//this.showAlert('Connected !!','You have an internet connection');	
           // resolve('yes connected');  
           resolve('connection connected') 
 				}
