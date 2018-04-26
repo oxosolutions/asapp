@@ -6,12 +6,6 @@ import {ToastController , LoadingController} from 'ionic-angular';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
-/**
- * Generated class for the ProfileEditPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -26,7 +20,6 @@ export class ProfileEditPage {
 , public navCtrl: NavController, public navParams: NavParams) {
   	
   }
-
   ionViewDidLoad() {
     this.result=this.navParams.get("userId");
     console.log(this.result);
@@ -41,9 +34,7 @@ export class ProfileEditPage {
               Validators.required,  
               Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
         ])],
-
     })
-    
   }
   Login(username){
     this.submitAttempt = true;
@@ -58,7 +49,6 @@ export class ProfileEditPage {
       }); 
     }
   }
-
   internet(){
     return new Promise((resolve,reject)=>{
       this.AioneHelp.internet().then((connectionCheck:any)=>{
@@ -68,9 +58,7 @@ export class ProfileEditPage {
         }
       });
     })
-   
   }
-
   submit(name,Email){
     let loader =this.loaderctrl.create({
       content:'<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Submitting your Enquiry</div>',
@@ -103,7 +91,6 @@ export class ProfileEditPage {
 
   }
   dismiss() {
-    
     this.viewCtrl.dismiss();
   }
  

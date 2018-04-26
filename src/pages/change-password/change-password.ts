@@ -23,12 +23,10 @@ export class ChangePasswordPage {
   result:any;
    submitAttempt: boolean = false;
   constructor(public AioneHelp:AioneHelperProvider,public servicesProvider : AioneServicesProvider,public toastctrl:ToastController, public loaderctrl:LoadingController,public http: Http,public fb: FormBuilder,public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams) {
-  
   }
   dismiss(){
   	this.viewCtrl.dismiss();
   }
-
   ionViewDidLoad() {
     this.result=this.navParams.get("reset");
     console.log(this.result);
@@ -49,8 +47,8 @@ export class ChangePasswordPage {
   resetPassword(username){
     this.submitAttempt = true;
     if(!this.newPassword.valid){
-        console.log('not valid');
-        this.newPassword;
+      console.log('not valid');
+      this.newPassword;
     }else{
       this.internet(this.newPassword.value.Oldpassword, this.newPassword.value.newpass, this.newPassword.value.confirmpassword).then((wifi:any)=>{
       console.log(this.newPassword.value);
@@ -65,10 +63,9 @@ export class ChangePasswordPage {
            this.servicesProvider.SelectWhere("users","app_password","'"+Oldpassword+"'").then((old:any)=>{
               console.log(old.rows);
               console.log(old.rows.length);
-              console.log(old.rows.item.length);
 
-              //here is problm with item for mobiles
-              
+              //here is problem with item for mobiles
+                
               if(old.rows.length > 0){
                 if(newpass === confirmpassword){
                   resolve("condition checked");
