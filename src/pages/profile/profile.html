@@ -19,10 +19,10 @@
 			<ion-icon name="menu"></ion-icon>
 		</button>
 		<div class="image-wrapper" (click)="camera1()">
-			<img src="../../assets/imgs/dummy-user-img.png" style="">
+			<img src="../../assets/imgs/dummy-user-img.png">
 			<img [src]="(base64Image)" *ngIf="base64Image" />
 		</div>
-		<button ion-button (click)="camera1()">Camera</button>
+		<!-- <button ion-button (click)="camera1()">Camera</button> -->
 
 
 		<ion-grid class="user-info">

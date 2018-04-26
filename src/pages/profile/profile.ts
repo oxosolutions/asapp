@@ -26,7 +26,11 @@ export class ProfilePage {
 
   }
   camera1(){
-    console.log("camera clicked");
+    this.takePhoto(0);
+    
+  }
+  takePhoto(sourceType:number) {
+   console.log("camera clicked");
     const options: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
@@ -39,6 +43,7 @@ export class ProfilePage {
     }, (err) => {
     });
   }
+
 
   EditModal() {
 	   let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
