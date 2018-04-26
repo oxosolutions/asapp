@@ -37,11 +37,11 @@ export class AioneHelperProvider {
         console.log(this.network.type);
 		  	if (this.network.type === 'none') {
 		  		this.showAlert('Disconnected !!','No Internet Connection');
-              //resolve('connection connected')
+            
 				}else{
 					this.showAlert('Connected !!','You have an internet connection');	
-       
-           //resolve('yes connected');   
+          // resolve('yes connected');  
+          resolve('connection connected') 
 				}
 	  	}
   	}) 
