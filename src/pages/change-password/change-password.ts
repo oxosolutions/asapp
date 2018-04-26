@@ -6,12 +6,6 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 
-/**
- * Generated class for the ChangePasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -60,12 +54,7 @@ export class ChangePasswordPage {
     return new Promise((resolve,reject)=>{
       this.AioneHelp.internet().then((connectionCheck:any)=>{
         if(connectionCheck=="connection connected"){
-           this.servicesProvider.SelectWhere("users","app_password","'"+Oldpassword+"'").then((old:any)=>{
-              console.log(old.rows);
-              console.log(old.rows.length);
-
-              //here is problem with item for mobiles
-                
+           this.servicesProvider.MultipleSelectWhere("users","app_password","'"+Oldpassword+"'","email","'"+localStorage.getItem("username")+"'").then((old:any)=>{
               if(old.rows.length > 0){
                 if(newpass === confirmpassword){
                   resolve("condition checked");
