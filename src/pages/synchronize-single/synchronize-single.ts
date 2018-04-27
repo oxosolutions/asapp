@@ -14,11 +14,17 @@ export class SynchronizeSinglePage {
   synchronize:any;
   EmptySurvey:any;
   loader:any;
+   filter = false;
   constructor(public servicesProvider:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private loaderCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     this.checkSurvey(); 
+  }
+ onFilterChange(eve: any,surveyName) {
+   console.log("clicked");
+    this.filter = !this.filter;
+    console.log(surveyName);
   }
   checkSurvey(){
     console.log(this.navParams.get('id'));
@@ -32,10 +38,8 @@ export class SynchronizeSinglePage {
     });
     this.loader.present(); 
       let tablename="surveyResult_"+this.navParams.get('id');
-      let query1="SELECT * FROM "+tablename +" WHERE survey_sync_status IS NULL AND survey_status = 'completed' ";
-      			//console.log(query1);
+      let query1="SELECT * FROM "+tablename +" WHERE survey_sync_status IS NULL AND survey_status ='completed'";
       	this.servicesProvider.ExecuteRun(query1,[]).then((result:any)=>{
-      //this.servicesProvider.MultipleSelectWhere(tablename,"survey_status","'completed'","survey_sync_status","Null").then((result:any)=>{
       	console.log(result);
         this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
           //this.checkSurveyDetail(resultParse.length).then((sur:any)=>{

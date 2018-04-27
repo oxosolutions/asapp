@@ -18,26 +18,26 @@
 </ion-header>
 <ion-content>
 	<div class="sub-head">
-	 	<ion-item>
+	<!--  	<ion-item>
             <ion-label>
                 Select All
             </ion-label>
-          <ion-checkbox color="dark" checked="true"></ion-checkbox>
-        </ion-item>
+          <ion-checkbox color="dark" (click)="filter = !filter" ></ion-checkbox>
+      
+        </ion-item> -->
 	</div>
+
+    <button (click)="filter = !filter">Change Status</button>
     <div class="list-records">
         <ion-list >
             <ion-item *ngFor="let  record of synchronize">
                 <ion-label>
                     {{record.incomplete_name}}<br>
-                   <!--  <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span> -->
                     <span class="date-time">{{record.survey_completedOn | date:'E dd-MM-yyyy hh:mm a '}}</span>
                 </ion-label>
-              <ion-checkbox color="dark" ></ion-checkbox>
+              <ion-checkbox color="dark" [(ngModel)]="filter" (click)="onFilterChange($event,record.incomplete_name)" ></ion-checkbox>
             </ion-item>
-           
-            
-            
+    
         </ion-list>
     </div>
     <div class="button-wrapper">
