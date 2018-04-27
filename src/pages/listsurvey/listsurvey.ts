@@ -41,7 +41,7 @@ export class ListsurveyPage {
   	localStorage.setItem("Surveyid", id);
   	localStorage.setItem("totalQuestion",totalQuestions);
   	let surveyMetaType;
-  	if(message["scheduling"].surveyResponse == "true"){
+  	if(message["scheduling"].surveyResponse == "true" ){
   		this.servicesProvider.SelectWhere("survey_meta", "form_id", id).then((form:any)=>{
   		console.log(form);
   		
@@ -156,27 +156,34 @@ export class ListsurveyPage {
 				metaSurvey.forEach((value,key)=>{
 					let content=[];
 					//value.length;
+					console.log(value);
 					for(let i=0; i < value.length; i++){
+						
 						this.surveyScheduling(value.item(i).form_id).then((surveySch : any)=>{
-								this.servicesProvider.SelectWhere("surveys","id",value.item(i).form_id).then((survey:any)=>{ console.log(survey);
+								this.servicesProvider.SelectWhere("surveys","id",value.item(i).form_id).then((survey:any)=>{ //console.log(survey);
 									this.responseLimit(value.item(i).form_id).then((responseData:any)=>{
 										this.surveytimer(value.item(i).form_id).then((timerData:any)=>{
 											this.surveyanswer("surveyResult_"+value.item(i).form_id).then((surveyFilled:any)=>{
 												this.totalQuestion(value.item(i).form_id).then((question:any)=>{
                						this.completedSurvey(value.item(i).form_id).then((completed:any)=>{	
-               						this.incompletedSurvey(value.item(i).form_id).then((incompleted:any)=>{	
-													let rowsData = survey.rows.item(0);
-													rowsData["details"]=responseData;
-													rowsData["timer"]=timerData;
-													rowsData["scheduling"]=surveySch;
-													rowsData["filledSurvey"]=surveyFilled;
-													rowsData["questions"]=question;
-													rowsData["completed"]=completed;
-													rowsData["incompleted"]=incompleted;
-											// console.log(rowsData["details"].responenumber);
+               							this.incompletedSurvey(value.item(i).form_id).then((incompleted:any)=>{	
+															this.synchronizeStatus(value.item(i).form_id).then((sync)=>{
+
 												
-												content.push(rowsData);	
-												// console.log(content);
+																let rowsData = survey.rows.item(0);
+																rowsData["details"]=responseData;
+																rowsData["timer"]=timerData;
+																rowsData["scheduling"]=surveySch;
+																rowsData["filledSurvey"]=surveyFilled;
+																rowsData["questions"]=question;
+																rowsData["completed"]=completed;
+																rowsData["incompleted"]=incompleted;
+																rowsData["synchronize"]=sync;
+														// console.log(rowsData["details"].responenumber);
+															
+															content.push(rowsData);	
+															console.log(content);
+													})
 												})
 												})
 												})
@@ -204,6 +211,24 @@ export class ListsurveyPage {
 			}
 		  });
 		})
+	}
+	synchronizeStatus(id){
+		return new Promise((resolve,reject)=>{
+     	let query="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_sync_status = 'synchronized' ";
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+      	//this.servicesProvider.SelectAll("surveyResult_"+id).then((totalrows:any)=>{
+      		let totalsyn=questions.rows.item(0).count;
+      		let query1="SELECT count(*) as count FROM surveyResult_"+id +" WHERE survey_sync_status IS NULL AND survey_status = 'completed' ";
+      			//console.log(query1);
+      			 this.servicesProvider.ExecuteRun(query1,[]).then((questions12:any)=>{
+      		let data = {};
+      		data["totalsynchronize"] = totalsyn;
+      		data["pendingsynchronize"] = questions12.rows.item(0).count;
+       		resolve(data);
+      	})
+      	
+      }) 
+    })
 	}
 	completedSurvey(id){
 		return new Promise((resolve,reject)=>{

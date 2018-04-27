@@ -88,6 +88,14 @@ export class SurveyDetailPage {
         this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
     }
   }
+  syncronizePage(id,synchronize){
+    console.log(synchronize);
+    if(synchronize > 0){
+        this.navCtrl.setRoot(SynchronizeSinglePage, {'id':id});  
+    }else{
+        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+    }
+  }
   incompletedSurveyPage(id,incompleteRecord){
     console.log(incompleteRecord);
     if(incompleteRecord > 0){
@@ -104,9 +112,9 @@ export class SurveyDetailPage {
       });
     })
   }
-  syncronizePage(){  
-  	this.navCtrl.setRoot(SynchronizeSinglePage);
-  }
+  // syncronizePage(){  
+  // 	this.navCtrl.setRoot(SynchronizeSinglePage);
+  // }
   incompletePage(){
   	this.navCtrl.push(CompletedSurveyPage); 
   }

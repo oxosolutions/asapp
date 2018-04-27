@@ -26,48 +26,18 @@
         </ion-item>
 	</div>
     <div class="list-records">
-        <ion-list>
-            <ion-item>
+        <ion-list >
+            <ion-item *ngFor="let  record of synchronize">
                 <ion-label>
-                    Name of the Survey<br>
-                    <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span>
-                    <span class="date-time">2 hours ago</span>
-                </ion-label>
-              <ion-checkbox color="dark" ></ion-checkbox>
-            </ion-item>
-             <ion-item>
-                <ion-label>
-                    Name of the Survey<br>
-                    <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span>
-                    <span class="date-time">2 hours ago</span>
-                </ion-label>
-              <ion-checkbox color="dark" ></ion-checkbox>
-            </ion-item>
-             <ion-item>
-                <ion-label>
-                    Name of the Survey<br>
-                    <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span>
-                    <span class="date-time">2 hours ago</span>
-                </ion-label>
-              <ion-checkbox color="dark" ></ion-checkbox>
-            </ion-item>
-             <ion-item>
-                <ion-label>
-                    Name of the Survey<br>
-                    <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span>
-                    <span class="date-time">2 hours ago</span>
-                </ion-label>
-              <ion-checkbox color="dark" ></ion-checkbox>
-            </ion-item>
-             <ion-item>
-                <ion-label>
-                    Name of the Survey<br>
-                    <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span>
-                    <span class="date-time">2 hours ago</span>
+                    {{record.incomplete_name}}<br>
+                   <!--  <span class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque consectetur leo.</span> -->
+                    <span class="date-time">{{record.survey_completedOn | date:'E dd-MM-yyyy hh:mm a '}}</span>
                 </ion-label>
               <ion-checkbox color="dark" ></ion-checkbox>
             </ion-item>
            
+            
+            
         </ion-list>
     </div>
     <div class="button-wrapper">

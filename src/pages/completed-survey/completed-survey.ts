@@ -32,7 +32,7 @@ export class CompletedSurveyPage {
    backToDetails(){
     this.navCtrl.setRoot(SurveyDetailPage);
   }
-   checkSurvey(){
+  checkSurvey(){
     console.log(this.navParams.get('id'));
     return new Promise((resolve,reject)=>{
        this.loader = this.loaderCtrl.create({

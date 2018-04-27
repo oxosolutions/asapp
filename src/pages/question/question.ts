@@ -554,11 +554,12 @@ export class QuestionPage {
       let formValue=[];
        //console.log("valid");
       if(QuestionType=="checkbox"){
-        this.checkbox(questionKey).then(()=>{
+        // this.checkbox(questionKey).then(()=>{
 
-        });
+        // });
         // json=JSON.stringify(formValidate);
-        // formValue.push(json);
+        console.log(this.form.value[questionText]);
+        formValue.push(this.form.value[questionText]);
       }else{
         formValue.push(formValidate);
         //console.log(formValue);

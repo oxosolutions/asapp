@@ -75,12 +75,12 @@
 			<ion-grid>
 			  <ion-row>
 			    <ion-col col-9>
-			    	<div style="margin-bottom: 10px;">!2 Synced Records</div>
-			    	<div>23 Pending Records</div>
+			    	<div style="margin-bottom: 10px;">{{surveyDetail.synchronize["totalsynchronize"]}} Synced Records</div>
+			    	<!-- <div>23 Pending Records</div> -->
 			    </ion-col>
 			    <ion-col col-3>
 					<div class="action-button">
-						<button ion-button color="light" (click)="syncronizePage()">Syncronize</button>
+						<button ion-button color="light" (click)="syncronizePage(surveyDetail.id,  surveyDetail.synchronize['pendingsynchronize'])">Syncronize</button>
 					</div>
 			    </ion-col>
 			  </ion-row>
