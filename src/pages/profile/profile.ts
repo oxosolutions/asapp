@@ -25,6 +25,7 @@ export class ProfilePage {
     this.servicesProvider.SelectWhere("users","email",'"'+localStorage.getItem("username")+'"').then((result:any)=>{
       this.userDetail=result.rows.item(0);
       console.log(this.userDetail);
+      this.base64Image = localStorage.getItem("imgData") ;
     })
 
   }
@@ -79,6 +80,7 @@ export class ProfilePage {
     }
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(this.base64Image);
       localStorage.setItem("imgData", this.base64Image);
        this.loader.dismiss();
     }, (err) => {
