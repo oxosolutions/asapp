@@ -16,7 +16,8 @@ export class ProfilePage {
   Email:any;
   public base64Image:string
   userDetail:any;
-    loader:any;
+  loader:any;
+  simpleImg:any;
   constructor(private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
   ionViewDidLoad() {
@@ -60,6 +61,8 @@ export class ProfilePage {
    
   }
   takePhoto(sourceType:number) {
+    let FileOutputStream  = null;
+    let fos=null;
      this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -78,17 +81,17 @@ export class ProfilePage {
     correctOrientation: true,
     sourceType:sourceType,
     }
+
     this.camera.getPicture(options).then((imageData) => {
+      console.log(imageData);
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
       console.log(this.base64Image);
       localStorage.setItem("imgData", this.base64Image);
-       this.loader.dismiss();
+      this.loader.dismiss();
     }, (err) => {
         this.loader.dismiss();
     });
-  }    
-
-
+  } 
   EditModal() {
 	   let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
 	   profileModal.present();
