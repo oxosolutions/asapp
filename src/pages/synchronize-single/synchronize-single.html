@@ -17,31 +17,40 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-	<div class="sub-head">
-	<!--  	<ion-item>
-            <ion-label>
-                Select All
-            </ion-label>
-          <ion-checkbox color="dark" (click)="filter = !filter" ></ion-checkbox>
-      
-        </ion-item> -->
-	</div>
+<!-- <button (click)="filter = !filter">Change Status</button> -->
+	
 
-    <button (click)="filter = !filter">Change Status</button>
-    <div class="list-records">
-        <ion-list >
-            <ion-item *ngFor="let  record of synchronize">
-                <ion-label>
-                    {{record.incomplete_name}}<br>
-                    <span class="date-time">{{record.survey_completedOn | date:'E dd-MM-yyyy hh:mm a '}}</span>
-                </ion-label>
-              <ion-checkbox color="dark" [(ngModel)]="filter" (click)="onFilterChange($event,record.incomplete_name)" ></ion-checkbox>
-            </ion-item>
-    
-        </ion-list>
+    <div *ngIf="synchronizeSurvey">
+      <form [formGroup]="synchronizeSurvey">
+        <div class="sub-head">
+          <ion-item>
+                  <ion-label> Select All </ion-label>
+                <ion-checkbox color="dark" (click)="filter = !filter" ></ion-checkbox>
+          </ion-item>
+        </div>
+        <div class="list-records" *ngFor="let  record of synchronize">
+            <ion-list>
+              <div class="checkbox">
+                <label class="center-block">
+                  <input type="checkbox" formControlName="{{record.incomplete_name}}" [(ngModel)]="record.incomplete_name.checked">{{record.incomplete_name}}
+                </label>
+              </div>
+
+
+               <!--  <ion-item>
+                    <ion-label>
+                        {{record.incomplete_name}}<br>
+                        <span class="date-time">{{record.survey_completedOn | date:'E dd-MM-yyyy hh:mm a '}}</span>
+                    </ion-label>
+                 <ion-checkbox id="record.incomplete_name" formControlName="{{record.incomplete_name}}"  [(ngModel)]="record.incomplete_name" (click)="onFilterChange($event,record)"> {{record.incomplete_name}}</ion-checkbox>
+                   <!--  <ion-input  color="primary" formControlName="{{record.incomplete_name}}" id="{{record.incomplete_name}}" type="text"   [(ngModel)]="record.incomplete_name" ></ion-input> -->
+                <!-- </ion-item> --> 
+            </ion-list>
+            <div class="button-wrapper">
+              <button ion-button  (click)="synchronizeAll(synchronizeSurvey.value)">Save</button>
+            </div>
+        </div>
+      </form>
     </div>
-    <div class="button-wrapper">
-        <!-- <button ion-button outline >Syncronize $x Survey</button> -->
-       <button ion-button full>Syncronize $x Survey</button>
-    </div>
+   
 </ion-content>

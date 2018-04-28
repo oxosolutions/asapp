@@ -15,7 +15,7 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 export class ProfileEditPage {
   loginUser : FormGroup;
   result:any;
-   submitAttempt: boolean = false;
+  submitAttempt: boolean = false;
   constructor(public AioneHelp:AioneHelperProvider,public servicesProvider : AioneServicesProvider, public toastctrl:ToastController, public loaderctrl:LoadingController,public http: Http,public fb: FormBuilder,public viewCtrl: ViewController
 , public navCtrl: NavController, public navParams: NavParams) {
   	
