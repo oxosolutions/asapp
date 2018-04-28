@@ -32,15 +32,13 @@ export class SynchronizeSinglePage {
   //   console.log(surveyDetail);
   // }
   synchronizeAll(value){
-    
-    // console.log(value.testing);
-    //  console.log(value['testing']);
     this.submitAttempt=true;
+    var favorite = [];
+    $.each($("input[name='sport']:checked"), function(){            
+        favorite.push($(this).val());
+        console.log(favorite);
+    });
     console.log(value);
-    // console.log(array);
-    // let nameChangeLog: string[] = [];
-
-  
   }
   ionViewWillEnter(){
 
@@ -74,7 +72,7 @@ export class SynchronizeSinglePage {
           if(resultParse.length>0){
            this.synchronize=resultParse;
            this.loader.dismiss(); 
-           // console.log(this.synchronize);
+            console.log(this.synchronize);
           }else{
             this.synchronize=resultParse;
             console.log("no record found"); 

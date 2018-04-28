@@ -30,13 +30,9 @@
         </div>
         <div class="list-records" *ngFor="let  record of synchronize">
             <ion-list>
-              <div class="checkbox">
-                <label class="center-block">
-                  <input type="checkbox" formControlName="{{record.incomplete_name}}" [(ngModel)]="record.incomplete_name.checked">{{record.incomplete_name}}
-                </label>
-              </div>
-
-
+              <input  type="checkbox" value="{{record.serialNo}}" name="sport"><span style="display:none"> {{record.serialNo}}</span>
+               <label>{{record.incomplete_name}}</label>
+        
                <!--  <ion-item>
                     <ion-label>
                         {{record.incomplete_name}}<br>
