@@ -176,7 +176,7 @@ export class SynchronizeSinglePage {
       	this.servicesProvider.ExecuteRun(query1,[]).then((result:any)=>{
       	//console.log(result);
         this.servicesProvider.mobileListArray(result).then((resultParse:any)=>{
-          //this.checkSurveyDetail(resultParse.length).then((sur:any)=>{
+          this.checkSurveyDetail(resultParse.length).then((sur:any)=>{
           //console.log(resultParse);
           if(resultParse.length>0){
            this.synchronize=resultParse;
@@ -191,18 +191,21 @@ export class SynchronizeSinglePage {
             this.EmptySurvey=null;
           }
         });
-       // });
+        });
       });
     })
   }
   checkSurveyDetail(totalNo){
     return new Promise((resolve,reject)=>{
       let data=JSON.parse(localStorage.getItem("currentSurvey"));
-      data["completed"]=totalNo;
-      console.log(data);
-      localStorage.setItem("currentSurvey",JSON.stringify(data));
-      resolve("data");
-
+      let query="SELECT count(*) as count FROM surveyResult_"+ this.navParams.get('id') +" WHERE survey_sync_status = 'synchronized' ";
+      this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
+        let totalsyn=questions.rows.item(0).count;
+        data["synchronize"].totalsynchronize=totalsyn;
+        console.log(data);
+        localStorage.setItem("currentSurvey",JSON.stringify(data));
+        resolve("data");
+      });
     })
   }
 
