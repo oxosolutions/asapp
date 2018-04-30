@@ -91,7 +91,7 @@ export class SurveyDetailPage {
   syncronizePage(id,synchronize){
     console.log(synchronize);
     if(synchronize > 0){
-        this.navCtrl.push(SynchronizeSinglePage, {'id':id});  
+        this.navCtrl.setRoot(SynchronizeSinglePage, {'id':id});  
     }else{
         this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
     }

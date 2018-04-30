@@ -32,7 +32,7 @@ export class SynchronizeSinglePage {
     this.setCurrentPosition();
     this.checkSurvey(); 
   }
-  private setCurrentPosition() {
+  private setCurrentPosition(){
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
@@ -72,7 +72,10 @@ export class SynchronizeSinglePage {
               console.log(formValue);
                this.dataSend(formValue).then(()=>{
                  this.loader.dismiss();
-                 this.AioneHelp.presentToast('Synchronized data successfully',1200,'top');
+                 this.checkSurvey().then(()=>{
+                   this.AioneHelp.presentToast('Synchronized data successfully',1200,'top');
+                 })
+                 
              })
             }
         })
@@ -117,7 +120,7 @@ export class SynchronizeSinglePage {
                   console.log(query);
                   this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
                     console.log(update);
-                    resolve(update);
+                   resolve(update);
                    })
                 }
                  
@@ -154,6 +157,9 @@ export class SynchronizeSinglePage {
   //   this.synchronizeSurvey = form;
     
   // }
+   backToDetails(){
+    this.navCtrl.setRoot(SurveyDetailPage);
+  }
   checkSurvey(){
     //console.log(this.navParams.get('id'));
     return new Promise((resolve,reject)=>{
