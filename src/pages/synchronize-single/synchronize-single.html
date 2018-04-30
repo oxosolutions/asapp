@@ -21,32 +21,22 @@
 	
 
     <div *ngIf="synchronizeSurvey">
-      <form [formGroup]="synchronizeSurvey">
-        <div class="sub-head">
-          <ion-item>
-                  <ion-label> Select All </ion-label>
-                <ion-checkbox color="dark" (click)="filter = !filter" ></ion-checkbox>
-          </ion-item>
-        </div>
-        <div class="list-records" *ngFor="let  record of synchronize">
-            <ion-list>
-              <input  type="checkbox" value="{{record.serialNo}}" name="sport"><span style="display:none"> {{record.serialNo}}</span>
-               <label>{{record.incomplete_name}}</label>
+      <form #myForm='ngForm' (ngSubmit)="onSubmit(myForm)">
         
-               <!--  <ion-item>
-                    <ion-label>
-                        {{record.incomplete_name}}<br>
-                        <span class="date-time">{{record.survey_completedOn | date:'E dd-MM-yyyy hh:mm a '}}</span>
-                    </ion-label>
-                 <ion-checkbox id="record.incomplete_name" formControlName="{{record.incomplete_name}}"  [(ngModel)]="record.incomplete_name" (click)="onFilterChange($event,record)"> {{record.incomplete_name}}</ion-checkbox>
-                   <!--  <ion-input  color="primary" formControlName="{{record.incomplete_name}}" id="{{record.incomplete_name}}" type="text"   [(ngModel)]="record.incomplete_name" ></ion-input> -->
-                <!-- </ion-item> --> 
-            </ion-list>
+         <!--  <ion-list > -->
+              <ion-item *ngFor="let  record of synchronize">
+                <ion-label>{{record.incomplete_name}}</ion-label>
+                <ion-checkbox  [(ngModel)]="record.serialNo.selected" name="{{record.serialNo}}"
+                 color="red" ></ion-checkbox>
+              </ion-item>
+      
             <div class="button-wrapper">
-              <button ion-button  (click)="synchronizeAll(synchronizeSurvey.value)">Save</button>
+            <button  ion-button color="dark" outline>
+            <ion-icon name="add"></ion-icon>Next</button>
             </div>
+          </form>
         </div>
-      </form>
-    </div>
+      
+   <!--  </div> -->
    
 </ion-content>

@@ -26,6 +26,24 @@ export class SynchronizeSinglePage {
   ionViewDidLoad() {
     this.checkSurvey(); 
   }
+
+  onSubmit(formData){
+    let tablename="surveyResult_"+this.navParams.get('id');
+    if(!formData.valid){
+      console.log("not valid");  
+    }else{
+      let formValue = [];
+      for(let key in formData.value){
+        if(formData.value[key]== true){
+          console.log(key);
+          this.servicesProvider.SelectWhere(tablename,"serialNo",key).then((result:any)=>{
+            formValue.push(result.rows.item(0));
+            console.log(formValue);
+          })
+        }
+      }
+     }
+   }
   // onFilterChange(eve: any,surveyDetail) {
   //  console.log("clicked");
   //   this.filter = !this.filter;
@@ -34,14 +52,13 @@ export class SynchronizeSinglePage {
   synchronizeAll(value){
     this.submitAttempt=true;
     var favorite = [];
-    $.each($("input[name='sport']:checked"), function(){            
-        favorite.push($(this).val());
-        console.log(favorite);
-    });
+    // $.each($("input[name='sport']:checked"), function(){            
+    //     favorite.push($(this).val());
+    //     console.log(favorite);
+    // });
     console.log(value);
   }
   ionViewWillEnter(){
-
     const form: FormGroup = new FormGroup({});
     for(let i=0; i < this.synchronize.length; i++){
       let name=this.synchronize[i].incomplete_name;
