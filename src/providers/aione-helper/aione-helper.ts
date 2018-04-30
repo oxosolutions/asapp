@@ -23,13 +23,13 @@ export class AioneHelperProvider {
     console.log('Hello AioneHelperProvider Provider');
   }
   deviceInfo(){
-    this.DeviceInfo['cordova']=this.device.cordova;
-    this.DeviceInfo['model']=this.device.model;
-    this.DeviceInfo['platform']=this.device.platform;
+    // this.DeviceInfo['cordova']=this.device.cordova;
+    // this.DeviceInfo['model']=this.device.model;
+    // this.DeviceInfo['platform']=this.device.platform;
     this.DeviceInfo['version']=this.device.version;
-    this.DeviceInfo['manufacturer']=this.device.manufacturer;
-    this.DeviceInfo['serial']=this.device.serial;
-    return this.DeviceInfo['model'];
+    // this.DeviceInfo['manufacturer']=this.device.manufacturer;
+    // this.DeviceInfo['serial']=this.device.serial;
+    return this.DeviceInfo['version'];
   }
   internet(){
   	return new Promise ((resolve,reject)=>{

@@ -6,6 +6,7 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
 import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
 import 'rxjs/add/operator/map';
+import {Http , Headers, RequestOptions} from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -21,10 +22,29 @@ export class SynchronizeSinglePage {
   synchronizeSurvey:FormGroup;
    cucumber: boolean;
   submitAttempt: boolean = false;
-  constructor(public fb: FormBuilder,public servicesProvider:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private loaderCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  latitude:any;
+  longitude:any;
+  zoom:any;
+  appVersion:any;
+  constructor(public http: Http,public fb: FormBuilder,public servicesProvider:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private loaderCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad() {
+    this.setCurrentPosition();
     this.checkSurvey(); 
+    // this.AioneHelp.deviceInfo().then((info:any)=>{
+    //   this.appVersion=info;
+    // })
+  }
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        //console.log(this.latitude);
+        this.longitude = position.coords.longitude;
+         //console.log(this.longitude);
+        this.zoom = 12;
+      });
+    }
   }
 
   onSubmit(formData){
@@ -33,17 +53,65 @@ export class SynchronizeSinglePage {
       console.log("not valid");  
     }else{
       let formValue = [];
+      let json:any;
+       let forloop=0;
       for(let key in formData.value){
-        if(formData.value[key]== true){
-          console.log(key);
+        if(formData.value[key] == true){
           this.servicesProvider.SelectWhere(tablename,"serialNo",key).then((result:any)=>{
             formValue.push(result.rows.item(0));
-            console.log(formValue);
-          })
-        }
+            forloop++;
+            if(forloop == Object.keys(formData.value).length){
+              console.log(formValue);
+               this.dataSend(formValue).then(()=>{
+
+             })
+            }
+        })
+      
+      }else{
+        forloop++;
       }
-     }
-   }
+    }
+  }
+}
+  dataSend(formValue){
+    return new Promise((resolve,reject)=>{
+      let tablename="surveyResult_"+this.navParams.get('id');
+       var formData = new FormData;
+            formData.append('survey_data',JSON.stringify(formValue));
+            formData.append('survey_id',this.navParams.get('id'));
+            formData.append('activation_code', '292608');
+            formData.append('lat_long',JSON.stringify({lat: this.latitude, long: this.longitude}));
+            try{
+              this.AioneHelp.deviceInfo().then((info:any)=>{
+                formData.append('app_version',info);
+              });
+            }catch(e){
+              formData.append('app_version','Unable to get app version');
+            }
+            console.log(formData)
+            this.http.post("http://iris.scolm.com/api/survey_filled_data", formData)
+              .subscribe(data => {
+                console.log(data);
+                for(let i=0; i< formValue.length ; i++){
+                  // serialNo
+                  console.log(formValue[i]);
+                  console.log(formValue[i].serialNo);
+                  let query='Update '+ tablename + ' SET survey_sync_status = "synchronized" where serialNo = "'+ formValue[i].serialNo +'"';
+                  console.log(query);
+                  this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+                    console.log(update);
+                  })
+                }
+                 
+
+              },error=>{
+                console.log(error);
+              });
+    })
+    
+  }
+
   // onFilterChange(eve: any,surveyDetail) {
   //  console.log("clicked");
   //   this.filter = !this.filter;
@@ -58,16 +126,16 @@ export class SynchronizeSinglePage {
     // });
     console.log(value);
   }
-  ionViewWillEnter(){
-    const form: FormGroup = new FormGroup({});
-    for(let i=0; i < this.synchronize.length; i++){
-      let name=this.synchronize[i].incomplete_name;
-      const control: FormControl = new FormControl(name, Validators.required);
-        form.addControl(name, control);
-    }
-    this.synchronizeSurvey = form;
+  // ionViewWillEnter(){
+  //   const form: FormGroup = new FormGroup({});
+  //   for(let i=0; i < this.synchronize.length; i++){
+  //     let name=this.synchronize[i].incomplete_name;
+  //     const control: FormControl = new FormControl(name, Validators.required);
+  //       form.addControl(name, control);
+  //   }
+  //   this.synchronizeSurvey = form;
     
-  }
+  // }
   checkSurvey(){
     //console.log(this.navParams.get('id'));
     return new Promise((resolve,reject)=>{
