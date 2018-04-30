@@ -21,12 +21,6 @@ export class CompletedSurveyPage {
 
   }
   ionViewDidLoad() {
-    // this.survey=this.navParams.get('result');
-    // let data = this.survey.filter((element, index) =>{
-    // 		return (element.survey_status == 'completed');
-    // });
-    // this.complete=data;
-    // console.log(this.complete);
      this.checkSurvey(); 
   }
    backToDetails(){

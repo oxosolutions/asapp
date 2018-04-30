@@ -31,27 +31,35 @@ export class SynchronizeSinglePage {
   ionViewDidLoad() {
     this.setCurrentPosition();
     this.checkSurvey(); 
-    // this.AioneHelp.deviceInfo().then((info:any)=>{
-    //   this.appVersion=info;
-    // })
   }
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
-        //console.log(this.latitude);
         this.longitude = position.coords.longitude;
-         //console.log(this.longitude);
         this.zoom = 12;
       });
     }
   }
-
   onSubmit(formData){
+    console.log('clicked');
+    console.log(formData.value);
+      this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+
+    this.loader.present(); 
     let tablename="surveyResult_"+this.navParams.get('id');
-    if(!formData.valid){
-      console.log("not valid");  
+    if((!formData.valid)){
+      console.log("not valid"); 
+      this.loader.dismiss(); 
     }else{
+     
+      console.log('further');
       let formValue = [];
       let json:any;
        let forloop=0;
@@ -63,7 +71,8 @@ export class SynchronizeSinglePage {
             if(forloop == Object.keys(formData.value).length){
               console.log(formValue);
                this.dataSend(formValue).then(()=>{
-
+                 this.loader.dismiss();
+                 this.AioneHelp.presentToast('Synchronized data successfully',1200,'top');
              })
             }
         })
@@ -71,6 +80,13 @@ export class SynchronizeSinglePage {
       }else{
         forloop++;
       }
+       if(formData.value[key] == undefined){
+         if(forloop == Object.keys(formData.value).length){
+               this.loader.dismiss();
+               this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
+          }
+          
+        }
     }
   }
 }
@@ -101,11 +117,13 @@ export class SynchronizeSinglePage {
                   console.log(query);
                   this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
                     console.log(update);
-                  })
+                    resolve(update);
+                   })
                 }
                  
 
               },error=>{
+                this.loader.dismiss();
                 console.log(error);
               });
     })
