@@ -17,44 +17,21 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <div>
-        <ion-list class="custom-border">
-                <ion-item>
-                    <h2>Name of the completed survey</h2>
-                    
-                    <p>
-                        <ion-icon name="clock"></ion-icon>
-                        26 Dec 2017 | 12:45pm 
-                        <!--  <ion-icon name="refresh"></ion-icon>
-                         12 Incompleted -->
-                    </p>
-                    
-                </ion-item>
-                 <ion-item>
-                    <h2>Name of the completed survey</h2>
-                    
-                    <p>
-                        <ion-icon name="clock"></ion-icon>
-                        26 Dec 2017 | 12:45pm 
-                        <!--  <ion-icon name="refresh"></ion-icon>
-                         12 Incompleted -->
-                    </p>
-                    
-                </ion-item>
-                 <ion-item>
-                    <h2>Name of the completed survey</h2>
-                    
-                    <p>
-                        <ion-icon name="clock"></ion-icon>
-                        26 Dec 2017 | 12:45pm 
-                        <!--  <ion-icon name="refresh"></ion-icon>
-                         12 Incompleted -->
-                    </p>
-                    
-                </ion-item>
-        </ion-list>
-    </div>
-    <div>
-    	
-    </div>
+   <!--   <form #myForm='ngForm' >
+        <div>
+          <ion-item *ngFor="let record of listSurvey">
+            <ion-label>{{record.incomplete_name}}</ion-label>
+            <ion-checkbox  [(ngModel)]="record.incomplete_name.selected" name="{{record.incomplete_name}}" 
+             color="red" ></ion-checkbox>
+          </ion-item>
+       
+          <div class="button-wrapper">
+              <button  ion-button color="dark" outline (click)="onSubmit(myForm,listSurvey)">
+               <ion-icon name="add" ></ion-icon>Next</button>
+          </div>
+         </div>
+      </form> -->
+
+
+      
 </ion-content>
