@@ -1,12 +1,13 @@
 
 <ion-header>
-		
-			
-	<ion-navbar color="headerClassic">
-    	<ion-title><button ion-button menuToggle class="dashboard-menu-toggle" >
-  				<ion-icon name="menu"></ion-icon>
-			</button>surveyDetail</ion-title>
-  	</ion-navbar>
+  <ion-navbar color="headerClassic">
+  	<button ion-button menuToggle>
+  		<ion-icon name="menu"></ion-icon>
+  	</button>
+    <ion-title> <!-- <span *ngIf="surveyTitle">{{surveyTitle}}</span> -->
+       Survey detail
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 <ion-content>
 <div  *ngIf="surveyDetail">

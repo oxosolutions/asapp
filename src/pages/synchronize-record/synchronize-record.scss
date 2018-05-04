@@ -13,7 +13,7 @@ page-synchronize-record {
 		font-size: 20px;
 		margin-bottom: 12px;
 		.sync-item-title{
-			padding: 12px;
+			
 		}
 		.sync-item-footer{
 			border-top: 1px solid #e8e8e8;
@@ -48,5 +48,8 @@ page-synchronize-record {
 	}
 	.clear{
 		clear: both;
+	}
+	.item.item-md .checkbox-md{
+		margin: 9px 10px 9px 4px
 	}
 }
