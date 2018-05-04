@@ -1,4 +1,52 @@
 page-synchronize-record {
- 
-
+	.scroll-content{
+		padding: 0 !important;
+     	background-color: #efefef;
+     	margin-top: 90px;
+	}
+	.custom-subheader{
+		min-height: 42px;
+		padding: 0;
+	}
+	.sync-item{
+		background: #ffffff;
+		font-size: 20px;
+		margin-bottom: 12px;
+		.sync-item-title{
+			padding: 12px;
+		}
+		.sync-item-footer{
+			border-top: 1px solid #e8e8e8;
+			.footer-item{
+				text-align: center;
+				padding: 10px 5px;
+				font-size: 14px;
+				float: left;
+				width: 50%;
+				color: #555555;
+				border-right: 1px solid #e8e8e8;
+			}
+			.footer-item:nth-child(2){
+				border-right: none;
+			}
+			ion-icon{
+				font-size: 20px;
+				vertical-align: middle;
+    			margin-right: 4px;
+			}
+		}
+	}
+	.sync-button{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		padding: 5px;
+		button{
+			width: 100%
+		}
+	}
+	.clear{
+		clear: both;
+	}
 }

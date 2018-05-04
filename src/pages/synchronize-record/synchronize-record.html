@@ -15,6 +15,12 @@
           </button>
       </ion-buttons>
   </ion-toolbar>
+<ion-toolbar class="custom-subheader">
+    <ion-item >
+        <ion-label>Select All</ion-label>
+        <ion-checkbox></ion-checkbox>
+    </ion-item>
+</ion-toolbar>
 </ion-header>
 <ion-content>
    <!--   <form #myForm='ngForm' >
@@ -31,7 +37,40 @@
           </div>
          </div>
       </form> -->
-
-
-      
+    <div class="sync-item">
+        <div class="sync-item-title">
+            Survey item 1
+        </div>
+        <div class="sync-item-footer">
+            <div class="footer-item">
+               
+                <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+                12 Synchronized
+            </div>
+            <div class="footer-item">
+                 <ion-icon name="ios-photos-outline"></ion-icon>
+                30 Unsynchronized
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="sync-item">
+        <div class="sync-item-title">
+            Survey item 1
+        </div>
+        <div class="sync-item-footer">
+            <div class="footer-item">
+                <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+                12 Synchronized
+            </div>
+            <div class="footer-item">
+                 <ion-icon name="ios-photos-outline"></ion-icon>
+                30 Unsynchronized
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="sync-button">
+        <button ion-button class=""  >Synchronize</button>
+    </div>
 </ion-content>
