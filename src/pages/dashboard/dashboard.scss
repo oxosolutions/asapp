@@ -8,11 +8,12 @@ page-dashboard {
 		background-color: #e8e8e8;
 	}
 	.dashbaord-background{
-		background-image: url('../../assets/imgs/dashboard.jpg');
+		// background-image: url('../../assets/imgs/dashboard.jpg');
+		background: #006f64;
 		position: relative;
 
 		.overlay{
-			background-color: rgba(128, 128, 128, 0.8);
+			// background-color: rgba(128, 128, 128, 0.8);
 
 			text-align: center;
 			padding: 100px 30px;
