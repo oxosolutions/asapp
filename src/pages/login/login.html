@@ -19,13 +19,9 @@
             <div>
                 <ion-input class="password" type="password" placeholder="Password" formControlName="password" [(ngModel)]="password"></ion-input>
             </div>
-            <ion-item class="checkbox-wrapper">
-                <ion-label>Keep Me logged in</ion-label>
-                <ion-checkbox color="dark" checked="true">as,dadskj</ion-checkbox>
-            </ion-item>
+           
             <div class="btn-wrapper">
                 <button ion-button  full (click)="Login(loginUser,username,password)">Submit</button>
-                
             </div>
             <div class="btn-wrapper">
                <!--  <button ion-button color="secondary"  full>Cancel</button>
@@ -34,10 +30,15 @@
             <ion-grid class="extra-options">
                 <ion-row>
                     <ion-col col-sm-6 >
-                        Forgot password
+                        <span>
+                            Forgot password    
+                        </span>
+                        
                     </ion-col>
                     <ion-col col-sm-6 >
-                        New User?   
+                        <span>
+                            New User?   
+                        </span>
                     </ion-col>
                 </ion-row>
             </ion-grid>

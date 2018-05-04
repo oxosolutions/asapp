@@ -1,45 +1,38 @@
 page-incompleted-survey {
-	$ItemColors: #dd4c3d, #d17b2a, #81ceb2, #099dc6, #bebebe;
-	 @for $i from 1 through 5 {
-        .custom-card:nth-child(5n+#{$i}){
-            border-left: 4px solid nth($ItemColors,$i);
-        }
-    }
+	.scroll-content{
+		padding: 0 !important;
+     	background-color: #efefef;
+	}
+	
 	.custom-card{
 		border:1px solid #e8e8e8;
-		margin-bottom: 16px;
+		margin-bottom: 12px;
+		background: white;
 
 		.percentage-wrapper{
-			width: 70px;
-			float: left;
-			text-align: center;
-			margin-top: 16px;
+			float: right;
 
 			div{
-				background-color: #24b56f;
-				display: inline-block;
-				line-height: 46px;
-				width: 46px;
-				border-radius: 50%;
+				
 			}
 			span{
-				display: inline-block;
-				background-color: white;
-				line-height: 38px;
-				width: 38px;
-				border-radius: 50%;	
-				font-weight: 700
+				
 			}
 		}
 		.content-wrapper{
-			width: calc(100% - 70px);
+			width: 100%;
 			float: left;
 			padding: 10px;
 
 			.item-title{
-				font-size: 15px;
+				font-size: 20px;
 				color: #757575;
-				line-height: 1.5
+				line-height: 1;
+				margin-bottom: 8px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+
 			}
 			.pause-location{
 				font-size: 14px;
@@ -48,30 +41,36 @@ page-incompleted-survey {
 				margin-bottom: 3px;
 			}
 			.start-end-date{
-				font-size: 11px;
+				font-size: 14px;
 				line-height: 1.5;
-				color: grey;
+				color: #999;
 
-				span{
-					margin-right: 30px;
-				}
+				
 
 				ion-icon{
-					color: grey
+					color: grey;
+					margin-right: 6px;
+					vertical-align: top;
+					font-size: 20px;
 				}
 			}
 		}
 		.custom-card-footer{
-			background-color: #efefef;
+			background-color: #ffffff;
 			border-top: 1px solid #e8e8e8;
-			font-size: 11px;
+			font-size: 14px;
 
 			.question-incomplete{
 				display: inline-block;
 				padding: 10px;
+				color: #454545;
 
 				ion-icon{
-					color: #dd4c3d;
+					color: #FF6F00;
+    				font-size: 20px;				
+     				vertical-align: middle;
+     				margin-right: 6px;
+
 				}
 			}
 			.resume-survey{
@@ -80,16 +79,21 @@ page-incompleted-survey {
 				border-left: 1px solid #e8e8e8;
 				border-right: 1px solid #e8e8e8;
 				float: right;
+				color: #454545;
 
 				ion-icon{
-					color: green;
+					color: #43A047;
+					font-size: 20px;				
+     				vertical-align: middle;
+     				margin-right: 6px;
 				}
 			}
 			.trash-survey{
 				display: inline-block;
 				float: right;
 				padding: 10px;
-				color: grey
+				color: white;
+				background: #E57373
 			}
 
 

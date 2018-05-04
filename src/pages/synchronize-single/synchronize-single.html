@@ -1,34 +1,30 @@
 <ion-header>
-  <ion-toolbar color="headerClassic">
-      <ion-buttons style="float: left" (click)="backToDetails()">
-          <button ion-button icon-only>
-              <ion-icon name="md-arrow-round-back" ></ion-icon>
-          </button>
-      </ion-buttons>
-      <ion-title><span>Synchronize-survey</span></ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="headerClassic">
+        <ion-buttons style="float: left" (click)="backToDetails()">
+            <button ion-button icon-only>
+                <ion-icon name="md-arrow-round-back" >
+                </ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            <span>Synchronize-survey</span>
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
-<!-- <button (click)="filter = !filter">Change Status</button> -->
-	
-
-  <!--   <div *ngIf="synchronizeSurvey"> -->
-      <form #myForm='ngForm' >
-        
-         <!--  <ion-list > -->
-              <ion-item *ngFor="let  record of synchronize">
-                <ion-label>{{record.incomplete_name}}</ion-label>
-                <ion-checkbox  [(ngModel)]="record.serialNo.selected" name="{{record.serialNo}}"
-                 color="red" ></ion-checkbox>
-              </ion-item>
-      
-            <div class="button-wrapper">
+    <form #myForm='ngForm' >
+        <ion-item *ngFor="let  record of synchronize">
+            <ion-label>
+                {{record.incomplete_name}}
+            </ion-label>
+            <ion-checkbox  [(ngModel)]="record.serialNo.selected" name="{{record.serialNo}}"
+            color="red" >
+            </ion-checkbox>
+        </ion-item>
+        <div class="button-wrapper">
             <button  ion-button color="dark" outline (click)="onSubmit(myForm)">
-            <ion-icon name="add" ></ion-icon>Next</button>
-            </div>
-          </form>
-<!--         </div> -->
-      
-   <!--  </div> -->
-   
+                <ion-icon name="add" >
+                </ion-icon>Next</button>
+        </div>
+    </form>
 </ion-content>
