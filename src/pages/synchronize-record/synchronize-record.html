@@ -37,65 +37,30 @@
           </div>
          </div>
       </form> -->
-    <div class="sync-item">
+   <form #myForm='ngForm' >
+    <div class="sync-item" *ngFor="let record of listSurvey">
         <div class="sync-item-title">
             <ion-item>
-                <ion-label>Survey Item 1</ion-label>
-                <ion-checkbox></ion-checkbox>
-            </ion-item>
-        </div>
-        <div class="sync-item-footer">
-            <div class="footer-item">
-               
-                <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-                12 Synchronized
-            </div>
-            <div class="footer-item">
-                 <ion-icon name="ios-photos-outline"></ion-icon>
-                30 Unsynchronized
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="sync-item">
-        <div class="sync-item-title">
-            <ion-item >
-                <ion-label>Survey Item 2</ion-label>
-                <ion-checkbox></ion-checkbox>
+                <ion-label>{{record.name}}</ion-label>
+                 <ion-checkbox  [(ngModel)]="record.tablename.selected" name="{{record.tablename}}" 
+             color="red" ></ion-checkbox>
             </ion-item>
         </div>
         <div class="sync-item-footer">
             <div class="footer-item">
                 <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-                12 Synchronized
+                {{record.synchronize}} Synchronized
             </div>
             <div class="footer-item">
                  <ion-icon name="ios-photos-outline"></ion-icon>
-                30 Unsynchronized
+                {{record.unsynchronize}} Unsynchronized
             </div>
             <div class="clear"></div>
         </div>
     </div>
-    <div class="sync-item">
-        <div class="sync-item-title">
-            <ion-item >
-                <ion-label>Survey Item 2</ion-label>
-                <ion-checkbox></ion-checkbox>
-            </ion-item>
-        </div>
-        <div class="sync-item-footer">
-            <div class="footer-item">
-                <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-                12 Synchronized
-            </div>
-            <div class="footer-item">
-                 <ion-icon name="ios-photos-outline"></ion-icon>
-                30 Unsynchronized
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
+   
     <div class="sync-button">
-        <button ion-button class="">Synchronize All</button>
+        <button ion-button class="" (click)="onSubmit(myForm)">Synchronize All</button>
     </div>
+  </form> 
 </ion-content>
