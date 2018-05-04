@@ -9,15 +9,15 @@
       <ion-title><span>completed-survey</span></ion-title>
   </ion-toolbar>
 </ion-header>
-
+a
 
 <ion-content padding>
 
 	<div class="custom-card" *ngFor="let  record of complete">
 		<div>
-			<div class="percentage-wrapper">
+			<!-- <div class="percentage-wrapper">
 				<div><span><ion-icon name="md-checkmark"></ion-icon></span></div>
-			</div>
+			</div> -->
 			<div class="content-wrapper">
 				<div class="item-title">{{record.incomplete_name}}</div>
 				<!-- <div class="pause-location">7th question, Section 3</div> -->
@@ -26,6 +26,9 @@
 						<ion-icon name="md-calendar"></ion-icon>
 						{{record.survey_startedOn | date:'fullDate' }}
 					</span>
+					<div class="percentage-wrapper">
+						<div><span>{{record.filledQuestions}} Question Filled</span></div>
+					</div>
 					
 				</div>
 
@@ -33,18 +36,21 @@
 			<div class="clear"></div>	
 		</div>
 		<div class="custom-card-footer">
-			<div class="question-incomplete">
+			<!-- <div class="question-incomplete">
 				<ion-icon name="alert"></ion-icon>
 					{{record.filledQuestions}} Question Filled
-			</div>
+			</div> -->
 			
 			<div class="trash-survey">
 				<ion-icon name="md-trash" (click)="deleteDetails(record.serialNo)"></ion-icon>
 								
 			</div>
 			<div class="resume-survey" (click)="resume(record)">
-				<ion-icon name="md-arrow-dropright-circle"></ion-icon>
+				<ion-icon name="ios-create"></ion-icon>
 				Edit			
+			</div>
+			<div class="clear">
+				
 			</div>
 		</div>
 		
