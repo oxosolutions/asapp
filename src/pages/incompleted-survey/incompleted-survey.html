@@ -1,13 +1,14 @@
 
 <ion-header>
-  <ion-toolbar color="headerClassic">
-      <ion-buttons style="float: left" (click)="backToDetails()">
-          <button ion-button icon-only>
-          	  <ion-icon name="md-arrow-round-back" ></ion-icon>
-          </button>
-      </ion-buttons>
-      <ion-title><span>Syncronize records</span></ion-title>
-  </ion-toolbar>
+ 
+  <ion-navbar color="headerClassic" class="back-btn-header">
+        <button ion-button  (click)="backToDetails()">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+        </button>
+        <ion-title> 
+           incomplete survey
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content padding>
 	<div class="custom-card" *ngFor="let  record of incomplete">
@@ -40,3 +41,9 @@
 		</div>
 	</div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>&copy; Copyright by OXO solutions | Developed by OXO Solutions</ion-title>
+  </ion-toolbar>
+</ion-footer>

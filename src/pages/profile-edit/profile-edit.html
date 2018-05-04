@@ -7,13 +7,15 @@
 
 </ion-header> -->
 <ion-header>
-  <ion-toolbar color="headerClassic">
-      <button ion-button color="transparent" (click)="dismiss()" style="box-shadow: none">
-          <ion-icon  name="ios-arrow-round-back-outline"></ion-icon>
-      </button>
-      <ion-title style="display: inline-block;">Edit profile details</ion-title>
-      
-  </ion-toolbar>
+  <ion-navbar color="headerClassic" class="back-btn-header">
+        <button ion-button  (click)="dismiss()">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+        </button>
+        <ion-title> 
+           Edit profile details
+        </ion-title>
+  </ion-navbar>
+
 </ion-header>
 
 

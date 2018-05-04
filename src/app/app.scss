@@ -70,3 +70,20 @@
 		font-size: 13px;
 	}
 }
+.back-btn-header{
+	.button-md{
+		float: left;
+		background: transparent;
+		box-shadow: none;
+	}
+	.button-md:hover{
+		background: transparent;
+	}
+	ion-title{
+		float: left;
+
+		.toolbar-title-md{
+			line-height: 44px;
+		}
+	}
+}

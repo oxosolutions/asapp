@@ -10,12 +10,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-<div  *ngIf="surveyDetail">
+<div *ngIf="surveyDetail">
 	<div class="details-wrapper">
 		<ion-list>
   			<ion-item>
 				<ion-avatar item-start>
-  					<img src="../../assets/imgs/surveyicon.png">
+  					<img src="assets/imgs/surveyicon.png">
     			</ion-avatar>
     			<h2>{{surveyDetail?.name}}</h2>	
     			<h3>{{surveyDetail?.filledSurvey}} times filled</h3>
@@ -90,4 +90,8 @@
 	</div>
 </div>
 </ion-content>
-	
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>&copy; Copyright by OXO solutions | Developed by OXO Solutions</ion-title>
+  </ion-toolbar>
+</ion-footer>
