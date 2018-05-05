@@ -39,7 +39,7 @@ export class DashboardPage {
   	this.navCtrl.setRoot(ListsurveyPage);
   }
   synchronizeRecord(){
-    this.navCtrl.setRoot(SynchronizeRecordPage);
+    this.navCtrl.push(SynchronizeRecordPage);
   }
 
 }

@@ -4,6 +4,7 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { LoadingController } from 'ionic-angular';
 import {Http , Headers, RequestOptions} from '@angular/http';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
 @IonicPage()
 @Component({
   selector: 'page-synchronize-record',
@@ -24,6 +25,7 @@ export class SynchronizeRecordPage {
   	this.checkSurvey().then((selected:any)=>{
   	})	
   }
+
   checkSurvey(){
   	return new Promise((resolve,reject)=>{
   		let forloop=0;
@@ -38,9 +40,10 @@ export class SynchronizeRecordPage {
                 this.synchronizeData=this.synchronizeData.filter((Element,index)=>{
                   return(Element != undefined);
                 });
+                console.log(this.synchronizeData);
                 if(this.synchronizeData.length >0){
                   this.listSurvey=this.synchronizeData;
-                  console.log(this.listSurvey)
+                  // console.log(this.listSurvey)
                 }else{
                   console.log('no surveys');
                 }
@@ -53,11 +56,11 @@ export class SynchronizeRecordPage {
 	    })
   	})	
   }
+  backToDetails(){
+    this.navCtrl.push(DashboardPage);
+  }
   synchronizeStatus(tablename,collection){
     return new Promise((resolve,reject)=>{ 
-      
-     
-
       let query="SELECT count(*) as count FROM "+ tablename +" WHERE survey_sync_status = 'synchronized' ";
       this.servicesProvider.ExecuteRun(query,[]).then((questions:any)=>{
           let totalsyn=questions.rows.item(0).count;
@@ -79,10 +82,8 @@ export class SynchronizeRecordPage {
                 }else{
                   resolve();
                 }
-               
              })
           }
-       
          }) ;
       }) 
     })
@@ -107,12 +108,39 @@ export class SynchronizeRecordPage {
   		}
   	})
   }
-
   
-
+  ckbCheckAll(event){
+    if(event.srcElement.checked == true){ 
+      $(".checkBoxClass").each(function(){
+        $(this).prop('checked',true); 
+      });
+    }else{
+      localStorage.setItem("selectAllcheckbox",'false');
+      $(".checkBoxClass").each(function(){
+          $(this).prop('checked',false);
+      });
+    }
+  }
+  checkboxValidate(){
+    return new Promise((resolve,reject)=>{
+      let tablename11=[];
+      $(".checkBoxClass").each(function(){
+        if(!$(this).is(':checked')){
+        }else{
+        let table = $(this).attr("ng-reflect-name"); 
+        tablename11.push(table);
+        console.log(tablename11);
+        }  ;
+      })
+     
+    })
+  }
   onSubmit(formData){
-  	// console.log(formData);
    
+    this.checkboxValidate().then(()=>{
+   
+     
+
     //   this.loader = this.loaderCtrl.create({
     //   spinner: 'crescent',
     //   content: `
@@ -175,6 +203,7 @@ export class SynchronizeRecordPage {
       // }
      }
   }
+  })
 }
   ArrayParse(formValue){
     let parsed=[]
@@ -222,19 +251,26 @@ export class SynchronizeRecordPage {
             console.log(formData)
             this.http.post("http://iris.scolm.com/api/survey_filled_data", formData)
               .subscribe(data => {
+                
                 console.log(data);
-
-                for(let i=0; i< listsurvey.length ; i++){
-                  
-                  console.log(listsurvey[i]);
-                 
-                  let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
-                  console.log(query);
-                  this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
-                    console.log(update);
-                   resolve(update);
-                   })
-                }
+                console.log(data)
+                console.log(data.json);
+                let apiResult:any;
+                apiResult=data.json;
+                console.log(apiResult.status);
+                if(apiResult.status=='error'){
+                  console.log('error');
+                }else{
+                  for(let i=0; i< listsurvey.length ; i++){   
+                    console.log(listsurvey[i]);
+                    // let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
+                    // console.log(query);
+                    // this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+                    //   console.log(update);
+                    //  resolve(update);
+                    //  })
+                  }
+                 }
               },error=>{
                 // this.loader.dismiss();
                 console.log(error);

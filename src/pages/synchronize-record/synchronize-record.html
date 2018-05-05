@@ -1,66 +1,65 @@
 <ion-header>
-  <ion-toolbar color="headerClassic">
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title><span>Syncronize records</span></ion-title>
-      <ion-buttons end>
-          <button ion-button icon-only>
-              <ion-icon name="search"></ion-icon>
-          </button>
-      </ion-buttons>
-      <ion-buttons end>
-          <button ion-button icon-only>
-              <ion-icon name="more"></ion-icon>
-          </button>
-      </ion-buttons>
+  <ion-toolbar color="headerClassic" class="back-btn-header">
+    <button ion-button  (click)="backToDetails()">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+    </button>
+    <ion-title><span>Syncronize records</span></ion-title>
+     
   </ion-toolbar>
-<ion-toolbar class="custom-subheader">
-    <ion-item >
-        <ion-label>Select All</ion-label>
-        <ion-checkbox></ion-checkbox>
-    </ion-item>
-</ion-toolbar>
+
 </ion-header>
 <ion-content>
-   <!--   <form #myForm='ngForm' >
-        <div>
-          <ion-item *ngFor="let record of listSurvey">
-            <ion-label>{{record.incomplete_name}}</ion-label>
-            <ion-checkbox  [(ngModel)]="record.incomplete_name.selected" name="{{record.incomplete_name}}" 
-             color="red" ></ion-checkbox>
+
+
+ <!-- <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);"> Check All
+    <div id="checkBoxes">
+     <div class="sync-item" *ngFor="let record of listSurvey">
+      
+         <ion-item>
+                 <input type="checkbox"  class="checkBoxClass" 
+             name="{{record.tablename}}"   color="red" >{{record.name}}
           </ion-item>
-       
-          <div class="button-wrapper">
-              <button  ion-button color="dark" outline (click)="onSubmit(myForm,listSurvey)">
-               <ion-icon name="add" ></ion-icon>Next</button>
+        
+        </div>
+        <br />
+    </div>  -->
+
+  <div *ngIf="(listSurvey!=null); else second">
+      
+      <form #myForm='ngForm' >
+        <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All
+        <div id="checkBoxes">
+          <div class="sync-item" *ngFor="let record of listSurvey">
+            <div class="sync-item-title">
+              <ion-item>
+                 <!--  <ion-label>{{record.name}}</ion-label> -->
+                   <!-- <ion-checkbox  [(ngModel)]="record.tablename.selected" class="checkBoxClass" name="{{record.tablename}}" 
+               color="red" ></ion-checkbox> -->
+
+                <input type="checkbox" [(ngModel)]="record.tablename.selected" id="id" class="checkBoxClass" name="{{record.tablename}}"  color="red">{{record.name}}
+              </ion-item>
+            </div>
+            <div class="sync-item-footer">
+              <div class="footer-item">
+                  <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+                  {{record.synchronize}} Synchronized
+              </div>
+              <div class="footer-item">
+                   <ion-icon name="ios-photos-outline"></ion-icon>
+                  {{record.unsynchronize}} Unsynchronized
+              </div>
+              <div class="clear"></div>
+            </div>
           </div>
-         </div>
-      </form> -->
-   <form #myForm='ngForm' >
-    <div class="sync-item" *ngFor="let record of listSurvey">
-        <div class="sync-item-title">
-            <ion-item>
-                <ion-label>{{record.name}}</ion-label>
-                 <ion-checkbox  [(ngModel)]="record.tablename.selected" name="{{record.tablename}}" 
-             color="red" ></ion-checkbox>
-            </ion-item>
+          <div class="sync-button">
+              <button ion-button class="ddd" (click)="onSubmit(myForm)">Synchronize All</button>
+          </div>
         </div>
-        <div class="sync-item-footer">
-            <div class="footer-item">
-                <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-                {{record.synchronize}} Synchronized
-            </div>
-            <div class="footer-item">
-                 <ion-icon name="ios-photos-outline"></ion-icon>
-                {{record.unsynchronize}} Unsynchronized
-            </div>
-            <div class="clear"></div>
-        </div>
+      </form> 
     </div>
+    <ng-template #second>
+      <p class="noSuvey">there is no survey</p>
+    </ng-template>
    
-    <div class="sync-button">
-        <button ion-button class="" (click)="onSubmit(myForm)">Synchronize All</button>
-    </div>
-  </form> 
+  
 </ion-content>

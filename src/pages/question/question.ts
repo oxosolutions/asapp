@@ -540,30 +540,35 @@ export class QuestionPage {
     console.log(e.checked);
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
-  // console.log(this.form.value);
+  
  
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
      console.log(formValidate);
     let i=0;
     let json;
     let formValue=[];
+
     if(formValidate == null){
-      console.log("not valid");
+      if(QuestionType=="checkbox"){
+         console.log(this.form.value);
+      }else{
+        console.log("not valid");
       this.Errors="it is not valid";
+      }
     }else{
       let formValue=[];
        //console.log("valid");
       if(QuestionType=="checkbox"){
+        console.log(this.form.value);
         // this.checkbox(questionKey).then(()=>{
 
         // });
         // json=JSON.stringify(formValidate);
-        console.log(this.form.value[questionText]);
-        formValue.push(this.form.value[questionText]);
-      }else{
+        // console.log(this.form.value[questionText]);
+        // formValue.push(this.form.value[questionText]);
+       }else{
         formValue.push(formValidate);
         //console.log(formValue);
-      
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
        localStorage.setItem("lastquestionIndex", this.indexArray.toString());
@@ -602,7 +607,7 @@ export class QuestionPage {
           });
       }
       } 
-       }
+        }
       form.reset(); 
        })
     //} 
