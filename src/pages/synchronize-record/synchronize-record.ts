@@ -121,103 +121,74 @@ export class SynchronizeRecordPage {
       });
     }
   }
-  checkboxValidate(){
+  checkboxValidate(surveylength){
     return new Promise((resolve,reject)=>{
       let tablename11=[];
+      let forloop=0;
       $(".checkBoxClass").each(function(){
-        if(!$(this).is(':checked')){
+        if($(this).is(':checked')){
+          forloop++;
+          let table = $(this).attr("ng-reflect-name");
+          tablename11.push(table);   
         }else{
-        let table = $(this).attr("ng-reflect-name"); 
-        tablename11.push(table);
-        console.log(tablename11);
-        }  ;
+          forloop++;
+        }
+        if(forloop == surveylength){
+          resolve(tablename11);
+        }
       })
      
     })
   }
   onSubmit(formData){
-   
-    this.checkboxValidate().then(()=>{
-   
-     
+    this.checkboxValidate(Object.keys(formData.value).length).then((table:any)=>{
+      //   this.loader = this.loaderCtrl.create({
+      //   spinner: 'crescent',
+      //   content: `
+      //   <div class="custom-spinner-container">
+      //     <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      //   </div>`,
+      // });
 
-    //   this.loader = this.loaderCtrl.create({
-    //   spinner: 'crescent',
-    //   content: `
-    //   <div class="custom-spinner-container">
-    //     <div class="custom-spinner-box">`+'Refreshing data'+`</div>
-    //   </div>`,
-    // });
-
-    // this.loader.present(); 
-    
-    if((!formData.valid)){
-      console.log("not valid"); 
-      // this.loader.dismiss(); 
-    }else{
-     console.log(formData.value);
-    //   console.log('further');
-      let formValue = [];
-      let listtable=[];
-      let json:any;
-      let forloop=0;
-      for(let key in formData.value){
-        if(formData.value[key] == true){
-          this.answerGet(key).then((answer:any)=>{ console.log(key);
-            forloop++;
-            let json=key;
-            listtable.push(json);
-            formValue.push(answer);
-            if(forloop == Object.keys(formData.value).length){ console.log(listtable);
-              this.ArrayParse(formValue).then((parsedData:any)=>{ 
-                console.log(parsedData);
-  
-                this.dataSend(parsedData,listtable).then(()=>{
-                 })
-              }); 
-             }
-          })
-  //       	let tablename="surveyResult_"+this.navParams.get('id');
-  //         this.servicesProvider.SelectWhere(tablename,"serialNo",key).then((result:any)=>{
-  //           formValue.push(result.rows.item(0));
-  //           forloop++;
-  //           if(forloop == Object.keys(formData.value).length){
-  //             console.log(formValue);
-  //              //this.dataSend(formValue).then(()=>{
-  //                // this.loader.dismiss();
-  //                this.checkSurvey().then(()=>{
-  //                  this.AioneHelp.presentToast('Synchronized data successfully',1200,'top');
-  //                })
-                 
-  //            //})
-  //           }
-  //       })
-      
-       }
-      //if user nothing selected and just clicked
-      // if(formData.value[key] == undefined){
-      //   if(forloop == Object.keys(formData.value).length){
-      //         // this.loader.dismiss();
-      //          this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
-      //   }
-      // }
-     }
+      // this.loader.present(); 
+      if((table.length>0)){
+        let formValue = [];
+        let listtable=[];
+        let json:any;
+        let forloop=0;
+        table.forEach((key,value)=>{
+          console.log(key);
+             this.answerGet(key).then((answer:any)=>{ console.log(answer);
+                forloop++;
+                formValue.push(answer);
+                 if(forloop == table.length){ 
+                this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
+                  this.dataSend(parsedData,table).then(()=>{
+                   })
+                 }); 
+                }
+            })
+          });
+        // this.loader.dismiss(); 
+      }else{
+        console.log("pls check for synchronize");
+      }
+    })  
   }
-  })
-}
   ArrayParse(formValue){
     let parsed=[]
-    return new Promise((resolve,reject)=>{
-      formValue.forEach((value,key)=>{
+    return new Promise((resolve,reject)=>{ console.log(formValue);
+      formValue.forEach((value,key)=>{ console.log(key);
         let forloop=0;
         Object.keys(value).forEach((valuearray,keyarray)=>{
           forloop++;
           parsed.push(value[valuearray]);
-          if((value.length-1)==(key)){
+          // if((value.length-1)==(key)){
+          //   console.log("hii");
             if(forloop==value.length){
               resolve(parsed);
             }
-          }  
+          // }  
         });
       });
     });
@@ -227,7 +198,6 @@ export class SynchronizeRecordPage {
       let query1="SELECT * FROM "+ tablename +" WHERE survey_sync_status IS NULL AND survey_status = 'completed' ";
       this.servicesProvider.ExecuteRun(query1,[]).then((answer:any)=>{
         this.servicesProvider.mobileListArray(answer).then((list:any)=>{ 
-          // list["tablename"]=tablename;
            resolve(list);
         });
       });
@@ -236,46 +206,44 @@ export class SynchronizeRecordPage {
   dataSend(formValue,listsurvey){
     return new Promise((resolve,reject)=>{
       let tablename="surveyResult_"+this.navParams.get('id');
-       var formData = new FormData;
-            formData.append('survey_data',JSON.stringify(formValue));
-            formData.append('survey_id',this.navParams.get('id'));
-            formData.append('activation_code', '292608');
-            formData.append('lat_long',JSON.stringify({lat: this.latitude, long: this.longitude}));
-            try{
-              this.AioneHelp.deviceInfo().then((info:any)=>{
-                formData.append('app_version',info);
-              });
-            }catch(e){
-              formData.append('app_version','Unable to get app version');
+      var formData = new FormData;
+      formData.append('survey_data',JSON.stringify(formValue));
+      formData.append('survey_id',this.navParams.get('id'));
+      formData.append('activation_code', '292608');
+      formData.append('lat_long',JSON.stringify({lat: this.latitude, long: this.longitude}));
+      try{
+        this.AioneHelp.deviceInfo().then((info:any)=>{
+          formData.append('app_version',info);
+        });
+      }catch(e){
+        formData.append('app_version','Unable to get app version');
+      }
+      console.log(formData)
+      this.http.post("http://iris.scolm.com/api/survey_filled_data", formData)
+        .subscribe(data => { 
+          console.log(data);
+          console.log(data)
+          console.log(data.json);
+          let apiResult:any;
+          apiResult=data.json;
+          console.log(apiResult.status);
+          if(apiResult.status=='error'){
+            console.log('error');
+          }else{
+            for(let i=0; i< listsurvey.length ; i++){   
+              console.log(listsurvey[i]);
+              let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
+              console.log(query);
+              // this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+              //   console.log(update);
+              //  resolve(update);
+              //  })
             }
-            console.log(formData)
-            this.http.post("http://iris.scolm.com/api/survey_filled_data", formData)
-              .subscribe(data => {
-                
-                console.log(data);
-                console.log(data)
-                console.log(data.json);
-                let apiResult:any;
-                apiResult=data.json;
-                console.log(apiResult.status);
-                if(apiResult.status=='error'){
-                  console.log('error');
-                }else{
-                  for(let i=0; i< listsurvey.length ; i++){   
-                    console.log(listsurvey[i]);
-                    // let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
-                    // console.log(query);
-                    // this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
-                    //   console.log(update);
-                    //  resolve(update);
-                    //  })
-                  }
-                 }
-              },error=>{
-                // this.loader.dismiss();
-                console.log(error);
-              });
-    })
-    
+          }
+        },error=>{
+          // this.loader.dismiss();
+          console.log(error);
+        });
+    });
   }
 }
