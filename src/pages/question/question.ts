@@ -114,6 +114,17 @@ export class QuestionPage {
   ngAfterViewInit() {
     // this.message = this.child.message
   }
+  check(value2){
+    console.log(value2);
+    if(value2 == ''){
+      console.log('null');
+      return 'checked';
+    }else{
+       console.log("second co");
+      return 'not checked';
+    }
+  }
+
   ionViewWillEnter(){
     this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
@@ -219,12 +230,9 @@ export class QuestionPage {
     })
   }
   textData(questions,i,questionKey){
-
-    
     return new Promise((resolve,reject)=>{
       this.lastArrayCheck().then((result:any)=>{
-
-        //console.log(questions[i].survey_id)
+        console.log(questions[i])
         this.filledQuestion= localStorage.getItem("fillingQuestion");
       // this.next(questions[i].survey_id,questions[i].question_key);
      
@@ -518,56 +526,56 @@ export class QuestionPage {
   update(text){
     console.log(text);
   }
-  checkbox(questionKey){
-    return new Promise((resolve,reject)=>{
-      // if($("#mycheckbox").is(":checked")) {
-      //   console.log("checked");
-      // } else {
-      //   console.log("not checked");
-      // }
-      
-      // if($('input:checked').val() != undefined){
-      //   $('input').prop('disabled',true);
-      //   console.log("yes checked");
-      // }else{
-      //   console.log("not checked");
-      // }
-    })
-   
-  }
-  datachanged(e:any){
+   datachanged(e:any){
     console.log(e);
     console.log(e.checked);
   }
-  onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
-  
+  checkboxValidate(QuestionType,surveylength){
+    return new Promise((resolve,reject)=>{
+      if(QuestionType=="checkbox"){
+        console.log("checkbox")
+         let tablename11=[];
+          let forloop=0;
+          $(".checkBoxClass").each(function(){
+            if($(this).is(':checked')){
+              forloop++;
+              let table = $(this).attr("name");
+              console.log(table);
+              tablename11.push(table);   
+            }else{
+              forloop++;
+            }
+            if(forloop == surveylength){
+             console.log(tablename11);
+             JSON.stringify(tablename11);
+              resolve(tablename11);
+            }
+          })
+      }else{
+        resolve();
+      }
+     
+    })
+  }
  
+  onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
-     console.log(formValidate);
+    console.log(formValidate);
     let i=0;
     let json;
     let formValue=[];
-
     if(formValidate == null){
-      if(QuestionType=="checkbox"){
-         console.log(this.form.value);
-      }else{
-        console.log("not valid");
+       console.log("not valid");
       this.Errors="it is not valid";
-      }
     }else{
-      let formValue=[];
-       //console.log("valid");
+      this.checkboxValidate(QuestionType, Object.keys(form.value).length).then((table:any)=>{  
+      console.log(table);
       if(QuestionType=="checkbox"){
-        console.log(this.form.value);
-        // this.checkbox(questionKey).then(()=>{
-
-        // });
-        // json=JSON.stringify(formValidate);
-        // console.log(this.form.value[questionText]);
-        // formValue.push(this.form.value[questionText]);
-       }else{
-        formValue.push(formValidate);
+        formValidate=table;
+      }else{
+        formValidate=formValidate;
+      }
+      formValue.push(formValidate);
         //console.log(formValue);
       let questionLength=this.questions.length;
       this.tablename="surveyResult_"+survey_id;
@@ -606,8 +614,9 @@ export class QuestionPage {
             this.next(survey_id,questionKey);
           });
       }
+      });
       } 
-        }
+        // }
       form.reset(); 
        })
     //} 
@@ -618,10 +627,5 @@ export class QuestionPage {
         resolve(questionSave33);
       });
     })
-  }
-
-  updateCucumber() {
-    let  cucumber:any
-    console.log('Cucumbers new state:' + cucumber);
   }
 }

@@ -98,12 +98,16 @@
 
  				<!--checkbox-->
 		      <div *ngSwitchCase="'checkbox'">
-		      	<ion-list >
-						  <ion-item *ngFor="let check of OriginalContent?.answers[0]">
-							  <ion-label>{{check?.option_text}}</ion-label>
-							  <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox>
-							</ion-item>
-						</ion-list>
+		      
+						  <div *ngFor="let check of OriginalContent?.answers[0]">
+							  <!-- <ion-label>{{check?.option_text}}</ion-label> -->
+
+							  <!-- <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox> -->
+
+							  <input type="checkbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" class="checkBoxClass" name="{{check?.option_text}}"  color="red">{{check?.option_text}}
+
+							</div>
+				
 		      </div>
 
 		   	 <!--new types-->

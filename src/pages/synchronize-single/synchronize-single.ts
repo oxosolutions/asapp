@@ -109,19 +109,10 @@ export class SynchronizeSinglePage {
            })
       
       }else{
-        // forloop++;
-         console.log("pls check for synchronize");
-                 this.loader.dismiss();
-               this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
+        console.log("pls check for synchronize");
+        this.loader.dismiss();
+          this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
       }
-       // if(formData.value[key] == undefined){
-       //   if(forloop == Object.keys(formData.value).length){
-       //         this.loader.dismiss();
-       //         this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
-       //    }
-          
-       //  }
-    //}
   });
  
 }

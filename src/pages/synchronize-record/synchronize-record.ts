@@ -23,32 +23,44 @@ export class SynchronizeRecordPage {
   }
   ionViewDidLoad(){
   	this.checkSurvey().then((selected:any)=>{
+      this.synchronizeData=selected;
+      if(this.synchronizeData.length >0){
+        this.listSurvey=this.synchronizeData;
+        this.loader.dismiss(); 
+      }else{
+        console.log('no surveys');
+        this.loader.dismiss(); 
+        this.AioneHelp.presentToast("Sorry, there is no completed survey found",500,'top')
+      }
   	})	
   }
 
   checkSurvey(){
   	return new Promise((resolve,reject)=>{
+       this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+    this.loader.present(); 
   		let forloop=0;
 	    this.servicesProvider.SelectAll("surveys").then((surveyId:any)=>{
 	    	this.servicesProvider.mobileListArray(surveyId).then((list:any)=>{ console.log(list);
 	    		list.forEach((key,value)=>{
 	    			let tablename='surveyResult_'+key.id;
-	    			this.synchronizeStatus(tablename, key).then((collection:any)=>{
-              this.synchronizeData.push(collection);
+	    			this.synchronizeStatus(tablename, key).then((collection:any)=>{ console.log(collection);
+              this.synchronizeData.push(collection); console.log(this.synchronizeData);
                forloop++;
               if(forloop == list.length){
+                console.log(forloop);
                 this.synchronizeData=this.synchronizeData.filter((Element,index)=>{
                   return(Element != undefined);
                 });
                 console.log(this.synchronizeData);
-                if(this.synchronizeData.length >0){
-                  this.listSurvey=this.synchronizeData;
-                  // console.log(this.listSurvey)
-                }else{
-                  console.log('no surveys');
-                }
+                resolve(this.synchronizeData)
               }
-              
             })
 	    		});
 	      })
@@ -78,6 +90,7 @@ export class SynchronizeRecordPage {
              this.servicesProvider.ExecuteRun(query2,[]).then((questions2:any)=>{ 
                console.log(questions2.rows.item(0).count);
                if(questions2.rows.item(0).count > 0){
+
                   resolve(collection);
                 }else{
                   resolve();
@@ -162,15 +175,30 @@ export class SynchronizeRecordPage {
                 formValue.push(answer);
                  if(forloop == table.length){ 
                 this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
-                  this.dataSend(parsedData,table).then(()=>{
+                  this.dataSend(parsedData,table).then(()=>{ this.loader.dismiss();
+                   //  this.checkSurvey().then((selected:any)=>{ 
+                   //  console.log("back to submit"); 
+                   //  this.synchronizeData=selected;
+                   //    if(this.synchronizeData.length >0){
+                   //      this.listSurvey=this.synchronizeData;
+                   //      this.loader.dismiss(); 
+                   //      this.AioneHelp.presentToast("Synchronized, Synchronized data successfully", 500,'top')
+                   //    }else{
+                   //      console.log('no surveys');
+                   //      this.loader.dismiss(); 
+                   //      this.AioneHelp.presentToast("Sorry, there is no completed survey found", 500,'top')
+                   //    }
+                   //  })
                    })
                  }); 
                 }
             })
           });
-        // this.loader.dismiss(); 
+       
       }else{
         console.log("pls check for synchronize");
+         this.loader.dismiss();
+        this.AioneHelp.showAlert('Error','To Synchronize data, you must check survey')
       }
     })  
   }
@@ -203,11 +231,11 @@ export class SynchronizeRecordPage {
     });
   }
   dataSend(formValue,listsurvey){
+    console.log(listsurvey[3]);
     return new Promise((resolve,reject)=>{
-      let tablename="surveyResult_"+this.navParams.get('id');
       var formData = new FormData;
       formData.append('survey_data',JSON.stringify(formValue));
-      formData.append('survey_id',this.navParams.get('id'));
+      formData.append('survey_id','6');
       formData.append('activation_code', '292608');
       formData.append('lat_long',JSON.stringify({lat: this.latitude, long: this.longitude}));
       try{
@@ -221,26 +249,30 @@ export class SynchronizeRecordPage {
       this.http.post("http://iris.scolm.com/api/survey_filled_data", formData)
         .subscribe(data => { 
           console.log(data);
-          console.log(data)
-          console.log(data.json);
           let apiResult:any;
           apiResult=data.json;
           console.log(apiResult.status);
           if(apiResult.status=='error'){
             console.log('error');
+             this.loader.dismiss(); 
           }else{
+             let forloop=0;
             for(let i=0; i< listsurvey.length ; i++){   
               console.log(listsurvey[i]);
               let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
               console.log(query);
-              // this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
-              //   console.log(update);
-              //  resolve(update);
-              //  })
+              this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+                 forloop++;
+                  if(forloop == listsurvey.length){
+                    console.log(update);
+                    resolve(update);
+                  }
+                
+               })
             }
           }
         },error=>{
-          // this.loader.dismiss();
+          this.loader.dismiss();
           console.log(error);
         });
     });
