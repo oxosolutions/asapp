@@ -240,19 +240,93 @@ export class QuestionPage {
       //console.log(this.QuestionKeyText);
       let content=[]
       content=questions[i]; 
-      content["prefill"]=this.QuestionKeyText;
-      this.OriginalContent = content ;
-      //console.log(this.OriginalContent);
+      console.log(content);
+      console.log(this.QuestionKeyText);
+      this.checkboxPrefillCheck(content["question_type"],this.QuestionKeyText).then((data)=>{
+       this.QuestionKeyText=data;
      
+      content["prefill"]=this.QuestionKeyText;
+      this.OriginalContent = content;
       if(this.questionCheck.length==0){
         this.previousButton=false;
       }else{
         this.previousButton=true; 
       }
       this.NextButton=true;
+        if(content["question_type"]=='checkbox'){
+          if(this.QuestionKeyText != null){
+            this.arraycheckcondtion(this.QuestionKeyText);
+          } 
+         }
        }); 
+       })
    });   
   }
+  checkboxPrefillCheck(question_text,QuestionKeyText){
+    return new Promise((resolve,reject)=>{
+      console.log(question_text);
+      console.log(QuestionKeyText);
+      if(question_text=='checkbox'){
+        if(QuestionKeyText==null){
+          console.log('radha');
+          QuestionKeyText='radha';
+          resolve(QuestionKeyText);
+        }else{     
+          let json=QuestionKeyText.split(',');
+          QuestionKeyText=json;
+          resolve(QuestionKeyText);
+        }
+      }else{
+        resolve(QuestionKeyText);
+      }
+    })
+  }
+  arraycheckcondtion(QuestionKeyText){
+    
+      setTimeout(function(){
+         $(".checkBoxClass").each(function(){
+          
+               console.log($(this).attr('name'));
+          if($.inArray($(this).attr('name') , QuestionKeyText) === 0){
+         
+           $(this).prop('checked',true);
+          }else{
+           console.log("not in array");
+          }
+        });
+      },800);
+        
+        
+   
+  }
+  checkboxValidate(QuestionType,surveylength){
+    return new Promise((resolve,reject)=>{
+      if(QuestionType=="checkbox"){
+        console.log("checkbox")
+         let tablename11=[];
+          let forloop=0;
+          $(".checkBoxClass").each(function(){
+            if($(this).is(':checked')){
+              forloop++;
+              let table = $(this).attr("name");
+              console.log(table);
+              tablename11.push(table);   
+            }else{
+              forloop++;
+            }
+            if(forloop == surveylength){
+             console.log(tablename11);
+             JSON.stringify(tablename11);
+              resolve(tablename11);
+            }
+          })
+      }else{
+        resolve();
+      }
+     
+    })
+  }
+ 
   next(surveyid,questionkey){
     //console.log(this.indexArray);
      this.loader = this.loaderCtrl.create({
@@ -530,34 +604,7 @@ export class QuestionPage {
     console.log(e);
     console.log(e.checked);
   }
-  checkboxValidate(QuestionType,surveylength){
-    return new Promise((resolve,reject)=>{
-      if(QuestionType=="checkbox"){
-        console.log("checkbox")
-         let tablename11=[];
-          let forloop=0;
-          $(".checkBoxClass").each(function(){
-            if($(this).is(':checked')){
-              forloop++;
-              let table = $(this).attr("name");
-              console.log(table);
-              tablename11.push(table);   
-            }else{
-              forloop++;
-            }
-            if(forloop == surveylength){
-             console.log(tablename11);
-             JSON.stringify(tablename11);
-              resolve(tablename11);
-            }
-          })
-      }else{
-        resolve();
-      }
-     
-    })
-  }
- 
+  
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
     console.log(formValidate);
