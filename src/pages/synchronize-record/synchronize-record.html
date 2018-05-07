@@ -24,7 +24,7 @@
         <br />
     </div>  -->
 
-  <div *ngIf="(listSurvey!=null); else second">
+    <div *ngIf="(listSurvey!=null); else second">
       
       <form #myForm='ngForm' >
         <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All

@@ -115,7 +115,6 @@ export class SynchronizeRecordPage {
         $(this).prop('checked',true); 
       });
     }else{
-      localStorage.setItem("selectAllcheckbox",'false');
       $(".checkBoxClass").each(function(){
           $(this).prop('checked',false);
       });
@@ -142,15 +141,15 @@ export class SynchronizeRecordPage {
   }
   onSubmit(formData){
     this.checkboxValidate(Object.keys(formData.value).length).then((table:any)=>{
-      //   this.loader = this.loaderCtrl.create({
-      //   spinner: 'crescent',
-      //   content: `
-      //   <div class="custom-spinner-container">
-      //     <div class="custom-spinner-box">`+'Refreshing data'+`</div>
-      //   </div>`,
-      // });
+        this.loader = this.loaderCtrl.create({
+        spinner: 'crescent',
+        content: `
+        <div class="custom-spinner-container">
+          <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+        </div>`,
+      });
 
-      // this.loader.present(); 
+      this.loader.present(); 
       if((table.length>0)){
         let formValue = [];
         let listtable=[];
