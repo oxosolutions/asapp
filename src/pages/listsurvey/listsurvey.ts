@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
+import { LoadingController } from 'ionic-angular';
 declare var jquery:any;
 declare var $ :any;
 @IonicPage()
@@ -29,8 +30,9 @@ export class ListsurveyPage {
 	currentTime:any;
 	today:any;
 	tomarrow:"14/03/2018 17:23:41 +0530";
+	loader:any;
 
-  constructor(public AioneHelp:AioneHelperProvider,public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public AioneHelp:AioneHelperProvider,private loaderCtrl:LoadingController, public toastCtrl: ToastController,public servicesProvider:AioneServicesProvider,public alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
   }
   toggleClass(evnt){
   	console.log(evnt);
@@ -79,46 +81,7 @@ export class ListsurveyPage {
   		this.presentToast();
   	}
   }
-  // groups(id,message,totalQuestions){
-  // 	localStorage.setItem("Surveyid", id);
-  // 	localStorage.setItem("totalQuestion",totalQuestions);
-  // 	let surveyMetaType;
-  // 	if(message["scheduling"].surveyResponse == "true"){
-  // 		this.servicesProvider.SelectWhere("survey_meta","form_id",id).then((form:any)=>{
-  // 		console.log(form);
-  // 		//this.surveyIncompleteName().then(()=>{
-  // 			//console.log(form.rows.item);
-  // 			var row = {};
-  //     	for(var i=0; i < form.rows.length; i++) {
-  //         	row[i] = form.rows.item(i)
-  //     	}
-  //      	let SurveyData = row;
-  //       for(let keys in SurveyData){
-	 //          // if(SurveyData[keys].value == "survey"){
-	 //          // 	surveyMetaType=SurveyData[keys].value;
-	 //          //   localStorage.setItem("questionType", 'save_survey');  
-	 //          // }else if(SurveyData[keys].value == "section"){
-	 //          // 	surveyMetaType=SurveyData[keys].value;
-	 //          //   localStorage.setItem("questionType", 'save_section');
-	 //          //   this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
-	 //          // }else if(SurveyData[keys].value == "question"){
-	 //          	surveyMetaType=SurveyData[keys].value;
-	 //            localStorage.setItem("questionType", 'questions');
-	 //            // localStorage.setItem("GroupdDesc")
-	            
-	 //            console.log(id);
-	 //            this.navCtrl.setRoot(GroupsPage,{'type' : surveyMetaType,'id': id});
 
-	 //          //}
-       	
-  //       }
-  //     });
-  //    // });
-  // 	}else{
-  // 		this.presentToast();
-  // 	}
-  // 	//this.showConfirm();	 
-  // }
   
   presentToast(){
     let toast = this.toastCtrl.create({
@@ -143,6 +106,15 @@ export class ListsurveyPage {
 		this.EnabledSurvey();
 	}
 	EnabledSurvey(){
+	 this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+
+    this.loader.present(); 
 		let questionId;
 		let questionData:any;
 		let metaSurvey=[];
@@ -199,6 +171,7 @@ export class ListsurveyPage {
 							forloop++;
 							if(forloop == survey_meta.rows.item.length ){
 								this.listSurvey=SurveySelect;
+								this.loader.dismiss();
 								console.log(this.listSurvey);
 							}
 						}
@@ -206,6 +179,7 @@ export class ListsurveyPage {
 
 				});
 			}else{
+				this.loader.dismiss();
 				this.nullSurvey="there is no survey";
 				console.log(this.nullSurvey);
 			}

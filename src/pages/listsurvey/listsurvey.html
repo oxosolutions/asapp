@@ -9,23 +9,26 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-<ion-list>
-<div class="" *ngFor="let survey of listSurvey[0]">      
-  <ion-item >
-    <ion-thumbnail item-start>
-     <img src="assets/imgs/survey.png">
-     <!--  <img src="assets/imgs/survey.png"> -->
-    </ion-thumbnail>
+<ion-list *ngIf="listSurvey != null else second">
+  <div class="" *ngFor="let survey of listSurvey[0]">      
+    <ion-item >
+      <ion-thumbnail item-start>
+       <img src="assets/imgs/survey.png">
+       <!--  <img src="assets/imgs/survey.png"> -->
+      </ion-thumbnail>
 
-    <div>
-      <h2>{{survey.name}}1</h2>
-      <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
-      <p class="read-more"> <button ion-button class="btn my_button" clear (click)="toggleClass($event)">Read More >></button></p>
-   </div>
-    <button (click)="surveyDetails(survey,survey.id,survey,survey['questions'])" ion-button item-end >View</button>
-  </ion-item>
-</div>
-</ion-list> 
+      <div>
+        <h2>{{survey.name}}1</h2>
+        <p class="survey-desc" >{{survey.description}} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ipsum lectus, consequat a feugiat vitae, tempor sit amet neque. In sit amet urna ac odio congue</p>
+        <p class="read-more"> <button ion-button class="btn my_button" clear (click)="toggleClass($event)">Read More >></button></p>
+     </div>
+      <button (click)="surveyDetails(survey,survey.id,survey,survey['questions'])" ion-button item-end >View</button>
+    </ion-item>
+  </div>
+</ion-list>
+<ng-template #second>
+  <p>There is no survey</p>
+</ng-template> 
 </ion-content>
 <ion-footer>
   <ion-toolbar>
