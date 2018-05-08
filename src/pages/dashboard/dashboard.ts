@@ -7,6 +7,7 @@ import { RecordListPage }  from '../../pages/record-list/record-list';
 import { QuestionPage } from '../../pages/question/question';
 import {SynchronizeRecordPage} from '../../pages/synchronize-record/synchronize-record';
 import {ProfilePage} from '../../pages/profile/profile';
+import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 declare var jquery:any;
 declare var $ :any;
 

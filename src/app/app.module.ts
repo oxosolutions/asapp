@@ -40,7 +40,7 @@ import {SynchronizeSinglePage} from '../pages/synchronize-single/synchronize-sin
 import {ProfilePage} from '../pages/profile/profile';
 import {ProfileEditPage} from '../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../pages/change-password/change-password';
-
+import {SurveyPopUpPage} from '../pages/survey-pop-up/survey-pop-up';
 
 
 
@@ -74,7 +74,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SynchronizeSinglePage,
     ProfilePage,
     ProfileEditPage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    SurveyPopUpPage
   ],
 
   imports: [
@@ -111,7 +112,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SynchronizeSinglePage,
     ProfilePage,
     ProfileEditPage,
-    ChangePasswordPage
+    ChangePasswordPage,
+    SurveyPopUpPage
   ],
   providers: [
     StatusBar,

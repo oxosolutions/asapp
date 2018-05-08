@@ -1,5 +1,5 @@
 import { Component,ViewChild, AfterViewInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ModalController} from 'ionic-angular';
 import {GroupsPage} from '../../pages/groups/groups';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AlertController } from 'ionic-angular';
@@ -12,6 +12,7 @@ import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/
 import { DatepickerOptions } from 'ng2-datepicker';
 import * as enLocale from 'date-fns/locale/en';
 import * as frLocale from 'date-fns/locale/fr';
+import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 import { LoadingController } from 'ionic-angular';
 declare var jquery:any;
 declare var $ :any;
@@ -65,7 +66,7 @@ export class QuestionPage {
   surveyTotalQuestions:any;
       loader:any;
      
-  constructor(private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController,private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
   }
  
@@ -362,14 +363,16 @@ export class QuestionPage {
           let query="UPDATE "+this.tablename + " SET survey_status = 'completed', "+"survey_completedOn='"+ time +"'"+" where serialNo = "+localStorage.getItem('record_id');
           //console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
-              this.AioneHelp.presentToast("survey is successfully completed", 3000,'top');
+             
              if(this.navParams.get("completed") ==  ""){
-                this.navCtrl.setRoot(DashboardPage);
+                let profileModal = this.modalCtrl.create(SurveyPopUpPage);
+                 profileModal.present();
+               // this.navCtrl.setRoot(SurveyPopUpPage,{'id':'complete'});
+                // this.navCtrl.setRoot(DashboardPage);
               }else{
+                 this.AioneHelp.presentToast("survey is successfully completed", 1000,'top');
                 this.navCtrl.setRoot(GroupsPage);
               }
-          
-           
           });
           });
       }else{
