@@ -98,7 +98,6 @@
 
  				<!--checkbox-->
 		      <div class="checkdiv" *ngSwitchCase="'checkbox'">
-		      
 						  <div *ngFor="let check of OriginalContent?.answers[0]">
 							  <input type="checkbox" [formControlName]="OriginalContent?.question_text" class="checkBoxClass" name="{{check?.option_text}}" id="checkall">{{check?.option_text}}
 							</div>
@@ -117,7 +116,7 @@
 
 					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
 
-					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" class="next"><ion-icon name="add"></ion-icon>Next</button>
+					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type ,OriginalContent)" class="next"><ion-icon name="add"></ion-icon>Next</button>
 				</div>
 </form>
 </div>

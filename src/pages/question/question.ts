@@ -540,25 +540,24 @@ export class QuestionPage {
             if($(this).is(':checked')){
               forloop++;
               let table = $(this).attr("name");
-              tablename11.push(table);   
+              tablename11.push(table); 
+              console.log(tablename11);  
             }else{
               forloop++;
             }
             if(forloop == surveylength){
              JSON.stringify(tablename11);
              console.log(tablename11.length);
-             if(tablename11.length >0){
+             if(tablename11.length > 0){
                 resolve(tablename11);
               }else{
                 resolve(null)
               }
-             
             }
           })
       }else{
         resolve(null);
       }
-     
     })
   }
  
@@ -566,7 +565,7 @@ export class QuestionPage {
     return new Promise((resolve,reject)=>{
       switch (QuestionType) {
         case "checkbox":
-          this.checkboxValidate(QuestionType,surveylength).then((table:any)=>{
+          this.checkboxValidate(QuestionType,surveylength.answers[0].length).then((table:any)=>{
             resolve(table);
           })
         break;
@@ -581,10 +580,10 @@ export class QuestionPage {
       }
     })
   }
-  onSubmit(form,questionKey,survey_id,questionText,QuestionType,update){
+  onSubmit(form,questionKey,survey_id,questionText,QuestionType,answerLength){
     this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
     console.log(formValidate);
-      this.switchConditions(QuestionType,Object.keys(form.value).length,formValidate).then(( validateFinal:any)=>{
+      this.switchConditions(QuestionType,answerLength,formValidate).then(( validateFinal:any)=>{
         console.log(validateFinal);
         let i=0;
         let json;
