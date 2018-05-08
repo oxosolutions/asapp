@@ -21,9 +21,8 @@ export class LoginPage {
 	user:any;
 	loader:any;
   constructor(public toastCtrl: ToastController,private loaderCtrl:LoadingController,public nav:NavController, public AioneService:AioneServicesProvider, private formBuilder: FormBuilder,public AioneHelp:AioneHelperProvider,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
-
   }
-  Login(loginUser,username,password) {
+  Login(loginUser,username,password){
   	this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -43,17 +42,16 @@ export class LoginPage {
   	this.password=this.loginUser.value.password;
     console.log(this.username);
     	this.AioneService.MultipleSelectWhere("users","email","'"+this.username+"'", "app_password" ,"'"+this.password+"'").then((userDetail:any)=>{
-       //console.log(userDetail.rows.item(0).name);
   			this.loader.dismiss();
     		if(userDetail.rows.length >= 1){
           localStorage.setItem("name", userDetail.rows.item(0).name);
+          localStorage.setItem("userId", userDetail.rows.item(0).id);
           console.log("user valid");
     			this.navCtrl.setRoot(DashboardPage);
           console.log(this.username);
     			localStorage.setItem("username", this.username);
     		}else{
           console.log("not valid");
-          //localStorage.setItem("username", undefined);
           this.loginUser.reset();
     			this.presentToast();
     		}
@@ -79,8 +77,7 @@ export class LoginPage {
 			Validators.required,				
   			])],
 
-  	})
-  	
+  	});
   }
 
 }

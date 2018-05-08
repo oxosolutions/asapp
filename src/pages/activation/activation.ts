@@ -327,9 +327,13 @@ export class ActivationPage {
         let headers = new Headers();
         headers.append('content-type', undefined);
         let formArray = {};
+   
         formArray['activation_key'] = this.loginForm.value.name;
+       
         this.http.post(localStorage.getItem("api_url"),formArray,{headers:headers}).subscribe((data:any)=>{
           this.apiresult=data.json();
+           console.log(this.loginForm.value.name);
+           localStorage.setItem("activationKey",this.loginForm.value.name)
           if(this.apiresult.status=='error'){
             this.loader.dismiss();
             this.loginForm.reset();
@@ -351,7 +355,7 @@ export class ActivationPage {
     name:['', Validators.compose([
           Validators.required,     
       ])],
-    })
+    });
   }
   location(){
     //this.geolocation.getCurrentPosition().then((resp)=>{
@@ -359,6 +363,5 @@ export class ActivationPage {
         //this.CreateSurvey().then(()=>{
       //  });
       //}).catch((error)=>{ console.log(error);
-
   }
 }

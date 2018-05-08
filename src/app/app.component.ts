@@ -37,6 +37,8 @@ export class MyApp {
   pages: Array<{title: string, icon: string, component: any}>;
   loader:any;
   db:any;  
+  username:any;
+  userEmail:any;
   constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     platform.registerBackButtonAction(() => {
@@ -46,6 +48,7 @@ export class MyApp {
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
+
         this.pages = [
           { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
           { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
@@ -59,7 +62,10 @@ export class MyApp {
       this.rootPage=LoginPage;  
       if(localStorage.getItem("username") != undefined && localStorage.getItem("username") != null && localStorage.getItem('username') != ""){
         console.log(localStorage.getItem("username"));
-        this.rootPage=DashboardPage;   
+         this.username=localStorage.getItem("name");
+        this.userEmail=localStorage.getItem("username"); 
+        this.rootPage=DashboardPage;
+          
       }else{
         this.rootPage=LoginPage;   
       }  
