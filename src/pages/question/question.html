@@ -16,7 +16,7 @@
 	<div class="card" >
 			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}
 	    <div class="question-text">{{OriginalContent?.question_text}}</div>
-			<p>{{OriginalContent?.question_desc}}</p>
+			
 
 			<!-- <input atp-time-picker arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
 			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  /> -->
@@ -97,15 +97,10 @@
 		      </div>
 
  				<!--checkbox-->
-		      <div *ngSwitchCase="'checkbox'">
+		      <div class="checkdiv" *ngSwitchCase="'checkbox'">
 		      
 						  <div *ngFor="let check of OriginalContent?.answers[0]">
-							  <!-- <ion-label>{{check?.option_text}}</ion-label> -->
-
-							  <!-- <ion-checkbox  id="mycheckbox" [formControlName]="OriginalContent?.question_text" [(ngModel)]="check.selected" color="red" ></ion-checkbox> -->
-
-							  <input type="checkbox" [formControlName]="OriginalContent?.question_text" class="checkBoxClass" name="{{check?.option_text}}" id="checkall"  >{{check?.option_text}}
-
+							  <input type="checkbox" [formControlName]="OriginalContent?.question_text" class="checkBoxClass" name="{{check?.option_text}}" id="checkall">{{check?.option_text}}
 							</div>
 				
 		      </div>

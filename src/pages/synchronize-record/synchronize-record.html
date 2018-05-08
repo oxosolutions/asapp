@@ -32,10 +32,6 @@
           <div class="sync-item" *ngFor="let record of listSurvey">
             <div class="sync-item-title">
               <ion-item>
-                 <!--  <ion-label>{{record.name}}</ion-label> -->
-                   <!-- <ion-checkbox  [(ngModel)]="record.tablename.selected" class="checkBoxClass" name="{{record.tablename}}" 
-               color="red" ></ion-checkbox> -->
-
                 <input type="checkbox" [(ngModel)]="record.tablename.selected" id="id" class="checkBoxClass" name="{{record.tablename}}"  color="red">{{record.name}}
               </ion-item>
             </div>
