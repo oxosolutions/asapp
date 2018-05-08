@@ -75,14 +75,12 @@ export class MyApp {
         });   
   } 
   initializeApp() {
-   
-      this.platform.ready().then(() => {
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
-      });
- 
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
   }
-  openPage(page) {
+  openPage(page){
     this.nav.setRoot(page.component);
   }
   presentLoading(message) {

@@ -37,7 +37,6 @@ export class LoginPage {
   	}else{
      
   	let name:string;
- 
   	this.username=this.loginUser.value.username;
   	this.password=this.loginUser.value.password;
     console.log(this.username);
