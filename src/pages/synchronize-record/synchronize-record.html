@@ -14,18 +14,15 @@
  <!-- <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);"> Check All
     <div id="checkBoxes">
      <div class="sync-item" *ngFor="let record of listSurvey">
-      
          <ion-item>
                  <input type="checkbox"  class="checkBoxClass" 
              name="{{record.tablename}}"   color="red" >{{record.name}}
           </ion-item>
-        
         </div>
         <br />
     </div>  -->
 
-    <div *ngIf="(listSurvey!=null); else second">
-      
+    <div *ngIf="(listSurvey != null); else second">
       <form #myForm='ngForm' >
         <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All
         <div id="checkBoxes">

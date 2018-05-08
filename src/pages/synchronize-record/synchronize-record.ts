@@ -22,6 +22,14 @@ export class SynchronizeRecordPage {
   constructor(public http: Http,private loaderCtrl:LoadingController,public servicesProvider:AioneServicesProvider,public AioneHelp:AioneHelperProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad(){
+     this.loader = this.loaderCtrl.create({
+      spinner: 'crescent',
+      content: `
+      <div class="custom-spinner-container">
+        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
+      </div>`,
+    });
+    this.loader.present(); 
   	this.checkSurvey().then((selected:any)=>{
       this.synchronizeData=selected;
       if(this.synchronizeData.length >0){
@@ -34,20 +42,13 @@ export class SynchronizeRecordPage {
       }
   	})	
   }
-
   checkSurvey(){
+    console.log(this.synchronizeData);
+    console.log(this.listSurvey);
   	return new Promise((resolve,reject)=>{
-       this.loader = this.loaderCtrl.create({
-      spinner: 'crescent',
-      content: `
-      <div class="custom-spinner-container">
-        <div class="custom-spinner-box">`+'Refreshing data'+`</div>
-      </div>`,
-    });
-    this.loader.present(); 
   		let forloop=0;
 	    this.servicesProvider.SelectAll("surveys").then((surveyId:any)=>{
-	    	this.servicesProvider.mobileListArray(surveyId).then((list:any)=>{ console.log(list);
+	    	this.servicesProvider.mobileListArray(surveyId).then((list:any)=>{ 
 	    		list.forEach((key,value)=>{
 	    			let tablename='surveyResult_'+key.id;
 	    			this.synchronizeStatus(tablename, key).then((collection:any)=>{ console.log(collection);
@@ -64,7 +65,6 @@ export class SynchronizeRecordPage {
             })
 	    		});
 	      })
-	    	
 	    })
   	})	
   }
@@ -87,15 +87,14 @@ export class SynchronizeRecordPage {
           }else{
             let query2="SELECT count(*) as count FROM "+ tablename +" WHERE survey_sync_status IS NULL AND survey_status = 'completed' ";
             console.log(query2);
-             this.servicesProvider.ExecuteRun(query2,[]).then((questions2:any)=>{ 
-               console.log(questions2.rows.item(0).count);
-               if(questions2.rows.item(0).count > 0){
-
-                  resolve(collection);
-                }else{
-                  resolve();
-                }
-             })
+            this.servicesProvider.ExecuteRun(query2,[]).then((questions2:any)=>{ 
+              console.log(questions2.rows.item(0).count);
+              if(questions2.rows.item(0).count > 0){
+                resolve(collection);
+              }else{
+                resolve();
+              }
+            })
           }
          }) ;
       }) 
@@ -121,7 +120,6 @@ export class SynchronizeRecordPage {
   		}
   	})
   }
-  
   ckbCheckAll(event){
     if(event.srcElement.checked == true){ 
       $(".checkBoxClass").each(function(){
@@ -161,7 +159,6 @@ export class SynchronizeRecordPage {
           <div class="custom-spinner-box">`+'Refreshing data'+`</div>
         </div>`,
       });
-
       this.loader.present(); 
       if((table.length>0)){
         let formValue = [];
@@ -170,31 +167,34 @@ export class SynchronizeRecordPage {
         let forloop=0;
         table.forEach((key,value)=>{
           console.log(key);
-             this.answerGet(key).then((answer:any)=>{ console.log(answer);
-                forloop++;
-                formValue.push(answer);
-                 if(forloop == table.length){ 
-                this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
-                  this.dataSend(parsedData,table).then(()=>{ this.loader.dismiss();
-                   //  this.checkSurvey().then((selected:any)=>{ 
-                   //  console.log("back to submit"); 
-                   //  this.synchronizeData=selected;
-                   //    if(this.synchronizeData.length >0){
-                   //      this.listSurvey=this.synchronizeData;
-                   //      this.loader.dismiss(); 
-                   //      this.AioneHelp.presentToast("Synchronized, Synchronized data successfully", 500,'top')
-                   //    }else{
-                   //      console.log('no surveys');
-                   //      this.loader.dismiss(); 
-                   //      this.AioneHelp.presentToast("Sorry, there is no completed survey found", 500,'top')
-                   //    }
-                   //  })
-                   })
-                 }); 
-                }
+            this.answerGet(key).then((answer:any)=>{ console.log(answer);
+              forloop++;
+              formValue.push(answer);
+               if(forloop == table.length){ 
+              this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
+                this.dataSend(parsedData,table).then(()=>{ console.log(this.listSurvey);
+                  this.listSurvey=[];
+                  this.synchronizeData=[];
+                  this.checkSurvey().then((selected:any)=>{ 
+                    console.log("back to submit"); 
+                    this.synchronizeData=selected;
+                    console.log(this.synchronizeData);  
+                    if(this.synchronizeData.length >0){
+                      this.listSurvey=this.synchronizeData;
+                      this.loader.dismiss(); 
+                      this.AioneHelp.presentToast("Synchronized, Synchronized data successfully", 500,'top');
+                    }else{
+                      this.listSurvey=null;
+                      console.log('no surveys');
+                      this.loader.dismiss(); 
+                      // this.AioneHelp.presentToast("Sorry, there is no completed survey found", 500,'top');
+                    }
+                  })
+                 })
+               }); 
+              }
             })
           });
-       
       }else{
         console.log("pls check for synchronize");
          this.loader.dismiss();
@@ -261,14 +261,13 @@ export class SynchronizeRecordPage {
               console.log(listsurvey[i]);
               let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
               console.log(query);
-              this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
-                 forloop++;
-                  if(forloop == listsurvey.length){
-                    console.log(update);
-                    resolve(update);
-                  }
-                
-               })
+               this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+                forloop++;
+                if(forloop == listsurvey.length){
+                  console.log('update');
+                  resolve('update');
+                }
+              });
             }
           }
         },error=>{

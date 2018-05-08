@@ -571,12 +571,11 @@ export class QuestionPage {
         break;
 
         case "value":
-
         break;
         
         default:
           resolve(formValidate);
-          break;
+        break;
       }
     })
   }

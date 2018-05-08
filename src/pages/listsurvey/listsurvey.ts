@@ -179,8 +179,8 @@ export class ListsurveyPage {
 
 				});
 			}else{
-				this.loader.dismiss();
 				this.nullSurvey="there is no survey";
+				this.loader.dismiss();
 				console.log(this.nullSurvey);
 			}
 		  });
