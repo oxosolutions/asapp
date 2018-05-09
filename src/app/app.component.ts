@@ -16,7 +16,7 @@ import {AboutPage} from '../pages/about/about';
 import { RecordListPage }  from '../pages/record-list/record-list';
 import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 import { TextPage }  from '../pages/text/text';
-
+import { Events } from 'ionic-angular';
 @Component({
   templateUrl: 'app.html',
 })
@@ -40,40 +40,26 @@ export class MyApp {
   db:any;  
   username:any;
   userEmail:any;
-  constructor(private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     platform.registerBackButtonAction(() => {
           platform.exitApp(); 
     });
     this.servicepro.PlatformCheck('asapp').then((db)=>{
-    this.username=localStorage.getItem("name");
-    this.userEmail=localStorage.getItem("username");
-    console.log(this.username);
-    console.log('hiii here');
-        this.pages = [
-          { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
-          { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
-          // { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
-          { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
-          { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
+      this.pages = [
+        { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
+        { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
+        // { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
+        { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
+        { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
+      ]; 
 
-    ]; 
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
-    if(localStorage.getItem("activation") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
-      console.log(localStorage.getItem("activation"));
-      this.rootPage=LoginPage;  
-      if(localStorage.getItem("username") != undefined && localStorage.getItem("username") != null && localStorage.getItem('username') != ""){
-        console.log(localStorage.getItem("username"));
-        this.rootPage=DashboardPage;
-      }else{
-        this.rootPage=LoginPage;   
-      }  
-    }else{
-      this.rootPage=ActivationPage;     
-    }
-        });   
+
+    this.detail();
+    });   
   } 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -81,7 +67,40 @@ export class MyApp {
       this.splashScreen.hide();
     });
   }
+
+  detail(){
+    if(localStorage.getItem("activation") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
+      console.log(localStorage.getItem("activation"));
+      this.rootPage=LoginPage;  
+      if(localStorage.getItem("username") != undefined && localStorage.getItem("username") != null && localStorage.getItem('username') != ""){
+        console.log(localStorage.getItem("username"));
+        this.username=localStorage.getItem("name");
+        this.userEmail=localStorage.getItem("username");
+        this.rootPage=DashboardPage;
+      }else{
+        this.rootPage=LoginPage;   
+         this.username=localStorage.getItem("name");
+        this.userEmail=localStorage.getItem("username");
+      }  
+    }else{
+      this.rootPage=ActivationPage;     
+    }
+    this.events.subscribe('user:created', (user) => {
+       console.log(user);
+       console.log(user["name"]);
+       this.username=user["name"];
+       this.userEmail=user["email"];
+        localStorage.setItem("name", this.username);
+        localStorage.setItem("username", this.userEmail);
+        localStorage.setItem("userId", user["id"]);
+    }); 
+
+    
+     
+    
+  }
   openPage(page){
+    
     this.nav.setRoot(page.component);
   }
   presentLoading(message) {
@@ -100,6 +119,9 @@ export class MyApp {
   logout(){
     this.presentLoading("wait, you are signouting");
     localStorage.clear();
+    localStorage.setItem("api_url",this.Api_Url);
+    localStorage.setItem("activation_ApiName", this.ApiName );
+    localStorage.setItem("activationDesc",this.ApiDesc);
     // if(localStorage.getItem("activation") == undefined){
       this.rootPage = ActivationPage;  
       this.dismissLoader();                                                 

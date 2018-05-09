@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -18,16 +19,22 @@ export class ProfilePage {
   userDetail:any;
   loader:any;
   simpleImg:any;
-  constructor(private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  constructor(public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
   }
   ionViewDidLoad() {
-    this.name=localStorage.getItem("name");
-    this.Email=localStorage.getItem("username");
-    this.servicesProvider.SelectWhere("users","email",'"'+localStorage.getItem("username")+'"').then((result:any)=>{
-      this.userDetail=result.rows.item(0);
-      console.log(this.userDetail);
-      this.base64Image = localStorage.getItem("imgData") ;
-    })
+    let userId=localStorage.getItem("userId");
+    this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{
+      console.log(result.rows.item(0));
+      let data=result.rows.item(0);
+      this.name=data["name"];
+      this.Email=data["email"];
+      this.events.publish('user:created', data); 
+      this.servicesProvider.SelectWhere("users","id",'"'+ data["id"]+'"').then((result:any)=>{
+        this.userDetail=result.rows.item(0);
+        console.log(this.userDetail);
+        this.base64Image = localStorage.getItem("imgData") ;
+      });
+     })
 
   }
   camera1(){

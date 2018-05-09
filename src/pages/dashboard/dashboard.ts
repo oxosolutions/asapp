@@ -10,6 +10,7 @@ import {ProfilePage} from '../../pages/profile/profile';
 import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 import {AboutPage} from '../../pages/about/about';
 import {UpdatePage} from '../../pages/update/update';
+import { Events } from 'ionic-angular';
 declare var jquery:any;
 declare var $ :any;
 
@@ -21,17 +22,31 @@ declare var $ :any;
 export class DashboardPage {
 	dashboard:any;
   ApplicationName:any;
-  constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  username:any;
+  userEmail:any;
+  constructor(public events: Events,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
    
   ionViewDidLoad() {
-    this.servicesProvider.SelectAll("settings").then((result:any)=>{
-    	this.dashboard=result.rows.item(0);
-      console.log(this.dashboard);
-      localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
-       localStorage.setItem('InCompleteSurveyName',null);
-    });
+    let userId=localStorage.getItem("userId");
+    this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{
+      console.log(result.rows.item(0));
+      let data=result.rows.item(0);
+      this.events.publish('user:created', data); 
+      this.servicesProvider.SelectAll("settings").then((result:any)=>{
+      	this.dashboard=result.rows.item(0);
+        console.log(this.dashboard); 
+        localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
+         localStorage.setItem('InCompleteSurveyName',null);
+      });
+    })
   }	
+  userInfo(id){
+    console.log(id);
+    return new Promise ((resolve,reject)=>{
+     
+    })
+  }
   userProfile(){
     this.navCtrl.push(ProfilePage);
   }

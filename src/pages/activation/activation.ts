@@ -70,7 +70,7 @@ export class ActivationPage {
         console.log(selectBulkTable2);
         let droptable2=selectBulkTable2.slice(1);
         console.log(droptable2);
-        this.AioneService.DropTable(selectBulkTable).then((drop)=>{
+       // this.AioneService.DropTable(selectBulkTable).then((drop)=>{
           this.Api().then((Apidata:any)=>{
             let i
             this.table(Apidata,tableName, 0).then(result => {
@@ -100,7 +100,7 @@ export class ActivationPage {
              });  
             })   
           })    
-         });
+        // });
       }) 
   }
   resultSurvey(questions,surveys){
