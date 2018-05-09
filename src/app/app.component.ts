@@ -30,7 +30,6 @@ export class MyApp {
   ApiDesc='Integrated Road Traffic Injuries Surveillance System - INDIA';
 
 
-
   //############ End of Global variables #####//
   
   @ViewChild(Nav) nav: Nav;
@@ -93,11 +92,7 @@ export class MyApp {
         localStorage.setItem("name", this.username);
         localStorage.setItem("username", this.userEmail);
         localStorage.setItem("userId", user["id"]);
-    }); 
-
-    
-     
-    
+    });   
   }
   openPage(page){
     
@@ -122,9 +117,9 @@ export class MyApp {
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
-    // if(localStorage.getItem("activation") == undefined){
-      this.rootPage = ActivationPage;  
-      this.dismissLoader();                                                 
-    // }   
+     if(localStorage.getItem("activation") == undefined){
+        this.nav.setRoot(ActivationPage); 
+        this.dismissLoader();                                                 
+     }   
   } 
 }

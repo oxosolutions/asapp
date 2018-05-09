@@ -26,7 +26,6 @@ export class DashboardPage {
   userEmail:any;
   constructor(public events: Events,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-   
   ionViewDidLoad() {
     let userId=localStorage.getItem("userId");
     this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{

@@ -205,12 +205,17 @@ export class AioneServicesProvider {
 			console.log(tableName.length);
 			if(this.db!= undefined){
 				if(tableName.length >0){
-					//console.log(Col);		
+					//console.log(Col);
+					let forloop=0;	
 				  for(let i=0; i<tableName.length;i++){
 				  	this.query='DROP Table IF  EXISTS ' + tableName[i];
 						console.log(this.query);
 				 	  this.ExecuteRun(this.query,[]).then((res)=>{
-				 	  	resolve(res);
+				 	  	forloop++;
+				 	  	if(forloop==tableName.length){
+				 	  		resolve(res);
+				 	  	}
+				 	  	
 				 	  });	
 				 	}		
 				}else{
