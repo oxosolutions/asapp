@@ -1,0 +1,52 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>update</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="update">
+		
+
+		<ion-list *ngIf="deviceInfo">
+	  	<ion-item>
+		    <ion-icon name="rose" item-start></ion-icon>
+		      Model 
+		    <ion-icon item-end>{{deviceInfo["model"]}}</ion-icon>
+		  </ion-item>
+
+		  <ion-item>
+		    <ion-icon name="rose" item-start></ion-icon>
+		      Platform 
+		    <ion-icon item-end>{{deviceInfo["platform"]}}</ion-icon>
+		  </ion-item>
+
+		  <ion-item>
+		    <ion-icon name="rose" item-start></ion-icon>
+		      Cordova 
+		    <ion-icon item-end>{{deviceInfo["cordova"]}}</ion-icon>
+		  </ion-item>
+
+		  <ion-item>
+		    <ion-icon name="rose" item-start></ion-icon>
+		      Manufacturer 
+		    <ion-icon item-end>{{deviceInfo["manufacturer"]}}</ion-icon>
+		  </ion-item>
+
+		  <ion-item>
+		    <ion-icon name="rose" item-start></ion-icon>
+		      Serial 
+		    <ion-icon item-end>{{deviceInfo["serial"]}}</ion-icon>
+		  </ion-item>
+		</ion-list>
+
+	
+		 <div class="sync-button">
+              <button ion-button class="ddd" (click)="update()">Update</button>
+          </div>
+	</div>
+</ion-content>

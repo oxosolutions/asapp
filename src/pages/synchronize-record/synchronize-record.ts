@@ -5,6 +5,9 @@ import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { LoadingController } from 'ionic-angular';
 import {Http , Headers, RequestOptions} from '@angular/http';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+declare var jquery:any;
+declare var $ :any;
+
 @IonicPage()
 @Component({
   selector: 'page-synchronize-record',

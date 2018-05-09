@@ -7,6 +7,8 @@ import {SurveyDetailPage} from '../../pages/survey-detail/survey-detail';
 import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
 import 'rxjs/add/operator/map';
 import {Http , Headers, RequestOptions} from '@angular/http';
+declare var jquery:any;
+declare var $ :any;
 
 @IonicPage()
 @Component({

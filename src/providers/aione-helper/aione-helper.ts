@@ -23,13 +23,24 @@ export class AioneHelperProvider {
     console.log('Hello AioneHelperProvider Provider');
   }
   deviceInfo(){
-    // this.DeviceInfo['cordova']=this.device.cordova;
-    // this.DeviceInfo['model']=this.device.model;
-    // this.DeviceInfo['platform']=this.device.platform;
-    this.DeviceInfo['version']=this.device.version;
-    // this.DeviceInfo['manufacturer']=this.device.manufacturer;
-    // this.DeviceInfo['serial']=this.device.serial;
+    // this.DeviceInfo['version']=this.device.version;
     return this.DeviceInfo['version'];
+  }
+  updateDeviceInfo(){
+    return new Promise((resolve,reject)=>{
+     this.DeviceInfo['cordova']=this.device.cordova;
+       this.DeviceInfo['model']=this.device.model;
+    this.DeviceInfo['platform']=this.device.platform;
+     this.DeviceInfo['manufacturer']=this.device.manufacturer;
+    this.DeviceInfo['serial']=this.device.serial;
+      let collection={}
+      collection["model"]=this.DeviceInfo['model'];
+      collection["platform"]=this.DeviceInfo['platform'];
+      collection["cordova"]=this.DeviceInfo['cordova'];
+      collection["manufacturer"]=this.DeviceInfo['manufacturer'];
+      collection["serial"]=this.DeviceInfo['serial'];
+      resolve(collection);
+    });
   }
   internet(){
   	return new Promise ((resolve,reject)=>{

@@ -41,9 +41,9 @@ import {ProfilePage} from '../pages/profile/profile';
 import {ProfileEditPage} from '../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../pages/change-password/change-password';
 import {SurveyPopUpPage} from '../pages/survey-pop-up/survey-pop-up';
-
-
-
+import {UpdatePage} from '../pages/update/update';
+declare var jquery:any;
+declare var $ :any;
 
 //plugin
 // import { AmazingTimePickerModule } from 'amazing-time-picker'; // http://angularjs.bestjquery.com/example/date-time/
@@ -75,7 +75,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ProfilePage,
     ProfileEditPage,
     ChangePasswordPage,
-    SurveyPopUpPage
+    SurveyPopUpPage,
+    UpdatePage
   ],
 
   imports: [
@@ -113,7 +114,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ProfilePage,
     ProfileEditPage,
     ChangePasswordPage,
-    SurveyPopUpPage
+    SurveyPopUpPage,
+    UpdatePage
   ],
   providers: [
     StatusBar,

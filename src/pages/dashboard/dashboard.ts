@@ -9,6 +9,7 @@ import {SynchronizeRecordPage} from '../../pages/synchronize-record/synchronize-
 import {ProfilePage} from '../../pages/profile/profile';
 import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 import {AboutPage} from '../../pages/about/about';
+import {UpdatePage} from '../../pages/update/update';
 declare var jquery:any;
 declare var $ :any;
 
@@ -45,6 +46,9 @@ export class DashboardPage {
   }
   aboutPage(){
     this.navCtrl.push(AboutPage)
+  }
+  update(){
+    this.navCtrl.push(UpdatePage);
   }
 
 }
