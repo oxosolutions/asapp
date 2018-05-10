@@ -19,7 +19,7 @@ export class SurveyPopUpPage {
   	var elem = this;
   	setTimeout(function(){
 	 	 elem.viewCtrl.dismiss();
-	 	  elem.navCtrl.setRoot(DashboardPage);
+	 	  //elem.navCtrl.setRoot(DashboardPage);
       // this.navCtrl.setRoot(DashboardPage);
 	  },1000);
 

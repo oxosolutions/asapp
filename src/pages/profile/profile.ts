@@ -7,6 +7,8 @@ import { AioneServicesProvider } from '../../providers/aione-services/aione-serv
 import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+import { DashboardPage } from '../../pages/dashboard/dashboard';
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -20,6 +22,7 @@ export class ProfilePage {
   loader:any;
   simpleImg:any;
   constructor(public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+   console.log("dj");
   }
   ionViewDidLoad() {
     let userId=localStorage.getItem("userId");
@@ -88,7 +91,6 @@ export class ProfilePage {
     correctOrientation: true,
     sourceType:sourceType,
     }
-
     this.camera.getPicture(options).then((imageData) => {
       console.log(imageData);
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -100,10 +102,10 @@ export class ProfilePage {
     });
   } 
   EditModal() {
-	   let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
-	   profileModal.present();
+    console.log("djkfld");
+	  let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
+	  profileModal.present();
 	}
-
   ResetPassword(){
     let model=this.modalCtrl.create(ChangePasswordPage, {'reset':this.userDetail});
     model.present();

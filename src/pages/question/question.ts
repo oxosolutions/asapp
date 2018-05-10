@@ -49,7 +49,6 @@ export class QuestionPage {
   surveyQuestion=[];
   Errors:any;
   questionCheck=[];
-
  // indexArray=0;
   public indexArray:any=localStorage.getItem("lastquestionIndex");
   filledQuestion:any;
@@ -64,7 +63,7 @@ export class QuestionPage {
   CompletedGroup=[];
   completedGroupIndex=localStorage.getItem('Groupid');
   surveyTotalQuestions:any;
-      loader:any;
+  loader:any;
      
   constructor(public modalCtrl: ModalController,private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
@@ -366,8 +365,12 @@ export class QuestionPage {
              
              if(this.navParams.get("completed") ==  ""){
                 let profileModal = this.modalCtrl.create(SurveyPopUpPage);
-                 profileModal.present();
-               // this.navCtrl.setRoot(SurveyPopUpPage,{'id':'complete'});
+                profileModal.present();
+                var elem = this;
+                setTimeout(function(){
+                   elem.navCtrl.setRoot(DashboardPage);
+                },1000);
+                //this.navCtrl.setRoot(SurveyPopUpPage,{'id':'complete'});
                 // this.navCtrl.setRoot(DashboardPage);
               }else{
                  this.AioneHelp.presentToast("survey is successfully completed", 1000,'top');
