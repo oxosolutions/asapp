@@ -182,14 +182,14 @@ export class QuestionPage {
           for(i=0; i< newcollection.length; i++){
             replacedData[newcolumn[i]]=newcollection[i];
           }
-          console.log(replacedData);
+          //console.log(replacedData);
           replacedArray.push(replacedData);
         });
       });
       this.questions=replacedArray;
-      console.log(this.indexArray);
+      //console.log(this.indexArray);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
-      console.log(newObject);
+      //console.log(newObject);
 
      //create dynamic 
     const form: FormGroup = new FormGroup({});
@@ -229,7 +229,7 @@ export class QuestionPage {
   textData(questions,i,questionKey){
     return new Promise((resolve,reject)=>{
       this.lastArrayCheck().then((result:any)=>{
-        console.log(questions[i])
+        //console.log(questions[i])
         this.filledQuestion= localStorage.getItem("fillingQuestion");
       this.QuestionKeyText=questionKey;
       let content=[]
@@ -294,24 +294,26 @@ export class QuestionPage {
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
       if(this.questionCheck.length == (questionLength-1)){ 
+        console.log("if part of next");
         this.updateCompleteGroup().then(()=>{
           this.NextButton=false;
             let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"',last_fieldId = " +null +" where serialNo = "+localStorage.getItem('record_id');
             //console.log(query);
             this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
               this.questionIndex(this.indexArray,questionkey).then((id)=>{
-                this.questionsFilledCheck().then((fillled)=>{
+               // this.questionsFilledCheck().then((fillled)=>{
                   this.questionsFilledCheckInsert().then((filledinsert)=>{
                     this.loader.dismiss();
                     this.surveyComplete().then(()=>{
-                      
-                    });
-               });
+         
+                  });
+              // });
              });
             }); 
           });    
         })    
       }else{
+        console.log("else part of next");
         this.questionIndex(this.indexArray,questionkey).then((id)=>{  
           this.indexArray++;
           this.answerGet(this.indexArray).then((answerKey:any)=>{
@@ -330,7 +332,7 @@ export class QuestionPage {
   questionsFilledCheckInsert(){
     return new Promise((resolve,reject)=>{
       let query="UPDATE "+ this.tablename +" SET filledQuestions='"+localStorage.getItem("fillingQuestion") +"' where serialNo= "+ localStorage.getItem('record_id');
-      //console.log(query);
+      console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
         resolve(insert);
       })
@@ -347,6 +349,7 @@ export class QuestionPage {
       // }else{
         this.filledQuestion= localStorage.getItem("fillingQuestion");
         this.filledQuestion++;
+        console.log(this.filledQuestion);
         localStorage.setItem("fillingQuestion",this.filledQuestion);
         resolve(this.filledQuestion);
       //}
@@ -594,7 +597,7 @@ export class QuestionPage {
         let json;
         let formValue=[];
         if(validateFinal == null){
-          this.AioneHelp.presentToast("Plese fill your answer", 900,'top')          
+          this.AioneHelp.presentToast("Plese fill your answer in proper format", 900,'top')          
           this.Errors="it is not valid";
         }else{
           formValue.push(validateFinal);
@@ -636,7 +639,6 @@ export class QuestionPage {
       })
       form.reset(); 
     });
-    
   }
   insertSubmit(tablename,questionKey,formValue){
     return new Promise((resolve,rejct)=>{

@@ -32,7 +32,6 @@ export class GroupsPage {
   questionid(id,serialNo){
    localStorage.setItem("Groupid", id);
    this.completedSurvey().then((resutlcomplete)=>{
-    //this.sectionCompleteCheck().then((sectionCheck:any)=>{
      console.log(resutlcomplete);
       if(this.surveyType=="section"){
        this.navCtrl.push(SectionalQuestionsPage,{'id': id});
@@ -40,7 +39,6 @@ export class GroupsPage {
         localStorage.setItem( "lastquestionIndex", ""+ 0 +"");
         this.navCtrl.setRoot(QuestionPage, {'id': id,'completed': resutlcomplete,'InCompleteStatus':this.navParams.get("InCompleteStatus") }); 
       }
-    //})
    }) 
   }
   completedSurvey(){
