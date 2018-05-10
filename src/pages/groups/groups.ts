@@ -28,7 +28,6 @@ export class GroupsPage {
   //recordId:any;
   constructor(public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  
   questionid(id,serialNo){
    localStorage.setItem("Groupid", id);
    this.completedSurvey().then((resutlcomplete)=>{

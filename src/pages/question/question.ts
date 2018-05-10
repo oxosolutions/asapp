@@ -301,14 +301,14 @@ export class QuestionPage {
             //console.log(query);
             this.servicesProvider.ExecuteRun(query,[]).then((questionSave33)=>{
               this.questionIndex(this.indexArray,questionkey).then((id)=>{
-               // this.questionsFilledCheck().then((fillled)=>{
+              // this.questionsFilledCheck().then((fillled)=>{
                   this.questionsFilledCheckInsert().then((filledinsert)=>{
                     this.loader.dismiss();
                     this.surveyComplete().then(()=>{
          
                   });
-              // });
-             });
+              });
+             //});
             }); 
           });    
         })    
@@ -358,6 +358,9 @@ export class QuestionPage {
   surveyComplete(){
     return new Promise((resolve,reject)=>{
       let data=JSON.parse(localStorage.getItem('completedGroups')); 
+      console.log(data);
+      console.log(data.length);
+      console.log(localStorage.getItem("totalGroup"));
       if(data.length == localStorage.getItem("totalGroup")){
         let time=new Date();
         console.log("datashborad pls go");
@@ -366,19 +369,19 @@ export class QuestionPage {
           //console.log(query);
           this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
              
-             if(this.navParams.get("completed") ==  ""){
+             // if(this.navParams.get("completed") ==  ""){
                 let profileModal = this.modalCtrl.create(SurveyPopUpPage);
                 profileModal.present();
                 var elem = this;
                 setTimeout(function(){
                    elem.navCtrl.setRoot(DashboardPage);
                 },1000);
-                //this.navCtrl.setRoot(SurveyPopUpPage,{'id':'complete'});
-                // this.navCtrl.setRoot(DashboardPage);
-              }else{
-                 this.AioneHelp.presentToast("survey is successfully completed", 1000,'top');
-                this.navCtrl.setRoot(GroupsPage);
-              }
+                this.navCtrl.setRoot(SurveyPopUpPage,{'id':'complete'});
+                this.navCtrl.setRoot(DashboardPage);
+              // }else{
+              //    this.AioneHelp.presentToast("survey is successfully completed", 1000,'top');
+              //   this.navCtrl.setRoot(GroupsPage);
+              // }
           });
           });
       }else{
@@ -416,7 +419,7 @@ export class QuestionPage {
                   }
                   loop++;
                   if(Totallength==loop){
-                    let query="UPDATE "+this.tablename + " SET filledQuestions="+ filled.length +" where serialNo = "+localStorage.getItem('record_id');
+                    let query="UPDATE "+this.tablename + " SET totalfilledQuestion = "+ filled.length +" where serialNo = "+localStorage.getItem('record_id');
                     this.servicesProvider.ExecuteRun(query,[]).then((complete:any)=>{
                        resolve(complete);
                     });
@@ -597,7 +600,7 @@ export class QuestionPage {
         let json;
         let formValue=[];
         if(validateFinal == null){
-          this.AioneHelp.presentToast("Plese fill your answer in proper format", 900,'top')          
+          this.AioneHelp.presentToast("Plese fill Your Answer In Proper Format", 900,'top')          
           this.Errors="it is not valid";
         }else{
           formValue.push(validateFinal);
@@ -628,7 +631,8 @@ export class QuestionPage {
             formValue.push(localStorage.getItem("username"));
             formValue.push("App");
             formValue.push(uniqueKey);
-            this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name","filledQuestions","survey_submittedBy","survey_submittedFrom","unique_id"], formValue).then((res:any)=>{
+            formValue.push(localStorage.getItem("totalGroup"));
+            this.servicesProvider.Insert(this.tablename, [questionKey,"last_fieldId","survey_status","last_group_id","survey_startedOn","totalQuestions","incomplete_name","filledQuestions","survey_submittedBy","survey_submittedFrom","unique_id","totalGroup"], formValue).then((res:any)=>{
            // console.log(res.insertId);
               localStorage.setItem('record_id', res.insertId);
               localStorage.setItem('InCompleteSurveyName',null);

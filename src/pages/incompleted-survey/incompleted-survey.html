@@ -21,7 +21,7 @@
 						{{record.survey_startedOn | date:'fullDate' }}
 					</span>
 					<div class="percentage-wrapper">
-						<div><span>{{((record.filledQuestions/record.totalQuestions)*100).toFixed()}}%</span> completed</div>
+						<div><span>{{((record.totalFilledQuestion/record.totalQuestions)*100).toFixed()}}%</span> completed</div>
 					</div>
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 		<div class="custom-card-footer">
 			<div class="question-incomplete">
 				<ion-icon name="alert"></ion-icon>
-				{{record.totalQuestions-record.filledQuestions}} question remaining
+				{{record.totalQuestions-record.totalFilledQuestion}} question remaining
 			</div>
 			<div class="trash-survey">
 				<ion-icon name="md-trash" (click)="deleteDetails(record.serialNo)"></ion-icon>			

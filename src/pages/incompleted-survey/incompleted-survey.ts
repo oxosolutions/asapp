@@ -73,7 +73,8 @@ export class IncompletedSurveyPage {
     localStorage.setItem("record_id", record.serialNo);
     localStorage.setItem("Groupid", record.last_group_id);
     localStorage.setItem("questionIndex", record.questionIndex);
-
+    localStorage.setItem("totalGroup", record.totalGroup);
+   
     this.groupCompleteCheck(record).then(()=>{
        // console.log(  record.last_fieldId);
      record.last_fieldId++;
