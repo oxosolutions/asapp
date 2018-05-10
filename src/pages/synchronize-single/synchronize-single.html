@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content>
     <form #myForm='ngForm' >
-      <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All
+      <ion-item class="checkAll"> <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All</ion-item>
         <div id="checkBoxes">
           <ion-item *ngFor="let  record of synchronize">
              <!--  <ion-label>

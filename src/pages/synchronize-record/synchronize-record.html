@@ -23,7 +23,7 @@
 
     <div *ngIf="(listSurvey != null); else second">
       <form #myForm='ngForm' >
-        <input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All
+         <ion-item class="checkAll"><input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All</ion-item>
         <div id="checkBoxes">
           <div class="sync-item" *ngFor="let record of listSurvey">
             <div class="sync-item-title">
