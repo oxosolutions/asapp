@@ -26,6 +26,7 @@
     "@ionic-native/device": "^4.6.0",
     "@ionic-native/geolocation": "^4.6.0",
     "@ionic-native/http": "^4.6.0",
+    "@ionic-native/image-resizer": "^4.7.0",
     "@ionic-native/network": "^4.6.0",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/sqlite": "^4.6.0",
@@ -76,7 +77,8 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "info.protonet.imageresizer": {}
     },
     "platforms": [
       "android"

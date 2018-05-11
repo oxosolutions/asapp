@@ -4,8 +4,17 @@ page-profile {
 		.image-wrapper {
 			margin-bottom: 10px;
 			img{
-				height: 120px;margin: 0 auto;
+				height: 114px;
+			    /* margin: 1px auto; */
+			    border-radius: 72px;
+			    width: 119px;
+			    /* border-color: red; */
+			    border: 1px #ff7616;
+			    border-style: inset;
 
+			}
+			.imgdiv{
+				margin: 0 auto;
 			}
 		}
 		.profile-menu-toggle{

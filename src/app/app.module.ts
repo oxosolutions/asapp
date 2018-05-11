@@ -42,6 +42,7 @@ import {ProfileEditPage} from '../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../pages/change-password/change-password';
 import {SurveyPopUpPage} from '../pages/survey-pop-up/survey-pop-up';
 import {UpdatePage} from '../pages/update/update';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 declare var jquery:any;
 declare var $ :any;
@@ -82,7 +83,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
 
   imports: [
     BrowserModule,
-     ReactiveFormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
     // AmazingTimePickerModule,
@@ -127,6 +128,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SQLite,
     Calendar,
     Device,
+     ImageResizer,
     Camera,
     Network,
     SurveyProvider,Geolocation,

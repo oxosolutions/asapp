@@ -8,6 +8,7 @@ import { AlertController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ export class ProfilePage {
   userDetail:any;
   loader:any;
   simpleImg:any;
-  constructor(public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  constructor(private imageResizer: ImageResizer,public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
    console.log("dj");
   }
   ionViewDidLoad() {
@@ -35,10 +36,20 @@ export class ProfilePage {
       this.servicesProvider.SelectWhere("users","id",'"'+ data["id"]+'"').then((result:any)=>{
         this.userDetail=result.rows.item(0);
         console.log(this.userDetail);
-        this.base64Image = localStorage.getItem("imgData") ;
+        this.base64Image = localStorage.getItem("imgData");
+        // if(localStorage.getItem("imgData") != null || localStorage.getItem("imgData") != "" || localStorage.getItem("imgData") != "null"){
+        //   this.ProfileUpdate().then(()=>{
+
+        //   })
+        // }
       });
      })
 
+  }
+  ProfileUpdate(){
+    return new Promise((resolve,reject)=>{
+      let image=localStorage.getItem("imgData");
+    })
   }
   camera1(){
     let alert=this.alert.create({
@@ -90,17 +101,48 @@ export class ProfilePage {
     allowEdit: true,
     correctOrientation: true,
     sourceType:sourceType,
+    targetWidth: 230,
+    targetHeight: 190,
     }
     this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log(this.base64Image);
-      localStorage.setItem("imgData", this.base64Image);
-      this.loader.dismiss();
+       let data = 'data:image/jpeg;base64,' + imageData;
+      console.log(data);
+     // this.resizer(data).then((result:any)=>{  console.log("returned data");
+        //console.log(result);
+         this.base64Image = data;
+           this.loader.dismiss();
+         localStorage.setItem("imgData", this.base64Image);
+    //  })
+      // this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      // console.log(this.base64Image);
+      //  this.loader.dismiss();
+      // localStorage.setItem("imgData", this.base64Image);
+     
     }, (err) => {
         this.loader.dismiss();
     });
   } 
+  resizer(data){
+    return new Promise((resolve,reject)=>{
+    let options = {
+     uri: data,
+     quality: 10,
+     width: 10,
+     height: 10
+    } as ImageResizerOptions;
+
+    this.imageResizer.resize(options).then((filePath: string) =>{
+      console.log('FilePath', filePath)
+     console.log("djkfd");
+     resolve(filePath);
+    },(err) => {
+        console.log(err);
+    });
+
+    // .catch(e => console.log(e));
+
+      });
+  }
   EditModal() {
     console.log("djkfld");
 	  let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });

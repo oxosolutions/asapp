@@ -89,5 +89,6 @@
     <plugin name="cordova-plugin-advanced-http" spec="^1.9.1" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <allow-navigation href="http://192.168.0.108:8100" />
+    <plugin name="info.protonet.imageresizer" spec="~0.1.1" />
     <engine name="android" spec="7.0.0" />
 </widget>

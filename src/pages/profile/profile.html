@@ -19,14 +19,14 @@
 			<ion-icon name="menu"></ion-icon>
 		</button>
 		<div class="image-wrapper" (click)="camera1()">
-			<div *ngIf="base64Image; else userimg">
-				<img [src]= "(base64Image)">
-				
+			<div  class="imgdiv" *ngIf="base64Image; else userimg">
+				<img [src]= "(base64Image)">	
 			</div >
 			<ng-template #userimg>
 				<img src="assets/imgs/dummy-user-img.png" >
 				
 			</ng-template>
+
 				
 		</div>
 		
