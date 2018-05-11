@@ -69,7 +69,7 @@ export class SurveyDetailPage {
   presentToast(){
     let toast = this.toastCtrl.create({
       message: 'Survey is not available',
-      duration: 5500,
+      duration: 1500,
       showCloseButton:true,
       closeButtonText: 'Ok'
     });
@@ -85,7 +85,7 @@ export class SurveyDetailPage {
     if(incompleteRecord > 0){
         this.navCtrl.setRoot(CompletedSurveyPage, {'id':id});  
     }else{
-        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+        this.AioneHelp.presentToast("Sorry, there is no survey found",500,'top')
     }
   }
   syncronizePage(id,synchronize){
@@ -93,7 +93,7 @@ export class SurveyDetailPage {
     if(synchronize > 0){
         this.navCtrl.setRoot(SynchronizeSinglePage, {'id':id});  
     }else{
-        this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+        this.AioneHelp.presentToast("Sorry, there is no survey found",500,'top')
     }
   }
   incompletedSurveyPage(id,incompleteRecord){
@@ -101,7 +101,7 @@ export class SurveyDetailPage {
     if(incompleteRecord > 0){
       this.navCtrl.setRoot(IncompletedSurveyPage, {'id' : id});
     }else{
-      this.AioneHelp.presentToast("Sorry, there is no survey found",900,'top')
+      this.AioneHelp.presentToast("Sorry, there is no survey found",500,'top')
     }
   }
   surveyIncompleteName(){

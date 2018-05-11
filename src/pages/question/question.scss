@@ -1,5 +1,11 @@
 
 page-question.ion-page {
+	input{
+		 width: 95%;
+		 height: 32px;
+	    margin-bottom: 20px;
+	    margin-top: 10px;
+	}
 	ion-content{
 		background-color: #f5f5f5;
 	}
@@ -7,6 +13,11 @@ page-question.ion-page {
 		    font-size: 17px;
     padding-left: 0px;
     margin-bottom: 6px;
+	}
+	input[type="checkbox"]{
+		width: auto !important;
+    height: auto !important;
+    margin-bottom: 10px !important;
 	}
 
 	.card{

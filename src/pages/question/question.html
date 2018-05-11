@@ -13,114 +13,114 @@
 </ion-header>
 <ion-content padding>
 	<div *ngIf="OriginalContent">
-	<div class="card" >
+		<div class="card" >
 			<span class="question-number">Question {{filledQuestion}}</span>of {{surveyTotalQuestions}}
-	    <div class="question-text">{{OriginalContent?.question_text}}</div>
-			
+		  <div class="question-text">{{OriginalContent?.question_text}}</div>
+				
 
-			<!-- <input atp-time-picker arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
-			<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  /> -->
+				<!-- <input atp-time-picker arrowStyle="{'background': 'red', 'color': 'white'}"/> -->
+				<!-- <input type="time" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  /> -->
 
-		<form novalidate  [formGroup]="form">
-		   <div [ngSwitch]="OriginalContent?.question_type">
+			<form novalidate  [formGroup]="form">
+			  <div [ngSwitch]="OriginalContent?.question_type">
 
-		   	<!--text-->
+			   	<!--text-->
 					<div  *ngSwitchCase="'text'">
-				      <input  [formControlName]="OriginalContent?.question_text"
+						 
+				      <input #controlDir [formControl]="form.get(currentFormControlName)"
 				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
 				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->
-				 </div>
-
-
-		   		<!--textarea-->
-					<div  *ngSwitchCase="'textarea'">
-				      <input [formControlName]="OriginalContent?.question_text"
-				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
-					<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
-				 -->
 					</div>
 
-					
 					<!--number-->
 					<div *ngSwitchCase="'number'">
-						 <input  [formControlName]="OriginalContent?.question_text"
-				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
+						 <input  #controlDir [formControl]="form.get(currentFormControlName)"
+				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill" required> 
+					</div>
+
+			   		<!--textarea-->
+					<div  *ngSwitchCase="'textarea'">
+					      <input  #controlDir [formControl]="form.get(currentFormControlName)"
+					        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
+						<!-- 	<div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div>
+					 -->
 					</div>
 
 					<!--Email-->
 					<div *ngSwitchCase="'email'">
-						 <input  [formControlName]="OriginalContent?.question_text"
+						 <input  #controlDir [formControl]="form.get(currentFormControlName)"
 				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
 					</div>
 
 					<!--password-->
 					<div *ngSwitchCase="'password'">
-						 <input  [formControlName]="OriginalContent?.question_text"
+						 <input  #controlDir [formControl]="form.get(currentFormControlName)"
 				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type" [(ngModel)]="OriginalContent.prefill"  required> 
 					</div>
 
-				  <!--datepicker-->
-				  <div *ngSwitchCase="'datepicker'">
-				  	 <div class="datepicker-container">
-				        <ng-datepicker  [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
-				      </div>
+					  <!--datepicker-->
+					<div *ngSwitchCase="'datepicker'">
+					  	 <div class="datepicker-container">
+					        <ng-datepicker  #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
+					      </div>
+					</div>
+
+					  <!--timepicker-->
+					  <div *ngSwitchCase="'timepicker'">
+					  	 <input type="time" #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  />
+					  </div>
+
+
+					  <!--select-->
+					   <div *ngSwitchCase="'select'">
+					   <ion-list>
+	  					<ion-item>
+					     	<ion-label>{{OriginalContent?.question_text}}</ion-label>
+								  <ion-select #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill" >
+						    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
+						    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
+						    	</ion-option>
+						    </ion-select>
+						     </ion-item>
+							</ion-list>
+					  </div>
+
+					  <!--radio button-->
+			       <div *ngSwitchCase="'radio'">
+			      	<ion-list radio-group #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill">
+							  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
+							    <ion-label>{{radio?.option_text}}</ion-label>
+							    <ion-radio value="{{radio?.option_text}}"></ion-radio>
+							  </ion-item>
+	 						</ion-list>
+			      </div>
+
+	 				<!--checkbox-->
+			      <div class="checkdiv" *ngSwitchCase="'checkbox'">
+							  <div *ngFor="let check of OriginalContent?.answers[0]">
+								  <input type="checkbox" #controlDir [formControl]="form.get(currentFormControlName)" class="checkBoxClass" name="{{check?.option_text}}" id="checkall">{{check?.option_text}}
+								</div>
+					
+			      </div>
+
+			   	 <!--new types-->
+				    <div *ngSwitchCase="'code'">
+
+				    </div>
+
 				  </div>
-
-				  <!--timepicker-->
-				  <div *ngSwitchCase="'timepicker'">
-				  	 <input type="time" [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" atp-time-picker value="" theme="dark" arrowStyle="{'background': 'red', 'color': 'white'}"  />
-				  </div>
-
-
-				  <!--select-->
-				   <div *ngSwitchCase="'select'">
-				   <ion-list>
-  					<ion-item>
-				     	<ion-label>{{OriginalContent?.question_text}}</ion-label>
-							  <ion-select [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill" >
-					    	<ion-option *ngFor = "let opt of OriginalContent?.answers[0]">
-					    	<ion-option value="{{opt?.option_value}}">{{opt?.option_text}}</ion-option>
-					    	</ion-option>
-					    </ion-select>
-					     </ion-item>
-						</ion-list>
-				  </div>
-
-				  <!--radio button-->
-		       <div *ngSwitchCase="'radio'">
-		      	<ion-list radio-group [formControlName]="OriginalContent?.question_text" [(ngModel)]="OriginalContent.prefill">
-						  <ion-item *ngFor = "let radio of OriginalContent?.answers[0]">
-						    <ion-label>{{radio?.option_text}}</ion-label>
-						    <ion-radio value="{{radio?.option_text}}"></ion-radio>
-						  </ion-item>
- 						</ion-list>
-		      </div>
-
- 				<!--checkbox-->
-		      <div class="checkdiv" *ngSwitchCase="'checkbox'">
-						  <div *ngFor="let check of OriginalContent?.answers[0]">
-							  <input type="checkbox" [formControlName]="OriginalContent?.question_text" class="checkBoxClass" name="{{check?.option_text}}" id="checkall">{{check?.option_text}}
-							</div>
 				
-		      </div>
+	    		<div class="action-buttons">
+						<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
 
-		   	 <!--new types-->
-			    <div *ngSwitchCase="'code'">
+						<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
 
-			    </div>
-
-			  </div>
-	
-    		<div class="action-buttons">
-					<button *ngIf="previousButton" ion-button   (click)="previous()">Previous</button>
-
-					<button (click)="showConfirm(OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type)" ion-button color="secondary" class="stop">Exit</button>
-
-					<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type ,OriginalContent)" class="next"><ion-icon name="add"></ion-icon>Next</button>
-				</div>
-</form>
-</div>
+						<button  *ngIf="NextButton" ion-button (click)="onSubmit(form,OriginalContent.question_key,OriginalContent.survey_id,OriginalContent?.question_text,OriginalContent?.question_type ,OriginalContent)" class="next"><ion-icon name="add"></ion-icon>Next</button>
+					</div>
+			</form>
+		</div>
 	</div>
+		<!-- <p>Form value: {{ form.value | json }}</p> -->
 
 
 <!-- <input *ngSwitchCase="'textarea'"

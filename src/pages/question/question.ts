@@ -8,12 +8,13 @@ import { TextPage }  from '../../pages/text/text';
 import { SelectPage } from '../../pages/select/select';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import {ToastController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup, NgForm, FormControl} from '@angular/forms';
+import {Validators,FormArray, FormBuilder, FormGroup, NgForm, FormControl,FormGroupDirective,FormControlName} from '@angular/forms';
 import { DatepickerOptions } from 'ng2-datepicker';
 import * as enLocale from 'date-fns/locale/en';
 import * as frLocale from 'date-fns/locale/fr';
 import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 import { LoadingController } from 'ionic-angular';
+import { ReactiveFormsModule } from '@angular/forms'; 
 declare var jquery:any;
 declare var $ :any;
 
@@ -24,6 +25,8 @@ declare var $ :any;
 })
 export class QuestionPage {
   form: FormGroup;
+  @ViewChild('formDir') formDir: FormGroupDirective;
+@ViewChild('controlDir', { read: FormControlName }) controlDir: FormControlName;
    // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
   //message:string
@@ -64,8 +67,9 @@ export class QuestionPage {
   completedGroupIndex=localStorage.getItem('Groupid');
   surveyTotalQuestions:any;
   loader:any;
-     
-  constructor(public modalCtrl: ModalController,private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
+  globalnewObject:any;
+  currentFormControlName:string;
+  constructor(private formBuilder: FormBuilder,public modalCtrl: ModalController,private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
   }
  
@@ -111,9 +115,7 @@ export class QuestionPage {
     });  
     prompt.present();
   }
-  ngAfterViewInit() {
-    // this.message = this.child.message
-  }
+  
   check(value2){
     console.log(value2);
     if(value2 == ''){
@@ -125,7 +127,7 @@ export class QuestionPage {
     }
   }
 
-  ionViewWillEnter(){
+  ngOnInit(){
     this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -140,14 +142,14 @@ export class QuestionPage {
     this.questionTitle=localStorage.getItem("ApplicationName");
     this.questionType=localStorage.getItem("questionType");
     this.id=this.navParams.get('id');
-    console.log(this.id);
+   // console.log(this.id);
     this.servicesProvider.SelectWhere("questions","group_id",this.id).then((result3:any)=>{
       this.servicesProvider.mobileListArray(result3).then((result:any)=>{
 
 
-      console.log(result);
+     // console.log(result);
       Content.push(result);
-      console.log(Content);
+     // console.log(Content);
 
       //code for converting json
       
@@ -187,19 +189,37 @@ export class QuestionPage {
         });
       });
       this.questions=replacedArray;
-      //console.log(this.indexArray);
+      console.log(this.questions);
       this.QuestionKeyText=this.questions[this.indexArray].question_key;
       //console.log(newObject);
+// this.form=this.formBuilder.group({
 
-     //create dynamic 
+//       "name":["",Validators.compose([  
+//               Validators.required,  
+//         ])],
+//       "mothers-name":["",Validators.compose([    
+//       Validators.required,        
+//         ])],
+//        "father name":["",Validators.compose([    
+//       Validators.required,        
+//         ])],
+//         "course":["",Validators.compose([    
+//       Validators.required,        
+//         ])],
+
+
+//     });
+ // this.currentFormControlName = 'name';
+     // create dynamic 
     const form: FormGroup = new FormGroup({});
     for (const key in newObject) {
       if (newObject.hasOwnProperty(key)){
         const control: FormControl = new FormControl(newObject[key], Validators.required);
         form.addControl(key, control);
-      }
+      } 
     }
     this.form = form;
+    // console.log(this.form);
     //end 
     
     //console.log(this.QuestionKeyText);
@@ -226,34 +246,37 @@ export class QuestionPage {
       }
     })
   }
+ 
   textData(questions,i,questionKey){
     return new Promise((resolve,reject)=>{
       this.lastArrayCheck().then((result:any)=>{
-        //console.log(questions[i])
         this.filledQuestion= localStorage.getItem("fillingQuestion");
-      this.QuestionKeyText=questionKey;
-      let content=[]
-      content=questions[i]; 
-      console.log(content);
-      this.checkboxPrefillCheck(content["question_type"],this.QuestionKeyText).then((data)=>{
-       this.QuestionKeyText=data;
-      content["prefill"]=this.QuestionKeyText;
-      this.OriginalContent = content;
-      if(this.questionCheck.length==0){
-        this.previousButton=false;
-      }else{
-        this.previousButton=true; 
-      }
-      this.NextButton=true;
-        if(content["question_type"]=='checkbox'){
-          if(this.QuestionKeyText != null){
-            this.arrayExitscondtion(this.QuestionKeyText);
-          } 
-         }
-       }); 
-       })
-   });   
+        this.QuestionKeyText=questionKey;
+        let content=[]
+        content=questions[i]; 
+        console.log(content);
+        this.currentFormControlName = content["question_text"];
+        console.log(this.currentFormControlName);
+        this.checkboxPrefillCheck(content["question_type"],this.QuestionKeyText).then((data)=>{
+          this.QuestionKeyText=data;
+          content["prefill"]=this.QuestionKeyText;
+          this.OriginalContent = content;
+          if(this.questionCheck.length==0){
+            this.previousButton=false;
+          }else{
+            this.previousButton=true; 
+          }
+          this.NextButton=true;
+          if(content["question_type"]=='checkbox'){
+            if(this.QuestionKeyText != null){
+              this.arrayExitscondtion(this.QuestionKeyText);
+            } 
+          }
+        });
+      })
+    });   
   }
+
   checkboxPrefillCheck(question_text,QuestionKeyText){
     return new Promise((resolve,reject)=>{
       if(question_text=='checkbox'){
@@ -294,7 +317,6 @@ export class QuestionPage {
       let questionLength=this.questions.length;
       localStorage.getItem('Groupid');
       if(this.questionCheck.length == (questionLength-1)){ 
-        console.log("if part of next");
         this.updateCompleteGroup().then(()=>{
           this.NextButton=false;
             let query="UPDATE "+ this.tablename + " SET completed_groups = '" + localStorage.getItem('completedGroups') +"',last_fieldId = " +null +" where serialNo = "+localStorage.getItem('record_id');
@@ -313,7 +335,6 @@ export class QuestionPage {
           });    
         })    
       }else{
-        console.log("else part of next");
         this.questionIndex(this.indexArray,questionkey).then((id)=>{  
           this.indexArray++;
           this.answerGet(this.indexArray).then((answerKey:any)=>{
@@ -332,7 +353,7 @@ export class QuestionPage {
   questionsFilledCheckInsert(){
     return new Promise((resolve,reject)=>{
       let query="UPDATE "+ this.tablename +" SET filledQuestions='"+localStorage.getItem("fillingQuestion") +"' where serialNo= "+ localStorage.getItem('record_id');
-      console.log(query);
+     // console.log(query);
       this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
         resolve(insert);
       })
@@ -349,7 +370,7 @@ export class QuestionPage {
       // }else{
         this.filledQuestion= localStorage.getItem("fillingQuestion");
         this.filledQuestion++;
-        console.log(this.filledQuestion);
+       
         localStorage.setItem("fillingQuestion",this.filledQuestion);
         resolve(this.filledQuestion);
       //}
@@ -358,9 +379,6 @@ export class QuestionPage {
   surveyComplete(){
     return new Promise((resolve,reject)=>{
       let data=JSON.parse(localStorage.getItem('completedGroups')); 
-      console.log(data);
-      console.log(data.length);
-      console.log(localStorage.getItem("totalGroup"));
       if(data.length == localStorage.getItem("totalGroup")){
         let time=new Date();
         console.log("datashborad pls go");
@@ -386,7 +404,7 @@ export class QuestionPage {
           });
       }else{
         this.totalfilledQuestion().then((length:any)=>{
-        this.AioneHelp.presentToast("section is successfully completed", 3000,'top');
+        this.AioneHelp.presentToast("section is successfully completed", 1000,'top');
         this.navCtrl.setRoot(GroupsPage, {'completedGroup': localStorage.getItem("completedGroups")});
         });
       }
@@ -462,7 +480,7 @@ export class QuestionPage {
       this.questionCheck.push(check);
       localStorage.setItem( "questionIndex", JSON.stringify(this.questionCheck));
       let questionFilled=JSON.parse(localStorage.getItem('questionIndex'));
-      console.log(questionFilled);  //list of array
+     // console.log(questionFilled);  //list of array
       let query="UPDATE "+ this.tablename +" SET questionIndex = '"+ localStorage.getItem('questionIndex') +"' where serialNo= "+ localStorage.getItem('record_id');
       this.servicesProvider.ExecuteRun(query,[]).then((insert)=>{
         resolve(this.questionCheck);
@@ -535,6 +553,7 @@ export class QuestionPage {
       }else{
         //if same types
         if(value[localStorage.getItem("lastQuestiontext")] != null){
+          console.log(localStorage.getItem("lastQuestiontext"));
           let data=value[localStorage.getItem("lastQuestiontext")];
           resolve(data);
         }else{
@@ -592,14 +611,16 @@ export class QuestionPage {
     })
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,answerLength){
-    this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
-    console.log(formValidate);
+    console.log(this.form.value[questionText]);
+    let formValidate=this.form.value[questionText]
+    //this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
+     console.log(formValidate);
       this.switchConditions(QuestionType,answerLength,formValidate).then(( validateFinal:any)=>{
         console.log(validateFinal);
         let i=0;
         let json;
         let formValue=[];
-        if(validateFinal == null){
+        if(validateFinal == null || validateFinal==""){
           this.AioneHelp.presentToast("Plese fill Your Answer In Proper Format", 900,'top')          
           this.Errors="it is not valid";
         }else{
@@ -638,11 +659,11 @@ export class QuestionPage {
               localStorage.setItem('InCompleteSurveyName',null);
               this.next(survey_id,questionKey);
             });
-          }
+          } form.reset();
         }
       })
-      form.reset(); 
-    });
+     
+    //});
   }
   insertSubmit(tablename,questionKey,formValue){
     return new Promise((resolve,rejct)=>{

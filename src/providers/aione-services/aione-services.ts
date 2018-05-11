@@ -99,7 +99,7 @@ export class AioneServicesProvider {
 		
 	}
 	Insert(tableName,Cols,Values){
-		console.log(Values.length);
+		//console.log(Values.length);
 		return new Promise((resolve,reject)=>{
 			let questionMarks=[]
 			if(this.db!= undefined){
@@ -108,7 +108,7 @@ export class AioneServicesProvider {
 					questionMarks.push("?");
 				}
 				this.query='insert into '+tableName + '(' + Cols + ') VALUES (' +questionMarks + ')'; 
-				console.log(this.query);
+				//console.log(this.query);
 				this.ExecuteRun(this.query, Values).then((insertRes:any)=>{
 					resolve(insertRes);
 				})

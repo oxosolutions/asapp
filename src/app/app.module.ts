@@ -42,6 +42,7 @@ import {ProfileEditPage} from '../pages/profile-edit/profile-edit';
 import {ChangePasswordPage} from '../pages/change-password/change-password';
 import {SurveyPopUpPage} from '../pages/survey-pop-up/survey-pop-up';
 import {UpdatePage} from '../pages/update/update';
+
 declare var jquery:any;
 declare var $ :any;
 

@@ -23,12 +23,14 @@
                <input type="checkbox" [(ngModel)]="record.serialNo.selected" id="id" class="checkBoxClass" name="{{record.serialNo}}"  color="red">{{record.incomplete_name}}
                <!--  </ion-item> -->
           </ion-item>
-        
-        <div class="button-wrapper">
+          <div class="sync-button">
+              <button ion-button class="ddd" (click)="onSubmit(myForm)">Synchronize All</button>
+          </div>
+       <!--  <div class="button-wrapper">
             <button  ion-button color="dark" outline (click)="onSubmit(myForm)">
                 <ion-icon name="add" >
                 </ion-icon>Next</button>
-        </div>
+        </div> -->
         </div>
     </form>
 </ion-content>
