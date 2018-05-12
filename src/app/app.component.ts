@@ -28,6 +28,7 @@ export class MyApp {
   Api_Url='http://master.scolm.com/api/survey_api';
   ApiName='IRIS Application';
   ApiDesc='Integrated Road Traffic Injuries Surveillance System - INDIA';
+  
 
 
   //############ End of Global variables #####//

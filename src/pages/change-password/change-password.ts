@@ -6,7 +6,6 @@ import { Http, Headers, RequestOptions} from '@angular/http';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 
-
 @IonicPage()
 @Component({
   selector: 'page-change-password',
@@ -69,8 +68,7 @@ export class ChangePasswordPage {
           //resolve("connected");
         }
       });
-    })
-   
+    }) 
   }
 
   submit(Oldpassword,newpass,confirmpassword){
@@ -84,24 +82,25 @@ export class ChangePasswordPage {
         position:'top',
       });
       let form = new FormData();
-      form.append('Oldpassword',Oldpassword);
-      form.append('newpass',newpass);
-      form.append('confirmpassword',confirmpassword);
+      form.append('old_password',Oldpassword);
+      form.append('new_password',newpass);
+     
+       form.append('activation_code',localStorage.getItem('activationKey'));
+      form.append("user_id",localStorage.getItem("userId"));
       console.log(form);
       loader.dismiss();
-      // this.http.post("http://admin.scolm.com/api/", form)
-      // .subscribe(data => {
-      //   console.log(data);
-      //   this.newPassword.reset()
-      //    loader.dismiss();
-      //   toast.present();
-      //   console.log('submitted successfully');
+      this.http.post("http://master.scolm.com/api/v2/update/password", form)
+      .subscribe(data => {
+        console.log(data);
+        this.newPassword.reset()
+         loader.dismiss();
+        toast.present();
+        console.log('submitted successfully');
         
-      // },error=>{
-      //   console.log(error);
-      // });
-      // 
-      // 
+      },error=>{
+        console.log(error);
+      });
+      
       // showalert(data);
       return false;
 

@@ -142,6 +142,7 @@ export class SynchronizeRecordPage {
         if($(this).is(':checked')){
           forloop++;
           let table = $(this).attr("ng-reflect-name");
+          console.log(table);
           tablename11.push(table);   
         }else{
           forloop++;
@@ -164,20 +165,26 @@ export class SynchronizeRecordPage {
       });
       this.loader.present(); 
       if((table.length>0)){
-        let formValue = [];
+        // let formValue = [];
         let listtable=[];
         let json:any;
         let forloop=0;
         table.forEach((key,value)=>{
-          console.log(key);
-            this.answerGet(key).then((answer:any)=>{ console.log(answer);
-              forloop++;
+          let formValue = [];
+          let surveyId=key.split("_").pop();
+            this.answerGet(key).then((answer:any)=>{ 
+              answer[0]["surveyId"]=surveyId;
+              console.log(answer);
+             // forloop++;
               formValue.push(answer);
-               if(forloop == table.length){ 
-              this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
-                this.dataSend(parsedData,table).then(()=>{ console.log(this.listSurvey);
-                  this.listSurvey=[];
-                  this.synchronizeData=[];
+             //  if(forloop == table.length){ 
+               console.log(formValue[0]);
+              //this.ArrayParse(formValue).then((parsedData:any)=>{ console.log(parsedData)
+               this.dataSend(formValue[0],table).then(()=>{ console.log(this.listSurvey);
+                 forloop++;
+                 this.listSurvey=[];
+                 this.synchronizeData=[];
+                   if(forloop == table.length){ 
                   this.checkSurvey().then((selected:any)=>{ 
                     console.log("back to submit"); 
                     this.synchronizeData=selected;
@@ -185,6 +192,7 @@ export class SynchronizeRecordPage {
                     if(this.synchronizeData.length >0){
                       this.listSurvey=this.synchronizeData;
                       this.loader.dismiss(); 
+                      this.listSurvey=null;
                       this.AioneHelp.presentToast("Synchronized, Synchronized data successfully", 500,'top');
                     }else{
                       this.listSurvey=null;
@@ -193,9 +201,10 @@ export class SynchronizeRecordPage {
                       // this.AioneHelp.presentToast("Sorry, there is no completed survey found", 500,'top');
                     }
                   })
-                 })
+                }
+                //})
                }); 
-              }
+             // }
             })
           });
       }else{
@@ -228,17 +237,17 @@ export class SynchronizeRecordPage {
       let query1="SELECT * FROM "+ tablename +" WHERE survey_sync_status IS NULL AND survey_status = 'completed' ";
       this.servicesProvider.ExecuteRun(query1,[]).then((answer:any)=>{
         this.servicesProvider.mobileListArray(answer).then((list:any)=>{ 
-           resolve(list);
+          resolve(list);
+          
         });
       });
     });
   }
   dataSend(formValue,listsurvey){
-    console.log(listsurvey[3]);
     return new Promise((resolve,reject)=>{
       var formData = new FormData;
       formData.append('survey_data',JSON.stringify(formValue));
-      formData.append('survey_id','6');
+      formData.append('survey_id',formValue[0].surveyId);
       formData.append('activation_code', '292608');
       formData.append('lat_long',JSON.stringify({lat: this.latitude, long: this.longitude}));
       try{
@@ -260,13 +269,15 @@ export class SynchronizeRecordPage {
              this.loader.dismiss(); 
           }else{
              let forloop=0;
-            for(let i=0; i< listsurvey.length ; i++){   
-              console.log(listsurvey[i]);
-              let query='Update '+ listsurvey[i] + ' SET survey_sync_status = "synchronized"';
+            for(let i=0; i< formValue.length; i++){
+              console.log(i);
+              console.log(formValue[i].surveyId);   
+              let query='Update surveyResult_'+formValue[i].surveyId + ' SET survey_sync_status = "synchronized"';
               console.log(query);
-               this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
+              this.servicesProvider.ExecuteRun(query,[]).then((update:any)=>{
                 forloop++;
-                if(forloop == listsurvey.length){
+                console.log(forloop);
+                if(forloop == formValue.length){
                   console.log('update');
                   resolve('update');
                 }
@@ -274,7 +285,7 @@ export class SynchronizeRecordPage {
             }
           }
         },error=>{
-          this.loader.dismiss();
+         // this.loader.dismiss();
           console.log(error);
         });
     });

@@ -22,10 +22,15 @@ export class ProfilePage {
   userDetail:any;
   loader:any;
   simpleImg:any;
+  imgs:any;
   constructor(private imageResizer: ImageResizer,public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
    console.log("dj");
   }
   ionViewDidLoad() {
+    this.profileFunction();
+
+  }
+  profileFunction(){
     let userId=localStorage.getItem("userId");
     this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{
       console.log(result.rows.item(0));
@@ -36,24 +41,23 @@ export class ProfilePage {
       this.servicesProvider.SelectWhere("users","id",'"'+ data["id"]+'"').then((result:any)=>{
         this.userDetail=result.rows.item(0);
         console.log(this.userDetail);
-        this.base64Image = localStorage.getItem("imgData");
-        // if(localStorage.getItem("imgData") != null || localStorage.getItem("imgData") != "" || localStorage.getItem("imgData") != "null"){
-        //   this.ProfileUpdate().then(()=>{
-
-        //   })
-        // }
+        //this.base64Image = localStorage.getItem("imgData");
+        if(localStorage.getItem("imgData") != null || localStorage.getItem("imgData") != "" || localStorage.getItem("imgData") != "null"){
+          this.ProfileUpdate().then(()=>{
+          })
+        }
       });
      })
-
   }
   ProfileUpdate(){
     return new Promise((resolve,reject)=>{
       let image=localStorage.getItem("imgData");
+      console.log(image);
+      this.imgs=image;
     })
   }
   camera1(){
     let alert=this.alert.create({
-     
       subTitle: "Select any option to upload image",
       buttons: [
       {
@@ -107,12 +111,12 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
        let data = 'data:image/jpeg;base64,' + imageData;
       console.log(data);
-     // this.resizer(data).then((result:any)=>{  console.log("returned data");
-        //console.log(result);
-         this.base64Image = data;
-           this.loader.dismiss();
-         localStorage.setItem("imgData", this.base64Image);
-    //  })
+     this.resizer(data).then((result:any)=>{  console.log("returned data");
+        console.log(result);
+          this.base64Image = data;
+          this.loader.dismiss();
+          localStorage.setItem("imgData", result);
+        })
       // this.base64Image = 'data:image/jpeg;base64,' + imageData;
       // console.log(this.base64Image);
       //  this.loader.dismiss();
@@ -140,12 +144,13 @@ export class ProfilePage {
     });
 
     // .catch(e => console.log(e));
-
       });
   }
   EditModal() {
-    console.log("djkfld");
 	  let profileModal = this.modalCtrl.create(ProfileEditPage, {"userId": this.userDetail });
+    profileModal.onDidDismiss(() => {
+      this.profileFunction();
+    });
 	  profileModal.present();
 	}
   ResetPassword(){

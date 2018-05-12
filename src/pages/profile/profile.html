@@ -23,14 +23,12 @@
 				<img [src]= "(base64Image)">	
 			</div >
 			<ng-template #userimg>
-				<img src="assets/imgs/dummy-user-img.png" >
-				
+				<img src="assets/imgs/dummy-user-img.png">
 			</ng-template>
-
-				
+			<div *ngIf="image">
+				<img src="{{imgs}}">
+			</div>		
 		</div>
-		
-
 		<ion-grid class="user-info">
 	 
 	  		<ion-row>
