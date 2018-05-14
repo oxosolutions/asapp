@@ -43,6 +43,7 @@ import {ChangePasswordPage} from '../pages/change-password/change-password';
 import {SurveyPopUpPage} from '../pages/survey-pop-up/survey-pop-up';
 import {UpdatePage} from '../pages/update/update';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import{SettingsPage} from '../pages/settings/settings';
 
 declare var jquery:any;
 declare var $ :any;
@@ -78,7 +79,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ProfileEditPage,
     ChangePasswordPage,
     SurveyPopUpPage,
-    UpdatePage
+    UpdatePage,
+    SettingsPage
   ],
 
   imports: [
@@ -117,7 +119,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ProfileEditPage,
     ChangePasswordPage,
     SurveyPopUpPage,
-    UpdatePage
+    UpdatePage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

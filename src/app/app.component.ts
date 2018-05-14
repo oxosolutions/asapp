@@ -17,6 +17,7 @@ import { RecordListPage }  from '../pages/record-list/record-list';
 import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 import { TextPage }  from '../pages/text/text';
 import { Events } from 'ionic-angular';
+import{SettingsPage} from '../pages/settings/settings';
 @Component({
   templateUrl: 'app.html',
 })
@@ -50,6 +51,7 @@ export class MyApp {
         // { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
         { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
         { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
+        { title: 'Setting',icon: 'ios-flag-outline', component: SettingsPage },
       ]; 
 
     localStorage.setItem("api_url",this.Api_Url);
@@ -75,6 +77,7 @@ export class MyApp {
         this.username=localStorage.getItem("name");
         this.userEmail=localStorage.getItem("username");
         this.rootPage=DashboardPage;
+        //this.rootPage=SettingsPage;
       }else{
         this.rootPage=LoginPage;   
          this.username=localStorage.getItem("name");

@@ -26,7 +26,7 @@ declare var $ :any;
 export class QuestionPage {
   form: FormGroup;
   @ViewChild('formDir') formDir: FormGroupDirective;
-@ViewChild('controlDir', { read: FormControlName }) controlDir: FormControlName;
+  @ViewChild('controlDir', { read: FormControlName }) controlDir: FormControlName;
    // @ViewChild('myForm') myForm;
   parentMessage = "message from parent";
   //message:string
@@ -72,7 +72,6 @@ export class QuestionPage {
   constructor(private formBuilder: FormBuilder,public modalCtrl: ModalController,private loaderCtrl:LoadingController,public fb: FormBuilder,public toastctrl: ToastController,public AioneHelp:AioneHelperProvider,public alertCtrl: AlertController,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.date = new Date(); 
   }
- 
   showConfirm(questionKey,survey_id,questionText,QuestionType) {
     let prompt = this.alertCtrl.create({
       message: "Are u sure want to quite survey",

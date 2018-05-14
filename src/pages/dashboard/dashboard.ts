@@ -11,6 +11,7 @@ import {SurveyPopUpPage} from '../../pages/survey-pop-up/survey-pop-up';
 import {AboutPage} from '../../pages/about/about';
 import {UpdatePage} from '../../pages/update/update';
 import { Events } from 'ionic-angular';
+import{SettingsPage} from '../../pages/settings/settings';
 declare var jquery:any;
 declare var $ :any;
 
@@ -66,6 +67,9 @@ export class DashboardPage {
   }
   update(){
     this.navCtrl.push(UpdatePage);
+  }
+  Settings(){
+    this.navCtrl.push(SettingsPage);
   }
 
 }
