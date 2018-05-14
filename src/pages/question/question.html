@@ -25,8 +25,7 @@
 			  <div [ngSwitch]="OriginalContent?.question_type">
 
 			   	<!--text-->
-					<div  *ngSwitchCase="'text'">
-						 
+					<div  *ngSwitchCase="'text'">	 
 				      <input #controlDir [formControl]="form.get(currentFormControlName)"
 				        [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.prefill"  required>  
 				        <!-- <div class="errorMessage" *ngIf="Errors">{{OriginalContent?.question_text}} is required</div> -->
@@ -60,9 +59,9 @@
 
 					  <!--datepicker-->
 					<div *ngSwitchCase="'datepicker'">
-					  	 <div class="datepicker-container">
-					        <ng-datepicker  #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
-					      </div>
+				  	<div class="datepicker-container">
+				        <ng-datepicker  #controlDir [formControl]="form.get(currentFormControlName)" [(ngModel)]="OriginalContent.prefill" [options]="options"></ng-datepicker>
+				    </div>
 					</div>
 
 					  <!--timepicker-->

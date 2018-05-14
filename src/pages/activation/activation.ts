@@ -32,9 +32,7 @@ export class ActivationPage {
   
   constructor(public nav:NavController,private loaderCtrl:LoadingController,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider,private formBuilder: FormBuilder,public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private geolocation: Geolocation,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
     this.ionViewWillEnter();
-
   }
-  
   activation(){
     this.AioneHelp.internet().then((conn)=>{
       this.presentLoading("your form is filling");
@@ -42,7 +40,7 @@ export class ActivationPage {
       });
     });
   }
-  presentLoading(message) {
+  presentLoading(message){
     this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -100,12 +98,11 @@ export class ActivationPage {
              });  
             })   
           })    
-         });
-      }) 
+        });
+    }) 
   }
   resultSurvey(questions,surveys){
     return new Promise((resolve,reject)=>{
-      
       let keyqColumns = [];
       let loopLength = 0;
       let surveyresult=[];
@@ -143,7 +140,7 @@ export class ActivationPage {
         this.insertExecute(Apidata.survey_meta).then((insertExe:any)=>{
           console.log(insertExe);
           this.AioneService.InsertBulk("survey_meta", insertExe.dataColumns,insertExe.insertContent).then((surveys)=>{
-             resolve(surveys);
+            resolve(surveys);
           })
         });
       }
@@ -241,7 +238,6 @@ export class ActivationPage {
       for(let app_key in result){
         dataColumns.push(app_key);
         insertContent.push(result[app_key]);
-
       }
       let collection={};
       collection['dataColumns']=dataColumns;
