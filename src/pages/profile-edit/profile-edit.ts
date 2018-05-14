@@ -27,8 +27,7 @@ export class ProfileEditPage {
   ionViewWillEnter(){
     this.loginUser=this.fb.group({
       name:[ null, Validators.compose([  
-              Validators.required ,
-
+              Validators.required,
         ])],
        email:[ null, Validators.compose([  
               Validators.required,  
@@ -39,9 +38,11 @@ export class ProfileEditPage {
   Login(username){
     this.submitAttempt = true;
     console.log(username);
-    if(!this.loginUser.valid){
+    if(username["name"] == "" || username["email"]==""){
+      if(!this.loginUser.valid){
         console.log('not valid');
         this.loginUser;
+      }
     }else{
       this.internet().then((wifi:any)=>{
        console.log(this.loginUser.value);
@@ -69,25 +70,28 @@ export class ProfileEditPage {
         duration:4000,
         position:'top',
       });
-      let form = new FormData();
-      form.append('name',name);
-      form.append('Email',Email);
+       let form = {};
+      form["name"] = name;
+      form["email"] = Email;
+      form["activation_code"] = localStorage.getItem('activationKey');
+      form["user_id"] = localStorage.getItem("userId");
       console.log(form);
-      loader.dismiss();
-      // this.http.post("http://admin.scolm.com/api/send_complaint", form)
-      // .subscribe(data => {
-      //   console.log(data);
-      //   this.loginUser.reset()
-      //    loader.dismiss();
-      //   toast.present();
-      //   console.log('submitted successfully');
-        
-      // },error=>{
-      //   console.log(error);
-      // });
-      // 
-      // showalert(data);
-      return false;
+      this.http.post("http://master.scolm.com/api/v2/update/profile", form)
+        .subscribe(data => {
+          console.log(data);
+           // this.loginUser.reset();
+          let query="update users SET email = ' "+ Email + " ', name = '" + name + "' where id = "+ localStorage.getItem("userId");
+          this.servicesProvider.ExecuteRun(query,[]).then((users:any)=>{
+            console.log(users);
+            this.AioneHelp.presentToast("your profile updated successfully", 500, 'top');
+            loader.dismiss();
+          })
+      },error=>{
+        let error1=error.json();
+        console.log(error1["message"]);
+        this.AioneHelp.presentToast(error1["message"],900,'top');
+        loader.dismiss();
+      });
 
   }
   dismiss() {

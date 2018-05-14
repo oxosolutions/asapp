@@ -28,7 +28,6 @@ export class ProfilePage {
   }
   ionViewDidLoad() {
     this.profileFunction();
-
   }
   profileFunction(){
     let userId=localStorage.getItem("userId");
