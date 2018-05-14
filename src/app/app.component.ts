@@ -24,13 +24,10 @@ export class MyApp {
   
   //############ Global variables #####//
   
-
   Api_Url='http://master.scolm.com/api/survey_api';
   ApiName='IRIS Application';
   ApiDesc='Integrated Road Traffic Injuries Surveillance System - INDIA';
   
-
-
   //############ End of Global variables #####//
   
   @ViewChild(Nav) nav: Nav;
@@ -40,6 +37,7 @@ export class MyApp {
   db:any;  
   username:any;
   userEmail:any;
+  public base64Image:string
   constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     platform.registerBackButtonAction(() => {
@@ -90,16 +88,16 @@ export class MyApp {
        console.log(user["name"]);
        this.username=user["name"];
        this.userEmail=user["email"];
+       this.base64Image=user["image"];
         localStorage.setItem("name", this.username);
         localStorage.setItem("username", this.userEmail);
         localStorage.setItem("userId", user["id"]);
     });   
   }
   openPage(page){
-    
     this.nav.setRoot(page.component);
   }
-  presentLoading(message) {
+  presentLoading(message){
     this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
@@ -118,9 +116,9 @@ export class MyApp {
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
-     if(localStorage.getItem("activation") == undefined){
+    if(localStorage.getItem("activation") == undefined){
         this.nav.setRoot(ActivationPage); 
         this.dismissLoader();                                                 
-     }   
+    }   
   } 
 }

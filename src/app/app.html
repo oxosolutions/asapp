@@ -4,9 +4,14 @@
         <ion-item color="transparent">
             <ion-avatar item-start>
                 <div class="icon-wrapper">
-                    <ion-icon name="person"></ion-icon>
+                <!--   <img src="assets/imgs/dummy-user-img.png"> -->
+                  <div  class="imgdiv" *ngIf="base64Image; else userimg">
+                    <img [src]= "(base64Image)">  
+                  </div >
+                  <ng-template #userimg>
+                    <img src="assets/imgs/dummy-user-img.png">
+                  </ng-template>
                 </div>    
-
             </ion-avatar>
             <h2>{{username}}</h2>
             <p>{{userEmail}}</p>

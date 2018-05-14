@@ -21,32 +21,39 @@ export class ProfilePage {
   public base64Image:string
   userDetail:any;
   loader:any;
+  sidemenu;
   simpleImg:any;
   imgs:any;
+
   constructor(private imageResizer: ImageResizer,public events: Events,private loaderCtrl:LoadingController,public alert:AlertController,public servicesProvider:AioneServicesProvider,private camera:Camera,public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
-   console.log("dj");
   }
   ionViewDidLoad() {
     this.profileFunction();
   }
   profileFunction(){
+
     let userId=localStorage.getItem("userId");
     this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{
       console.log(result.rows.item(0));
       let data=result.rows.item(0);
+       this.base64Image = localStorage.getItem("imgData");
+      data["image"]=this.base64Image;
       this.name=data["name"];
       this.Email=data["email"];
       this.events.publish('user:created', data); 
       this.servicesProvider.SelectWhere("users","id",'"'+ data["id"]+'"').then((result:any)=>{
         this.userDetail=result.rows.item(0);
         console.log(this.userDetail);
-        //this.base64Image = localStorage.getItem("imgData");
-        if(localStorage.getItem("imgData") != null || localStorage.getItem("imgData") != "" || localStorage.getItem("imgData") != "null"){
-          this.ProfileUpdate().then(()=>{
-          })
-        }
+       
+        // if(localStorage.getItem("imgData") != null || localStorage.getItem("imgData") != "" || localStorage.getItem("imgData") != "null"){
+        //   this.ProfileUpdate().then(()=>{
+        // })
+        // }else{
+
+        // }
       });
-     })
+     });
+ 
   }
   ProfileUpdate(){
     return new Promise((resolve,reject)=>{
@@ -108,18 +115,21 @@ export class ProfilePage {
     targetHeight: 190,
     }
     this.camera.getPicture(options).then((imageData) => {
-       let data = 'data:image/jpeg;base64,' + imageData;
+      let data = 'data:image/jpeg;base64,' + imageData;
       console.log(data);
-     this.resizer(data).then((result:any)=>{  console.log("returned data");
-        console.log(result);
-          this.base64Image = data;
-          this.loader.dismiss();
-          localStorage.setItem("imgData", result);
-        })
-      // this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      // console.log(this.base64Image);
-      //  this.loader.dismiss();
-      // localStorage.setItem("imgData", this.base64Image);
+     // this.resizer(data).then((result:any)=>{  console.log("returned data");
+     //    console.log(result);
+     //      this.base64Image = data;
+     //      this.loader.dismiss();
+     //      localStorage.setItem("imgData", result);
+     //    })
+
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log(this.base64Image);
+      localStorage.setItem("imgData", this.base64Image);
+      this.profileFunction();
+      this.loader.dismiss();
+      
      
     }, (err) => {
         this.loader.dismiss();

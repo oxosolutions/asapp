@@ -76,11 +76,7 @@ export class ChangePasswordPage {
       content:'<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Submitting your Enquiry</div>',
     });
       loader.present();
-      let toast=this.toastctrl.create({
-        message:'Your Enquiry is Submitted',
-        duration:4000,
-        position:'top',
-      });
+ 
       let form = new FormData();
       form.append('old_password',Oldpassword);
       form.append('new_password',newpass);
@@ -88,17 +84,27 @@ export class ChangePasswordPage {
        form.append('activation_code',localStorage.getItem('activationKey'));
       form.append("user_id",localStorage.getItem("userId"));
       console.log(form);
-      loader.dismiss();
       this.http.post("http://master.scolm.com/api/v2/update/password", form)
       .subscribe(data => {
-        console.log(data);
-        this.newPassword.reset()
-         loader.dismiss();
-        toast.present();
-        console.log('submitted successfully');
-        
+        let error1=data.json();
+        console.log(error1);
+        if(error1["status"]=="error"){
+           this.AioneHelp.presentToast(error1["message"], 700, 'top');
+            loader.dismiss();
+        }else{ console.log( newpass);
+            let query="update users SET app_password = ' "+  newpass + "' where id = "+ localStorage.getItem("userId");
+            console.log(query);
+            this.servicesProvider.ExecuteRun(query,[]).then((users:any)=>{
+              console.log(users);
+              this.AioneHelp.presentToast("Password Updated Successfully", 700, 'top');
+              this.newPassword.reset()
+              loader.dismiss();
+            });
+        }
       },error=>{
-        console.log(error);
+        let error1=error.json();
+        console.log(error1["message"]);
+        this.AioneHelp.presentToast(error1["message"],900,'top');
       });
       
       // showalert(data);

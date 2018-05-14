@@ -24,20 +24,23 @@ export class DashboardPage {
   ApplicationName:any;
   username:any;
   userEmail:any;
+  public base64Image:string
   constructor(public events: Events,public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-  ionViewDidLoad() {
+  ionViewDidLoad(){
     let userId=localStorage.getItem("userId");
     this.servicesProvider.SelectWhere("users",'id', userId).then((result:any)=>{
       console.log(result.rows.item(0));
       let data=result.rows.item(0);
-      this.events.publish('user:created', data); 
-      this.servicesProvider.SelectAll("settings").then((result:any)=>{
-      	this.dashboard=result.rows.item(0);
-        console.log(this.dashboard); 
-        localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
-         localStorage.setItem('InCompleteSurveyName',null);
-      });
+        this.base64Image = localStorage.getItem("imgData");
+        data["image"]=this.base64Image;
+        this.events.publish('user:created', data); 
+        this.servicesProvider.SelectAll("settings").then((result:any)=>{
+        	this.dashboard=result.rows.item(0);
+          console.log(this.dashboard); 
+          localStorage.setItem("ApplicationName", this.dashboard.android_application_title);
+           localStorage.setItem('InCompleteSurveyName',null);
+        });
     })
   }	
   userInfo(id){

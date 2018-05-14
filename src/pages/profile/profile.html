@@ -24,10 +24,10 @@
 			</div >
 			<ng-template #userimg>
 				<img src="assets/imgs/dummy-user-img.png">
-			</ng-template>
-			<div *ngIf="image">
-				<img src="{{imgs}}">
-			</div>		
+			</ng-template>		
+		</div>
+		<div *ngIf="imgs">
+			<img [src]="imgs">
 		</div>
 		<ion-grid class="user-info">
 	 
