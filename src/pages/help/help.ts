@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the HelpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { DashboardPage } from '../../pages/dashboard/dashboard';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 
 @IonicPage()
 @Component({
@@ -14,12 +9,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'help.html',
 })
 export class HelpPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	content:any;
+  constructor(public aioneservice:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HelpPage');
+   	this.aioneservice.SelectAll("settings").then((result:any)=>{
+   		this.content=result.rows.item(0)["help_page_content"];
+   		console.log(this.content);
+   	})
   }
 
 }

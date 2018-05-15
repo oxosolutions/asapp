@@ -12,5 +12,7 @@
 
 
 <ion-content padding>
-	<div class="desc">The “road accidents survey” collects all road accidents resulting in deaths (within the 30th day) or injuries, involving at least a vehicle circulating on the national road net and documented by a Police authority or military corps. The data collection is based on a composite organisational model and it is realised by a various selection of public corporations and local organisations. Variables collected concern the main aspects of road accidents: date and location of the accident, data collector, localization, road type and name, junction, road bed, traffic signs, weather, road accident type, circumstances and consequences on persons involved.</div>
+	<div *ngIf="content">
+		<div class="desc" [innerHtml]="content"></div>
+	</div>
 </ion-content>

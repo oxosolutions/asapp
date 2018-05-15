@@ -45,6 +45,7 @@ import {UpdatePage} from '../pages/update/update';
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import{SettingsPage} from '../pages/settings/settings';
 
+
 declare var jquery:any;
 declare var $ :any;
 
@@ -80,7 +81,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ChangePasswordPage,
     SurveyPopUpPage,
     UpdatePage,
-    SettingsPage
+    SettingsPage,
+   
   ],
 
   imports: [
@@ -120,7 +122,8 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     ChangePasswordPage,
     SurveyPopUpPage,
     UpdatePage,
-    SettingsPage
+    SettingsPage,
+    
   ],
   providers: [
     StatusBar,

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 
-/**
- * Generated class for the AboutPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -14,12 +10,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'about.html',
 })
 export class AboutPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	content:any;
+  constructor(public aioneservice:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
+    this.aioneservice.SelectAll("settings").then((result:any)=>{
+   		this.content=result.rows.item(0)["about_page_content"];
+   		console.log(this.content);
+   	})
   }
 
 }
