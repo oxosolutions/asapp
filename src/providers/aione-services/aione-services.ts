@@ -229,9 +229,8 @@ export class AioneServicesProvider {
 	SelectUnion(tableName1,tableName2){
 		return new Promise((resolve,reject)=>{
 			this.query='SELECT * FROM '+tableName1+' UNION SELECT * FROM ' + tableName2;
-		console.log(this.query);
-		})
-		
+			console.log(this.query);
+		});
 	}
 	StringReplaceBulk(result){
 		return new Promise ((resolve,reject)=>{
