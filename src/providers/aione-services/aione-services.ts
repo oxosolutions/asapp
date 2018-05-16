@@ -56,7 +56,7 @@ export class AioneServicesProvider {
 						tx.executeSql(query,DataValue,(tx,executeResult:any)=>{
 							resolve(executeResult);
 						},(error:any)=>{
-							console.log(this.query);
+							console.log(query);
 							console.log(error);
 						})
 					});
@@ -208,6 +208,7 @@ export class AioneServicesProvider {
 					//console.log(Col);
 					let forloop=0;	
 				  for(let i=0; i<tableName.length;i++){
+				  	console.log(i);
 				  	this.query='DROP Table IF  EXISTS ' + tableName[i];
 						console.log(this.query);
 				 	  this.ExecuteRun(this.query,[]).then((res)=>{
