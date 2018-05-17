@@ -93,7 +93,10 @@ export class UpdatePage {
       this.AioneService.ExecuteRun(query,[]).then((res:any)=>{
         this.AioneService.SelectAllTable().then((slectdrop:any)=>{
         Object.keys(slectdrop).forEach((dropkey,dropvalue)=>{
-          let json=slectdrop[dropkey].name;
+          console.log(slectdrop[dropkey].name);
+          let json:any;
+          json=slectdrop[dropkey].name;
+          console.log(json);
           if(json.match(/surveyResult_/g) || json.match(/sqlite_sequence/g) || json.match(/__WebKitDatabaseInfoTable__/g)){
           }else{
             selectBulkTable.push(json);
