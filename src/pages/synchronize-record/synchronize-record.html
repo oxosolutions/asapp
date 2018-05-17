@@ -20,7 +20,7 @@
         </div>
         <br />
     </div>  -->
-
+    <div *ngIf="(listSurvey != undefined)">
     <div *ngIf="(listSurvey != null); else second">
       <form #myForm='ngForm' >
          <ion-item class="checkAll"><input type="checkbox" id="ckbCheckAll" (click)="ckbCheckAll($event);">Check All</ion-item>
@@ -54,6 +54,7 @@
     <ng-template #second>
       <p class="noSuvey">there is no survey</p>
     </ng-template>
+    </div>
    
   
 </ion-content>

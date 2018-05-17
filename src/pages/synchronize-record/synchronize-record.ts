@@ -244,7 +244,7 @@ export class SynchronizeRecordPage {
     });
   }
   dataSend(formValue,listsurvey){
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve,reject)=>{ console.log(formValue)
       var formData = new FormData;
       formData.append('survey_data',JSON.stringify(formValue));
       formData.append('survey_id',formValue[0].surveyId);
