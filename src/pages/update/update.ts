@@ -100,10 +100,8 @@ export class UpdatePage {
         let SurveyData = row;
         console.log(SurveyData);
         Object.keys(SurveyData).forEach((dropkey,dropvalue)=>{
-          console.log(SurveyData[dropkey].name);
           let json:any;
           json=SurveyData[dropkey].name;
-          console.log(json);
           if(json.match(/surveyResult_/g) || json.match(/sqlite_sequence/g) || json.match(/__WebKitDatabaseInfoTable__/g)){
           }else{
             selectBulkTable.push(json);

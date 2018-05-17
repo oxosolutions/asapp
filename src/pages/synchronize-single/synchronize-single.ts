@@ -102,7 +102,7 @@ export class SynchronizeSinglePage {
               console.log(formValue);
                 this.dataSend(formValue).then(()=>{ this.loader.dismiss();
                  this.checkSurvey().then(()=>{  
-                   this.AioneHelp.presentToast('Synchronized data successfully',1200,'top');
+                   this.AioneHelp.presentToast('Synchronized data successfully',500,'top');
                  })
                  
              })
@@ -220,7 +220,7 @@ export class SynchronizeSinglePage {
             console.log("no record found"); 
             this.navCtrl.setRoot(SurveyDetailPage);
              this.loader.dismiss(); 
-             this.AioneHelp.presentToast("Sorry, there is no completed survey found",15000,'top')
+             this.AioneHelp.presentToast("Sorry, there is no completed survey found",900,'top')
             this.EmptySurvey=null;
           }
         });
