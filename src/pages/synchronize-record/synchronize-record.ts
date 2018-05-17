@@ -193,7 +193,7 @@ export class SynchronizeRecordPage {
                       this.listSurvey=this.synchronizeData;
                       this.loader.dismiss(); 
                       this.listSurvey=null;
-                      this.AioneHelp.presentToast("Synchronized, Synchronized Data Successfully", 500,'top');
+                      this.AioneHelp.presentToast(" Synchronized  Survey Data Successfully", 500,'top');
                     }else{
                       this.listSurvey=null;
                       console.log('no surveys');
