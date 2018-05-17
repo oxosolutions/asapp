@@ -22,10 +22,11 @@ export class SynchronizeRecordPage {
   longitude:any;
   zoom:any;
   appVersion:any;
+  surveyError
   constructor(public http: Http,private loaderCtrl:LoadingController,public servicesProvider:AioneServicesProvider,public AioneHelp:AioneHelperProvider,public navCtrl: NavController, public navParams: NavParams) {
   }
   ionViewDidLoad(){
-     this.loader = this.loaderCtrl.create({
+    this.loader = this.loaderCtrl.create({
       spinner: 'crescent',
       content: `
       <div class="custom-spinner-container">
@@ -40,6 +41,8 @@ export class SynchronizeRecordPage {
         this.loader.dismiss(); 
       }else{
         console.log('no surveys');
+        this.surveyError="there is no survey";
+         console.log(this.surveyError);
         this.loader.dismiss(); 
         this.AioneHelp.presentToast("Sorry, there is no completed survey found",500,'top')
       }
@@ -196,6 +199,8 @@ export class SynchronizeRecordPage {
                       this.AioneHelp.presentToast(" Synchronized  Survey Data Successfully", 500,'top');
                     }else{
                       this.listSurvey=null;
+                      this.surveyError="there is no survey";
+                      // console.log(this.su)
                       console.log('no surveys');
                       this.loader.dismiss(); 
                       this.AioneHelp.presentToast("Synchronized Surveys Successfully", 500,'top');
