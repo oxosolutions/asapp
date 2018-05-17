@@ -92,6 +92,7 @@ export class UpdatePage {
       console.log(query); let survey=[]; let selectBulkTable=[]
       this.AioneService.ExecuteRun(query,[]).then((res:any)=>{
         this.AioneService.SelectAllTable().then((slectdrop:any)=>{
+         console.log(slectdrop);
         Object.keys(slectdrop).forEach((dropkey,dropvalue)=>{
           console.log(slectdrop[dropkey].name);
           let json:any;
