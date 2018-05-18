@@ -611,8 +611,14 @@ export class QuestionPage {
   }
   onSubmit(form,questionKey,survey_id,questionText,QuestionType,answerLength){
     console.log(this.form.value[questionText]);
-    let formValidate=this.form.value[questionText]
+    let formValidate=this.form.value[questionText];
     //this.submitConditionCheck(this.form.value,questionText).then((formValidate)=>{
+    // if(this.form.invalid){
+    //   this.form;
+    //    console.log("invalid");
+    // }else{
+    //   console.log("all gud");
+    // }
      console.log(formValidate);
       this.switchConditions(QuestionType,answerLength,formValidate).then(( validateFinal:any)=>{
         console.log(validateFinal);
