@@ -99,7 +99,6 @@
 							  <div *ngFor="let check of OriginalContent?.answers[0]">
 								  <input type="checkbox" #controlDir [formControl]="form.get(currentFormControlName)" class="checkBoxClass" name="{{check?.option_text}}" id="checkall">{{check?.option_text}}
 								</div>
-					
 			      </div>
 
 			   	 <!--new types-->
@@ -141,9 +140,7 @@ range -->
 <!-- <input *ngSwitchCase="'textarea'"
         [formControlName]="OriginalContent?.question_text"
         [id]="OriginalContent?.question_text" [type]="OriginalContent?.question_type"   [(ngModel)]="OriginalContent.question_text" required> -->
-
-	
-
+        
 	<!--question based-->
 	<!-- <div *ngIf ="OriginalContent">
 		<h1>{{OriginalContent?.question_text}}</h1>

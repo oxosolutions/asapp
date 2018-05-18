@@ -19,7 +19,6 @@ export class RecordListPage {
   EmptySurvey:any;
   constructor(public servicesProvider:AioneServicesProvider,public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController) {
   }
-
   ionViewDidLoad() {
     this.recordTitle=localStorage.getItem("ApplicationName");
     this.EnabledSurvey();
@@ -94,8 +93,7 @@ export class RecordListPage {
           }
         });
       });
-    })
-    
+    })  
   }
   completedSurveyPage(id){
     this.checkSurvey(id).then((result:any)=>{
@@ -104,7 +102,6 @@ export class RecordListPage {
       // })
         
     });
-   
   }
   incompletedSurveyPage(id){
     this.checkSurvey(id).then((result:any)=>{

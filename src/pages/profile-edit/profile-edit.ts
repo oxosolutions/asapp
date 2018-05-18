@@ -27,12 +27,12 @@ export class ProfileEditPage {
   ionViewWillEnter(){
     this.loginUser=this.fb.group({
       name:[ null, Validators.compose([  
-              Validators.required,
-        ])],
-       email:[ null, Validators.compose([  
-              Validators.required,  
-              Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-        ])],
+        Validators.required,
+      ])],
+      email:[ null, Validators.compose([  
+        Validators.required,  
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])],
     })
   }
   Login(username){
@@ -64,35 +64,34 @@ export class ProfileEditPage {
     let loader =this.loaderctrl.create({
       content:'<div class="custom-spinner-container"><div class="custom-spinner-box"></div>Submitting your Enquiry</div>',
     });
-      loader.present();
-      let toast=this.toastctrl.create({
-        message:'Your Enquiry is Submitted',
-        duration:4000,
-        position:'top',
-      });
-       let form = {};
-      form["name"] = name;
-      form["email"] = Email;
-      form["activation_code"] = localStorage.getItem('activationKey');
-      form["user_id"] = localStorage.getItem("userId");
-      console.log(form);
-      this.http.post("http://master.scolm.com/api/v2/update/profile", form)
-        .subscribe(data => {
-          console.log(data);
-           // this.loginUser.reset();
-          let query="update users SET email = ' "+ Email + " ', name = '" + name + "' where id = "+ localStorage.getItem("userId");
-          this.servicesProvider.ExecuteRun(query,[]).then((users:any)=>{
-            console.log(users);
-            this.AioneHelp.presentToast("your profile updated successfully", 500, 'top');
-            loader.dismiss();
-          })
-      },error=>{
-        let error1=error.json();
-        console.log(error1["message"]);
-        this.AioneHelp.presentToast(error1["message"],900,'top');
-        loader.dismiss();
-      });
-
+    loader.present();
+    let toast=this.toastctrl.create({
+      message:'Your Enquiry is Submitted',
+      duration:4000,
+      position:'top',
+    });
+     let form = {};
+    form["name"] = name;
+    form["email"] = Email;
+    form["activation_code"] = localStorage.getItem('activationKey');
+    form["user_id"] = localStorage.getItem("userId");
+    console.log(form);
+    this.http.post("http://master.scolm.com/api/v2/update/profile", form)
+      .subscribe(data => {
+        console.log(data);
+         // this.loginUser.reset();
+        let query="update users SET email = ' "+ Email + " ', name = '" + name + "' where id = "+ localStorage.getItem("userId");
+        this.servicesProvider.ExecuteRun(query,[]).then((users:any)=>{
+          console.log(users);
+          this.AioneHelp.presentToast("your profile updated successfully", 500, 'top');
+          loader.dismiss();
+        })
+    },error=>{
+      let error1=error.json();
+      console.log(error1["message"]);
+      this.AioneHelp.presentToast(error1["message"],900,'top');
+      loader.dismiss();
+    });
   }
   dismiss() {
     this.viewCtrl.dismiss();
