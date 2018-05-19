@@ -55,13 +55,13 @@ export class SettingsPage {
    // console.log(b);
    // finger curl, pen rotate, coin drop
    
-    let fact=4;
-    let answer=1;
-    for(let i=4; i >= 1; i--){
-      answer=answer*i;
-      console.log(answer)
-      console.log(answer)
-    }
+    // let fact=4;
+    // let answer=1;
+    // for(let i=4; i >= 1; i--){
+    //   answer=answer*i;
+    //   console.log(answer)
+    //   console.log(answer)
+    // }
    
     
   }
