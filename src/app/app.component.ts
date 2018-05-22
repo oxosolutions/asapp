@@ -41,10 +41,10 @@ export class MyApp {
   public base64Image:string
   constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-    platform.registerBackButtonAction(() => {
+    this.platform.registerBackButtonAction(() => {
       console.log("here platfrom");
       // ionic.Platform.exitApp();
-          platform.exitApp(); 
+          this.platform.exitApp(); 
     });
     this.servicepro.PlatformCheck('asapp').then((db)=>{
       this.pages = [
@@ -66,7 +66,10 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+       setTimeout(function () {
+                           this.splashScreen.hide();
+                        }, 100);
+     
     });
   }
 
