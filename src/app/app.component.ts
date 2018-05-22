@@ -41,10 +41,10 @@ export class MyApp {
   public base64Image:string
   constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-    this.platform.registerBackButtonAction(() => {
+    platform.registerBackButtonAction(() => {
       console.log("here platfrom");
       // ionic.Platform.exitApp();
-          this.platform.exitApp(); 
+          platform.exitApp(); 
     });
     this.servicepro.PlatformCheck('asapp').then((db)=>{
       this.pages = [
