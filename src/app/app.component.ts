@@ -41,7 +41,7 @@ export class MyApp {
   public base64Image:string
   constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-    platform.registerBackButtonAction(() => {
+     platform.registerBackButtonAction(() => {
       console.log("here platfrom");
       // ionic.Platform.exitApp();
           platform.exitApp(); 
@@ -66,10 +66,9 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-       setTimeout(function () {
-                           this.splashScreen.hide();
-                        }, 100);
-     
+       this.splashScreen.hide();
+       setTimeout(function () {                
+        }, 100);
     });
   }
 
