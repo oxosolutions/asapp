@@ -20,7 +20,6 @@ export class AioneServicesProvider {
 	constructor( public platform:Platform, public sqlite:SQLite) {
 		console.log('Hello AioneServicesProvider Provider');
 	}
-
 	dbClose(){
 		return new Promise((resolve,reject)=>{
 			console.log(this.db);

@@ -82,7 +82,6 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
     SurveyPopUpPage,
     UpdatePage,
     SettingsPage,
-   
   ],
 
   imports: [

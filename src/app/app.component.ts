@@ -42,6 +42,8 @@ export class MyApp {
   constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     platform.registerBackButtonAction(() => {
+      console.log("here platfrom");
+      // ionic.Platform.exitApp();
           platform.exitApp(); 
     });
     this.servicepro.PlatformCheck('asapp').then((db)=>{
