@@ -67,8 +67,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
        this.splashScreen.hide();
-       setTimeout(function () {                
-        }, 100);
+       
     });
   }
 
@@ -122,7 +121,7 @@ export class MyApp {
     localStorage.clear();
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
-    localStorage.setItem("activationDesc",this.ApiDesc);
+    localStorage.setItem("activatidashbaord-backgroundonDesc",this.ApiDesc);
     if(localStorage.getItem("activation") == undefined){
         this.nav.setRoot(ActivationPage); 
         this.dismissLoader();                                                 
