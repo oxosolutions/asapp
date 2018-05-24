@@ -18,6 +18,7 @@ import { ListsurveyPage } from '../pages/listsurvey/listsurvey';
 import { TextPage }  from '../pages/text/text';
 import { Events } from 'ionic-angular';
 import{SettingsPage} from '../pages/settings/settings';
+import { AlertController } from 'ionic-angular';
 @Component({
   templateUrl: 'app.html',
 })
@@ -39,12 +40,38 @@ export class MyApp {
   username:any;
   userEmail:any;
   public base64Image:string
-  constructor(public events: Events,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public events: Events,public alert:AlertController,private loaderCtrl:LoadingController,public app: App,public servicepro:AioneServicesProvider,public servicesProvider:AioneServicesProvider,public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
      platform.registerBackButtonAction(() => {
       console.log("here platfrom");
       // ionic.Platform.exitApp();
-          platform.exitApp(); 
+     
+        let alert=this.alert.create({
+          subTitle: "Select any option to upload image",
+          buttons: [
+          {
+            text: 'yes',
+            handler: data => {
+              console.log('Cancel clicked');
+              this.platform.exitApp(); 
+              //ionic.Platform.exitApp();
+               // navigator.app.exitApp();
+            }
+          },
+          {
+            text: 'cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+             
+            }
+          }
+          ],
+
+        });
+        alert.present();
+   
+  
+        
     });
     this.servicepro.PlatformCheck('asapp').then((db)=>{
       this.pages = [
@@ -59,8 +86,7 @@ export class MyApp {
     localStorage.setItem("api_url",this.Api_Url);
     localStorage.setItem("activation_ApiName", this.ApiName );
     localStorage.setItem("activationDesc",this.ApiDesc);
-
-    this.detail();
+     this.detail();
     });   
   } 
   initializeApp() {
