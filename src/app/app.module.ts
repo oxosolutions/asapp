@@ -17,7 +17,6 @@ import { Nav, Platform ,ToastController} from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import { SurveyProvider } from '../providers/survey/survey';
 import { ActivationPage } from '../pages/activation/activation';
-import { Geolocation } from '@ionic-native/geolocation';
 import { Http,Headers ,RequestOptions } from '@angular/http';
 import { LoginPage } from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -136,7 +135,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';  //https://www.npmjs.com/pa
      ImageResizer,
     Camera,
     Network,
-    SurveyProvider,Geolocation,
+    SurveyProvider
     // Toast
   ]
 })

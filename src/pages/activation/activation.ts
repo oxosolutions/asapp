@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 import { SurveyProvider } from '../../providers/survey/survey';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
 import { AioneHelperProvider } from '../../providers/aione-helper/aione-helper';
@@ -30,8 +29,12 @@ export class ActivationPage {
   ApplicationName:any;
   ApplicationDesc:any;
   
-  constructor(public nav:NavController,private loaderCtrl:LoadingController,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider,private formBuilder: FormBuilder,public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider,private geolocation: Geolocation,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
-    this.ionViewWillEnter();
+  constructor(public nav:NavController,private loaderCtrl:LoadingController,public http:Http, public AioneService:AioneServicesProvider, public servicepro:AioneServicesProvider,private formBuilder: FormBuilder,public Aioneservices:AioneServicesProvider,public AioneHelp:AioneHelperProvider, public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
+    
+  }
+
+  ionViewDidLoad() {
+	this.ionViewWillEnter();
   }
   activation(){
     this.AioneHelp.internet().then((conn)=>{

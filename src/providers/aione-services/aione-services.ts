@@ -22,7 +22,6 @@ export class AioneServicesProvider {
 	}
 	dbClose(){
 		return new Promise((resolve,reject)=>{
-			console.log(this.db);
 			resolve(this.db);
 		})
 	}
@@ -31,7 +30,6 @@ export class AioneServicesProvider {
 			if(this.platform.is('cordova')){
 			this.sqlite.create({name: databaseName, location:'default'}).then(( data: SQLiteObject) => { 
 			  this.db=data;
-			  console.log(this.db);
 			  resolve(this.db);
 			});
 			}else{
@@ -46,17 +44,16 @@ export class AioneServicesProvider {
 			if(this.query!= undefined && this.db!= undefined){
 				if(this.platform.is('cordova')){
 					this.db.executeSql(query,DataValue,(executeResult:any)=>{
-						console.log(executeResult);
 						resolve(executeResult);
-					},(error:any)=>{ console.log(error);
+					},(error:any)=>{ console.error(error);
 					})
 				}else{
 					this.db.transaction((tx)=>{
 						tx.executeSql(query,DataValue,(tx,executeResult:any)=>{
 							resolve(executeResult);
 						},(error:any)=>{
-							console.log(query);
-							console.log(error);
+							console.error(query);
+							console.error(error);
 						})
 					});
 				}
@@ -66,15 +63,13 @@ export class AioneServicesProvider {
 	CreateTable(TableName,Col){
 		if(this.db!= undefined){			
 			this.query="CREATE TABLE IF NOT EXISTS " +TableName +' ('+Col +')';
-			console.log(this.query);
 		  this.ExecuteRun(this.query,[]).then((res)=>{
-			  console.log(res);
+			 
 		  });
 		}
 	}
 	SelectAllTable(){
-		return new Promise ((resolve,reject)=>{
-			console.log("table");
+		return new Promise ((resolve,reject)=>{			
 			this.query="SELECT name FROM sqlite_master WHERE type = 'table' ";
 			this.ExecuteRun(this.query , []).then((res:any)=>{
 					resolve(res.rows);
@@ -135,9 +130,9 @@ export class AioneServicesProvider {
 		return new Promise ((resolve,reject)=>{
 			if(this.db!= undefined){
 				this.query='Delete  from '+tableName;
-				console.log(this.query);
+				
 				this.ExecuteRun(this.query,[]).then((Delresult)=>{
-					console.log(Delresult);
+					
 				})
 			}
 		})	
@@ -201,15 +196,12 @@ export class AioneServicesProvider {
 	}
 	DropTable(tableName){
 		return new Promise ((resolve,reject)=>{
-			console.log(tableName.length);
 			if(this.db!= undefined){
 				if(tableName.length >0){
 					//console.log(Col);
 					let forloop=0;	
 				  for(let i=0; i<tableName.length;i++){
-				  	console.log(i);
 				  	this.query='DROP Table IF  EXISTS ' + tableName[i];
-						console.log(this.query);
 				 	  this.ExecuteRun(this.query,[]).then((res)=>{
 				 	  	forloop++;
 				 	  	if(forloop==tableName.length){
@@ -229,7 +221,7 @@ export class AioneServicesProvider {
 	SelectUnion(tableName1,tableName2){
 		return new Promise((resolve,reject)=>{
 			this.query='SELECT * FROM '+tableName1+' UNION SELECT * FROM ' + tableName2;
-			console.log(this.query);
+			
 		});
 	}
 	StringReplaceBulk(result){
@@ -240,7 +232,7 @@ export class AioneServicesProvider {
 				for(let key in result[i]){
 					//console.log(result[i][key]);
 					if(typeof(key)!='string'){
-						console.log('id');
+						
 					}else{
 						result[i][key]=result[i][key].replace(/&lt;/g, "<")
                 .replace(/&gt;/g, ">")

@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { ActivationPage } from '../../pages/activation/activation';
 import {Validators, FormBuilder, FormGroup,NgForm,FormControl} from '@angular/forms';
 import { AioneServicesProvider } from '../../providers/aione-services/aione-services';
@@ -20,7 +20,7 @@ export class LoginPage {
 	pass:any
 	user:any;
 	loader:any;
-  constructor(public toastCtrl: ToastController,private loaderCtrl:LoadingController,public nav:NavController, public AioneService:AioneServicesProvider, private formBuilder: FormBuilder,public AioneHelp:AioneHelperProvider,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public toastCtrl: ToastController,private loaderCtrl:LoadingController,public nav:NavController, public AioneService:AioneServicesProvider, private formBuilder: FormBuilder,public AioneHelp:AioneHelperProvider,public survey:SurveyProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
   }
   Login(loginUser,username,password){
   	this.loader = this.loaderCtrl.create({
@@ -68,15 +68,17 @@ export class LoginPage {
     toast.present();
   }
   ionViewWillEnter(){
-  	this.loginUser=this.formBuilder.group({
-  		username:["",Validators.compose([  
-  						Validators.required,	
-  			])],
-			password:["",Validators.compose([		
-			Validators.required,				
-  			])],
+      //this.platform.ready().then(() => {
+          	this.loginUser=this.formBuilder.group({
+          		username:["",Validators.compose([  
+          						Validators.required,	
+          			])],
+        			password:["",Validators.compose([		
+        			Validators.required,				
+          			])],
 
-  	});
+          	});
+      //});
   }
 
 }

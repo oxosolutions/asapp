@@ -73,42 +73,40 @@ export class MyApp {
   
         
     });
-    this.servicepro.PlatformCheck('asapp').then((db)=>{
-      this.pages = [
-        { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
-        { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
-        // { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
-        { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
-        { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
-        { title: 'Setting',icon: 'ios-flag-outline', component: SettingsPage },
-      ]; 
-
-    localStorage.setItem("api_url",this.Api_Url);
-    localStorage.setItem("activation_ApiName", this.ApiName );
-    localStorage.setItem("activationDesc",this.ApiDesc);
-     this.detail();
-    });   
+     
   } 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-       this.splashScreen.hide();
+      // this.statusBar.styleDefault();
+           this.splashScreen.hide();
+           this.servicepro.PlatformCheck('asapp').then((db)=>{
+          this.pages = [
+            { title: 'Home',icon: 'ios-home-outline', component: DashboardPage },
+            { title: 'Enter Record',icon: 'ios-create-outline', component: ListsurveyPage},
+            // { title: 'Review Record',icon: 'ios-clipboard-outline', component: RecordListPage },
+            { title: 'About',icon: 'ios-easel-outline', component: AboutPage },
+            { title: 'Help',icon: 'ios-flag-outline', component: HelpPage },
+            { title: 'Setting',icon: 'ios-flag-outline', component: SettingsPage },
+          ]; 
+
+        localStorage.setItem("api_url",this.Api_Url);
+        localStorage.setItem("activation_ApiName", this.ApiName );
+        localStorage.setItem("activationDesc",this.ApiDesc);
+         this.detail();
+        });  
        
     });
   }
 
   detail(){
     if(localStorage.getItem("activation") != undefined && localStorage.getItem("activation") != null && localStorage.getItem('activation') != ""){
-      console.log(localStorage.getItem("activation"));
       this.rootPage=LoginPage;  
       if(localStorage.getItem("username") != undefined && localStorage.getItem("username") != null && localStorage.getItem('username') != ""){
-        console.log(localStorage.getItem("username"));
         this.username=localStorage.getItem("name");
         this.userEmail=localStorage.getItem("username");
         this.rootPage=DashboardPage;
-        //this.rootPage=SettingsPage;
       }else{
-        this.rootPage=LoginPage;   
+        this.rootPage=LoginPage;
          this.username=localStorage.getItem("name");
         this.userEmail=localStorage.getItem("username");
       }  
@@ -116,8 +114,6 @@ export class MyApp {
       this.rootPage=ActivationPage;     
     }
     this.events.subscribe('user:created', (user) => {
-       console.log(user);
-       console.log(user["name"]);
        this.username=user["name"];
        this.userEmail=user["email"];
        this.base64Image=user["image"];

@@ -15,8 +15,8 @@
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
-    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="FadeSplashScreenDuration" value="100" />
+    <preference name="SplashShowOnlyFirstTime" value="true" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="100" />
     <preference name="AutoHideSplashScreen" value="false" />
@@ -86,7 +86,6 @@
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
-    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.9.1" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <allow-navigation href="http://192.168.0.108:8100" />
