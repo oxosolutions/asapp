@@ -47,7 +47,7 @@ export class MyApp {
       // ionic.Platform.exitApp();
      
         let alert=this.alert.create({
-          subTitle: "Select any option to upload image",
+          subTitle: "Are you sure, You Want to exit from app",
           buttons: [
           {
             text: 'yes',
